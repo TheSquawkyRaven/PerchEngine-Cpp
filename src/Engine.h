@@ -24,16 +24,20 @@ public:
 private:
 
 	// SDL Window for rendering into
-	SDL_Window* SDL_Window = nullptr;
+	SDL_Window* MainWindow = nullptr;
 
-	SDL_Surface* SDL_Surface = nullptr;
+	SDL_Surface* MainWindowSurface = nullptr;
 
 public:
 
 	Engine(int ScreenWidth = 480, int ScreenHeight = 640);
 
-	Engine* Create();
+	bool InitializeMainWindow();
 
+	// "Start" here will wait for until the closure of the MainWindow
+	// Will call quit to free up SDL. May change in the future
+	void Start();
+	void Quit();
 
 
 };
