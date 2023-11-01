@@ -16,9 +16,9 @@ private:
 	static void SetColor(int color);
 	static void ResetColor();
 	static void PrintWithColor(const char* str, int color);
-	static char* FormatPrintStr(char* str);
-	static void FormatPrintResult(char* str, int color = CONSOLE_COLOR_RESET);
-	static void FPrint(int color, const char* format, va_list args);
+	static char* AddStrInfo(char* str);
+	static void PrintAddInfo(char* str, int color = CONSOLE_COLOR_RESET);
+	static void PrintFormatter(int color, const char* format, va_list args);
 
 public:
 

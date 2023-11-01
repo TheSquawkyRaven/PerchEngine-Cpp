@@ -28,7 +28,7 @@ void Log::PrintWithColor(const char* str, int color)
     ResetColor();
 }
 
-char* Log::FormatPrintStr(char* str)
+char* Log::AddStrInfo(char* str)
 {
     const char* format = "String: %s";
     size_t size = std::strlen(str) + std::strlen(format);
@@ -41,14 +41,14 @@ char* Log::FormatPrintStr(char* str)
         return NULL;
     }
 
-    size_t neededSize = sprintf_s(buffer, size, format, str);
+    sprintf_s(buffer, size, format, str);
 
     return buffer;
 }
 
-void Log::FormatPrintResult(char* str, int color)
+void Log::PrintAddInfo(char* str, int color)
 {
-    char* strResult = FormatPrintStr(str);
+    char* strResult = AddStrInfo(str);
     // str is realloc-ed
 
     if (strResult == NULL)
@@ -60,7 +60,7 @@ void Log::FormatPrintResult(char* str, int color)
     free(strResult);
 }
 
-void Log::FPrint(int color, const char* format, va_list args)
+void Log::PrintFormatter(int color, const char* format, va_list args)
 {
     // Create a buffer with initial size of 256
     size_t size = 256;
@@ -88,12 +88,12 @@ void Log::FPrint(int color, const char* format, va_list args)
         vsnprintf(buffer, size, format, args);
     }
 
-    FormatPrintResult(buffer, color);
+    PrintAddInfo(buffer, color);
 }
 
 void Log::Print(const char* str)
 {
-    FormatPrintResult((char*)str, CONSOLE_COLOR_WHITE);
+    Printf(str);
 }
 
 void Log::Printf(const char* format, ...)
@@ -101,32 +101,32 @@ void Log::Printf(const char* format, ...)
     // Read args in the ellipsis ... parameter
     va_list args;
     va_start(args, format);
-    FPrint(CONSOLE_COLOR_WHITE, format, args);
+    PrintFormatter(CONSOLE_COLOR_WHITE, format, args);
     va_end(args);
 }
 
 void Log::Error(const char* err)
 {
-    FormatPrintResult((char*)err, CONSOLE_COLOR_RED);
+    Errorf(err);
 }
 
 void Log::Errorf(const char* format, ...)
 {
     va_list args;
     va_start(args, format);
-    FPrint(CONSOLE_COLOR_RED, format, args);
+    PrintFormatter(CONSOLE_COLOR_RED, format, args);
     va_end(args);
 }
 
 void Log::Warn(const char* warn)
 {
-    FormatPrintResult((char*)warn, CONSOLE_COLOR_YELLOW);
+    Warnf(warn);
 }
 
 void Log::Warnf(const char* format, ...)
 {
     va_list args;
     va_start(args, format);
-    FPrint(CONSOLE_COLOR_YELLOW, format, args);
+    PrintFormatter(CONSOLE_COLOR_YELLOW, format, args);
     va_end(args);
 }
