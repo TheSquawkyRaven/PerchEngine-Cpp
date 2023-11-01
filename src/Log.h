@@ -10,7 +10,7 @@ namespace Squawk
 	constexpr auto CONSOLE_COLOR_WHITE = 15;
 	constexpr auto CONSOLE_COLOR_RED = 12;
 
-	class Log
+	static class Log
 	{
 
 	private:

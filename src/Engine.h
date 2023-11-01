@@ -3,8 +3,6 @@
 // Main SDL Window
 #include <SDL.h>
 
-// Standard Input and Output Library (for IO streams with keyboard input, file support etc)
-#include <stdio.h>
 #include <string>
 
 namespace Perch
@@ -13,6 +11,11 @@ namespace Perch
 	// For bool return functions, true represents success
 	class Engine
 	{
+
+		class Branch;
+
+		// # Variables + Getters/Setters
+
 	private:
 
 		int ScreenWidth;
@@ -34,11 +37,14 @@ namespace Perch
 		// Retrieved from MainWindow, the surface (texture) of the SDL_Window
 		SDL_Surface* MainWindowSurface = NULL;
 
-
 	public:
 
-
 		SDL_Surface* BmpSurface = NULL;
+
+		// ###
+
+
+		// # Functions
 
 	private:
 
@@ -61,6 +67,7 @@ namespace Perch
 		void Start();
 		void Quit();
 
+		// ###
 
 	};
 
