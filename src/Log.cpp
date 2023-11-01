@@ -7,7 +7,7 @@
 #include <iostream>
 #include <windows.h>
 
-
+using namespace Squawk;
 
 void Log::SetColor(int color)
 {
@@ -30,7 +30,7 @@ void Log::PrintWithColor(const char* str, int color)
 
 char* Log::AddStrInfo(char* str)
 {
-    const char* format = "String: %s";
+    const char* format = "Squawk Log: %s";
     size_t size = std::strlen(str) + std::strlen(format);
 
     char* buffer = (char*)realloc(str, size);

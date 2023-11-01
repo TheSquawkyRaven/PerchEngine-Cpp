@@ -5,40 +5,63 @@
 
 // Standard Input and Output Library (for IO streams with keyboard input, file support etc)
 #include <stdio.h>
+#include <string>
 
-class Engine
+namespace Perch
 {
-private:
 
-	int ScreenWidth;
-	int ScreenHeight;
+	// For bool return functions, true represents success
+	class Engine
+	{
+	private:
 
-public:
+		int ScreenWidth;
+		int ScreenHeight;
 
-	void SetScreenWidth(int width);
-	void SetScreenHeight(int height);
+	public:
 
-	inline int GetScreenWidth() { return ScreenWidth; }
-	inline int GetScreenHeight() { return ScreenHeight; }
+		void SetScreenWidth(int width);
+		void SetScreenHeight(int height);
 
-private:
+		inline int GetScreenWidth() { return ScreenWidth; }
+		inline int GetScreenHeight() { return ScreenHeight; }
 
-	// SDL Window for rendering into
-	SDL_Window* MainWindow = nullptr;
+	private:
 
-	SDL_Surface* MainWindowSurface = nullptr;
+		// SDL Window for rendering into
+		SDL_Window* MainWindow = NULL;
 
-public:
-
-	Engine(int ScreenWidth = 480, int ScreenHeight = 640);
-
-	bool InitializeMainWindow();
-
-	// "Start" here will wait for until the closure of the MainWindow
-	// Will call quit to free up SDL. May change in the future
-	void Start();
-	void Quit();
+		// Retrieved from MainWindow, the surface (texture) of the SDL_Window
+		SDL_Surface* MainWindowSurface = NULL;
 
 
-};
+	public:
 
+
+		SDL_Surface* BmpSurface = NULL;
+
+	private:
+
+		void Update(SDL_Event* e, bool* quit);
+		void StartUpdateLoop();
+
+	public:
+
+		Engine(int ScreenWidth = 480, int ScreenHeight = 640);
+
+		bool InitializeMainWindow();
+
+		SDL_Surface* LoadBmpSurface(std::string path);
+
+		void BlitSurface(SDL_Surface* surface);
+		void BlitSurfaceScaled(SDL_Surface* surface);
+
+		// "Start" here will wait for until the closure of the MainWindow
+		// Will call quit to free up SDL. May change in the future
+		void Start();
+		void Quit();
+
+
+	};
+
+}
