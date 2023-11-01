@@ -33,6 +33,7 @@
     <ProjectGuid>{6cdef897-73d4-4827-b2b1-56c7dda374d1}</ProjectGuid>
     <RootNamespace>SDLEngineCpp</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>Perch-Engine-Cpp</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
