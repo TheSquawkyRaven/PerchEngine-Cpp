@@ -4,15 +4,17 @@
 #include <SDL.h>
 
 #include <string>
+#include <functional>
 
 namespace Perch
 {
 
+	// Engine is a friend of Branch
+	class Branch;
+
 	// For bool return functions, true represents success
 	class Engine
 	{
-
-		class Branch;
 
 		// # Variables + Getters/Setters
 
@@ -20,6 +22,8 @@ namespace Perch
 
 		int ScreenWidth;
 		int ScreenHeight;
+
+		bool HasError = false;
 
 	public:
 
@@ -37,9 +41,12 @@ namespace Perch
 		// Retrieved from MainWindow, the surface (texture) of the SDL_Window
 		SDL_Surface* MainWindowSurface = NULL;
 
-	public:
+		Branch* Root = NULL;
 
-		SDL_Surface* BmpSurface = NULL;
+		std::function<void(Branch* Root)>* OnRootCreate = NULL;
+
+	public:
+		inline SDL_Surface* GetMainWindowSurface() { return MainWindowSurface; }
 
 		// ###
 
@@ -51,13 +58,20 @@ namespace Perch
 		void Update(SDL_Event* e, bool* quit);
 		void StartUpdateLoop();
 
+		bool CreateMainWindow();
+		bool CreateTree();
+
+		// Returns true if has error
+		bool CheckError();
+
 	public:
 
 		Engine(int ScreenWidth = 480, int ScreenHeight = 640);
 
-		bool InitializeMainWindow();
+		inline void SetOnRootCreate(std::function<void(Branch* Root)>* onRootCreate) { this->OnRootCreate = onRootCreate; };
 
-		SDL_Surface* LoadBmpSurface(std::string path);
+		bool Create();
+		void Run();
 
 		void BlitSurface(SDL_Surface* surface);
 		void BlitSurfaceScaled(SDL_Surface* surface);

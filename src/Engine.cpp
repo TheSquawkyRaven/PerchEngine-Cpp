@@ -1,6 +1,7 @@
 #include "Engine.h"
 
 #include "Log.h"
+#include "Branch/Branch.h"
 
 using namespace Perch;
 using namespace Squawk;
@@ -43,22 +44,16 @@ void Perch::Engine::StartUpdateLoop()
 	delete e;
 }
 
-Engine::Engine(int ScreenHeight, int ScreenWidth)
+bool Engine::CreateMainWindow()
 {
-	this->ScreenWidth = ScreenWidth;
-	this->ScreenHeight = ScreenHeight;
-}
-
-bool Engine::InitializeMainWindow()
-{
-	// Initialize SDL Video Graphics
+	// Create SDL Video Graphics
 	if (SDL_Init(SDL_INIT_VIDEO) < 0)
 	{
 		Log::Errorf("Could not initialize SDL_VIDEO! SDL_ERROR: %s", SDL_GetError());
 		return false;
 	}
 
-	// InitializeMainWindow a main window
+	// Create a main window
 	// Title, X, & Y pos of window position on screen, width, height, hide window when created
 	MainWindow = SDL_CreateWindow("SDL Game Engine", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, ScreenWidth, ScreenHeight, SDL_WINDOW_HIDDEN);
 	if (MainWindow == NULL)
@@ -76,29 +71,65 @@ bool Engine::InitializeMainWindow()
 	return true;
 }
 
-SDL_Surface* Engine::LoadBmpSurface(std::string path)
+bool Engine::CreateTree()
 {
-	SDL_Surface* rawSurface = SDL_LoadBMP(path.c_str());
-	if (rawSurface == NULL)
+	Root = new Branch();
+
+	if (OnRootCreate == NULL)
 	{
-		Log::Errorf("Failed to load bmp texture! SDL_ERROR: %s", SDL_GetError());
+		Log::Warn("OnRootCreate is not set, no root will be attached!");
+		return true;
+	}
+	(*OnRootCreate)(Root);
+
+	return true;
+}
+
+bool Perch::Engine::CheckError()
+{
+	if (HasError)
+	{
+		Log::Error("Engine has error, please refer to log");
+		return true;
+	}
+	return false;
+}
+
+Engine::Engine(int ScreenHeight, int ScreenWidth)
+{
+	this->ScreenWidth = ScreenWidth;
+	this->ScreenHeight = ScreenHeight;
+
+	bool success = CreateMainWindow();
+	if (!success)
+	{
+		HasError = true;
+	}
+}
+
+bool Perch::Engine::Create()
+{
+	if (CheckError())
+	{
 		return NULL;
 	}
 
-	// Optimize
-	// Bmp textures are generally 24 bit. This pre-converts the texture to 32 bit (or monitor's bits, in this case the MainWindow's Surface)
-	// so SDL won't have to convert 24 bit -> 32 bit every time it is blitted
-	SDL_Surface* optimizedSurface = SDL_ConvertSurface(rawSurface, MainWindowSurface->format, 0);
-	if (optimizedSurface == NULL)
+	bool success = CreateTree();
+	if (!success)
 	{
-		Log::Errorf("Failed to optimize bmp texture! SDL_ERROR: %s", SDL_GetError());
 		return NULL;
 	}
+	return true;
+}
 
-	// Since Converting it creates a new copy, free the raw bmp texture
-	SDL_FreeSurface(rawSurface);
+void Perch::Engine::Run()
+{
+	if (CheckError())
+	{
+		return;
+	}
 
-	return optimizedSurface;
+	Root->Init();
 }
 
 void Engine::BlitSurface(SDL_Surface* surface)
@@ -119,6 +150,11 @@ void Engine::BlitSurfaceScaled(SDL_Surface* surface)
 
 void Engine::Start()
 {
+	if (CheckError())
+	{
+		return;
+	}
+
 	SDL_ShowWindow(MainWindow);
 	
 	StartUpdateLoop();
@@ -128,9 +164,6 @@ void Engine::Start()
 
 void Engine::Quit()
 {
-	SDL_FreeSurface(BmpSurface);
-	BmpSurface = NULL;
-
 	SDL_DestroyWindow(MainWindow);
 	MainWindow = NULL;
 

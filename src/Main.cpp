@@ -2,28 +2,33 @@
 
 #include "Engine.h"
 #include "Log.h"
+#include "Resources/Texture.h"
 
 
 const int SCREEN_WIDTH = 640;
 const int SCREEN_HEIGHT = 480;
 
 
+using namespace Perch;
+
+
 int main(int argc, char* args[])
 {
-	Perch::Engine* window = new Perch::Engine(SCREEN_WIDTH, SCREEN_HEIGHT);
+	Engine* window = new Engine(SCREEN_WIDTH, SCREEN_HEIGHT);
 
-	if (!window->InitializeMainWindow())
+
+	Texture* texture = Texture::Create(window->GetMainWindowSurface(), "./images/squawky_birb.bmp", Texture::FORMAT_BMP);
+	if (texture == NULL)
 	{
 		return -1;
 	}
 
-	SDL_Surface* testSurface = window->LoadBmpSurface("./images/squawky_birb.bmp");
-	if (testSurface == NULL)
+	if (!window->Create())
 	{
 		return -1;
 	}
 
-	window->BlitSurfaceScaled(testSurface);
+	//window->BlitSurfaceScaled(texture);
 
 	window->Start();
 
