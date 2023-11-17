@@ -22,9 +22,7 @@ namespace Perch
 
 	public:
 
-		static SDL_Surface* LoadBMPSurface(SDL_Surface* mainWindowSurface, std::string path);
-
-		static SDL_Surface* LoadSurface(SDL_Surface* mainWindowSurface, std::string path);
+		static SDL_Texture* LoadTexture(SDL_Renderer* renderer, std::string path);
 
 		// ###
 

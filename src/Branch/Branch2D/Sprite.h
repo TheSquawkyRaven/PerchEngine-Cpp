@@ -5,6 +5,7 @@
 #include "../../Resources/Texture.h"
 #include "../../Structs/Rect2D.h"
 #include "../../Structs/Vector2.h"
+#include "../../Structs/Vector2i.h"
 
 #include <SDL.h>
 
@@ -22,11 +23,11 @@ namespace Perch
 		// # Variables + Getters/Setters
 	private:
 
-		Texture* _Texture = NULL;
+		std::shared_ptr<Texture> _Texture = NULL;
 
 	public:
 
-		Perch::Texture& GetTexture() { return *_Texture; }
+		std::shared_ptr<Texture> GetTexture() { return _Texture; }
 		Vector2 GetSize();
 
 		// ###
@@ -38,9 +39,12 @@ namespace Perch
 		
 	public:
 
-		void SetTexture(Texture* texture);
+		void SetTexture(std::shared_ptr<Texture> texture);
 
-		virtual void Draw(SDL_Surface* MainSurface) override;
+		virtual void Update() override;
+		virtual void Draw(SDL_Renderer* renderer) override;
+
+		virtual void OnDestroy() override;
 
 		// ###
 

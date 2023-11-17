@@ -4,13 +4,24 @@
 
 #include <SDL.h>
 
-#include "../Structs/Vector2.h"
+#include "../Log.h"
+#include "../Structs/Vector2i.h"
 
 #include <memory>
 #include <string>
+#include "../Engine.h"
 
 namespace Perch
 {
+
+	struct SDLTextureDeleter
+	{
+		void operator()(SDL_Texture* SDLTexture)
+		{
+			Squawk::Log::Print("Texture Destroyed");
+			SDL_DestroyTexture(SDLTexture);
+		}
+	};
 
 	/// <summary>
 	/// 
@@ -18,22 +29,16 @@ namespace Perch
 	class Texture
 	{
 
-	public:
-		enum TextureFileFormat
-		{
-			FORMAT_BMP,
-			FORMAT_PNG
-		};
-
 		// # Variables + Getters/Setters
 	private:
 
-		std::unique_ptr<SDL_Surface> SDLSurface = NULL;
+		std::unique_ptr<SDL_Texture, SDLTextureDeleter> SDLTexture = NULL;
+		Vector2i Size = Vector2i();
 
 	public:
-		inline SDL_Surface& GetSDLSurface() { return *SDLSurface; }
+		inline SDL_Texture& GetSDLTexture() { return *SDLTexture; }
 
-		Vector2 GetSize() const;
+		Vector2i GetSize() const;
 
 		// ###
 
@@ -41,11 +46,11 @@ namespace Perch
 		// # Functions
 
 	private:
-		Texture(SDL_Surface* surface);
+		Texture(SDL_Texture* sdlTexture);
 
 	public:
 
-		static Texture* Create(SDL_Surface* mainWindowSurface, std::string path, TextureFileFormat fileFormat);
+		static std::shared_ptr<Texture> Create(Engine* engine, std::string path);
 
 		// ###
 

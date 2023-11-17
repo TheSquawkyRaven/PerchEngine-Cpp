@@ -18,7 +18,7 @@ Branch::Branch()
 
 int Branch::GetChildIndex(Branch* child)
 {
-    auto iterator = std::find(Children.begin(), Children.end(), child);
+    auto iterator = std::find(Children.begin(), Children.end(), std::shared_ptr<Branch>(child));
     if (iterator == Children.end())
     {
         // Not found!
@@ -37,6 +37,7 @@ void Branch::_Init()
 
 void Branch::_Ready()
 {
+    // Preorder ready order (Parent ready first)
     if (!ReadyCalled)
     {
         Ready();
@@ -47,7 +48,7 @@ void Branch::_Ready()
         // Ready through recursion
         for (size_t i = 0; i < Children.size(); ++i)
         {
-            Branch* child = Children[i];
+            std::shared_ptr<Branch> child = Children[i];
             child->_Ready();
         }
     }
@@ -55,28 +56,30 @@ void Branch::_Ready()
 
 void Branch::_Update()
 {
+    // Preorder update order (Parent update first)
     Update();
     if (!Children.empty())
     {
         // Update through recursion
         for (size_t i = 0; i < Children.size(); ++i)
         {
-            Branch* child = Children[i];
+            std::shared_ptr<Branch> child = Children[i];
             child->_Update();
         }
     }
 }
 
-void Branch::_Draw(SDL_Surface* MainSurface)
+void Branch::_Draw(SDL_Renderer* renderer)
 {
-    Draw(MainSurface);
+    // Preorder draw order (Parent draw first)
+    Draw(renderer);
     if (!Children.empty())
     {
         // Draw through recursion
         for (size_t i = 0; i < Children.size(); ++i)
         {
-            Branch* child = Children[i];
-            child->_Draw(MainSurface);
+            std::shared_ptr<Branch> child = Children[i];
+            child->_Draw(renderer);
         }
     }
 }
@@ -88,14 +91,15 @@ void Branch::_Destroy(bool isChainedDestroy)
         // Destroys all children through recursion
         for (size_t i = 0; i < Children.size(); ++i)
         {
-            Branch* child = Children[i];
+            std::shared_ptr<Branch> child = Children[i];
             child->_Destroy(true);
 
-            delete child;
             Children[i] = NULL;
         }
         Children.clear();
     }
+    // Postorder destruction order (Innermost child destroy first)
+    OnDestroy();
 
     // If this is chained, no need to remove this(child) from parent
     if (!isChainedDestroy)
@@ -115,9 +119,9 @@ void Branch::_Destroy(bool isChainedDestroy)
     }
 }
 
-void Perch::Branch::AttachChild(Branch* Branch)
+void Perch::Branch::AttachChild(std::shared_ptr<Branch> branch)
 {
-    Children.push_back(Branch);
+    Children.push_back(branch);
 }
 
 void Perch::Branch::Init()
@@ -129,10 +133,14 @@ void Perch::Branch::Ready()
 void Perch::Branch::Update()
 {}
 
-void Perch::Branch::Draw(SDL_Surface* MainSurface)
+void Perch::Branch::Draw(SDL_Renderer* renderer)
 {}
 
 void Branch::Destroy()
 {
     _Destroy(false);
+}
+
+void Perch::Branch::OnDestroy()
+{
 }

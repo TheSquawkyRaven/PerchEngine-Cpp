@@ -4,9 +4,11 @@
 #include <SDL.h>
 #include <SDL_image.h>
 
+#include "Structs/Vector2.h"
+
 #include <string>
 #include <functional>
-#include "Structs/Vector2.h"
+#include <memory>
 
 
 namespace Perch
@@ -48,6 +50,10 @@ namespace Perch
 		// SDL Window for rendering into
 		SDL_Window* MainWindow = NULL;
 
+		// SDL Renderer for hardware rendering
+		SDL_Renderer* MainWindowRenderer = NULL;
+
+		// Deprecate
 		// Retrieved from MainWindow, the surface (texture) of the SDL_Window
 		SDL_Surface* MainWindowSurface = NULL;
 
@@ -56,6 +62,8 @@ namespace Perch
 		std::function<void(Engine* Engine, Branch* Root)> OnRootCreate = NULL;
 
 	public:
+
+		inline SDL_Renderer* GetMainWindowRenderer() { return MainWindowRenderer; }
 		inline SDL_Surface* GetMainWindowSurface() { return MainWindowSurface; }
 
 		// ###
@@ -86,12 +94,12 @@ namespace Perch
 		inline void SetOnRootCreate(std::function<void(Engine* Engine, Branch* Root)> onRootCreate) { this->OnRootCreate = onRootCreate; };
 
 		template<typename BranchT>
-		static inline BranchT* CreateBranch()
+		static inline std::shared_ptr<BranchT> CreateBranch()
 		{
 			static_assert(std::is_base_of<Branch, BranchT>::value, "CreateBranch template must be derived from Branch.");
 			BranchT* branch = new BranchT();
 			branch->_Init();
-			return branch;
+			return std::shared_ptr<BranchT>(branch);
 		}
 
 		// "Start" here will wait for until the closure of the MainWindow

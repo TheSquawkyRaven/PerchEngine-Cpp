@@ -8,18 +8,24 @@ Vector2 Perch::Sprite::GetSize()
 {
 	if (_Texture == NULL)
 	{
-		return NULL;
+		return Vector2();
 	}
-	Vector2 textureSize = _Texture->GetSize();
+	Vector2i textureSize = _Texture->GetSize();
 	return Vector2(Scale.X * textureSize.X, Scale.Y * textureSize.Y);
 }
 
-void Sprite::SetTexture(Texture* texture)
+void Sprite::SetTexture(std::shared_ptr<Texture> texture)
 {
-	_Texture = texture;
+	_Texture = std::shared_ptr<Texture>(texture);
 }
 
-void Sprite::Draw(SDL_Surface* MainSurface)
+void Perch::Sprite::Update()
+{
+	// Test Update
+	//Position.X += 0.01f;
+}
+
+void Sprite::Draw(SDL_Renderer* renderer)
 {
 	if (_Texture == NULL)
 	{
@@ -28,7 +34,12 @@ void Sprite::Draw(SDL_Surface* MainSurface)
 	Vector2 size = GetSize();
 	SDL_Rect* rect = Rect2D::CreateSDLRect(&Position, &size);
 
-	SDL_BlitScaled(&_Texture->GetSDLSurface(), NULL, MainSurface, rect);
+	SDL_RenderCopy(renderer, &_Texture->GetSDLTexture(), NULL, rect);
 
 	delete rect;
+}
+
+void Perch::Sprite::OnDestroy()
+{
+	_Texture = NULL;
 }

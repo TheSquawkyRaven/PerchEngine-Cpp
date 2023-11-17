@@ -6,6 +6,7 @@
 
 #include <string>
 #include <vector>
+#include <memory>
 
 namespace Perch
 {
@@ -29,8 +30,8 @@ namespace Perch
 
 	private:
 
-		Branch* Parent = NULL;
-		std::vector<Branch*> Children;
+		std::shared_ptr<Branch> Parent = NULL;
+		std::vector<std::shared_ptr<Branch>> Children;
 
 		bool ReadyCalled = false;
 
@@ -51,7 +52,7 @@ namespace Perch
 		void _Ready();
 
 		void _Update();
-		void _Draw(SDL_Surface* MainSurface);
+		void _Draw(SDL_Renderer* renderer);
 		void _Destroy(bool isChainedDestroy);
 
 	protected:
@@ -60,18 +61,24 @@ namespace Perch
 
 	public:
 
-		void AttachChild(Branch* Branch);
+		void AttachChild(std::shared_ptr<Branch> branch);
 
 		// Init - Called right after constructor is ran, from Engine::CreateBranch
+		// Will NOT call Init on children
 		virtual void Init();
 
-		// Ready - Called upon attaching to a branch of the main tree or when the tree is run. Only called once
+		// Ready - Preorder, Called upon attaching to a branch of the main tree or when the tree is run. Only called once
 		virtual void Ready();
 
+		// Update - Preorder, Called every frame
 		virtual void Update();
-		virtual void Draw(SDL_Surface* MainSurface);
+		// Draw - Preorder, Called every frame. Update first, then draw
+		virtual void Draw(SDL_Renderer* renderer);
 
 		void Destroy();
+
+		// OnDestroy - POSTorder, Called while destroying. Uninitialize pointers here.
+		virtual void OnDestroy();
 
 		// ###
 

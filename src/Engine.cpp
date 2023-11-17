@@ -19,10 +19,9 @@ void Engine::Update(SDL_Event* e, bool* quit)
 
 	Root->_Update();
 
-	Root->_Draw(MainWindowSurface);
-
-	// Update frame
-	SDL_UpdateWindowSurface(MainWindow);
+	SDL_RenderClear(MainWindowRenderer);
+	Root->_Draw(MainWindowRenderer);
+	SDL_RenderPresent(MainWindowRenderer);
 }
 
 void Perch::Engine::StartUpdateLoop()
@@ -57,6 +56,16 @@ bool Engine::InitMainWindow()
 		return false;
 	}
 
+	MainWindowRenderer = SDL_CreateRenderer(MainWindow, -1, SDL_RENDERER_ACCELERATED);
+	if (MainWindowRenderer == NULL)
+	{
+		Log::Errorf("Renderer cannot be created! SDL_ERROR: %s", SDL_GetError());
+		return false;
+	}
+	// Renderer color
+	SDL_SetRenderDrawColor(MainWindowRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
+
+	// PNG Loading
 	if (Config->SupportPNGLoading)
 	{
 		// Attempt to initialize the PNG Loader
@@ -68,10 +77,7 @@ bool Engine::InitMainWindow()
 		}
 	}
 
-	MainWindowSurface = SDL_GetWindowSurface(MainWindow);
-	SDL_FillRect(MainWindowSurface, NULL, SDL_MapRGB(MainWindowSurface->format, 0xff, 0xff, 0xff));
-
-	SDL_UpdateWindowSurface(MainWindow);
+	SDL_RenderPresent(MainWindowRenderer);
 
 
 	return true;
@@ -142,9 +148,18 @@ void Engine::Start()
 
 void Engine::Quit()
 {
+	// Destroy Texture
+	// SDL_DestroyTexture(texture);
+
+	Root->Destroy();
+
+	SDL_DestroyRenderer(MainWindowRenderer);
 	SDL_DestroyWindow(MainWindow);
+
+	MainWindowRenderer = NULL;
 	MainWindow = NULL;
 
+	IMG_Quit();
 	SDL_Quit();
 
 	Log::Print("MainWindow is Closed");
