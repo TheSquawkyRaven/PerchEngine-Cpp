@@ -17,14 +17,18 @@ namespace Perch
 		// # Variables + Getters/Setters
 
 	public:
-		Vector2 Position;
-		Vector2 Scale;
+		Vector2 Position = {};
+		Vector2 Scale = {};
 
 		// ###
 
 
 		// # Functions
 		// ###
+
+	protected:
+
+		Branch2D();
 
 	};
 

@@ -25,12 +25,18 @@ namespace Perch
 
 	public:
 		void SetName(std::string name);
-		inline std::string GetName() { return Name; }
+		inline std::string GetName() const { return Name; }
 
 	private:
 
 		Branch* Parent = NULL;
 		std::vector<Branch*> Children;
+
+		bool ReadyCalled = false;
+
+	public:
+
+		inline bool IsReady() const { return ReadyCalled; }
 
 		// ###
 
@@ -45,18 +51,27 @@ namespace Perch
 		void _Ready();
 
 		void _Update();
-		void _Draw(SDL_Surface& MainSurface);
+		void _Draw(SDL_Surface* MainSurface);
 		void _Destroy(bool isChainedDestroy);
+
+	protected:
+
+		Branch();
 
 	public:
 
+		void AttachChild(Branch* Branch);
+
+		// Init - Called right after constructor is ran, from Engine::CreateBranch
 		virtual void Init();
+
+		// Ready - Called upon attaching to a branch of the main tree or when the tree is run. Only called once
 		virtual void Ready();
 
 		virtual void Update();
-		virtual void Draw(SDL_Surface& MainSurface);
+		virtual void Draw(SDL_Surface* MainSurface);
 
-		virtual void Destroy();
+		void Destroy();
 
 		// ###
 

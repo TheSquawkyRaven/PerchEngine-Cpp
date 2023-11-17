@@ -22,11 +22,12 @@ namespace Perch
 		// # Variables + Getters/Setters
 	private:
 
-		std::unique_ptr<Texture> _Texture = NULL;
+		Texture* _Texture = NULL;
 
 	public:
 
 		Perch::Texture& GetTexture() { return *_Texture; }
+		Vector2 GetSize();
 
 		// ###
 
@@ -34,12 +35,12 @@ namespace Perch
 		// # Functions
 
 	private:
-		Sprite(Texture* texture);
 		
 	public:
-		Sprite* Create(Texture* texture);
 
-		virtual void Draw(SDL_Surface& MainSurface) override;
+		void SetTexture(Texture* texture);
+
+		virtual void Draw(SDL_Surface* MainSurface) override;
 
 		// ###
 

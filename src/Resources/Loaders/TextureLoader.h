@@ -1,6 +1,7 @@
 #pragma once
 
 #include <SDL.h>
+#include <SDL_image.h>
 
 #include <string>
 
@@ -22,6 +23,8 @@ namespace Perch
 	public:
 
 		static SDL_Surface* LoadBMPSurface(SDL_Surface* mainWindowSurface, std::string path);
+
+		static SDL_Surface* LoadSurface(SDL_Surface* mainWindowSurface, std::string path);
 
 		// ###
 

@@ -11,6 +11,11 @@ void Branch::SetName(std::string name)
     Name = name;
 }
 
+Branch::Branch()
+{
+
+}
+
 int Branch::GetChildIndex(Branch* child)
 {
     auto iterator = std::find(Children.begin(), Children.end(), child);
@@ -23,6 +28,57 @@ int Branch::GetChildIndex(Branch* child)
 
     int index = iterator - Children.begin();
     return index;
+}
+
+void Branch::_Init()
+{
+    Init();
+}
+
+void Branch::_Ready()
+{
+    if (!ReadyCalled)
+    {
+        Ready();
+        ReadyCalled = true;
+    }
+    if (!Children.empty())
+    {
+        // Ready through recursion
+        for (size_t i = 0; i < Children.size(); ++i)
+        {
+            Branch* child = Children[i];
+            child->_Ready();
+        }
+    }
+}
+
+void Branch::_Update()
+{
+    Update();
+    if (!Children.empty())
+    {
+        // Update through recursion
+        for (size_t i = 0; i < Children.size(); ++i)
+        {
+            Branch* child = Children[i];
+            child->_Update();
+        }
+    }
+}
+
+void Branch::_Draw(SDL_Surface* MainSurface)
+{
+    Draw(MainSurface);
+    if (!Children.empty())
+    {
+        // Draw through recursion
+        for (size_t i = 0; i < Children.size(); ++i)
+        {
+            Branch* child = Children[i];
+            child->_Draw(MainSurface);
+        }
+    }
 }
 
 void Branch::_Destroy(bool isChainedDestroy)
@@ -41,7 +97,7 @@ void Branch::_Destroy(bool isChainedDestroy)
         Children.clear();
     }
 
-    // This is chained, no need to remove this(child) from parent
+    // If this is chained, no need to remove this(child) from parent
     if (!isChainedDestroy)
     {
         if (Parent != NULL)
@@ -59,56 +115,9 @@ void Branch::_Destroy(bool isChainedDestroy)
     }
 }
 
-void Branch::_Init()
+void Perch::Branch::AttachChild(Branch* Branch)
 {
-    if (!Children.empty())
-    {
-        // Init through recursion
-        for (size_t i = 0; i < Children.size(); ++i)
-        {
-            Branch* child = Children[i];
-            child->_Init();
-        }
-    }
-}
-
-void Branch::_Ready()
-{
-    if (!Children.empty())
-    {
-        // Ready through recursion
-        for (size_t i = 0; i < Children.size(); ++i)
-        {
-            Branch* child = Children[i];
-            child->_Ready();
-        }
-    }
-}
-
-void Branch::_Update()
-{
-    if (!Children.empty())
-    {
-        // Update through recursion
-        for (size_t i = 0; i < Children.size(); ++i)
-        {
-            Branch* child = Children[i];
-            child->_Update();
-        }
-    }
-}
-
-void Branch::_Draw(SDL_Surface& MainSurface)
-{
-    if (!Children.empty())
-    {
-        // Draw through recursion
-        for (size_t i = 0; i < Children.size(); ++i)
-        {
-            Branch* child = Children[i];
-            child->_Draw(MainSurface);
-        }
-    }
+    Children.push_back(Branch);
 }
 
 void Perch::Branch::Init()
@@ -120,7 +129,7 @@ void Perch::Branch::Ready()
 void Perch::Branch::Update()
 {}
 
-void Perch::Branch::Draw(SDL_Surface& MainSurface)
+void Perch::Branch::Draw(SDL_Surface* MainSurface)
 {}
 
 void Branch::Destroy()

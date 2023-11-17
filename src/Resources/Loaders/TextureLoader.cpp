@@ -28,3 +28,27 @@ SDL_Surface* Perch::TextureLoader::LoadBMPSurface(SDL_Surface* mainWindowSurface
 
 	return optimizedSurface;
 }
+
+
+SDL_Surface* Perch::TextureLoader::LoadSurface(SDL_Surface* mainWindowSurface, std::string path)
+{
+	SDL_Surface* rawSurface = IMG_Load(path.c_str());
+	if (rawSurface == NULL)
+	{
+		Log::Errorf("Failed to load texture! SDL_IMAGE_ERROR: %s", IMG_GetError());
+		return NULL;
+	}
+
+	// Optimize to 32 bit
+	SDL_Surface* optimizedSurface = SDL_ConvertSurface(rawSurface, mainWindowSurface->format, 0);
+	if (optimizedSurface == NULL)
+	{
+		Log::Errorf("Failed to optimize texture! SDL_ERROR: %s", SDL_GetError());
+		return NULL;
+	}
+
+	// Since Converting it creates a new copy, free the raw bmp texture
+	SDL_FreeSurface(rawSurface);
+
+	return optimizedSurface;
+}

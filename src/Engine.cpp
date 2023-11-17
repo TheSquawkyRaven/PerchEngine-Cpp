@@ -6,16 +6,6 @@
 using namespace Perch;
 using namespace Squawk;
 
-void Engine::SetScreenWidth(int width)
-{
-	ScreenWidth = width;
-}
-
-void Engine::SetScreenHeight(int height)
-{
-	ScreenHeight = height;
-}
-
 void Engine::Update(SDL_Event* e, bool* quit)
 {
 	// Check for input events
@@ -26,6 +16,10 @@ void Engine::Update(SDL_Event* e, bool* quit)
 			*quit = true;
 		}
 	}
+
+	Root->_Update();
+
+	Root->_Draw(MainWindowSurface);
 
 	// Update frame
 	SDL_UpdateWindowSurface(MainWindow);
@@ -44,7 +38,7 @@ void Perch::Engine::StartUpdateLoop()
 	delete e;
 }
 
-bool Engine::CreateMainWindow()
+bool Engine::InitMainWindow()
 {
 	// Create SDL Video Graphics
 	if (SDL_Init(SDL_INIT_VIDEO) < 0)
@@ -55,11 +49,23 @@ bool Engine::CreateMainWindow()
 
 	// Create a main window
 	// Title, X, & Y pos of window position on screen, width, height, hide window when created
-	MainWindow = SDL_CreateWindow("SDL Game Engine", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, ScreenWidth, ScreenHeight, SDL_WINDOW_HIDDEN);
+	Vector2 ScreenSize = GetScreenSize();
+	MainWindow = SDL_CreateWindow("SDL Game Engine", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, ScreenSize.X, ScreenSize.Y, SDL_WINDOW_HIDDEN);
 	if (MainWindow == NULL)
 	{
 		Log::Errorf("Window cannot be created! SDL_ERROR: %s", SDL_GetError());
 		return false;
+	}
+
+	if (Config->SupportPNGLoading)
+	{
+		// Attempt to initialize the PNG Loader
+		int imageFlags = IMG_INIT_PNG;
+		if (!(IMG_Init(imageFlags) & imageFlags))
+		{
+			Log::Errorf("SDL_image cannot initialize! SDL_IMAGE_ERROR: %s", IMG_GetError());
+			return false;
+		}
 	}
 
 	MainWindowSurface = SDL_GetWindowSurface(MainWindow);
@@ -71,21 +77,31 @@ bool Engine::CreateMainWindow()
 	return true;
 }
 
-bool Engine::CreateTree()
+// Creates the root branch and calls the delegate for OnRootCreate for attachments of branches
+void Engine::CreateTree()
 {
 	Root = new Branch();
 
 	if (OnRootCreate == NULL)
 	{
 		Log::Warn("OnRootCreate is not set, no root will be attached!");
-		return true;
+		return;
 	}
-	(*OnRootCreate)(Root);
-
-	return true;
+	OnRootCreate(this, Root);
 }
 
-bool Perch::Engine::CheckError()
+// Calls ready from the root
+void Perch::Engine::RunTree()
+{
+	if (CheckError())
+	{
+		return;
+	}
+
+	Root->_Ready();
+}
+
+bool Perch::Engine::CheckError() const
 {
 	if (HasError)
 	{
@@ -95,57 +111,15 @@ bool Perch::Engine::CheckError()
 	return false;
 }
 
-Engine::Engine(int ScreenHeight, int ScreenWidth)
+Engine::Engine(EngineConfig* config)
 {
-	this->ScreenWidth = ScreenWidth;
-	this->ScreenHeight = ScreenHeight;
+	Config = config;
 
-	bool success = CreateMainWindow();
+	bool success = InitMainWindow();
 	if (!success)
 	{
 		HasError = true;
 	}
-}
-
-bool Perch::Engine::Create()
-{
-	if (CheckError())
-	{
-		return NULL;
-	}
-
-	bool success = CreateTree();
-	if (!success)
-	{
-		return NULL;
-	}
-	return true;
-}
-
-void Perch::Engine::Run()
-{
-	if (CheckError())
-	{
-		return;
-	}
-
-	Root->Init();
-}
-
-void Engine::BlitSurface(SDL_Surface* surface)
-{
-	SDL_BlitSurface(surface, NULL, MainWindowSurface, NULL);
-}
-
-void Engine::BlitSurfaceScaled(SDL_Surface* surface)
-{
-	SDL_Rect scaleRect{};
-	scaleRect.x = 0;
-	scaleRect.y = 0;
-	scaleRect.w = ScreenWidth;
-	scaleRect.h = ScreenHeight;
-
-	SDL_BlitScaled(surface, NULL, MainWindowSurface, &scaleRect);
 }
 
 void Engine::Start()
@@ -154,6 +128,10 @@ void Engine::Start()
 	{
 		return;
 	}
+
+	CreateTree();
+
+	RunTree();
 
 	SDL_ShowWindow(MainWindow);
 	

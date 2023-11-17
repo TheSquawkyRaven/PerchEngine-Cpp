@@ -4,6 +4,8 @@
 
 #include <SDL.h>
 
+#include "../Structs/Vector2.h"
+
 #include <memory>
 #include <string>
 
@@ -30,6 +32,8 @@ namespace Perch
 
 	public:
 		inline SDL_Surface& GetSDLSurface() { return *SDLSurface; }
+
+		Vector2 GetSize() const;
 
 		// ###
 

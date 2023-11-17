@@ -1,24 +1,34 @@
 #include "Sprite.h"
 
+#include "../../Log.h"
+
 using namespace Perch;
 
-Sprite::Sprite(Texture* texture)
+Vector2 Perch::Sprite::GetSize()
 {
-	_Texture = std::unique_ptr<Texture>(texture);
+	if (_Texture == NULL)
+	{
+		return NULL;
+	}
+	Vector2 textureSize = _Texture->GetSize();
+	return Vector2(Scale.X * textureSize.X, Scale.Y * textureSize.Y);
 }
 
-Sprite* Sprite::Create(Texture* texture)
+void Sprite::SetTexture(Texture* texture)
 {
-	Sprite* sprite = new Sprite(texture);
-	return sprite;
+	_Texture = texture;
 }
 
-void Sprite::Draw(SDL_Surface& MainSurface)
+void Sprite::Draw(SDL_Surface* MainSurface)
 {
-	//TODO Change Scale to actual size (Multiply with texture)
-	SDL_Rect* rect = Rect2D::CreateSDLRect(&Position, &Scale);
+	if (_Texture == NULL)
+	{
+		return;
+	}
+	Vector2 size = GetSize();
+	SDL_Rect* rect = Rect2D::CreateSDLRect(&Position, &size);
 
-	SDL_BlitScaled(&_Texture->GetSDLSurface(), NULL, &MainSurface, rect);
+	SDL_BlitScaled(&_Texture->GetSDLSurface(), NULL, MainSurface, rect);
 
 	delete rect;
 }

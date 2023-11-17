@@ -2,12 +2,27 @@
 
 // Main SDL Window
 #include <SDL.h>
+#include <SDL_image.h>
 
 #include <string>
 #include <functional>
+#include "Structs/Vector2.h"
+
 
 namespace Perch
 {
+
+	// Config definition
+	class EngineConfig
+	{
+
+	public:
+
+		std::string WindowName = "";
+		Vector2 WindowSize = Vector2(640, 480);
+		bool SupportPNGLoading = true;
+
+	};
 
 	// Engine is a friend of Branch
 	class Branch;
@@ -20,18 +35,13 @@ namespace Perch
 
 	private:
 
-		int ScreenWidth;
-		int ScreenHeight;
-
+		EngineConfig* Config;
 		bool HasError = false;
 
 	public:
 
-		void SetScreenWidth(int width);
-		void SetScreenHeight(int height);
-
-		inline int GetScreenWidth() { return ScreenWidth; }
-		inline int GetScreenHeight() { return ScreenHeight; }
+		inline void SetScreenSize(Vector2 size) { Config->WindowSize = size; }
+		inline Vector2 GetScreenSize() { return Config->WindowSize; }
 
 	private:
 
@@ -43,7 +53,7 @@ namespace Perch
 
 		Branch* Root = NULL;
 
-		std::function<void(Branch* Root)>* OnRootCreate = NULL;
+		std::function<void(Engine* Engine, Branch* Root)> OnRootCreate = NULL;
 
 	public:
 		inline SDL_Surface* GetMainWindowSurface() { return MainWindowSurface; }
@@ -55,26 +65,34 @@ namespace Perch
 
 	private:
 
+		// Init - Runs in a constructor level
+		bool InitMainWindow();
+
+		// Create - 
+		void CreateTree();
+		void RunTree();
+
+		// Update - Runs every frame
 		void Update(SDL_Event* e, bool* quit);
 		void StartUpdateLoop();
 
-		bool CreateMainWindow();
-		bool CreateTree();
-
 		// Returns true if has error
-		bool CheckError();
+		bool CheckError() const;
 
 	public:
 
-		Engine(int ScreenWidth = 480, int ScreenHeight = 640);
+		Engine(EngineConfig* config);
 
-		inline void SetOnRootCreate(std::function<void(Branch* Root)>* onRootCreate) { this->OnRootCreate = onRootCreate; };
+		inline void SetOnRootCreate(std::function<void(Engine* Engine, Branch* Root)> onRootCreate) { this->OnRootCreate = onRootCreate; };
 
-		bool Create();
-		void Run();
-
-		void BlitSurface(SDL_Surface* surface);
-		void BlitSurfaceScaled(SDL_Surface* surface);
+		template<typename BranchT>
+		static inline BranchT* CreateBranch()
+		{
+			static_assert(std::is_base_of<Branch, BranchT>::value, "CreateBranch template must be derived from Branch.");
+			BranchT* branch = new BranchT();
+			branch->_Init();
+			return branch;
+		}
 
 		// "Start" here will wait for until the closure of the MainWindow
 		// Will call quit to free up SDL. May change in the future
@@ -82,7 +100,5 @@ namespace Perch
 		void Quit();
 
 		// ###
-
 	};
-
 }
