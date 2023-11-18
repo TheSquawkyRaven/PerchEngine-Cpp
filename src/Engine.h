@@ -5,6 +5,8 @@
 #include <SDL_image.h>
 
 #include "Structs/Vector2.h"
+#include "Structs/Vector2i.h"
+#include "Structs/Rect2.h"
 
 #include <string>
 #include <functional>
@@ -21,7 +23,7 @@ namespace Perch
 	public:
 
 		std::string WindowName = "";
-		Vector2 WindowSize = Vector2(640, 480);
+		Vector2i WindowSize = Vector2i(640, 480);
 		bool SupportPNGLoading = true;
 
 	};
@@ -42,8 +44,9 @@ namespace Perch
 
 	public:
 
-		inline void SetScreenSize(Vector2 size) { Config->WindowSize = size; }
-		inline Vector2 GetScreenSize() { return Config->WindowSize; }
+		inline void SetScreenSize(Vector2i size) { Config->WindowSize = size; }
+		inline Vector2i GetScreenSize() { return Config->WindowSize; }
+		inline Rect2 GetScreenRect() { return Rect2(0, 0, Config->WindowSize.X, Config->WindowSize.Y); }
 
 	private:
 

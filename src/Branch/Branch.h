@@ -35,6 +35,10 @@ namespace Perch
 
 		bool ReadyCalled = false;
 
+	protected:
+
+		inline std::shared_ptr<Branch> GetParent() { return Parent; }
+
 	public:
 
 		inline bool IsReady() const { return ReadyCalled; }

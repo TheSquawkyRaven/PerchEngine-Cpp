@@ -20,28 +20,38 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Branch\Branch.cpp" />
+    <ClCompile Include="src\Branch\Branch2D\BorderedRectangle2D.cpp" />
     <ClCompile Include="src\Branch\Branch2D\Branch2D.cpp" />
-    <ClCompile Include="src\Branch\Branch2D\Sprite.cpp" />
+    <ClCompile Include="src\Branch\Branch2D\Line2D.cpp" />
+    <ClCompile Include="src\Branch\Branch2D\Point2D.cpp" />
+    <ClCompile Include="src\Branch\Branch2D\Rectangle2D.cpp" />
+    <ClCompile Include="src\Branch\Branch2D\Sprite2D.cpp" />
+    <ClCompile Include="src\Branch\Branch2D\Viewport2D.cpp" />
     <ClCompile Include="src\Engine.cpp" />
     <ClCompile Include="src\Log.cpp" />
     <ClCompile Include="src\Main.cpp" />
     <ClCompile Include="src\Resources\Loaders\TextureLoader.cpp" />
     <ClCompile Include="src\Resources\Resource.cpp" />
     <ClCompile Include="src\Resources\Texture.cpp" />
-    <ClCompile Include="src\Structs\Rect2D.cpp" />
+    <ClCompile Include="src\Structs\Rect2.cpp" />
     <ClCompile Include="src\Structs\Vector2.cpp" />
     <ClCompile Include="src\Structs\Vector2i.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Branch\Branch.h" />
+    <ClInclude Include="src\Branch\Branch2D\BorderedRectangle2D.h" />
     <ClInclude Include="src\Branch\Branch2D\Branch2D.h" />
-    <ClInclude Include="src\Branch\Branch2D\Sprite.h" />
+    <ClInclude Include="src\Branch\Branch2D\Line2D.h" />
+    <ClInclude Include="src\Branch\Branch2D\Point2D.h" />
+    <ClInclude Include="src\Branch\Branch2D\Rectangle2D.h" />
+    <ClInclude Include="src\Branch\Branch2D\Sprite2D.h" />
+    <ClInclude Include="src\Branch\Branch2D\Viewport2D.h" />
     <ClInclude Include="src\Engine.h" />
     <ClInclude Include="src\Log.h" />
     <ClInclude Include="src\Resources\Loaders\TextureLoader.h" />
     <ClInclude Include="src\Resources\Resource.h" />
     <ClInclude Include="src\Resources\Texture.h" />
-    <ClInclude Include="src\Structs\Rect2D.h" />
+    <ClInclude Include="src\Structs\Rect2.h" />
     <ClInclude Include="src\Structs\Vector2.h" />
     <ClInclude Include="src\Structs\Vector2i.h" />
   </ItemGroup>

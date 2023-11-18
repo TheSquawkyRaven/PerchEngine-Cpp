@@ -3,7 +3,7 @@
 #include "Branch2D.h"
 
 #include "../../Resources/Texture.h"
-#include "../../Structs/Rect2D.h"
+#include "../../Structs/Rect2.h"
 #include "../../Structs/Vector2.h"
 #include "../../Structs/Vector2i.h"
 
@@ -17,7 +17,7 @@ namespace Perch
 	/// <summary>
 	/// 
 	/// </summary>
-	class Sprite : public Branch2D
+	class Sprite2D : public Branch2D
 	{
 
 		// # Variables + Getters/Setters
@@ -29,6 +29,7 @@ namespace Perch
 
 		std::shared_ptr<Texture> GetTexture() { return _Texture; }
 		Vector2 GetSize();
+		Vector2 GetGlobalSize();
 
 		// ###
 

@@ -17,8 +17,12 @@ namespace Perch
 		// # Variables + Getters/Setters
 
 	public:
+
+		// Position - Local Position
 		Vector2 Position = {};
-		Vector2 Scale = {};
+		// TODO + Rotation
+		// Scale - Local Scale (1, 1) is full size
+		Vector2 Scale = Vector2(1, 1);
 
 		// ###
 
@@ -29,6 +33,14 @@ namespace Perch
 	protected:
 
 		Branch2D();
+
+		Vector2 _GetGlobalPosition();
+		Vector2 _GetGlobalScale();
+
+	public:
+
+		virtual Vector2 GetGlobalPosition();
+		virtual Vector2 GetGlobalScale();
 
 	};
 

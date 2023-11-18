@@ -19,9 +19,18 @@ void Engine::Update(SDL_Event* e, bool* quit)
 
 	Root->_Update();
 
+	// How to use this to return to previous viewport rect when going out of drawing of the parent viewport?
+	SDL_Rect* screenSDLRect = GetScreenRect().GetSDLRect();
+	SDL_RenderSetViewport(MainWindowRenderer, screenSDLRect);
+
+	SDL_SetRenderDrawColor(MainWindowRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
 	SDL_RenderClear(MainWindowRenderer);
+
 	Root->_Draw(MainWindowRenderer);
+
 	SDL_RenderPresent(MainWindowRenderer);
+
+	delete screenSDLRect;
 }
 
 void Perch::Engine::StartUpdateLoop()
@@ -48,7 +57,7 @@ bool Engine::InitMainWindow()
 
 	// Create a main window
 	// Title, X, & Y pos of window position on screen, width, height, hide window when created
-	Vector2 ScreenSize = GetScreenSize();
+	Vector2i ScreenSize = GetScreenSize();
 	MainWindow = SDL_CreateWindow("SDL Game Engine", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, ScreenSize.X, ScreenSize.Y, SDL_WINDOW_HIDDEN);
 	if (MainWindow == NULL)
 	{
@@ -77,7 +86,7 @@ bool Engine::InitMainWindow()
 		}
 	}
 
-	SDL_RenderPresent(MainWindowRenderer);
+	SDL_RenderClear(MainWindowRenderer);
 
 
 	return true;
