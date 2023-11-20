@@ -31,13 +31,13 @@ void Sprite2D::SetTexture(shared_ptr<Texture> texture)
 	_Texture = shared_ptr<Texture>(texture);
 }
 
-void Sprite2D::Update()
+void Sprite2D::Update(Engine* engine)
 {
 	// Test Update
 	//Position.X += 0.01f;
 }
 
-void Sprite2D::Draw(SDL_Renderer* renderer)
+void Sprite2D::Draw(Engine* engine, SDL_Renderer* renderer)
 {
 	if (_Texture == NULL)
 	{
@@ -53,7 +53,7 @@ void Sprite2D::Draw(SDL_Renderer* renderer)
 	delete rect;
 }
 
-void Sprite2D::OnDestroy()
+void Sprite2D::OnDestroy(Engine* engine)
 {
 	_Texture = NULL;
 }

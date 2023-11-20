@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Vector2i.h"
+
 namespace Perch
 {
 
@@ -30,6 +32,8 @@ namespace Perch
 
 		Vector2 Midpoint(Vector2 const& other) const;
 		Vector2 ProportionalPoint(Vector2 const& other, float proportion) const;
+
+		operator Vector2i() const;
 
 		Vector2 operator+(Vector2 const& other);
 		Vector2 operator-(Vector2 const& other);

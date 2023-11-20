@@ -2,7 +2,9 @@
 
 #include "Log.h"
 #include "Branch/Branch.h"
+#include <cassert>
 
+using namespace std;
 using namespace Perch;
 using namespace Squawk;
 
@@ -17,23 +19,24 @@ void Engine::Update(SDL_Event* e, bool* quit)
 		}
 	}
 
-	Root->_Update();
+	Root->_Update(this);
 
 	// How to use this to return to previous viewport rect when going out of drawing of the parent viewport?
-	SDL_Rect* screenSDLRect = GetScreenRect().GetSDLRect();
+	SDL_Rect* screenSDLRect = MainWindowRect.GetSDLRect();
 	SDL_RenderSetViewport(MainWindowRenderer, screenSDLRect);
 
 	SDL_SetRenderDrawColor(MainWindowRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
 	SDL_RenderClear(MainWindowRenderer);
 
-	Root->_Draw(MainWindowRenderer);
+	UseViewport(MainWindowRenderer, RootViewport);
+	Root->_Draw(this, MainWindowRenderer);
+	UnuseViewport(MainWindowRenderer, RootViewport);
+	ClearViewportStack();
 
 	SDL_RenderPresent(MainWindowRenderer);
-
-	delete screenSDLRect;
 }
 
-void Perch::Engine::StartUpdateLoop()
+void Engine::StartUpdateLoop()
 {
 	SDL_Event* e = new SDL_Event{};
 	bool quit = false;
@@ -57,7 +60,7 @@ bool Engine::InitMainWindow()
 
 	// Create a main window
 	// Title, X, & Y pos of window position on screen, width, height, hide window when created
-	Vector2i ScreenSize = GetScreenSize();
+	Vector2i ScreenSize = MainWindowRect.GetSize();
 	MainWindow = SDL_CreateWindow("SDL Game Engine", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, ScreenSize.X, ScreenSize.Y, SDL_WINDOW_HIDDEN);
 	if (MainWindow == NULL)
 	{
@@ -106,17 +109,17 @@ void Engine::CreateTree()
 }
 
 // Calls ready from the root
-void Perch::Engine::RunTree()
+void Engine::RunTree()
 {
 	if (CheckError())
 	{
 		return;
 	}
 
-	Root->_Ready();
+	Root->_Ready(this);
 }
 
-bool Perch::Engine::CheckError() const
+bool Engine::CheckError() const
 {
 	if (HasError)
 	{
@@ -129,11 +132,68 @@ bool Perch::Engine::CheckError() const
 Engine::Engine(EngineConfig* config)
 {
 	Config = config;
+	UpdateConfig();
 
 	bool success = InitMainWindow();
 	if (!success)
 	{
 		HasError = true;
+	}
+
+}
+
+void Engine::UpdateConfig()
+{
+	MainWindowRect.SetSize(Config->WindowSize);
+}
+
+void Engine::SimulateUseViewport(shared_ptr<Viewport> viewport)
+{
+	ViewportStack.push(viewport);
+}
+
+void Engine::SimulateUnuseViewport(shared_ptr<Viewport> viewport)
+{
+	shared_ptr<Viewport> viewportCheck = ViewportStack.top();
+	if (viewportCheck != viewport)
+	{
+		Log::Error("Viewport Stack is not properly popped (SimulateUnuseViewport)!");
+	}
+	ViewportStack.pop();
+}
+
+void Engine::UseViewport(SDL_Renderer* renderer, shared_ptr<Viewport> viewport)
+{
+	ViewportStack.push(viewport);
+	SDL_RenderSetViewport(renderer, viewport->GetSDLRect());
+}
+
+void Engine::UnuseViewport(SDL_Renderer* renderer, std::shared_ptr<Viewport> viewport)
+{
+	shared_ptr<Viewport> viewportCheck = ViewportStack.top();
+	if (viewportCheck != viewport)
+	{
+		Log::Errorf("Viewport Stack is not properly popped (UnuseViewport)! (%p == %p)", viewportCheck, viewport);
+	}
+	ViewportStack.pop();
+	if (ViewportStack.empty())
+	{
+		return;
+	}
+	shared_ptr<Viewport> currentViewport = ViewportStack.top();
+	SDL_RenderSetViewport(renderer, currentViewport->GetSDLRect());
+}
+
+shared_ptr<Viewport> Engine::GetCurrentViewport()
+{
+	return ViewportStack.top();
+}
+
+void Engine::ClearViewportStack()
+{
+	while (!ViewportStack.empty())
+	{
+		ViewportStack.pop();
 	}
 }
 
@@ -160,7 +220,7 @@ void Engine::Quit()
 	// Destroy Texture
 	// SDL_DestroyTexture(texture);
 
-	Root->Destroy();
+	Root->Destroy(this);
 
 	SDL_DestroyRenderer(MainWindowRenderer);
 	SDL_DestroyWindow(MainWindow);

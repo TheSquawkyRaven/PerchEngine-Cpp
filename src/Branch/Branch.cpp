@@ -2,11 +2,12 @@
 
 #include "../Log.h"
 
+using namespace std;
 using namespace Perch;
 using namespace Squawk;
 
 
-void Branch::SetName(std::string name)
+void Branch::SetName(string name)
 {
     Name = name;
 }
@@ -18,7 +19,7 @@ Branch::Branch()
 
 int Branch::GetChildIndex(Branch* child)
 {
-    auto iterator = std::find(Children.begin(), Children.end(), std::shared_ptr<Branch>(child));
+    auto iterator = find(Children.begin(), Children.end(), shared_ptr<Branch>(child));
     if (iterator == Children.end())
     {
         // Not found!
@@ -30,17 +31,17 @@ int Branch::GetChildIndex(Branch* child)
     return index;
 }
 
-void Branch::_Init()
+void Branch::_Init(Engine* engine)
 {
-    Init();
+    Init(engine);
 }
 
-void Branch::_Ready()
+void Branch::_Ready(Engine* engine)
 {
     // Preorder ready order (Parent ready first)
     if (!ReadyCalled)
     {
-        Ready();
+        Ready(engine);
         ReadyCalled = true;
     }
     if (!Children.empty())
@@ -48,58 +49,84 @@ void Branch::_Ready()
         // Ready through recursion
         for (size_t i = 0; i < Children.size(); ++i)
         {
-            std::shared_ptr<Branch> child = Children[i];
-            child->_Ready();
+            shared_ptr<Branch> child = Children[i];
+            child->_Ready(engine);
         }
     }
 }
 
-void Branch::_Update()
+void Branch::_Update(Engine* engine)
 {
     // Preorder update order (Parent update first)
-    Update();
+    Update(engine);
     if (!Children.empty())
     {
         // Update through recursion
         for (size_t i = 0; i < Children.size(); ++i)
         {
-            std::shared_ptr<Branch> child = Children[i];
-            child->_Update();
+            shared_ptr<Branch> child = Children[i];
+            child->_Update(engine);
+            OutStack.push(child);
         }
+    }
+    // Reverse Preorder update out
+    while (!OutStack.empty())
+    {
+        shared_ptr<Branch> child = OutStack.top();
+        OutStack.pop();
+        child->_UpdateOut(engine);
     }
 }
 
-void Branch::_Draw(SDL_Renderer* renderer)
+void Branch::_UpdateOut(Engine* engine)
+{
+    UpdateOut(engine);
+}
+
+void Branch::_Draw(Engine* engine, SDL_Renderer* renderer)
 {
     // Preorder draw order (Parent draw first)
-    Draw(renderer);
+    Draw(engine, renderer);
     if (!Children.empty())
     {
         // Draw through recursion
         for (size_t i = 0; i < Children.size(); ++i)
         {
-            std::shared_ptr<Branch> child = Children[i];
-            child->_Draw(renderer);
+            shared_ptr<Branch> child = Children[i];
+            child->_Draw(engine, renderer);
+            OutStack.push(child);
         }
+    }
+    // Reverse Preorder draw out
+    while (!OutStack.empty())
+    {
+        shared_ptr<Branch> child = OutStack.top();
+        OutStack.pop();
+        child->_DrawOut(engine, renderer);
     }
 }
 
-void Branch::_Destroy(bool isChainedDestroy)
+void Branch::_DrawOut(Engine* engine, SDL_Renderer* renderer)
+{
+    DrawOut(engine, renderer);
+}
+
+void Branch::_Destroy(Engine* engine, bool isChainedDestroy)
 {
     if (!Children.empty())
     {
         // Destroys all children through recursion
         for (size_t i = 0; i < Children.size(); ++i)
         {
-            std::shared_ptr<Branch> child = Children[i];
-            child->_Destroy(true);
+            shared_ptr<Branch> child = Children[i];
+            child->_Destroy(engine, true);
 
             Children[i] = NULL;
         }
         Children.clear();
     }
     // Postorder destruction order (Innermost child destroy first)
-    OnDestroy();
+    OnDestroy(engine);
 
     // If this is chained, no need to remove this(child) from parent
     if (!isChainedDestroy)
@@ -119,28 +146,34 @@ void Branch::_Destroy(bool isChainedDestroy)
     }
 }
 
-void Perch::Branch::AttachChild(std::shared_ptr<Branch> branch)
+void Branch::AttachChild(shared_ptr<Branch> branch)
 {
     Children.push_back(branch);
 }
 
-void Perch::Branch::Init()
+void Branch::Init(Engine* engine)
 {}
 
-void Perch::Branch::Ready()
+void Branch::Ready(Engine* engine)
 {}
 
-void Perch::Branch::Update()
+void Branch::Update(Engine* engine)
 {}
 
-void Perch::Branch::Draw(SDL_Renderer* renderer)
+void Perch::Branch::UpdateOut(Engine * engine)
 {}
 
-void Branch::Destroy()
+void Branch::Draw(Engine* engine, SDL_Renderer* renderer)
+{}
+
+void Branch::DrawOut(Engine* engine, SDL_Renderer * renderer)
+{}
+
+void Branch::Destroy(Engine* engine)
 {
-    _Destroy(false);
+    _Destroy(engine, false);
 }
 
-void Perch::Branch::OnDestroy()
+void Branch::OnDestroy(Engine* engine)
 {
 }

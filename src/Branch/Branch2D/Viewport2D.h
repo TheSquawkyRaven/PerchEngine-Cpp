@@ -6,6 +6,7 @@
 #include "../../Structs/Rect2.h"
 
 #include <SDL.h>
+#include <memory>
 
 namespace Perch
 {
@@ -19,9 +20,12 @@ namespace Perch
 
 		// # Variables + Getters/Setters
 	private:
-		Rect2 _ViewportRect = Rect2(0, 0, 100, 100);
+		std::shared_ptr<Viewport> _Viewport;
 
 	public:
+
+		inline std::shared_ptr<Viewport> GetViewport() const { return _Viewport; }
+		inline void SetViewport(std::shared_ptr<Viewport> viewport) { _Viewport = viewport; }
 
 		// ###
 
@@ -31,7 +35,11 @@ namespace Perch
 
 	public:
 
-		virtual void Draw(SDL_Renderer* renderer) override;
+		virtual void Update(Engine* engine) override;
+		virtual void UpdateOut(Engine* engine) override;
+
+		virtual void Draw(Engine* engine, SDL_Renderer* renderer) override;
+		virtual void DrawOut(Engine* engine, SDL_Renderer* renderer) override;
 
 		// ###
 

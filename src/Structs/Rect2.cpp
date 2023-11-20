@@ -4,27 +4,72 @@ using namespace Perch;
 
 Rect2::Rect2()
 {
+	SDLRect->x = 0;
+	SDLRect->y = 0;
+	SDLRect->w = 0;
+	SDLRect->h = 0;
 }
 
 Rect2::Rect2(Vector2 position, Vector2 size)
 {
-	Position = position;
-	Size = size;
+	SDLRect->x = position.X;
+	SDLRect->y = position.Y;
+	SDLRect->w = size.X;
+	SDLRect->h = size.Y;
 }
 
 Rect2::Rect2(float x, float y, float w, float h)
 {
-	Position = Vector2(x, y);
-	Size = Vector2(w, h);
+	SDLRect->x = x;
+	SDLRect->y = y;
+	SDLRect->w = w;
+	SDLRect->h = h;
+}
+
+Vector2 Rect2::GetPosition()
+{
+	return Vector2(SDLRect->x, SDLRect->y);
+}
+
+Vector2 Rect2::GetSize()
+{
+	return Vector2(SDLRect->w, SDLRect->h);
+}
+
+void Rect2::SetPosition(Vector2 position)
+{
+	SetPosition(position.X, position.Y);
+}
+
+void Rect2::SetPosition(Vector2i position)
+{
+	SetPosition(position.X, position.Y);
+}
+
+void Rect2::SetPosition(float x, float y)
+{
+	SDLRect->x = x;
+	SDLRect->y = y;
+}
+
+void Rect2::SetSize(Vector2 size)
+{
+	SetSize(size.X, size.Y);
+}
+
+void Rect2::SetSize(Vector2i size)
+{
+	SetSize(size.X, size.Y);
+}
+
+void Rect2::SetSize(float w, float h)
+{
+	SDLRect->w = w;
+	SDLRect->h = h;
 }
 
 SDL_Rect* Rect2::GetSDLRect()
 {
-	SDLRect->x = Position.X;
-	SDLRect->y = Position.Y;
-	SDLRect->w = Size.X;
-	SDLRect->h = Size.Y;
-
 	return SDLRect;
 }
 

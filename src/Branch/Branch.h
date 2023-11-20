@@ -22,9 +22,11 @@ namespace Perch
 		// # Variables + Getters/Setters
 
 	private:
+
 		std::string Name = "Branch";
 
 	public:
+
 		void SetName(std::string name);
 		inline std::string GetName() const { return Name; }
 
@@ -32,6 +34,8 @@ namespace Perch
 
 		std::shared_ptr<Branch> Parent = NULL;
 		std::vector<std::shared_ptr<Branch>> Children;
+
+		std::stack<std::shared_ptr<Branch>> OutStack;
 
 		bool ReadyCalled = false;
 
@@ -52,12 +56,14 @@ namespace Perch
 
 		int GetChildIndex(Branch* child);
 		
-		void _Init();
-		void _Ready();
+		void _Init(Engine* engine);
+		void _Ready(Engine* engine);
 
-		void _Update();
-		void _Draw(SDL_Renderer* renderer);
-		void _Destroy(bool isChainedDestroy);
+		void _Update(Engine* engine);
+		void _UpdateOut(Engine* engine);
+		void _Draw(Engine* engine, SDL_Renderer* renderer);
+		void _DrawOut(Engine* engine, SDL_Renderer* renderer);
+		void _Destroy(Engine* engine, bool isChainedDestroy);
 
 	protected:
 
@@ -69,20 +75,25 @@ namespace Perch
 
 		// Init - Called right after constructor is ran, from Engine::CreateBranch
 		// Will NOT call Init on children
-		virtual void Init();
+		virtual void Init(Engine* engine);
 
 		// Ready - Preorder, Called upon attaching to a branch of the main tree or when the tree is run. Only called once
-		virtual void Ready();
+		virtual void Ready(Engine* engine);
 
 		// Update - Preorder, Called every frame
-		virtual void Update();
-		// Draw - Preorder, Called every frame. Update first, then draw
-		virtual void Draw(SDL_Renderer* renderer);
+		virtual void Update(Engine* engine);
+		// UpdateOut - Reverse Preorder, Called every frame after Update
+		virtual void UpdateOut(Engine* engine);
 
-		void Destroy();
+		// Draw - Preorder, Called every frame. Update first, then draw
+		virtual void Draw(Engine* engine, SDL_Renderer* renderer);
+		// DrawOut - Reverse Preorder, Called every frame. Calls after draw
+		virtual void DrawOut(Engine* engine, SDL_Renderer* renderer);
+
+		void Destroy(Engine* engine);
 
 		// OnDestroy - POSTorder, Called while destroying. Uninitialize pointers here.
-		virtual void OnDestroy();
+		virtual void OnDestroy(Engine* engine);
 
 		// ###
 

@@ -63,6 +63,12 @@ Vector2 Vector2::ProportionalPoint(Vector2 const& other, float proportion) const
 
 
 
+
+Vector2::operator Vector2i() const
+{
+	return Vector2i(X, Y);
+}
+
 Vector2 Vector2::operator+(Vector2 const& other)
 {
 	return Vector2(X + other.X, Y + other.Y);

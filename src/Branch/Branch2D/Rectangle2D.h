@@ -35,12 +35,12 @@ namespace Perch
 		
 	public:
 
-		Vector2 GetRectSize() const;
+		Vector2 GetRectSize();
 		Vector2 GetRectGlobalSize();
 
 		Vector2 GetRectGlobalPosition();
 
-		virtual void Draw(SDL_Renderer* renderer) override;
+		virtual void Draw(Engine* engine, SDL_Renderer* renderer) override;
 
 		// ###
 
