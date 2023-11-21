@@ -35,8 +35,6 @@ namespace Perch
 		std::shared_ptr<Branch> Parent = NULL;
 		std::vector<std::shared_ptr<Branch>> Children;
 
-		std::stack<std::shared_ptr<Branch>> OutStack;
-
 		bool ReadyCalled = false;
 
 	protected:
@@ -82,12 +80,12 @@ namespace Perch
 
 		// Update - Preorder, Called every frame
 		virtual void Update(Engine* engine);
-		// UpdateOut - Reverse Preorder, Called every frame after Update
+		// UpdateOut - Called every frame after Updating all children
 		virtual void UpdateOut(Engine* engine);
 
 		// Draw - Preorder, Called every frame. Update first, then draw
 		virtual void Draw(Engine* engine, SDL_Renderer* renderer);
-		// DrawOut - Reverse Preorder, Called every frame. Calls after draw
+		// DrawOut - Called every frame right after Drawing all children
 		virtual void DrawOut(Engine* engine, SDL_Renderer* renderer);
 
 		void Destroy(Engine* engine);

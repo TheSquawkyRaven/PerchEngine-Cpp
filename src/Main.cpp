@@ -99,6 +99,8 @@ void OnRootCreate(Engine* Engine, Branch* Root)
 	viewport2D->AttachChild(line);
 	viewport2D->AttachChild(point);
 
+	// One issue with the current Rect2 implementation is that all the Vector2s become integer when stored as SDL_Rects
+
 	shared_ptr<CutSprite2D> cutSprite = Engine->CreateBranch<CutSprite2D>();
 	cutSprite->SetTexture(png);
 	cutSprite->Position = Vector2(0, 0);

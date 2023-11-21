@@ -66,15 +66,8 @@ void Branch::_Update(Engine* engine)
         {
             shared_ptr<Branch> child = Children[i];
             child->_Update(engine);
-            OutStack.push(child);
+            child->_Update(engine);
         }
-    }
-    // Reverse Preorder update out
-    while (!OutStack.empty())
-    {
-        shared_ptr<Branch> child = OutStack.top();
-        OutStack.pop();
-        child->_UpdateOut(engine);
     }
 }
 
@@ -94,15 +87,8 @@ void Branch::_Draw(Engine* engine, SDL_Renderer* renderer)
         {
             shared_ptr<Branch> child = Children[i];
             child->_Draw(engine, renderer);
-            OutStack.push(child);
+            child->_DrawOut(engine, renderer);
         }
-    }
-    // Reverse Preorder draw out
-    while (!OutStack.empty())
-    {
-        shared_ptr<Branch> child = OutStack.top();
-        OutStack.pop();
-        child->_DrawOut(engine, renderer);
     }
 }
 
