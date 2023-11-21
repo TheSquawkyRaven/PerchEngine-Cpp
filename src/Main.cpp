@@ -3,6 +3,7 @@
 #include "Engine.h"
 #include "Log.h"
 #include "Branch/Branch2D/Sprite2D.h"
+#include "Branch/Branch2D/CutSprite2D.h"
 #include "Branch/Branch2D/Rectangle2D.h"
 #include "Branch/Branch2D/BorderedRectangle2D.h"
 #include "Branch/Branch2D/Line2D.h"
@@ -52,15 +53,15 @@ void OnRootCreate(Engine* Engine, Branch* Root)
 	{
 		return;
 	}
-	sprite->SetTexture(png);
+	//sprite->SetTexture(png);
 	sprite->Position = Vector2(100, 100);
 	sprite->Scale = Vector2(1, 1.5f);
 
-	sprite2->SetTexture(bmp);
+	//sprite2->SetTexture(bmp);
 	sprite2->Position = Vector2(300, 100);
 	sprite2->Scale = Vector2(1.5, 1);
 
-	sprite3->SetTexture(bmp);
+	//sprite3->SetTexture(bmp);
 	sprite3->Position = Vector2(200, 300);
 	sprite3->Scale = Vector2(1.5, 1.5);
 
@@ -85,7 +86,7 @@ void OnRootCreate(Engine* Engine, Branch* Root)
 
 	Root->AttachChild(point);
 
-	Viewport viewport = Viewport(new Rect2(640, 360, 640, 360));
+	Viewport viewport = Viewport(Rect2(640, 360, 640, 360));
 	
 	shared_ptr<Viewport2D> viewport2D = Engine->CreateBranch<Viewport2D>();
 	viewport2D->SetViewport(std::shared_ptr<Viewport>(new Viewport(viewport)));
@@ -97,5 +98,15 @@ void OnRootCreate(Engine* Engine, Branch* Root)
 	viewport2D->AttachChild(rectangle);
 	viewport2D->AttachChild(line);
 	viewport2D->AttachChild(point);
+
+	shared_ptr<CutSprite2D> cutSprite = Engine->CreateBranch<CutSprite2D>();
+	cutSprite->SetTexture(png);
+	cutSprite->Position = Vector2(0, 0);
+	cutSprite->Scale = Vector2(1, 1.5f);
+	cutSprite->SetSpriteColumns(3);
+	cutSprite->SetSpriteRows(3);
+	cutSprite->SetSpriteIndex(7);
+
+	Root->AttachChild(cutSprite);
 
 }

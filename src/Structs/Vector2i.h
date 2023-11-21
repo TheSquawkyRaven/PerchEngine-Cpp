@@ -3,6 +3,8 @@
 namespace Perch
 {
 
+	struct Vector2;
+
 	/// <summary>
 	/// 
 	/// </summary>
@@ -15,6 +17,8 @@ namespace Perch
 
 
 	public:
+
+		operator Vector2() const;
 
 		Vector2i();
 		Vector2i(int x, int y);

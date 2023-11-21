@@ -22,6 +22,7 @@
     <ClCompile Include="src\Branch\Branch.cpp" />
     <ClCompile Include="src\Branch\Branch2D\BorderedRectangle2D.cpp" />
     <ClCompile Include="src\Branch\Branch2D\Branch2D.cpp" />
+    <ClCompile Include="src\Branch\Branch2D\CutSprite2D.cpp" />
     <ClCompile Include="src\Branch\Branch2D\Line2D.cpp" />
     <ClCompile Include="src\Branch\Branch2D\Point2D.cpp" />
     <ClCompile Include="src\Branch\Branch2D\Rectangle2D.cpp" />
@@ -42,6 +43,7 @@
     <ClInclude Include="src\Branch\Branch.h" />
     <ClInclude Include="src\Branch\Branch2D\BorderedRectangle2D.h" />
     <ClInclude Include="src\Branch\Branch2D\Branch2D.h" />
+    <ClInclude Include="src\Branch\Branch2D\CutSprite2D.h" />
     <ClInclude Include="src\Branch\Branch2D\Line2D.h" />
     <ClInclude Include="src\Branch\Branch2D\Point2D.h" />
     <ClInclude Include="src\Branch\Branch2D\Rectangle2D.h" />

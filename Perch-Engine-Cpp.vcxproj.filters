@@ -75,6 +75,9 @@
     <ClCompile Include="src\Structs\Viewport.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\Branch\Branch2D\CutSprite2D.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Branch\Branch.h">
@@ -126,6 +129,9 @@
       <Filter>Header Files\Branch2D</Filter>
     </ClInclude>
     <ClInclude Include="src\Structs\Viewport.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Branch\Branch2D\CutSprite2D.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

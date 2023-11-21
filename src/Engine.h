@@ -56,7 +56,7 @@ namespace Perch
 
 		std::function<void(Engine* Engine, Branch* Root)> OnRootCreate = NULL;
 
-		std::shared_ptr<Viewport> RootViewport = std::shared_ptr<Viewport>(new Viewport(&MainWindowRect));
+		std::shared_ptr<Viewport> RootViewport = std::shared_ptr<Viewport>(new Viewport(MainWindowRect));
 		std::stack<std::shared_ptr<Viewport>> ViewportStack;
 
 	public:

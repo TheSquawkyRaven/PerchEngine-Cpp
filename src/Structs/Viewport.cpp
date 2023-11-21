@@ -3,12 +3,15 @@
 
 using namespace Perch;
 
-Viewport::Viewport(Rect2* rect)
+Viewport::Viewport()
+{}
+
+Viewport::Viewport(Rect2 rect)
 {
-	_Rect = rect;
+	Rect = rect;
 }
 
 SDL_Rect* Viewport::GetSDLRect()
 {
-	return _Rect->GetSDLRect();
+	return Rect.GetSDLRect();
 }

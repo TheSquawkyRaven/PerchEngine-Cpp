@@ -28,8 +28,6 @@ namespace Perch
 	public:
 
 		std::shared_ptr<Texture> GetTexture() { return _Texture; }
-		Vector2 GetSize();
-		Vector2 GetGlobalSize();
 
 		// ###
 
@@ -40,7 +38,10 @@ namespace Perch
 		
 	public:
 
-		void SetTexture(std::shared_ptr<Texture> texture);
+		virtual Vector2 GetSize();
+		virtual Vector2 GetGlobalSize();
+
+		virtual void SetTexture(std::shared_ptr<Texture> texture);
 
 		virtual void Update(Engine* engine) override;
 		virtual void Draw(Engine* engine, SDL_Renderer* renderer) override;

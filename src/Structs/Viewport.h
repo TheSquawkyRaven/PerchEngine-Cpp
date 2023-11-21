@@ -15,13 +15,13 @@ namespace Perch
 
 	public:
 
-		Rect2* _Rect = new Rect2();
+		Rect2 Rect = Rect2();
 
 
 	public:
 
-		Viewport(Rect2* rect);
-
+		Viewport();
+		Viewport(Rect2 rect);
 		SDL_Rect* GetSDLRect();
 
 	};

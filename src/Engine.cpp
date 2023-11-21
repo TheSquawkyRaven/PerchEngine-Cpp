@@ -21,10 +21,6 @@ void Engine::Update(SDL_Event* e, bool* quit)
 
 	Root->_Update(this);
 
-	// How to use this to return to previous viewport rect when going out of drawing of the parent viewport?
-	SDL_Rect* screenSDLRect = MainWindowRect.GetSDLRect();
-	SDL_RenderSetViewport(MainWindowRenderer, screenSDLRect);
-
 	SDL_SetRenderDrawColor(MainWindowRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
 	SDL_RenderClear(MainWindowRenderer);
 
@@ -145,6 +141,7 @@ Engine::Engine(EngineConfig* config)
 void Engine::UpdateConfig()
 {
 	MainWindowRect.SetSize(Config->WindowSize);
+	RootViewport->Rect = MainWindowRect;
 }
 
 void Engine::SimulateUseViewport(shared_ptr<Viewport> viewport)
