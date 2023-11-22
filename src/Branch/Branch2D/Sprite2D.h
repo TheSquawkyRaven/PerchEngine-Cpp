@@ -57,10 +57,10 @@ namespace Perch
 
 		virtual void SetTexture(std::shared_ptr<Texture> texture);
 
-		virtual void Update(Engine* engine) override;
-		virtual void Draw(Engine* engine, SDL_Renderer* renderer) override;
+		virtual void Update() override;
+		virtual void Draw(SDL_Renderer* renderer) override;
 
-		virtual void OnDestroy(Engine* engine) override;
+		virtual void OnDestroy() override;
 
 		// ###
 

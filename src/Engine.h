@@ -3,6 +3,7 @@
 // Main SDL Window
 #include <SDL.h>
 #include <SDL_image.h>
+#include <SDL_ttf.h>
 
 #include "Structs/Vector2.h"
 #include "Structs/Vector2i.h"

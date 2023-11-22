@@ -4,6 +4,8 @@
 
 #include "../Log.h"
 #include "../Structs/Vector2i.h"
+#include "../Structs/Color.h"
+#include "../Structs/Font.h"
 
 #include <memory>
 #include <string>
@@ -14,10 +16,10 @@ namespace Perch
 
 	struct SDLTextureDeleter
 	{
-		void operator()(SDL_Texture* SDLTexture)
+		void operator()(SDL_Texture* sdlTexture)
 		{
 			Squawk::Log::Print("Texture Destroyed");
-			SDL_DestroyTexture(SDLTexture);
+			SDL_DestroyTexture(sdlTexture);
 		}
 	};
 
@@ -52,6 +54,7 @@ namespace Perch
 	public:
 
 		static std::shared_ptr<Texture> Create(Engine* engine, std::string path);
+		static std::shared_ptr<Texture> Create(Engine* engine, std::shared_ptr<Font> font, std::string text, Color color);
 
 		// ###
 

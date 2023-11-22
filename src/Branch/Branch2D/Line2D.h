@@ -42,7 +42,7 @@ namespace Perch
 		Vector2 GetGlobalStartPosition();
 		Vector2 GetGlobalEndPosition();
 
-		virtual void Draw(Engine* engine, SDL_Renderer* renderer) override;
+		virtual void Draw(SDL_Renderer* renderer) override;
 
 		// ###
 

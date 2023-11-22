@@ -1,6 +1,6 @@
 #pragma once
 
-#include <SDL_stdinc.h>
+#include <SDL.h>
 
 namespace Perch
 {
@@ -28,7 +28,6 @@ namespace Perch
 		Color(Uint8 r, Uint8 g, Uint8 b);
 		Color(Uint8 r, Uint8 g, Uint8 b, Uint8 a);
 
-
 		inline static Color Black() { return Color(0, 0, 0, 255); }
 		inline static Color White() { return Color(255, 255, 255, 255); }
 		inline static Color Gray() { return Color(128, 128, 128, 255); }
@@ -46,6 +45,7 @@ namespace Perch
 		inline static Color Teal() { return Color(0, 128, 128, 255); }
 		inline static Color Cyan() { return Color(0, 255, 255, 255); }
 
+		operator SDL_Color() const;
 
 		bool operator==(Color const& other);
 		bool operator!=(Color const& other);

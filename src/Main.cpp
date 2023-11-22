@@ -3,6 +3,7 @@
 #include "Engine.h"
 #include "Log.h"
 #include "Branch/Branch2D/Sprite2D.h"
+#include "Branch/Branch2D/Text2D.h"
 #include "Branch/Branch2D/CutSprite2D.h"
 #include "Branch/Branch2D/Rectangle2D.h"
 #include "Branch/Branch2D/BorderedRectangle2D.h"
@@ -10,6 +11,7 @@
 #include "Branch/Branch2D/Point2D.h"
 #include "Branch/Branch2D/Viewport2D.h"
 #include "Structs/Texture.h"
+#include "Structs/Font.h"
 
 
 using namespace std;
@@ -118,5 +120,19 @@ void OnRootCreate(Engine* Engine, Branch* Root)
 	cutSprite->SetSpriteIndex(7);
 
 	Root->AttachChild(cutSprite);
+
+	shared_ptr<Font> lameFont = Font::Create(Engine, "./fonts/LameFont.ttf", 24);
+	if (lameFont == NULL) 
+	{
+		return;
+	}
+
+	shared_ptr<Text2D> text = Engine->CreateBranch<Text2D>();
+	text->Position = Vector2(50, 50);
+	text->SetFont(lameFont);
+	text->SetText("This is a text.");
+	text->SetText("Muahah");
+
+	Root->AttachChild(text);
 
 }

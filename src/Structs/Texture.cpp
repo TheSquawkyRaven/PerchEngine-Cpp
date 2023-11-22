@@ -46,3 +46,30 @@ shared_ptr<Texture> Texture::Create(Engine* engine, string path)
 
 	return texture;
 }
+
+shared_ptr<Texture> Texture::Create(Engine* engine, std::shared_ptr<Font> font, std::string text, Color color)
+{
+	if (text.length() == 0)
+	{
+		return NULL;
+	}
+
+	SDL_Surface* sdlSurface = TTF_RenderText_Solid(font->GetSDLFont(), text.c_str(), color);
+	if (sdlSurface == NULL)
+	{
+		Log::Errorf("Failed to create surface from font! SDL_TTF_ERROR: %s", TTF_GetError());
+		return NULL;
+	}
+
+	SDL_Texture* sdlTexture = SDL_CreateTextureFromSurface(engine->GetMainWindowRenderer(), sdlSurface);
+	SDL_FreeSurface(sdlSurface);
+	if (sdlTexture == NULL)
+	{
+		Log::Errorf("Failed to convert surface to texture! SDL_IMAGE_ERROR: %s", IMG_GetError());
+		return NULL;
+	}
+
+	shared_ptr<Texture> texture = shared_ptr<Texture>(new Texture(sdlTexture));
+
+	return texture;
+}

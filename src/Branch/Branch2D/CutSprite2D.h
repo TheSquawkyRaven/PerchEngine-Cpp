@@ -59,7 +59,7 @@ namespace Perch
 		virtual Vector2 GetGlobalSize() override;
 
 		Rect2 GetCutRect();
-		virtual void Draw(Engine* engine, SDL_Renderer* renderer) override;
+		virtual void Draw(SDL_Renderer* renderer) override;
 
 		// ###
 

@@ -6,7 +6,7 @@ using namespace std;
 using namespace Perch;
 using namespace Squawk;
 
-void BorderedRectangle2D::Draw(Engine* engine, SDL_Renderer* renderer)
+void BorderedRectangle2D::Draw(SDL_Renderer* renderer)
 {
 	Vector2 position = GetRectGlobalPosition() - Vector2(_BorderSize);
 	Vector2 size = GetRectSize() + Vector2(_BorderSize * 2);
@@ -17,5 +17,5 @@ void BorderedRectangle2D::Draw(Engine* engine, SDL_Renderer* renderer)
 	SDL_RenderFillRect(renderer, rect.get());
 
 	// Draw base rectangle
-	Rectangle2D::Draw(engine, renderer);
+	Rectangle2D::Draw(renderer);
 }

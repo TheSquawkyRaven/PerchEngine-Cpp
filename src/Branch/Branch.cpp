@@ -33,15 +33,16 @@ int Branch::GetChildIndex(Branch* child)
 
 void Branch::_Init(Engine* engine)
 {
-    Init(engine);
+    EngineRef = engine;
+    Init();
 }
 
-void Branch::_Ready(Engine* engine)
+void Branch::_Ready()
 {
     // Preorder ready order (Parent ready first)
     if (!ReadyCalled)
     {
-        Ready(engine);
+        Ready();
         ReadyCalled = true;
     }
     if (!Children.empty())
@@ -50,12 +51,12 @@ void Branch::_Ready(Engine* engine)
         for (size_t i = 0; i < Children.size(); ++i)
         {
             shared_ptr<Branch> child = Children[i];
-            child->_Ready(engine);
+            child->_Ready();
         }
     }
 }
 
-void Branch::_Update(Engine* engine)
+void Branch::_Update()
 {
     // Preorder update order (Parent update first)
     if (Updated)
@@ -63,7 +64,7 @@ void Branch::_Update(Engine* engine)
         return;
     }
     // Updated problem! Update Out is not tracked properly as intended!
-    Update(engine);
+    Update();
     Updated = true;
     if (!Children.empty())
     {
@@ -71,30 +72,30 @@ void Branch::_Update(Engine* engine)
         for (size_t i = 0; i < Children.size(); ++i)
         {
             shared_ptr<Branch> child = Children[i];
-            child->_Update(engine);
-            child->_UpdateOut(engine);
+            child->_Update();
+            child->_UpdateOut();
         }
     }
 }
 
-void Branch::_UpdateOut(Engine* engine)
+void Branch::_UpdateOut()
 {
     if (!Updated)
     {
         return;
     }
-    UpdateOut(engine);
+    UpdateOut();
     Updated = false;
 }
 
-void Branch::_Draw(Engine* engine, SDL_Renderer* renderer)
+void Branch::_Draw(SDL_Renderer* renderer)
 {
     // Preorder draw order (Parent draw first)
     if (Drawn)
     {
         return;
     }
-    Draw(engine, renderer);
+    Draw(renderer);
     Drawn = true;
     if (!Children.empty())
     {
@@ -102,23 +103,23 @@ void Branch::_Draw(Engine* engine, SDL_Renderer* renderer)
         for (size_t i = 0; i < Children.size(); ++i)
         {
             shared_ptr<Branch> child = Children[i];
-            child->_Draw(engine, renderer);
-            child->_DrawOut(engine, renderer);
+            child->_Draw(renderer);
+            child->_DrawOut(renderer);
         }
     }
 }
 
-void Branch::_DrawOut(Engine* engine, SDL_Renderer* renderer)
+void Branch::_DrawOut(SDL_Renderer* renderer)
 {
     if (!Drawn)
     {
         return;
     }
-    DrawOut(engine, renderer);
+    DrawOut(renderer);
     Drawn = false;
 }
 
-void Branch::_Destroy(Engine* engine, bool isChainedDestroy)
+void Branch::_Destroy(bool isChainedDestroy)
 {
     if (!Children.empty())
     {
@@ -126,14 +127,14 @@ void Branch::_Destroy(Engine* engine, bool isChainedDestroy)
         for (size_t i = 0; i < Children.size(); ++i)
         {
             shared_ptr<Branch> child = Children[i];
-            child->_Destroy(engine, true);
+            child->_Destroy(true);
 
             Children[i] = NULL;
         }
         Children.clear();
     }
     // Postorder destruction order (Innermost child destroy first)
-    OnDestroy(engine);
+    OnDestroy();
 
     // If this is chained, no need to remove this(child) from parent
     if (!isChainedDestroy)
@@ -158,29 +159,29 @@ void Branch::AttachChild(shared_ptr<Branch> branch)
     Children.push_back(branch);
 }
 
-void Branch::Init(Engine* engine)
+void Branch::Init()
 {}
 
-void Branch::Ready(Engine* engine)
+void Branch::Ready()
 {}
 
-void Branch::Update(Engine* engine)
+void Branch::Update()
 {}
 
-void Branch::UpdateOut(Engine* engine)
+void Branch::UpdateOut()
 {}
 
-void Branch::Draw(Engine* engine, SDL_Renderer* renderer)
+void Branch::Draw(SDL_Renderer* renderer)
 {}
 
-void Branch::DrawOut(Engine* engine, SDL_Renderer* renderer)
+void Branch::DrawOut(SDL_Renderer* renderer)
 {}
 
-void Branch::Destroy(Engine* engine)
+void Branch::Destroy()
 {
-    _Destroy(engine, false);
+    _Destroy(false);
 }
 
-void Branch::OnDestroy(Engine* engine)
+void Branch::OnDestroy()
 {
 }

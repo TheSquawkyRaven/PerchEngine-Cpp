@@ -84,6 +84,12 @@
     <ClCompile Include="src\Structs\Texture.cpp">
       <Filter>Source Files\Structs</Filter>
     </ClCompile>
+    <ClCompile Include="src\Structs\Font.cpp">
+      <Filter>Source Files\Structs</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Branch\Branch2D\Text2D.cpp">
+      <Filter>Source Files\Branch2D</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Branch\Branch.h">
@@ -139,6 +145,12 @@
     </ClInclude>
     <ClInclude Include="src\Structs\Texture.h">
       <Filter>Header Files\Structs</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Structs\Font.h">
+      <Filter>Header Files\Structs</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Branch\Branch2D\Text2D.h">
+      <Filter>Header Files\Branch2D</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

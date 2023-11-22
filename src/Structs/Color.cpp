@@ -32,6 +32,11 @@ Color::Color(Uint8 r, Uint8 g, Uint8 b, Uint8 a)
 	A = a;
 }
 
+Color::operator SDL_Color() const
+{
+	return SDL_Color{R, G, B, A};
+}
+
 bool Color::operator==(Color const& other)
 {
 	return R == other.A && G == other.G && B == other.B && A == other.A;

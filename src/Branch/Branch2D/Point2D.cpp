@@ -11,7 +11,7 @@ Vector2 Point2D::GetGlobalPointPosition()
 	return _GetGlobalPosition() + _PointPosition;
 }
 
-void Point2D::Draw(Engine* engine, SDL_Renderer* renderer)
+void Point2D::Draw(SDL_Renderer* renderer)
 {
 	Vector2 point = GetGlobalPointPosition();
 

@@ -38,7 +38,7 @@ namespace Perch
 		
 	public:
 
-		virtual void Draw(Engine* engine, SDL_Renderer* renderer) override;
+		virtual void Draw(SDL_Renderer* renderer) override;
 
 		// ###
 

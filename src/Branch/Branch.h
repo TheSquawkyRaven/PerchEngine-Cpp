@@ -25,6 +25,10 @@ namespace Perch
 
 		std::string Name = "Branch";
 
+	protected:
+
+		Engine* EngineRef = NULL;
+
 	public:
 
 		void SetName(std::string name);
@@ -57,13 +61,13 @@ namespace Perch
 		int GetChildIndex(Branch* child);
 		
 		void _Init(Engine* engine);
-		void _Ready(Engine* engine);
+		void _Ready();
 
-		void _Update(Engine* engine);
-		void _UpdateOut(Engine* engine);
-		void _Draw(Engine* engine, SDL_Renderer* renderer);
-		void _DrawOut(Engine* engine, SDL_Renderer* renderer);
-		void _Destroy(Engine* engine, bool isChainedDestroy);
+		void _Update();
+		void _UpdateOut();
+		void _Draw(SDL_Renderer* renderer);
+		void _DrawOut(SDL_Renderer* renderer);
+		void _Destroy(bool isChainedDestroy);
 
 	protected:
 
@@ -75,25 +79,25 @@ namespace Perch
 
 		// Init - Called right after constructor is ran, from Engine::CreateBranch
 		// Will NOT call Init on children
-		virtual void Init(Engine* engine);
+		virtual void Init();
 
 		// Ready - Preorder, Called upon attaching to a branch of the main tree or when the tree is run. Only called once
-		virtual void Ready(Engine* engine);
+		virtual void Ready();
 
 		// Update - Preorder, Called every frame
-		virtual void Update(Engine* engine);
+		virtual void Update();
 		// UpdateOut - Called every frame after Updating all children
-		virtual void UpdateOut(Engine* engine);
+		virtual void UpdateOut();
 
 		// Draw - Preorder, Called every frame. Update first, then draw
-		virtual void Draw(Engine* engine, SDL_Renderer* renderer);
+		virtual void Draw(SDL_Renderer* renderer);
 		// DrawOut - Called every frame right after Drawing all children
-		virtual void DrawOut(Engine* engine, SDL_Renderer* renderer);
+		virtual void DrawOut(SDL_Renderer* renderer);
 
-		void Destroy(Engine* engine);
+		void Destroy();
 
 		// OnDestroy - POSTorder, Called while destroying. Uninitialize pointers here.
-		virtual void OnDestroy(Engine* engine);
+		virtual void OnDestroy();
 
 		// ###
 

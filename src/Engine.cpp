@@ -19,16 +19,16 @@ void Engine::Update(SDL_Event* e, bool* quit)
 		}
 	}
 
-	Root->_Update(this);
-	Root->_UpdateOut(this);
+	Root->_Update();
+	Root->_UpdateOut();
 
 	Color c = Config->ClearColor;
 	SDL_SetRenderDrawColor(MainWindowRenderer, c.R, c.G, c.B, c.A);
 	SDL_RenderClear(MainWindowRenderer);
 
 	UseViewport(MainWindowRenderer, RootViewport);
-	Root->_Draw(this, MainWindowRenderer);
-	Root->_DrawOut(this, MainWindowRenderer);
+	Root->_Draw(MainWindowRenderer);
+	Root->_DrawOut(MainWindowRenderer);
 	UnuseViewport(MainWindowRenderer, RootViewport);
 	ClearViewportStack();
 
@@ -67,6 +67,7 @@ bool Engine::InitMainWindow()
 		return false;
 	}
 
+	// Hardware Accelerated renderer with VSync
 	MainWindowRenderer = SDL_CreateRenderer(MainWindow, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 	if (MainWindowRenderer == NULL)
 	{
@@ -80,6 +81,13 @@ bool Engine::InitMainWindow()
 	if (!(IMG_Init(imageFlags) & imageFlags))
 	{
 		Log::Errorf("SDL_image cannot initialize! SDL_IMAGE_ERROR: %s", IMG_GetError());
+		return false;
+	}
+
+	// TTF Loading
+	if (TTF_Init() == -1)
+	{
+		Log::Errorf("SDL_TTF cannot initialize! SDL_TTF_ERROR: %s", TTF_GetError());
 		return false;
 	}
 
@@ -114,7 +122,7 @@ void Engine::RunTree()
 		return;
 	}
 
-	Root->_Ready(this);
+	Root->_Ready();
 }
 
 bool Engine::CheckError() const
@@ -219,7 +227,7 @@ void Engine::Quit()
 	// Destroy Texture
 	// SDL_DestroyTexture(texture);
 
-	Root->Destroy(this);
+	Root->Destroy();
 
 	SDL_DestroyRenderer(MainWindowRenderer);
 	SDL_DestroyWindow(MainWindow);
@@ -227,6 +235,7 @@ void Engine::Quit()
 	MainWindow = NULL;
 	MainWindowRenderer = NULL;
 
+	TTF_Quit();
 	IMG_Quit();
 	SDL_Quit();
 

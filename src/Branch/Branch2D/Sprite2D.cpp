@@ -21,7 +21,7 @@ SDL_RendererFlip Sprite2D::GetSDLFlip() const
 	return flip;
 }
 
-shared_ptr<SDL_Point> Perch::Sprite2D::GetRotateOrigin()
+shared_ptr<SDL_Point> Sprite2D::GetRotateOrigin()
 {
 	if (_Texture == NULL)
 	{
@@ -58,13 +58,13 @@ void Sprite2D::SetTexture(shared_ptr<Texture> texture)
 	_Texture = shared_ptr<Texture>(texture);
 }
 
-void Sprite2D::Update(Engine* engine)
+void Sprite2D::Update()
 {
 	// Test Update
 	//Position.X += 0.01f;
 }
 
-void Sprite2D::Draw(Engine* engine, SDL_Renderer* renderer)
+void Sprite2D::Draw(SDL_Renderer* renderer)
 {
 	if (_Texture == NULL)
 	{
@@ -80,7 +80,7 @@ void Sprite2D::Draw(Engine* engine, SDL_Renderer* renderer)
 	SDL_RenderCopyEx(renderer, _Texture->GetSDLTexture(), NULL, rect.get(), Angle, GetRotateOrigin().get(), GetSDLFlip());
 }
 
-void Sprite2D::OnDestroy(Engine* engine)
+void Sprite2D::OnDestroy()
 {
 	_Texture = NULL;
 }

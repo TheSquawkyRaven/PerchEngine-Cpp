@@ -35,11 +35,11 @@ namespace Perch
 
 	public:
 
-		virtual void Update(Engine* engine) override;
-		virtual void UpdateOut(Engine* engine) override;
+		virtual void Update() override;
+		virtual void UpdateOut() override;
 
-		virtual void Draw(Engine* engine, SDL_Renderer* renderer) override;
-		virtual void DrawOut(Engine* engine, SDL_Renderer* renderer) override;
+		virtual void Draw(SDL_Renderer* renderer) override;
+		virtual void DrawOut(SDL_Renderer* renderer) override;
 
 		// ###
 

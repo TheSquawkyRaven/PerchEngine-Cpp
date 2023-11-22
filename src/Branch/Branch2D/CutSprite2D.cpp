@@ -89,7 +89,7 @@ Rect2 CutSprite2D::GetCutRect()
 	return _CutRect;
 }
 
-void CutSprite2D::Draw(Engine* engine, SDL_Renderer* renderer)
+void CutSprite2D::Draw(SDL_Renderer* renderer)
 {
 	shared_ptr<Texture> texture = GetTexture();
 	if (texture == NULL)
