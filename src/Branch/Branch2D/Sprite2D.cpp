@@ -5,6 +5,22 @@
 using namespace std;
 using namespace Perch;
 
+SDL_RendererFlip Sprite2D::GetSDLFlip() const
+{
+	SDL_RendererFlip flip = SDL_FLIP_NONE;
+	if (FlipX)
+	{
+		flip = SDL_FLIP_HORIZONTAL;
+		return flip;
+	}
+	if (FlipY)
+	{
+		flip = SDL_FLIP_VERTICAL;
+		return flip;
+	}
+	return flip;
+}
+
 Vector2 Sprite2D::GetSize()
 {
 	if (_Texture == NULL)
@@ -50,7 +66,7 @@ void Sprite2D::Draw(Engine* engine, SDL_Renderer* renderer)
 
 	SDL_SetTextureColorMod(_Texture->GetSDLTexture(), _Color.R, _Color.G, _Color.B);
 	SDL_SetTextureAlphaMod(_Texture->GetSDLTexture(), _Color.A);
-	SDL_RenderCopy(renderer, _Texture->GetSDLTexture(), NULL, rect.get());
+	SDL_RenderCopyEx(renderer, _Texture->GetSDLTexture(), NULL, rect.get(), Angle, NULL, GetSDLFlip());
 }
 
 void Sprite2D::OnDestroy(Engine* engine)

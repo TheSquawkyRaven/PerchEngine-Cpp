@@ -58,14 +58,17 @@ void OnRootCreate(Engine* Engine, Branch* Root)
 	sprite->SetTexture(png);
 	sprite->Position = Vector2(100, 100);
 	sprite->Scale = Vector2(1, 1.5f);
+	sprite->FlipY = true;
 
 	sprite2->SetTexture(bmp);
 	sprite2->Position = Vector2(300, 100);
 	sprite2->Scale = Vector2(1.5, 1);
+	sprite2->FlipX = true;
 
 	sprite3->SetTexture(bmp);
 	sprite3->Position = Vector2(200, 300);
 	sprite3->Scale = Vector2(1.5, 1.5);
+	sprite3->Angle = 45;
 
 	shared_ptr<BorderedRectangle2D> rectangle = Engine->CreateBranch<BorderedRectangle2D>();
 	rectangle->SetRect2(Rect2(100, 120, 50, 50));

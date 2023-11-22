@@ -28,6 +28,10 @@ namespace Perch
 
 	public:
 
+		double Angle = 0;
+		bool FlipX = false;
+		bool FlipY = false;
+
 		std::shared_ptr<Texture> GetTexture() { return _Texture; }
 		inline Color GetColor() const { return _Color; }
 		inline void SetColor(Color color) { _Color = color; }
@@ -39,6 +43,10 @@ namespace Perch
 
 	private:
 		
+	protected:
+
+		SDL_RendererFlip GetSDLFlip() const;
+
 	public:
 
 		virtual Vector2 GetSize();

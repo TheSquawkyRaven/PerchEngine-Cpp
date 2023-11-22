@@ -106,5 +106,5 @@ void CutSprite2D::Draw(Engine* engine, SDL_Renderer* renderer)
 	Color color = GetColor();
 	SDL_SetTextureColorMod(texture->GetSDLTexture(), color.R, color.G, color.B);
 	SDL_SetTextureAlphaMod(texture->GetSDLTexture(), color.A);
-	SDL_RenderCopy(renderer, texture->GetSDLTexture(), cutRect.get(), rect.get());
+	SDL_RenderCopyEx(renderer, texture->GetSDLTexture(), cutRect.get(), rect.get(), Angle, NULL, GetSDLFlip());
 }
