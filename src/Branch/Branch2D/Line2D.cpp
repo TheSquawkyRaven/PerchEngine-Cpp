@@ -21,6 +21,6 @@ void Line2D::Draw(Engine* engine, SDL_Renderer* renderer)
 	Vector2 start = GetGlobalStartPosition();
 	Vector2 end = GetGlobalEndPosition();
 
-	SDL_SetRenderDrawColor(renderer, 0x00, 0x00, 0xff, 0xff);
+	SDL_SetRenderDrawColor(renderer, _Color.R, _Color.G, _Color.B, _Color.A);
 	SDL_RenderDrawLine(renderer, start.X, start.Y, end.X, end.Y);
 }

@@ -2,7 +2,7 @@
 
 #include "Sprite2D.h"
 
-#include "../../Resources/Texture.h"
+#include "../../Structs/Texture.h"
 #include "../../Structs/Rect2.h"
 #include "../../Structs/Vector2.h"
 #include "../../Structs/Vector2i.h"

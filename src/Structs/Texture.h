@@ -1,7 +1,5 @@
 #pragma once
 
-#include "Resource.h"
-
 #include <SDL.h>
 
 #include "../Log.h"
@@ -26,7 +24,7 @@ namespace Perch
 	/// <summary>
 	/// 
 	/// </summary>
-	class Texture
+	struct Texture
 	{
 
 		// # Variables + Getters/Setters
@@ -36,7 +34,7 @@ namespace Perch
 		Vector2i Size = Vector2i();
 
 	public:
-		inline SDL_Texture& GetSDLTexture() { return *SDLTexture; }
+		inline SDL_Texture* GetSDLTexture() { return SDLTexture.get(); }
 
 		Vector2i GetSize() const;
 
@@ -46,6 +44,9 @@ namespace Perch
 		// # Functions
 
 	private:
+
+		static SDL_Texture* LoadTexture(SDL_Renderer* renderer, std::string path);
+
 		Texture(SDL_Texture* sdlTexture);
 
 	public:

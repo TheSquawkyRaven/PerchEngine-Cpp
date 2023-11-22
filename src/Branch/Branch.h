@@ -17,7 +17,7 @@ namespace Perch
 	class Branch
 	{
 
-		friend class Perch::Engine;
+		friend class Engine;
 
 		// # Variables + Getters/Setters
 
@@ -36,6 +36,8 @@ namespace Perch
 		std::vector<std::shared_ptr<Branch>> Children;
 
 		bool ReadyCalled = false;
+		bool Updated = false;
+		bool Drawn = false;
 
 	protected:
 

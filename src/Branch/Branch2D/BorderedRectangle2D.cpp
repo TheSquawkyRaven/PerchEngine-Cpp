@@ -8,16 +8,14 @@ using namespace Squawk;
 
 void BorderedRectangle2D::Draw(Engine* engine, SDL_Renderer* renderer)
 {
-	Vector2 position = GetRectGlobalPosition() - Vector2(BorderSize);
-	Vector2 size = GetRectSize() + Vector2(BorderSize * 2);
+	Vector2 position = GetRectGlobalPosition() - Vector2(_BorderSize);
+	Vector2 size = GetRectSize() + Vector2(_BorderSize * 2);
 
-	SDL_Rect* rect = Rect2::CreateSDLRect(&position, &size);
+	shared_ptr<SDL_Rect> rect = Rect2::CreateSDLRect(position, size);
 
-	SDL_SetRenderDrawColor(renderer, 0xff, 0xff, 0x00, 0xff);
-	SDL_RenderFillRect(renderer, rect);
+	SDL_SetRenderDrawColor(renderer, _BorderColor.R, _BorderColor.G, _BorderColor.B, _BorderColor.A);
+	SDL_RenderFillRect(renderer, rect.get());
 
 	// Draw base rectangle
 	Rectangle2D::Draw(engine, renderer);
-
-	delete rect;
 }

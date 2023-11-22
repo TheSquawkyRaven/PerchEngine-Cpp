@@ -9,14 +9,14 @@
 #include "Branch/Branch2D/Line2D.h"
 #include "Branch/Branch2D/Point2D.h"
 #include "Branch/Branch2D/Viewport2D.h"
-#include "Resources/Texture.h"
+#include "Structs/Texture.h"
 
 
 using namespace std;
 using namespace Perch;
 using namespace Squawk;
 
-const string WINDOW_NAME;
+const string WINDOW_NAME = "A???";
 const int SCREEN_WIDTH = 1280;
 const int SCREEN_HEIGHT = 720;
 
@@ -24,7 +24,7 @@ void OnRootCreate(Engine* Engine, Branch* Root);
 
 int main(int argc, char* args[])
 {
-	EngineConfig* engineConfig = new EngineConfig();
+	shared_ptr<EngineConfig> engineConfig = shared_ptr<EngineConfig>(new EngineConfig());
 
 	engineConfig->WindowName = WINDOW_NAME;
 	engineConfig->WindowSize = Vector2i(SCREEN_WIDTH, SCREEN_HEIGHT);
@@ -32,6 +32,8 @@ int main(int argc, char* args[])
 	Engine* engine = new Engine(engineConfig);
 	engine->SetOnRootCreate(&OnRootCreate);
 	engine->Start();
+
+	delete engine;
 
 	return 0;
 }
@@ -53,15 +55,15 @@ void OnRootCreate(Engine* Engine, Branch* Root)
 	{
 		return;
 	}
-	//sprite->SetTexture(png);
+	sprite->SetTexture(png);
 	sprite->Position = Vector2(100, 100);
 	sprite->Scale = Vector2(1, 1.5f);
 
-	//sprite2->SetTexture(bmp);
+	sprite2->SetTexture(bmp);
 	sprite2->Position = Vector2(300, 100);
 	sprite2->Scale = Vector2(1.5, 1);
 
-	//sprite3->SetTexture(bmp);
+	sprite3->SetTexture(bmp);
 	sprite3->Position = Vector2(200, 300);
 	sprite3->Scale = Vector2(1.5, 1.5);
 
@@ -72,6 +74,7 @@ void OnRootCreate(Engine* Engine, Branch* Root)
 	shared_ptr<Line2D> line = Engine->CreateBranch<Line2D>();
 	line->SetStartPosition(Vector2(0, 100));
 	line->SetEndPosition(Vector2(300, 300));
+	line->SetColor(Color::Purple());
 
 	shared_ptr<Point2D> point = Engine->CreateBranch<Point2D>();
 	point->SetPointPosition(Vector2(5, 5));
@@ -99,12 +102,13 @@ void OnRootCreate(Engine* Engine, Branch* Root)
 	viewport2D->AttachChild(line);
 	viewport2D->AttachChild(point);
 
-	// One issue with the current Rect2 implementation is that all the Vector2s become integer when stored as SDL_Rects
-
 	shared_ptr<CutSprite2D> cutSprite = Engine->CreateBranch<CutSprite2D>();
 	cutSprite->SetTexture(png);
 	cutSprite->Position = Vector2(0, 0);
 	cutSprite->Scale = Vector2(1, 1.5f);
+	Color color = Color::White();
+	color.A = 120;
+	cutSprite->SetColor(color);
 	cutSprite->SetSpriteColumns(3);
 	cutSprite->SetSpriteRows(3);
 	cutSprite->SetSpriteIndex(7);

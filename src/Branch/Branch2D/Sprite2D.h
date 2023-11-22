@@ -2,7 +2,7 @@
 
 #include "Branch2D.h"
 
-#include "../../Resources/Texture.h"
+#include "../../Structs/Texture.h"
 #include "../../Structs/Rect2.h"
 #include "../../Structs/Vector2.h"
 #include "../../Structs/Vector2i.h"
@@ -24,10 +24,13 @@ namespace Perch
 	private:
 
 		std::shared_ptr<Texture> _Texture = NULL;
+		Color _Color = Color();
 
 	public:
 
 		std::shared_ptr<Texture> GetTexture() { return _Texture; }
+		inline Color GetColor() const { return _Color; }
+		inline void SetColor(Color color) { _Color = color; }
 
 		// ###
 

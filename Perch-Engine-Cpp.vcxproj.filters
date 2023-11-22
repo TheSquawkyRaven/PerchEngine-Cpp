@@ -19,6 +19,12 @@
     <Filter Include="Source Files\Branch2D">
       <UniqueIdentifier>{fefe4b19-c49a-4426-9b1d-ace5aff25aed}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Structs">
+      <UniqueIdentifier>{de04af6b-67ce-43e3-b555-066e838db513}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Structs">
+      <UniqueIdentifier>{5033f4ec-cb05-4cf0-9eff-af3b3ad73388}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Engine.cpp">
@@ -34,21 +40,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Resources\Resource.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Resources\Texture.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Resources\Loaders\TextureLoader.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Structs\Rect2.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Structs\Vector2.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Structs\Vector2i.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Branch\Branch2D\Sprite2D.cpp">
@@ -72,11 +63,26 @@
     <ClCompile Include="src\Branch\Branch2D\Viewport2D.cpp">
       <Filter>Source Files\Branch2D</Filter>
     </ClCompile>
+    <ClCompile Include="src\Structs\Rect2.cpp">
+      <Filter>Source Files\Structs</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Structs\Vector2.cpp">
+      <Filter>Source Files\Structs</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Structs\Vector2i.cpp">
+      <Filter>Source Files\Structs</Filter>
+    </ClCompile>
     <ClCompile Include="src\Structs\Viewport.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Structs</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Structs\Color.cpp">
+      <Filter>Source Files\Structs</Filter>
     </ClCompile>
     <ClCompile Include="src\Branch\Branch2D\CutSprite2D.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Branch2D</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Structs\Texture.cpp">
+      <Filter>Source Files\Structs</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -90,21 +96,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Resources\Resource.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Resources\Texture.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Resources\Loaders\TextureLoader.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Structs\Rect2.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Structs\Vector2.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Structs\Vector2i.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Branch\Branch2D\Point2D.h">
@@ -128,11 +119,26 @@
     <ClInclude Include="src\Branch\Branch2D\Viewport2D.h">
       <Filter>Header Files\Branch2D</Filter>
     </ClInclude>
+    <ClInclude Include="src\Structs\Color.h">
+      <Filter>Header Files\Structs</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Structs\Rect2.h">
+      <Filter>Header Files\Structs</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Structs\Vector2.h">
+      <Filter>Header Files\Structs</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Structs\Vector2i.h">
+      <Filter>Header Files\Structs</Filter>
+    </ClInclude>
     <ClInclude Include="src\Structs\Viewport.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Structs</Filter>
     </ClInclude>
     <ClInclude Include="src\Branch\Branch2D\CutSprite2D.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Branch2D</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Structs\Texture.h">
+      <Filter>Header Files\Structs</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

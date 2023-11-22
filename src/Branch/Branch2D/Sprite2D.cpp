@@ -46,11 +46,11 @@ void Sprite2D::Draw(Engine* engine, SDL_Renderer* renderer)
 
 	Vector2 position = GetGlobalPosition();
 	Vector2 size = GetGlobalSize();
-	SDL_Rect* rect = Rect2::CreateSDLRect(&position, &size);
+	shared_ptr<SDL_Rect> rect = Rect2::CreateSDLRect(position, size);
 
-	SDL_RenderCopy(renderer, &_Texture->GetSDLTexture(), NULL, rect);
-
-	delete rect;
+	SDL_SetTextureColorMod(_Texture->GetSDLTexture(), _Color.R, _Color.G, _Color.B);
+	SDL_SetTextureAlphaMod(_Texture->GetSDLTexture(), _Color.A);
+	SDL_RenderCopy(renderer, _Texture->GetSDLTexture(), NULL, rect.get());
 }
 
 void Sprite2D::OnDestroy(Engine* engine)

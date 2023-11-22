@@ -20,7 +20,7 @@ namespace Perch
 
 		Vector2 _StartPosition = Vector2();
 		Vector2 _EndPosition = Vector2();
-		// TODO + color
+		Color _Color = Color();
 
 	public:
 
@@ -28,6 +28,8 @@ namespace Perch
 		inline Vector2 GetEndPosition() const { return _EndPosition; }
 		inline void SetStartPosition(Vector2 position) { _StartPosition = position; }
 		inline void SetEndPosition(Vector2 position) { _EndPosition = position; }
+		inline Color GetColor() const { return _Color; }
+		inline void SetColor(Color color) { _Color = color; }
 
 		// ###
 

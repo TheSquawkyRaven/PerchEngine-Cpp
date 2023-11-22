@@ -29,10 +29,8 @@ void Rectangle2D::Draw(Engine* engine, SDL_Renderer* renderer)
 	Vector2 position = GetRectGlobalPosition();
 	Vector2 size = GetRectSize();
 
-	SDL_Rect* rect = Rect2::CreateSDLRect(&position, &size);
+	shared_ptr<SDL_Rect> rect = Rect2::CreateSDLRect(position, size);
 
-	SDL_SetRenderDrawColor(renderer, 0xff, 0x00, 0x00, 0xff);
-	SDL_RenderFillRect(renderer, rect);
-
-	delete rect;
+	SDL_SetRenderDrawColor(renderer, _Color.R, _Color.G, _Color.B, _Color.A);
+	SDL_RenderFillRect(renderer, rect.get());
 }

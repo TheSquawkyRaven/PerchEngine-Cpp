@@ -5,6 +5,8 @@
 #include "Vector2.h"
 #include "Vector2i.h"
 
+#include <memory>
+
 namespace Perch
 {
 
@@ -15,9 +17,16 @@ namespace Perch
 	{
 
 	private:
-		SDL_Rect* SDLRect = new SDL_Rect;
+
+		Vector2 Position = Vector2();
+		Vector2 Size = Vector2();
+		std::shared_ptr<SDL_Rect> SDLRect = std::shared_ptr<SDL_Rect>(new SDL_Rect);
 
 	public:
+
+	private:
+
+		void UpdateSDLRect();
 
 	public:
 
@@ -34,9 +43,9 @@ namespace Perch
 		void SetSize(Vector2i size);
 		void SetSize(float w, float h);
 
-		SDL_Rect* GetSDLRect();
+		std::shared_ptr<SDL_Rect> GetSDLRect();
 
-		static SDL_Rect* CreateSDLRect(Vector2* position, Vector2* size);
+		static std::shared_ptr<SDL_Rect> CreateSDLRect(Vector2 position, Vector2 size);
 
 	};
 

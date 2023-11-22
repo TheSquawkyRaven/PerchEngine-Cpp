@@ -4,6 +4,8 @@
 
 #include "Rect2.h"
 
+#include <memory>
+
 namespace Perch
 {
 
@@ -22,7 +24,7 @@ namespace Perch
 
 		Viewport();
 		Viewport(Rect2 rect);
-		SDL_Rect* GetSDLRect();
+		std::shared_ptr<SDL_Rect> GetSDLRect();
 
 	};
 

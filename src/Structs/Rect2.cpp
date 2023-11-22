@@ -1,29 +1,31 @@
 #include "Rect2.h"
 
 using namespace Perch;
+using namespace std;
+
+void Rect2::UpdateSDLRect()
+{
+	SDLRect->x = (int)(Position.X + 0.5f);
+	SDLRect->y = (int)(Position.Y + 0.5f);
+	SDLRect->w = (int)(Size.X + 0.5f);
+	SDLRect->h = (int)(Size.Y + 0.5f);
+}
 
 Rect2::Rect2()
 {
-	SDLRect->x = 0;
-	SDLRect->y = 0;
-	SDLRect->w = 0;
-	SDLRect->h = 0;
+	UpdateSDLRect();
 }
 
 Rect2::Rect2(Vector2 position, Vector2 size)
 {
-	SDLRect->x = position.X;
-	SDLRect->y = position.Y;
-	SDLRect->w = size.X;
-	SDLRect->h = size.Y;
+	SetPosition(position);
+	SetSize(size);
 }
 
 Rect2::Rect2(float x, float y, float w, float h)
 {
-	SDLRect->x = x;
-	SDLRect->y = y;
-	SDLRect->w = w;
-	SDLRect->h = h;
+	SetPosition(x, y);
+	SetSize(w, h);
 }
 
 Vector2 Rect2::GetPosition()
@@ -48,8 +50,8 @@ void Rect2::SetPosition(Vector2i position)
 
 void Rect2::SetPosition(float x, float y)
 {
-	SDLRect->x = x;
-	SDLRect->y = y;
+	Position = Vector2(x, y);
+	UpdateSDLRect();
 }
 
 void Rect2::SetSize(Vector2 size)
@@ -64,22 +66,22 @@ void Rect2::SetSize(Vector2i size)
 
 void Rect2::SetSize(float w, float h)
 {
-	SDLRect->w = w;
-	SDLRect->h = h;
+	Size = Vector2(w, h);
+	UpdateSDLRect();
 }
 
-SDL_Rect* Rect2::GetSDLRect()
+shared_ptr<SDL_Rect> Rect2::GetSDLRect()
 {
 	return SDLRect;
 }
 
-SDL_Rect* Rect2::CreateSDLRect(Vector2* position, Vector2* size)
+shared_ptr<SDL_Rect> Rect2::CreateSDLRect(Vector2 position, Vector2 size)
 {
-	SDL_Rect* rect = new SDL_Rect{};
-	rect->x = position->X;
-	rect->y = position->Y;
-	rect->w = size->X;
-	rect->h = size->Y;
+	shared_ptr<SDL_Rect> rect = shared_ptr<SDL_Rect>(new SDL_Rect);
+	rect->x = position.X;
+	rect->y = position.Y;
+	rect->w = size.X;
+	rect->h = size.Y;
 
 	return rect;
 }

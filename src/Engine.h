@@ -8,6 +8,7 @@
 #include "Structs/Vector2i.h"
 #include "Structs/Rect2.h"
 #include "Structs/Viewport.h"
+#include "Structs/Color.h"
 
 #include <string>
 #include <functional>
@@ -26,7 +27,8 @@ namespace Perch
 
 		std::string WindowName = "";
 		Vector2i WindowSize = Vector2i(640, 480);
-		bool SupportPNGLoading = true;
+
+		Color ClearColor = Color();
 
 	};
 
@@ -41,7 +43,7 @@ namespace Perch
 
 	private:
 
-		EngineConfig* Config;
+		std::shared_ptr<EngineConfig> Config;
 		Rect2 MainWindowRect = Rect2();
 
 		bool HasError = false;
@@ -52,6 +54,7 @@ namespace Perch
 		// SDL Renderer for hardware rendering
 		SDL_Renderer* MainWindowRenderer = NULL;
 
+		// Root is not delete when deconstructing because the destroy function will delete itself!
 		Branch* Root = NULL;
 
 		std::function<void(Engine* Engine, Branch* Root)> OnRootCreate = NULL;
@@ -87,7 +90,7 @@ namespace Perch
 
 	public:
 
-		Engine(EngineConfig* config);
+		Engine(std::shared_ptr<EngineConfig> config);
 		void UpdateConfig();
 
 		inline void SetOnRootCreate(std::function<void(Engine* Engine, Branch* Root)> onRootCreate) { this->OnRootCreate = onRootCreate; };

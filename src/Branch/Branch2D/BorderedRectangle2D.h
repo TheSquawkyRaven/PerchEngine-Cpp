@@ -19,13 +19,15 @@ namespace Perch
 		// # Variables + Getters/Setters
 	private:
 
-		float BorderSize = 1.0f;
-		// TODO + color
+		float _BorderSize = 1.0f;
+		Color _BorderColor = Color(0);
 
 	public:
 
-		inline float GetBorderSize() const { return BorderSize; }
-		inline void SetBorderSize(float size) { BorderSize = size; }
+		inline float GetBorderSize() const { return _BorderSize; }
+		inline void SetBorderSize(float size) { _BorderSize = size; }
+		inline Color GetBorderColor() const { return _BorderColor; }
+		inline void SetBorderColor(float color) { _BorderColor = color; }
 
 		// ###
 

@@ -20,12 +20,14 @@ namespace Perch
 	private:
 
 		Rect2 _Rect2 = Rect2();
-		// TODO + color
+		Color _Color = Color();
 
 	public:
 
 		inline Rect2 GetRect2() const { return _Rect2; }
 		inline void SetRect2(Rect2 rect2) { _Rect2 = rect2; }
+		inline Color GetColor() const { return _Color; }
+		inline void SetColor(Color color) { _Color = color; }
 
 		// ###
 

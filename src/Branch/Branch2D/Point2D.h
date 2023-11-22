@@ -19,12 +19,14 @@ namespace Perch
 	private:
 
 		Vector2 _PointPosition = Vector2();
-		// TODO + color
+		Color _Color = Color();
 
 	public:
 
 		inline Vector2 GetPointPosition() const { return _PointPosition; }
 		inline void SetPointPosition(Vector2 position) { _PointPosition = position; }
+		inline Color GetColor() const { return _Color; }
+		inline void SetColor(Color color) { _Color = color; }
 
 		// ###
 

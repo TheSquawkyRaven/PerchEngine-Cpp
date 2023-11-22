@@ -2,6 +2,7 @@
 #include "Viewport.h"
 
 using namespace Perch;
+using namespace std;
 
 Viewport::Viewport()
 {}
@@ -11,7 +12,7 @@ Viewport::Viewport(Rect2 rect)
 	Rect = rect;
 }
 
-SDL_Rect* Viewport::GetSDLRect()
+shared_ptr<SDL_Rect> Viewport::GetSDLRect()
 {
 	return Rect.GetSDLRect();
 }

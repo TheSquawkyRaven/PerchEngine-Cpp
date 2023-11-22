@@ -19,16 +19,16 @@ Branch::Branch()
 
 int Branch::GetChildIndex(Branch* child)
 {
-    auto iterator = find(Children.begin(), Children.end(), shared_ptr<Branch>(child));
-    if (iterator == Children.end())
+    for (int i = 0; i < Children.size(); i++)
     {
-        // Not found!
-        Log::Warnf("%s not found as a child in %s!", child->Name, Name);
-        return -1;
+        if (Children[i].get() == child)
+        {
+            return i;
+        }
     }
-
-    int index = iterator - Children.begin();
-    return index;
+    // Not found!
+    Log::Warnf("%s not found as a child in %s!", child->Name, Name);
+    return -1;
 }
 
 void Branch::_Init(Engine* engine)
@@ -58,7 +58,13 @@ void Branch::_Ready(Engine* engine)
 void Branch::_Update(Engine* engine)
 {
     // Preorder update order (Parent update first)
+    if (Updated)
+    {
+        return;
+    }
+    // Updated problem! Update Out is not tracked properly as intended!
     Update(engine);
+    Updated = true;
     if (!Children.empty())
     {
         // Update through recursion
@@ -66,20 +72,30 @@ void Branch::_Update(Engine* engine)
         {
             shared_ptr<Branch> child = Children[i];
             child->_Update(engine);
-            child->_Update(engine);
+            child->_UpdateOut(engine);
         }
     }
 }
 
 void Branch::_UpdateOut(Engine* engine)
 {
+    if (!Updated)
+    {
+        return;
+    }
     UpdateOut(engine);
+    Updated = false;
 }
 
 void Branch::_Draw(Engine* engine, SDL_Renderer* renderer)
 {
     // Preorder draw order (Parent draw first)
+    if (Drawn)
+    {
+        return;
+    }
     Draw(engine, renderer);
+    Drawn = true;
     if (!Children.empty())
     {
         // Draw through recursion
@@ -94,7 +110,12 @@ void Branch::_Draw(Engine* engine, SDL_Renderer* renderer)
 
 void Branch::_DrawOut(Engine* engine, SDL_Renderer* renderer)
 {
+    if (!Drawn)
+    {
+        return;
+    }
     DrawOut(engine, renderer);
+    Drawn = false;
 }
 
 void Branch::_Destroy(Engine* engine, bool isChainedDestroy)
@@ -146,13 +167,13 @@ void Branch::Ready(Engine* engine)
 void Branch::Update(Engine* engine)
 {}
 
-void Perch::Branch::UpdateOut(Engine * engine)
+void Branch::UpdateOut(Engine* engine)
 {}
 
 void Branch::Draw(Engine* engine, SDL_Renderer* renderer)
 {}
 
-void Branch::DrawOut(Engine* engine, SDL_Renderer * renderer)
+void Branch::DrawOut(Engine* engine, SDL_Renderer* renderer)
 {}
 
 void Branch::Destroy(Engine* engine)

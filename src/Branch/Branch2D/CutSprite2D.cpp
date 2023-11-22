@@ -1,6 +1,7 @@
 #include "CutSprite2D.h"
 
 #include "../../Log.h"
+#include "../../Structs/Color.h"
 
 using namespace std;
 using namespace Perch;
@@ -56,8 +57,8 @@ void CutSprite2D::UpdateCutRect()
 	position.X = size.X * iX;
 	position.Y = size.Y * iY;
 
-	_CutRect.SetPosition(position + 0.5f);
-	_CutRect.SetSize(size + 0.5f);
+	_CutRect.SetPosition(position);
+	_CutRect.SetSize(size);
 }
 
 CutSprite2D::CutSprite2D()
@@ -98,11 +99,12 @@ void CutSprite2D::Draw(Engine* engine, SDL_Renderer* renderer)
 
 	Vector2 position = GetGlobalPosition();
 	Vector2 size = GetGlobalSize();
-	SDL_Rect* rect = Rect2::CreateSDLRect(&position, &size);
+	shared_ptr<SDL_Rect> rect = Rect2::CreateSDLRect(position, size);
 	
-	SDL_Rect* cutRect = _CutRect.GetSDLRect();
-
-	SDL_RenderCopy(renderer, &texture->GetSDLTexture(), cutRect, rect);
-
-	delete rect;
+	shared_ptr<SDL_Rect> cutRect = _CutRect.GetSDLRect();
+	
+	Color color = GetColor();
+	SDL_SetTextureColorMod(texture->GetSDLTexture(), color.R, color.G, color.B);
+	SDL_SetTextureAlphaMod(texture->GetSDLTexture(), color.A);
+	SDL_RenderCopy(renderer, texture->GetSDLTexture(), cutRect.get(), rect.get());
 }

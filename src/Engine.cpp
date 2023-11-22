@@ -20,12 +20,15 @@ void Engine::Update(SDL_Event* e, bool* quit)
 	}
 
 	Root->_Update(this);
+	Root->_UpdateOut(this);
 
-	SDL_SetRenderDrawColor(MainWindowRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
+	Color c = Config->ClearColor;
+	SDL_SetRenderDrawColor(MainWindowRenderer, c.R, c.G, c.B, c.A);
 	SDL_RenderClear(MainWindowRenderer);
 
 	UseViewport(MainWindowRenderer, RootViewport);
 	Root->_Draw(this, MainWindowRenderer);
+	Root->_DrawOut(this, MainWindowRenderer);
 	UnuseViewport(MainWindowRenderer, RootViewport);
 	ClearViewportStack();
 
@@ -57,34 +60,32 @@ bool Engine::InitMainWindow()
 	// Create a main window
 	// Title, X, & Y pos of window position on screen, width, height, hide window when created
 	Vector2i ScreenSize = MainWindowRect.GetSize();
-	MainWindow = SDL_CreateWindow("SDL Game Engine", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, ScreenSize.X, ScreenSize.Y, SDL_WINDOW_HIDDEN);
+	MainWindow = SDL_CreateWindow(Config->WindowName.c_str(), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, ScreenSize.X, ScreenSize.Y, SDL_WINDOW_HIDDEN);
 	if (MainWindow == NULL)
 	{
 		Log::Errorf("Window cannot be created! SDL_ERROR: %s", SDL_GetError());
 		return false;
 	}
 
-	MainWindowRenderer = SDL_CreateRenderer(MainWindow, -1, SDL_RENDERER_ACCELERATED);
+	MainWindowRenderer = SDL_CreateRenderer(MainWindow, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 	if (MainWindowRenderer == NULL)
 	{
 		Log::Errorf("Renderer cannot be created! SDL_ERROR: %s", SDL_GetError());
 		return false;
 	}
-	// Renderer color
-	SDL_SetRenderDrawColor(MainWindowRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
 
 	// PNG Loading
-	if (Config->SupportPNGLoading)
+	// Attempt to initialize the PNG Loader
+	int imageFlags = IMG_INIT_PNG;
+	if (!(IMG_Init(imageFlags) & imageFlags))
 	{
-		// Attempt to initialize the PNG Loader
-		int imageFlags = IMG_INIT_PNG;
-		if (!(IMG_Init(imageFlags) & imageFlags))
-		{
-			Log::Errorf("SDL_image cannot initialize! SDL_IMAGE_ERROR: %s", IMG_GetError());
-			return false;
-		}
+		Log::Errorf("SDL_image cannot initialize! SDL_IMAGE_ERROR: %s", IMG_GetError());
+		return false;
 	}
 
+	// Renderer color
+	Color c = Config->ClearColor;
+	SDL_SetRenderDrawColor(MainWindowRenderer, c.R, c.G, c.B, c.A);
 	SDL_RenderClear(MainWindowRenderer);
 
 
@@ -95,6 +96,7 @@ bool Engine::InitMainWindow()
 void Engine::CreateTree()
 {
 	Root = new Branch();
+	Root->_Init(this);
 
 	if (OnRootCreate == NULL)
 	{
@@ -125,7 +127,7 @@ bool Engine::CheckError() const
 	return false;
 }
 
-Engine::Engine(EngineConfig* config)
+Engine::Engine(shared_ptr<EngineConfig> config)
 {
 	Config = config;
 	UpdateConfig();
@@ -162,7 +164,7 @@ void Engine::SimulateUnuseViewport(shared_ptr<Viewport> viewport)
 void Engine::UseViewport(SDL_Renderer* renderer, shared_ptr<Viewport> viewport)
 {
 	ViewportStack.push(viewport);
-	SDL_RenderSetViewport(renderer, viewport->GetSDLRect());
+	SDL_RenderSetViewport(renderer, viewport->GetSDLRect().get());
 }
 
 void Engine::UnuseViewport(SDL_Renderer* renderer, std::shared_ptr<Viewport> viewport)
@@ -178,7 +180,7 @@ void Engine::UnuseViewport(SDL_Renderer* renderer, std::shared_ptr<Viewport> vie
 		return;
 	}
 	shared_ptr<Viewport> currentViewport = ViewportStack.top();
-	SDL_RenderSetViewport(renderer, currentViewport->GetSDLRect());
+	SDL_RenderSetViewport(renderer, currentViewport->GetSDLRect().get());
 }
 
 shared_ptr<Viewport> Engine::GetCurrentViewport()
@@ -222,8 +224,8 @@ void Engine::Quit()
 	SDL_DestroyRenderer(MainWindowRenderer);
 	SDL_DestroyWindow(MainWindow);
 
-	MainWindowRenderer = NULL;
 	MainWindow = NULL;
+	MainWindowRenderer = NULL;
 
 	IMG_Quit();
 	SDL_Quit();
