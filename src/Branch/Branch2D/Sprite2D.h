@@ -28,7 +28,9 @@ namespace Perch
 
 	public:
 
+		Vector2 RotatePivot = Vector2(0.5f, 0.5f);
 		double Angle = 0;
+		// SDL do not support flipping at both axes at the same time
 		bool FlipX = false;
 		bool FlipY = false;
 
@@ -46,6 +48,7 @@ namespace Perch
 	protected:
 
 		SDL_RendererFlip GetSDLFlip() const;
+		std::shared_ptr<SDL_Point> GetRotateOrigin();
 
 	public:
 

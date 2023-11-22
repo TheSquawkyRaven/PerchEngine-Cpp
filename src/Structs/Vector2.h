@@ -1,6 +1,10 @@
 #pragma once
 
+#include <SDL.h>
+
 #include "Vector2i.h"
+
+#include <memory>
 
 namespace Perch
 {
@@ -32,6 +36,8 @@ namespace Perch
 
 		Vector2 Midpoint(Vector2 const& other) const;
 		Vector2 ProportionalPoint(Vector2 const& other, float proportion) const;
+
+		std::shared_ptr<SDL_Point> GetSDLPoint() const;
 
 		operator Vector2i() const;
 

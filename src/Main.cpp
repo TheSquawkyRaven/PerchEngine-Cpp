@@ -68,6 +68,7 @@ void OnRootCreate(Engine* Engine, Branch* Root)
 	sprite3->SetTexture(bmp);
 	sprite3->Position = Vector2(200, 300);
 	sprite3->Scale = Vector2(1.5, 1.5);
+	sprite3->RotatePivot = Vector2(0, 0);
 	sprite3->Angle = 45;
 
 	shared_ptr<BorderedRectangle2D> rectangle = Engine->CreateBranch<BorderedRectangle2D>();

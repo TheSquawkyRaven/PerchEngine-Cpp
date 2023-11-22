@@ -102,9 +102,10 @@ void CutSprite2D::Draw(Engine* engine, SDL_Renderer* renderer)
 	shared_ptr<SDL_Rect> rect = Rect2::CreateSDLRect(position, size);
 	
 	shared_ptr<SDL_Rect> cutRect = _CutRect.GetSDLRect();
+	Vector2 rotateOrigin = RotatePivot * texture->GetSize();
 	
 	Color color = GetColor();
 	SDL_SetTextureColorMod(texture->GetSDLTexture(), color.R, color.G, color.B);
 	SDL_SetTextureAlphaMod(texture->GetSDLTexture(), color.A);
-	SDL_RenderCopyEx(renderer, texture->GetSDLTexture(), cutRect.get(), rect.get(), Angle, NULL, GetSDLFlip());
+	SDL_RenderCopyEx(renderer, texture->GetSDLTexture(), cutRect.get(), rect.get(), Angle, GetRotateOrigin().get(), GetSDLFlip());
 }

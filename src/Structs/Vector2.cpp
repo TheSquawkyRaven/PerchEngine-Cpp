@@ -59,6 +59,14 @@ Vector2 Vector2::ProportionalPoint(Vector2 const& other, float proportion) const
 	return Vector2((X + other.X) * proportion, (Y + other.Y) * proportion);
 }
 
+shared_ptr<SDL_Point> Vector2::GetSDLPoint() const
+{
+	SDL_Point* sdlPoint = new SDL_Point();
+	sdlPoint->x = X + 0.5f;
+	sdlPoint->y = Y + 0.5f;
+	return shared_ptr<SDL_Point>(sdlPoint);
+}
+
 
 
 

@@ -21,6 +21,17 @@ SDL_RendererFlip Sprite2D::GetSDLFlip() const
 	return flip;
 }
 
+shared_ptr<SDL_Point> Perch::Sprite2D::GetRotateOrigin()
+{
+	if (_Texture == NULL)
+	{
+		return NULL;
+	}
+	Vector2 rotateOrigin = RotatePivot * _Texture->GetSize();
+
+	return rotateOrigin.GetSDLPoint();
+}
+
 Vector2 Sprite2D::GetSize()
 {
 	if (_Texture == NULL)
@@ -66,7 +77,7 @@ void Sprite2D::Draw(Engine* engine, SDL_Renderer* renderer)
 
 	SDL_SetTextureColorMod(_Texture->GetSDLTexture(), _Color.R, _Color.G, _Color.B);
 	SDL_SetTextureAlphaMod(_Texture->GetSDLTexture(), _Color.A);
-	SDL_RenderCopyEx(renderer, _Texture->GetSDLTexture(), NULL, rect.get(), Angle, NULL, GetSDLFlip());
+	SDL_RenderCopyEx(renderer, _Texture->GetSDLTexture(), NULL, rect.get(), Angle, GetRotateOrigin().get(), GetSDLFlip());
 }
 
 void Sprite2D::OnDestroy(Engine* engine)
