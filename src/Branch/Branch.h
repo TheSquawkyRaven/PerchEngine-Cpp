@@ -51,6 +51,7 @@ namespace Perch
 
 		bool ReadyCalled = false;
 		bool Updated = false;
+		bool PhysicsUpdated = false;
 		bool Drawn = false;
 
 	protected:
@@ -75,6 +76,7 @@ namespace Perch
 
 		void _Update();
 		void _UpdateOut();
+		void _PhysicsUpdate();
 		void _Draw(SDL_Renderer* renderer);
 		void _DrawOut(SDL_Renderer* renderer);
 		void _Destroy(bool isChainedDestroy);
@@ -100,6 +102,9 @@ namespace Perch
 		PERCHENGINECPP_API virtual void Update();
 		// UpdateOut - Called every frame after Updating all children
 		PERCHENGINECPP_API virtual void UpdateOut();
+
+		// PhysicsUpdate - Preorder, Called every frame after update, before draw
+		PERCHENGINECPP_API virtual void PhysicsUpdate();
 
 		// Draw - Preorder, Called every frame. Update first, then draw
 		PERCHENGINECPP_API virtual void Draw(SDL_Renderer* renderer);

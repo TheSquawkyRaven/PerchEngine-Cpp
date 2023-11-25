@@ -96,6 +96,9 @@
     <ClInclude Include="src\Script.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\Branch\Branch2D\Rigidbody2D.h">
+      <Filter>Header Files\Branch2D</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -169,6 +172,9 @@
     </ClCompile>
     <ClCompile Include="src\Script.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Branch\Branch2D\Rigidbody2D.cpp">
+      <Filter>Source Files\Branch2D</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

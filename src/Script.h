@@ -51,6 +51,9 @@ namespace Perch
 		// Update - Preorder, Called every frame
 		PERCHENGINECPP_API virtual void Update(Engine* engine);
 
+		// Update - Preorder, Called every frame after update, before draw
+		PERCHENGINECPP_API virtual void PhysicsUpdate(Engine* engine);
+
 		// Draw - Preorder, Called every frame. Update first, then draw
 		PERCHENGINECPP_API virtual void Draw(Engine* engine, SDL_Renderer* renderer);
 

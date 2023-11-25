@@ -4,6 +4,7 @@
 #include "Engine.h"
 #include "Log.h"
 #include "Branch/Branch2D/Sprite2D.h"
+#include "Branch/Branch2D/Rigidbody2D.h"
 #include "Branch/Branch2D/Text2D.h"
 #include "Branch/Branch2D/Rectangle2D.h"
 #include "Branch/Branch2D/BorderedRectangle2D.h"
@@ -134,5 +135,10 @@ void OnRootCreate(Engine* Engine, Branch* Root)
 	text->SetText("Hello World");
 
 	Root->AttachChild(text);
+
+
+	shared_ptr<Rigidbody2D> rigidbody2D = Engine->CreateBranch<Rigidbody2D>();
+	Root->AttachChild(rigidbody2D);
+
 
 }

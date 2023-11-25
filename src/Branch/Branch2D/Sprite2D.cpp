@@ -48,6 +48,12 @@ void Sprite2D::UpdateCutRect()
 	}
 
 	shared_ptr<Texture> texture = GetTexture();
+
+	if (texture == NULL)
+	{
+		return;
+	}
+
 	Vector2 size = texture->GetSize();
 	size.X = size.X / _SpriteColumns;
 	size.Y = size.Y / _SpriteRows;

@@ -29,6 +29,9 @@ void Script::Ready(Engine* engine)
 void Script::Update(Engine* engine)
 {}
 
+void Script::PhysicsUpdate(Engine * engine)
+{}
+
 void Script::Draw(Engine* engine, SDL_Renderer * renderer)
 {}
 

@@ -98,6 +98,29 @@ void Branch::_UpdateOut()
     Updated = false;
 }
 
+void Branch::_PhysicsUpdate()
+{
+    if (PhysicsUpdated)
+    {
+        return;
+    }
+    PhysicsUpdate();
+    if (ScriptRef != NULL)
+    {
+        ScriptRef->PhysicsUpdate(EngineRef);
+    }
+    PhysicsUpdated = true;
+    if (!Children.empty())
+    {
+        // Update through recursion
+        for (size_t i = 0; i < Children.size(); ++i)
+        {
+            shared_ptr<Branch> child = Children[i];
+            child->_PhysicsUpdate();
+        }
+    }
+}
+
 void Branch::_Draw(SDL_Renderer* renderer)
 {
     // Preorder draw order (Parent draw first)
@@ -187,6 +210,9 @@ void Branch::Update()
 {}
 
 void Branch::UpdateOut()
+{}
+
+void Branch::PhysicsUpdate()
 {}
 
 void Branch::Draw(SDL_Renderer* renderer)

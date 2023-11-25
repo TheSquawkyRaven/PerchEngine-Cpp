@@ -18,6 +18,8 @@ void Engine::Update(SDL_Event* e, bool* quit)
 	Root->_Update();
 	Root->_UpdateOut();
 
+	Root->_PhysicsUpdate();
+
 	Color c = Config->ClearColor;
 	SDL_SetRenderDrawColor(MainWindowRenderer, c.R, c.G, c.B, c.A);
 	SDL_RenderClear(MainWindowRenderer);
