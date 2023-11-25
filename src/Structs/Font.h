@@ -1,5 +1,12 @@
 #pragma once
 
+#ifdef PERCHENGINECPP_EXPORTS
+#define PERCHENGINECPP_API __declspec(dllexport)
+#else
+#define PERCHENGINECPP_API __declspec(dllimport)
+#endif
+
+
 #include <SDL.h>
 #include <SDL_ttf.h>
 
@@ -35,7 +42,7 @@ namespace Perch
 
 	public:
 
-		inline TTF_Font* GetSDLFont() { return SDLFont.get(); }
+		PERCHENGINECPP_API inline TTF_Font* GetSDLFont() { return SDLFont.get(); }
 
 		// ###
 
@@ -50,7 +57,7 @@ namespace Perch
 
 	public:
 
-		static std::shared_ptr<Font> Create(Engine* engine, std::string path, int fontSize);
+		PERCHENGINECPP_API static std::shared_ptr<Font> Create(Engine* engine, std::string path, int fontSize);
 
 		// ###
 

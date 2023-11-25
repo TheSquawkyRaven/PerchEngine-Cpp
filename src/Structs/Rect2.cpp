@@ -1,3 +1,5 @@
+#include "pch.h"
+
 #include "Rect2.h"
 
 using namespace Perch;

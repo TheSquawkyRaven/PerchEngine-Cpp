@@ -1,5 +1,12 @@
 #pragma once
 
+#ifdef PERCHENGINECPP_EXPORTS
+#define PERCHENGINECPP_API __declspec(dllexport)
+#else
+#define PERCHENGINECPP_API __declspec(dllimport)
+#endif
+
+
 #include "Sprite2D.h"
 
 #include "../../Structs/Texture.h"
@@ -33,12 +40,12 @@ namespace Perch
 
 	public:
 
-		inline int GetSpriteColumns() const { return _SpriteColumns; }
-		void SetSpriteColumns(int spriteColumns);
-		inline int GetSpriteRows() const { return _SpriteRows; }
-		void SetSpriteRows(int spriteRows);
-		inline int GetSpriteIndex() const { return _SpriteIndex; }
-		void SetSpriteIndex(int spriteIndex);
+		PERCHENGINECPP_API inline int GetSpriteColumns() const { return _SpriteColumns; }
+		PERCHENGINECPP_API void SetSpriteColumns(int spriteColumns);
+		PERCHENGINECPP_API inline int GetSpriteRows() const { return _SpriteRows; }
+		PERCHENGINECPP_API void SetSpriteRows(int spriteRows);
+		PERCHENGINECPP_API inline int GetSpriteIndex() const { return _SpriteIndex; }
+		PERCHENGINECPP_API void SetSpriteIndex(int spriteIndex);
 
 		// ###
 
@@ -51,15 +58,15 @@ namespace Perch
 
 	public:
 
-		CutSprite2D();
+		PERCHENGINECPP_API CutSprite2D();
 
-		virtual void SetTexture(std::shared_ptr<Texture> texture) override;
+		PERCHENGINECPP_API virtual void SetTexture(std::shared_ptr<Texture> texture) override;
 
-		virtual Vector2 GetSize() override;
-		virtual Vector2 GetGlobalSize() override;
+		PERCHENGINECPP_API virtual Vector2 GetSize() override;
+		PERCHENGINECPP_API virtual Vector2 GetGlobalSize() override;
 
-		Rect2 GetCutRect();
-		virtual void Draw(SDL_Renderer* renderer) override;
+		PERCHENGINECPP_API Rect2 GetCutRect();
+		PERCHENGINECPP_API virtual void Draw(SDL_Renderer* renderer) override;
 
 		// ###
 

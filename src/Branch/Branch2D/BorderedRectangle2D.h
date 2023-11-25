@@ -1,5 +1,12 @@
 #pragma once
 
+#ifdef PERCHENGINECPP_EXPORTS
+#define PERCHENGINECPP_API __declspec(dllexport)
+#else
+#define PERCHENGINECPP_API __declspec(dllimport)
+#endif
+
+
 #include "Rectangle2D.h"
 
 #include "../../Structs/Rect2.h"
@@ -24,10 +31,10 @@ namespace Perch
 
 	public:
 
-		inline float GetBorderSize() const { return _BorderSize; }
-		inline void SetBorderSize(float size) { _BorderSize = size; }
-		inline Color GetBorderColor() const { return _BorderColor; }
-		inline void SetBorderColor(float color) { _BorderColor = color; }
+		PERCHENGINECPP_API inline float GetBorderSize() const { return _BorderSize; }
+		PERCHENGINECPP_API inline void SetBorderSize(float size) { _BorderSize = size; }
+		PERCHENGINECPP_API inline Color GetBorderColor() const { return _BorderColor; }
+		PERCHENGINECPP_API inline void SetBorderColor(float color) { _BorderColor = color; }
 
 		// ###
 
@@ -38,7 +45,7 @@ namespace Perch
 		
 	public:
 
-		virtual void Draw(SDL_Renderer* renderer) override;
+		PERCHENGINECPP_API virtual void Draw(SDL_Renderer* renderer) override;
 
 		// ###
 

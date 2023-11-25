@@ -1,5 +1,12 @@
 #pragma once
 
+#ifdef PERCHENGINECPP_EXPORTS
+#define PERCHENGINECPP_API __declspec(dllexport)
+#else
+#define PERCHENGINECPP_API __declspec(dllimport)
+#endif
+
+
 #include <SDL.h>
 
 #include "../Log.h"
@@ -36,9 +43,9 @@ namespace Perch
 		Vector2i Size = Vector2i();
 
 	public:
-		inline SDL_Texture* GetSDLTexture() { return SDLTexture.get(); }
+		PERCHENGINECPP_API inline SDL_Texture* GetSDLTexture() { return SDLTexture.get(); }
 
-		Vector2i GetSize() const;
+		PERCHENGINECPP_API Vector2i GetSize() const;
 
 		// ###
 
@@ -53,8 +60,8 @@ namespace Perch
 
 	public:
 
-		static std::shared_ptr<Texture> Create(Engine* engine, std::string path);
-		static std::shared_ptr<Texture> Create(Engine* engine, std::shared_ptr<Font> font, std::string text, Color color);
+		PERCHENGINECPP_API static std::shared_ptr<Texture> Create(Engine* engine, std::string path);
+		PERCHENGINECPP_API static std::shared_ptr<Texture> Create(Engine* engine, std::shared_ptr<Font> font, std::string text, Color color);
 
 		// ###
 

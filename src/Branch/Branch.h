@@ -1,5 +1,12 @@
 #pragma once
 
+#ifdef PERCHENGINECPP_EXPORTS
+#define PERCHENGINECPP_API __declspec(dllexport)
+#else
+#define PERCHENGINECPP_API __declspec(dllimport)
+#endif
+
+
 #include "../Engine.h"
 
 #include <SDL.h>
@@ -31,8 +38,8 @@ namespace Perch
 
 	public:
 
-		void SetName(std::string name);
-		inline std::string GetName() const { return Name; }
+		PERCHENGINECPP_API void SetName(std::string name);
+		PERCHENGINECPP_API inline std::string GetName() const { return Name; }
 
 	private:
 
@@ -45,11 +52,11 @@ namespace Perch
 
 	protected:
 
-		inline std::shared_ptr<Branch> GetParent() { return Parent; }
+		PERCHENGINECPP_API inline std::shared_ptr<Branch> GetParent() { return Parent; }
 
 	public:
 
-		inline bool IsReady() const { return ReadyCalled; }
+		PERCHENGINECPP_API inline bool IsReady() const { return ReadyCalled; }
 
 		// ###
 
@@ -75,29 +82,29 @@ namespace Perch
 
 	public:
 
-		void AttachChild(std::shared_ptr<Branch> branch);
+		PERCHENGINECPP_API void AttachChild(std::shared_ptr<Branch> branch);
 
 		// Init - Called right after constructor is ran, from Engine::CreateBranch
 		// Will NOT call Init on children
-		virtual void Init();
+		PERCHENGINECPP_API virtual void Init();
 
 		// Ready - Preorder, Called upon attaching to a branch of the main tree or when the tree is run. Only called once
-		virtual void Ready();
+		PERCHENGINECPP_API virtual void Ready();
 
 		// Update - Preorder, Called every frame
-		virtual void Update();
+		PERCHENGINECPP_API virtual void Update();
 		// UpdateOut - Called every frame after Updating all children
-		virtual void UpdateOut();
+		PERCHENGINECPP_API virtual void UpdateOut();
 
 		// Draw - Preorder, Called every frame. Update first, then draw
-		virtual void Draw(SDL_Renderer* renderer);
+		PERCHENGINECPP_API virtual void Draw(SDL_Renderer* renderer);
 		// DrawOut - Called every frame right after Drawing all children
-		virtual void DrawOut(SDL_Renderer* renderer);
+		PERCHENGINECPP_API virtual void DrawOut(SDL_Renderer* renderer);
 
-		void Destroy();
+		PERCHENGINECPP_API void Destroy();
 
 		// OnDestroy - POSTorder, Called while destroying. Uninitialize pointers here.
-		virtual void OnDestroy();
+		PERCHENGINECPP_API virtual void OnDestroy();
 
 		// ###
 

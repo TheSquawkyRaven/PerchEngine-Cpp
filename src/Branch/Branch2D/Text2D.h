@@ -1,5 +1,12 @@
 #pragma once
 
+#ifdef PERCHENGINECPP_EXPORTS
+#define PERCHENGINECPP_API __declspec(dllexport)
+#else
+#define PERCHENGINECPP_API __declspec(dllimport)
+#endif
+
+
 #include "SDL_ttf.h"
 
 #include "Sprite2D.h"
@@ -31,8 +38,8 @@ namespace Perch
 
 	public:
 
-		inline std::string GetText() const { return _Text; }
-		void SetText(std::string text);
+		PERCHENGINECPP_API inline std::string GetText() const { return _Text; }
+		PERCHENGINECPP_API void SetText(std::string text);
 
 		// ###
 
@@ -41,12 +48,12 @@ namespace Perch
 
 	protected:
 
-		void UpdateTexture();
+		PERCHENGINECPP_API void UpdateTexture();
 
 	public:
 
-		virtual void Init() override;
-		void SetFont(std::shared_ptr<Font> font);
+		PERCHENGINECPP_API virtual void Init() override;
+		PERCHENGINECPP_API void SetFont(std::shared_ptr<Font> font);
 
 		// ###
 

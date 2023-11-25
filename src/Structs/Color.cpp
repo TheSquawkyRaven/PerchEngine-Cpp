@@ -1,3 +1,5 @@
+#include "pch.h"
+
 #include "Color.h"
 
 using namespace std;

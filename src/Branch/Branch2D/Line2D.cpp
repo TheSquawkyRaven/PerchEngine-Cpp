@@ -1,3 +1,5 @@
+#include "pch.h"
+
 #include "Line2D.h"
 
 #include "../../Log.h"

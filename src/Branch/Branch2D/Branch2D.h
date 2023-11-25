@@ -1,5 +1,12 @@
 #pragma once
 
+#ifdef PERCHENGINECPP_EXPORTS
+#define PERCHENGINECPP_API __declspec(dllexport)
+#else
+#define PERCHENGINECPP_API __declspec(dllimport)
+#endif
+
+
 #include "../Branch.h"
 #include "../../Structs/Vector2.h"
 
@@ -32,15 +39,15 @@ namespace Perch
 
 	protected:
 
-		Branch2D();
+		PERCHENGINECPP_API Branch2D();
 
-		Vector2 _GetGlobalPosition();
-		Vector2 _GetGlobalScale();
+		PERCHENGINECPP_API Vector2 _GetGlobalPosition();
+		PERCHENGINECPP_API Vector2 _GetGlobalScale();
 
 	public:
 
-		virtual Vector2 GetGlobalPosition();
-		virtual Vector2 GetGlobalScale();
+		PERCHENGINECPP_API virtual Vector2 GetGlobalPosition();
+		PERCHENGINECPP_API virtual Vector2 GetGlobalScale();
 
 	};
 

@@ -1,5 +1,12 @@
 #pragma once
 
+#ifdef PERCHENGINECPP_EXPORTS
+#define PERCHENGINECPP_API __declspec(dllexport)
+#else
+#define PERCHENGINECPP_API __declspec(dllimport)
+#endif
+
+
 #include <SDL.h>
 
 #include "Vector2i.h"
@@ -22,37 +29,37 @@ namespace Perch
 
 	public:
 
-		Vector2();
-		Vector2(float x, float y);
-		Vector2(float val);
+		PERCHENGINECPP_API Vector2();
+		PERCHENGINECPP_API Vector2(float x, float y);
+		PERCHENGINECPP_API Vector2(float val);
 
-		float Magnitude() const;
+		PERCHENGINECPP_API float Magnitude() const;
 
-		float Dot(Vector2 const& other) const;
-		float Distance(Vector2 const& other) const;
+		PERCHENGINECPP_API float Dot(Vector2 const& other) const;
+		PERCHENGINECPP_API float Distance(Vector2 const& other) const;
 
-		void Normalize();
-		Vector2 NormalizedVector() const;
+		PERCHENGINECPP_API void Normalize();
+		PERCHENGINECPP_API Vector2 NormalizedVector() const;
 
-		Vector2 Midpoint(Vector2 const& other) const;
-		Vector2 ProportionalPoint(Vector2 const& other, float proportion) const;
+		PERCHENGINECPP_API Vector2 Midpoint(Vector2 const& other) const;
+		PERCHENGINECPP_API Vector2 ProportionalPoint(Vector2 const& other, float proportion) const;
 
-		std::shared_ptr<SDL_Point> GetSDLPoint() const;
+		PERCHENGINECPP_API std::shared_ptr<SDL_Point> GetSDLPoint() const;
 
-		operator Vector2i() const;
+		PERCHENGINECPP_API operator Vector2i() const;
 
-		Vector2 operator+(Vector2 const& other);
-		Vector2 operator-(Vector2 const& other);
-		Vector2 operator*(Vector2 const& other);
-		Vector2 operator/(Vector2 const& other);
+		PERCHENGINECPP_API Vector2 operator+(Vector2 const& other);
+		PERCHENGINECPP_API Vector2 operator-(Vector2 const& other);
+		PERCHENGINECPP_API Vector2 operator*(Vector2 const& other);
+		PERCHENGINECPP_API Vector2 operator/(Vector2 const& other);
 
-		Vector2 operator+(float const& other);
-		Vector2 operator-(float const& other);
-		Vector2 operator*(float const& other);
-		Vector2 operator/(float const& other);
+		PERCHENGINECPP_API Vector2 operator+(float const& other);
+		PERCHENGINECPP_API Vector2 operator-(float const& other);
+		PERCHENGINECPP_API Vector2 operator*(float const& other);
+		PERCHENGINECPP_API Vector2 operator/(float const& other);
 
-		bool operator==(Vector2 const& other);
-		bool operator!=(Vector2 const& other);
+		PERCHENGINECPP_API bool operator==(Vector2 const& other);
+		PERCHENGINECPP_API bool operator!=(Vector2 const& other);
 
 	};
 

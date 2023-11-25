@@ -1,3 +1,5 @@
+#include "pch.h"
+
 #include "BorderedRectangle2D.h"
 
 #include "../../Log.h"

@@ -18,81 +18,35 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="src\Branch\Branch.cpp" />
-    <ClCompile Include="src\Branch\Branch2D\BorderedRectangle2D.cpp" />
-    <ClCompile Include="src\Branch\Branch2D\Branch2D.cpp" />
-    <ClCompile Include="src\Branch\Branch2D\CutSprite2D.cpp" />
-    <ClCompile Include="src\Branch\Branch2D\Line2D.cpp" />
-    <ClCompile Include="src\Branch\Branch2D\Point2D.cpp" />
-    <ClCompile Include="src\Branch\Branch2D\Rectangle2D.cpp" />
-    <ClCompile Include="src\Branch\Branch2D\Sprite2D.cpp" />
-    <ClCompile Include="src\Branch\Branch2D\Text2D.cpp" />
-    <ClCompile Include="src\Branch\Branch2D\Viewport2D.cpp" />
-    <ClCompile Include="src\Engine.cpp" />
-    <ClCompile Include="src\Log.cpp" />
-    <ClCompile Include="src\Main.cpp" />
-    <ClCompile Include="src\Resources\Resource.cpp" />
-    <ClCompile Include="src\Structs\Color.cpp" />
-    <ClCompile Include="src\Structs\Font.cpp" />
-    <ClCompile Include="src\Structs\Rect2.cpp" />
-    <ClCompile Include="src\Structs\Texture.cpp" />
-    <ClCompile Include="src\Structs\Vector2.cpp" />
-    <ClCompile Include="src\Structs\Vector2i.cpp" />
-    <ClCompile Include="src\Structs\Viewport.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="src\Branch\Branch.h" />
-    <ClInclude Include="src\Branch\Branch2D\BorderedRectangle2D.h" />
-    <ClInclude Include="src\Branch\Branch2D\Branch2D.h" />
-    <ClInclude Include="src\Branch\Branch2D\CutSprite2D.h" />
-    <ClInclude Include="src\Branch\Branch2D\Line2D.h" />
-    <ClInclude Include="src\Branch\Branch2D\Point2D.h" />
-    <ClInclude Include="src\Branch\Branch2D\Rectangle2D.h" />
-    <ClInclude Include="src\Branch\Branch2D\Sprite2D.h" />
-    <ClInclude Include="src\Branch\Branch2D\Text2D.h" />
-    <ClInclude Include="src\Branch\Branch2D\Viewport2D.h" />
-    <ClInclude Include="src\Engine.h" />
-    <ClInclude Include="src\Log.h" />
-    <ClInclude Include="src\Resources\Resource.h" />
-    <ClInclude Include="src\Structs\Color.h" />
-    <ClInclude Include="src\Structs\Font.h" />
-    <ClInclude Include="src\Structs\Rect2.h" />
-    <ClInclude Include="src\Structs\Texture.h" />
-    <ClInclude Include="src\Structs\Vector2.h" />
-    <ClInclude Include="src\Structs\Vector2i.h" />
-    <ClInclude Include="src\Structs\Viewport.h" />
-  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{6cdef897-73d4-4827-b2b1-56c7dda374d1}</ProjectGuid>
-    <RootNamespace>SDLEngineCpp</RootNamespace>
+    <ProjectGuid>{3beb8af3-4c66-4865-aea5-777f725711d1}</ProjectGuid>
+    <RootNamespace>PerchEngineCpp</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
-    <ProjectName>Perch-Engine-Cpp</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -128,12 +82,15 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;PERCHENGINECPP_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableUAC>false</EnableUAC>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -142,26 +99,34 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;PERCHENGINECPP_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableUAC>false</EnableUAC>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;PERCHENGINECPP_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>$(SolutionDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalUsingDirectories>pch.h</AdditionalUsingDirectories>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableUAC>false</EnableUAC>
       <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -171,17 +136,76 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;PERCHENGINECPP_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>$(SolutionDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalUsingDirectories>pch.h</AdditionalUsingDirectories>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableUAC>false</EnableUAC>
       <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="framework.h" />
+    <ClInclude Include="pch.h" />
+    <ClInclude Include="src\Branch\Branch.h" />
+    <ClInclude Include="src\Branch\Branch2D\BorderedRectangle2D.h" />
+    <ClInclude Include="src\Branch\Branch2D\Branch2D.h" />
+    <ClInclude Include="src\Branch\Branch2D\CutSprite2D.h" />
+    <ClInclude Include="src\Branch\Branch2D\Line2D.h" />
+    <ClInclude Include="src\Branch\Branch2D\Point2D.h" />
+    <ClInclude Include="src\Branch\Branch2D\Rectangle2D.h" />
+    <ClInclude Include="src\Branch\Branch2D\Sprite2D.h" />
+    <ClInclude Include="src\Branch\Branch2D\Text2D.h" />
+    <ClInclude Include="src\Branch\Branch2D\Viewport2D.h" />
+    <ClInclude Include="src\Engine.h" />
+    <ClInclude Include="src\Log.h" />
+    <ClInclude Include="src\Resources\Resource.h" />
+    <ClInclude Include="src\Structs\Color.h" />
+    <ClInclude Include="src\Structs\Font.h" />
+    <ClInclude Include="src\Structs\Rect2.h" />
+    <ClInclude Include="src\Structs\Texture.h" />
+    <ClInclude Include="src\Structs\Vector2.h" />
+    <ClInclude Include="src\Structs\Vector2i.h" />
+    <ClInclude Include="src\Structs\Viewport.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="dllmain.cpp" />
+    <ClCompile Include="pch.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="src\Branch\Branch.cpp" />
+    <ClCompile Include="src\Branch\Branch2D\BorderedRectangle2D.cpp" />
+    <ClCompile Include="src\Branch\Branch2D\Branch2D.cpp" />
+    <ClCompile Include="src\Branch\Branch2D\CutSprite2D.cpp" />
+    <ClCompile Include="src\Branch\Branch2D\Line2D.cpp" />
+    <ClCompile Include="src\Branch\Branch2D\Point2D.cpp" />
+    <ClCompile Include="src\Branch\Branch2D\Rectangle2D.cpp" />
+    <ClCompile Include="src\Branch\Branch2D\Sprite2D.cpp" />
+    <ClCompile Include="src\Branch\Branch2D\Text2D.cpp" />
+    <ClCompile Include="src\Branch\Branch2D\Viewport2D.cpp" />
+    <ClCompile Include="src\Engine.cpp" />
+    <ClCompile Include="src\Log.cpp" />
+    <ClCompile Include="src\Main.cpp" />
+    <ClCompile Include="src\Resources\Resource.cpp" />
+    <ClCompile Include="src\Structs\Color.cpp" />
+    <ClCompile Include="src\Structs\Font.cpp" />
+    <ClCompile Include="src\Structs\Rect2.cpp" />
+    <ClCompile Include="src\Structs\Texture.cpp" />
+    <ClCompile Include="src\Structs\Vector2.cpp" />
+    <ClCompile Include="src\Structs\Vector2i.cpp" />
+    <ClCompile Include="src\Structs\Viewport.cpp" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

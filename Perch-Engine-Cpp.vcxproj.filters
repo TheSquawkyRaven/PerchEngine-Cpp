@@ -14,84 +14,25 @@
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
     <Filter Include="Header Files\Branch2D">
-      <UniqueIdentifier>{7ef565b2-bb93-4433-8381-e22ef1de51d0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Branch2D">
-      <UniqueIdentifier>{fefe4b19-c49a-4426-9b1d-ace5aff25aed}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Structs">
-      <UniqueIdentifier>{de04af6b-67ce-43e3-b555-066e838db513}</UniqueIdentifier>
+      <UniqueIdentifier>{ab505b31-d2fb-4f0e-a238-e1b2b30e1144}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files\Structs">
-      <UniqueIdentifier>{5033f4ec-cb05-4cf0-9eff-af3b3ad73388}</UniqueIdentifier>
+      <UniqueIdentifier>{d7d14696-bc69-4f85-9df2-3336ddfffcd9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Branch2D">
+      <UniqueIdentifier>{a5730795-2a19-4b3d-8b0f-28b6cfdfc5e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Structs">
+      <UniqueIdentifier>{3ad76cb7-0eb3-43a0-9591-bb4b5063ca77}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Engine.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Log.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Branch\Branch.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Resources\Resource.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Branch\Branch2D\Sprite2D.cpp">
-      <Filter>Source Files\Branch2D</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Branch\Branch2D\Rectangle2D.cpp">
-      <Filter>Source Files\Branch2D</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Branch\Branch2D\Point2D.cpp">
-      <Filter>Source Files\Branch2D</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Branch\Branch2D\Line2D.cpp">
-      <Filter>Source Files\Branch2D</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Branch\Branch2D\Branch2D.cpp">
-      <Filter>Source Files\Branch2D</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Branch\Branch2D\BorderedRectangle2D.cpp">
-      <Filter>Source Files\Branch2D</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Branch\Branch2D\Viewport2D.cpp">
-      <Filter>Source Files\Branch2D</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Structs\Rect2.cpp">
-      <Filter>Source Files\Structs</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Structs\Vector2.cpp">
-      <Filter>Source Files\Structs</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Structs\Vector2i.cpp">
-      <Filter>Source Files\Structs</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Structs\Viewport.cpp">
-      <Filter>Source Files\Structs</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Structs\Color.cpp">
-      <Filter>Source Files\Structs</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Branch\Branch2D\CutSprite2D.cpp">
-      <Filter>Source Files\Branch2D</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Structs\Texture.cpp">
-      <Filter>Source Files\Structs</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Structs\Font.cpp">
-      <Filter>Source Files\Structs</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Branch\Branch2D\Text2D.cpp">
-      <Filter>Source Files\Branch2D</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
+    <ClInclude Include="framework.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="pch.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="src\Branch\Branch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -104,10 +45,19 @@
     <ClInclude Include="src\Resources\Resource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Branch\Branch2D\Point2D.h">
+    <ClInclude Include="src\Branch\Branch2D\Branch2D.h">
+      <Filter>Header Files\Branch2D</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Branch\Branch2D\BorderedRectangle2D.h">
+      <Filter>Header Files\Branch2D</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Branch\Branch2D\CutSprite2D.h">
       <Filter>Header Files\Branch2D</Filter>
     </ClInclude>
     <ClInclude Include="src\Branch\Branch2D\Line2D.h">
+      <Filter>Header Files\Branch2D</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Branch\Branch2D\Point2D.h">
       <Filter>Header Files\Branch2D</Filter>
     </ClInclude>
     <ClInclude Include="src\Branch\Branch2D\Rectangle2D.h">
@@ -116,10 +66,7 @@
     <ClInclude Include="src\Branch\Branch2D\Sprite2D.h">
       <Filter>Header Files\Branch2D</Filter>
     </ClInclude>
-    <ClInclude Include="src\Branch\Branch2D\Branch2D.h">
-      <Filter>Header Files\Branch2D</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Branch\Branch2D\BorderedRectangle2D.h">
+    <ClInclude Include="src\Branch\Branch2D\Text2D.h">
       <Filter>Header Files\Branch2D</Filter>
     </ClInclude>
     <ClInclude Include="src\Branch\Branch2D\Viewport2D.h">
@@ -128,7 +75,13 @@
     <ClInclude Include="src\Structs\Color.h">
       <Filter>Header Files\Structs</Filter>
     </ClInclude>
+    <ClInclude Include="src\Structs\Font.h">
+      <Filter>Header Files\Structs</Filter>
+    </ClInclude>
     <ClInclude Include="src\Structs\Rect2.h">
+      <Filter>Header Files\Structs</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Structs\Texture.h">
       <Filter>Header Files\Structs</Filter>
     </ClInclude>
     <ClInclude Include="src\Structs\Vector2.h">
@@ -140,17 +93,76 @@
     <ClInclude Include="src\Structs\Viewport.h">
       <Filter>Header Files\Structs</Filter>
     </ClInclude>
-    <ClInclude Include="src\Branch\Branch2D\CutSprite2D.h">
-      <Filter>Header Files\Branch2D</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Structs\Texture.h">
-      <Filter>Header Files\Structs</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Structs\Font.h">
-      <Filter>Header Files\Structs</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Branch\Branch2D\Text2D.h">
-      <Filter>Header Files\Branch2D</Filter>
-    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="dllmain.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="pch.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Branch\Branch.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Engine.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Log.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Resources\Resource.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Branch\Branch2D\BorderedRectangle2D.cpp">
+      <Filter>Source Files\Branch2D</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Branch\Branch2D\Branch2D.cpp">
+      <Filter>Source Files\Branch2D</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Branch\Branch2D\CutSprite2D.cpp">
+      <Filter>Source Files\Branch2D</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Branch\Branch2D\Line2D.cpp">
+      <Filter>Source Files\Branch2D</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Branch\Branch2D\Point2D.cpp">
+      <Filter>Source Files\Branch2D</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Branch\Branch2D\Rectangle2D.cpp">
+      <Filter>Source Files\Branch2D</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Branch\Branch2D\Sprite2D.cpp">
+      <Filter>Source Files\Branch2D</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Branch\Branch2D\Text2D.cpp">
+      <Filter>Source Files\Branch2D</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Branch\Branch2D\Viewport2D.cpp">
+      <Filter>Source Files\Branch2D</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Structs\Color.cpp">
+      <Filter>Source Files\Structs</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Structs\Font.cpp">
+      <Filter>Source Files\Structs</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Structs\Rect2.cpp">
+      <Filter>Source Files\Structs</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Structs\Texture.cpp">
+      <Filter>Source Files\Structs</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Structs\Vector2.cpp">
+      <Filter>Source Files\Structs</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Structs\Vector2i.cpp">
+      <Filter>Source Files\Structs</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Structs\Viewport.cpp">
+      <Filter>Source Files\Structs</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

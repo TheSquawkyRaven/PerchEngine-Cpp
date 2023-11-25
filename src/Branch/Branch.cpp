@@ -1,3 +1,5 @@
+#include "pch.h"
+
 #include "Branch.h"
 
 #include "../Log.h"

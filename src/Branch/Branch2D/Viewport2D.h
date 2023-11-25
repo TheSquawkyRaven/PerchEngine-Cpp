@@ -1,5 +1,12 @@
 #pragma once
 
+#ifdef PERCHENGINECPP_EXPORTS
+#define PERCHENGINECPP_API __declspec(dllexport)
+#else
+#define PERCHENGINECPP_API __declspec(dllimport)
+#endif
+
+
 #include "Branch2D.h"
 
 #include "../../Structs/Vector2.h"
@@ -24,8 +31,8 @@ namespace Perch
 
 	public:
 
-		inline std::shared_ptr<Viewport> GetViewport() const { return _Viewport; }
-		inline void SetViewport(std::shared_ptr<Viewport> viewport) { _Viewport = viewport; }
+		PERCHENGINECPP_API inline std::shared_ptr<Viewport> GetViewport() const { return _Viewport; }
+		PERCHENGINECPP_API inline void SetViewport(std::shared_ptr<Viewport> viewport) { _Viewport = viewport; }
 
 		// ###
 
@@ -35,11 +42,11 @@ namespace Perch
 
 	public:
 
-		virtual void Update() override;
-		virtual void UpdateOut() override;
+		PERCHENGINECPP_API virtual void Update() override;
+		PERCHENGINECPP_API virtual void UpdateOut() override;
 
-		virtual void Draw(SDL_Renderer* renderer) override;
-		virtual void DrawOut(SDL_Renderer* renderer) override;
+		PERCHENGINECPP_API virtual void Draw(SDL_Renderer* renderer) override;
+		PERCHENGINECPP_API virtual void DrawOut(SDL_Renderer* renderer) override;
 
 		// ###
 

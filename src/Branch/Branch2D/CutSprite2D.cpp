@@ -1,3 +1,5 @@
+#include "pch.h"
+
 #include "CutSprite2D.h"
 
 #include "../../Log.h"

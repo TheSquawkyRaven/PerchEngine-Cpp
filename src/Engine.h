@@ -1,5 +1,12 @@
 #pragma once
 
+#ifdef PERCHENGINECPP_EXPORTS
+#define PERCHENGINECPP_API __declspec(dllexport)
+#else
+#define PERCHENGINECPP_API __declspec(dllimport)
+#endif
+
+
 // Main SDL Window
 #include <SDL.h>
 #include <SDL_image.h>
@@ -65,8 +72,8 @@ namespace Perch
 
 	public:
 
-		inline Rect2 GetMainWindowRect() const { return MainWindowRect; }
-		inline SDL_Renderer* GetMainWindowRenderer() { return MainWindowRenderer; }
+		PERCHENGINECPP_API inline Rect2 GetMainWindowRect() const { return MainWindowRect; }
+		PERCHENGINECPP_API inline SDL_Renderer* GetMainWindowRenderer() { return MainWindowRenderer; }
 
 		// ###
 
@@ -91,24 +98,24 @@ namespace Perch
 
 	public:
 
-		Engine(std::shared_ptr<EngineConfig> config);
-		void UpdateConfig();
+		PERCHENGINECPP_API Engine(std::shared_ptr<EngineConfig> config);
+		PERCHENGINECPP_API void UpdateConfig();
 
-		inline void SetOnRootCreate(std::function<void(Engine* Engine, Branch* Root)> onRootCreate) { this->OnRootCreate = onRootCreate; };
+		PERCHENGINECPP_API inline void SetOnRootCreate(std::function<void(Engine* Engine, Branch* Root)> onRootCreate) { this->OnRootCreate = onRootCreate; };
 
 		// Simulate viewport use, called in update when it is not drawing for children to use viewport data
-		void SimulateUseViewport(std::shared_ptr<Viewport> viewport);
-		void SimulateUnuseViewport(std::shared_ptr<Viewport> viewport);
+		PERCHENGINECPP_API void SimulateUseViewport(std::shared_ptr<Viewport> viewport);
+		PERCHENGINECPP_API void SimulateUnuseViewport(std::shared_ptr<Viewport> viewport);
 
 		// Called in Draw and DrawOut to set the current viewport
-		void UseViewport(SDL_Renderer* renderer, std::shared_ptr<Viewport> viewport);
-		void UnuseViewport(SDL_Renderer* renderer, std::shared_ptr<Viewport> viewport);
+		PERCHENGINECPP_API void UseViewport(SDL_Renderer* renderer, std::shared_ptr<Viewport> viewport);
+		PERCHENGINECPP_API void UnuseViewport(SDL_Renderer* renderer, std::shared_ptr<Viewport> viewport);
 
-		std::shared_ptr<Viewport> GetCurrentViewport();
-		void ClearViewportStack();
+		PERCHENGINECPP_API std::shared_ptr<Viewport> GetCurrentViewport();
+		PERCHENGINECPP_API void ClearViewportStack();
 
 		template<typename BranchT>
-		inline std::shared_ptr<BranchT> CreateBranch()
+		PERCHENGINECPP_API inline std::shared_ptr<BranchT> CreateBranch()
 		{
 			static_assert(std::is_base_of<Branch, BranchT>::value, "CreateBranch template must be derived from Branch.");
 			BranchT* branch = new BranchT();
@@ -118,8 +125,8 @@ namespace Perch
 
 		// "Start" here will wait for until the closure of the MainWindow
 		// Will call quit to free up SDL. May change in the future
-		void Start();
-		void Quit();
+		PERCHENGINECPP_API void Start();
+		PERCHENGINECPP_API void Quit();
 
 		// ###
 	};

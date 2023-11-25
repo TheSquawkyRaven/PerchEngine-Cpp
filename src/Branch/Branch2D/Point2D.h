@@ -1,5 +1,12 @@
 #pragma once
 
+#ifdef PERCHENGINECPP_EXPORTS
+#define PERCHENGINECPP_API __declspec(dllexport)
+#else
+#define PERCHENGINECPP_API __declspec(dllimport)
+#endif
+
+
 #include "Branch2D.h"
 
 #include "../../Structs/Vector2.h"
@@ -23,10 +30,10 @@ namespace Perch
 
 	public:
 
-		inline Vector2 GetPointPosition() const { return _PointPosition; }
-		inline void SetPointPosition(Vector2 position) { _PointPosition = position; }
-		inline Color GetColor() const { return _Color; }
-		inline void SetColor(Color color) { _Color = color; }
+		PERCHENGINECPP_API inline Vector2 GetPointPosition() const { return _PointPosition; }
+		PERCHENGINECPP_API inline void SetPointPosition(Vector2 position) { _PointPosition = position; }
+		PERCHENGINECPP_API inline Color GetColor() const { return _Color; }
+		PERCHENGINECPP_API inline void SetColor(Color color) { _Color = color; }
 
 		// ###
 
@@ -36,9 +43,9 @@ namespace Perch
 		
 	public:
 
-		Vector2 GetGlobalPointPosition();
+		PERCHENGINECPP_API Vector2 GetGlobalPointPosition();
 
-		virtual void Draw(SDL_Renderer* renderer) override;
+		PERCHENGINECPP_API virtual void Draw(SDL_Renderer* renderer) override;
 
 		// ###
 

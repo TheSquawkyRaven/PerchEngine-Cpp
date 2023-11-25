@@ -1,4 +1,5 @@
 // This file is to test the game engine
+#include "pch.h"
 
 #include "Engine.h"
 #include "Log.h"
@@ -131,7 +132,7 @@ void OnRootCreate(Engine* Engine, Branch* Root)
 	text->Position = Vector2(50, 50);
 	text->SetFont(lameFont);
 	text->SetText("This is a text.");
-	text->SetText("Muahah");
+	text->SetText("Hello World");
 
 	Root->AttachChild(text);
 

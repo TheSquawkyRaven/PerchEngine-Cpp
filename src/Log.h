@@ -1,5 +1,12 @@
 #pragma once
 
+#ifdef PERCHENGINECPP_EXPORTS
+#define PERCHENGINECPP_API __declspec(dllexport)
+#else
+#define PERCHENGINECPP_API __declspec(dllimport)
+#endif
+
+
 #include <stdarg.h>
 
 namespace Squawk
@@ -24,12 +31,12 @@ namespace Squawk
 
 	public:
 
-		static void Print(const char* str);
-		static void Printf(const char* format, ...);
-		static void Error(const char* err);
-		static void Errorf(const char* format, ...);
-		static void Warn(const char* warn);
-		static void Warnf(const char* format, ...);
+		PERCHENGINECPP_API static void Print(const char* str);
+		PERCHENGINECPP_API static void Printf(const char* format, ...);
+		PERCHENGINECPP_API static void Error(const char* err);
+		PERCHENGINECPP_API static void Errorf(const char* format, ...);
+		PERCHENGINECPP_API static void Warn(const char* warn);
+		PERCHENGINECPP_API static void Warnf(const char* format, ...);
 
 	};
 

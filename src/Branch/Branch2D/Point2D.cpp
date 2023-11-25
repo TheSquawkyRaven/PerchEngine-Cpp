@@ -1,3 +1,5 @@
+#include "pch.h"
+
 #include "Point2D.h"
 
 #include "../../Log.h"

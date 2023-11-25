@@ -1,5 +1,12 @@
 #pragma once
 
+#ifdef PERCHENGINECPP_EXPORTS
+#define PERCHENGINECPP_API __declspec(dllexport)
+#else
+#define PERCHENGINECPP_API __declspec(dllimport)
+#endif
+
+
 #include "Branch2D.h"
 
 #include "../../Structs/Rect2.h"
@@ -24,10 +31,10 @@ namespace Perch
 
 	public:
 
-		inline Rect2 GetRect2() const { return _Rect2; }
-		inline void SetRect2(Rect2 rect2) { _Rect2 = rect2; }
-		inline Color GetColor() const { return _Color; }
-		inline void SetColor(Color color) { _Color = color; }
+		PERCHENGINECPP_API inline Rect2 GetRect2() const { return _Rect2; }
+		PERCHENGINECPP_API inline void SetRect2(Rect2 rect2) { _Rect2 = rect2; }
+		PERCHENGINECPP_API inline Color GetColor() const { return _Color; }
+		PERCHENGINECPP_API inline void SetColor(Color color) { _Color = color; }
 
 		// ###
 
@@ -37,12 +44,12 @@ namespace Perch
 		
 	public:
 
-		Vector2 GetRectSize();
-		Vector2 GetRectGlobalSize();
+		PERCHENGINECPP_API Vector2 GetRectSize();
+		PERCHENGINECPP_API Vector2 GetRectGlobalSize();
 
-		Vector2 GetRectGlobalPosition();
+		PERCHENGINECPP_API Vector2 GetRectGlobalPosition();
 
-		virtual void Draw(SDL_Renderer* renderer) override;
+		PERCHENGINECPP_API virtual void Draw(SDL_Renderer* renderer) override;
 
 		// ###
 
