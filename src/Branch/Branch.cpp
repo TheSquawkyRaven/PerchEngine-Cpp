@@ -45,6 +45,10 @@ void Branch::_Ready()
     if (!ReadyCalled)
     {
         Ready();
+        if (ScriptRef != NULL)
+        {
+            ScriptRef->Ready(EngineRef);
+        }
         ReadyCalled = true;
     }
     if (!Children.empty())
@@ -67,6 +71,10 @@ void Branch::_Update()
     }
     // Updated problem! Update Out is not tracked properly as intended!
     Update();
+    if (ScriptRef != NULL)
+    {
+        ScriptRef->Update(EngineRef);
+    }
     Updated = true;
     if (!Children.empty())
     {
@@ -98,6 +106,10 @@ void Branch::_Draw(SDL_Renderer* renderer)
         return;
     }
     Draw(renderer);
+    if (ScriptRef != NULL)
+    {
+        ScriptRef->Draw(EngineRef, renderer);
+    }
     Drawn = true;
     if (!Children.empty())
     {
@@ -136,6 +148,10 @@ void Branch::_Destroy(bool isChainedDestroy)
         Children.clear();
     }
     // Postorder destruction order (Innermost child destroy first)
+    if (ScriptRef != NULL)
+    {
+        ScriptRef->OnDestroy(EngineRef); // Script destroys first
+    }
     OnDestroy();
 
     // If this is chained, no need to remove this(child) from parent

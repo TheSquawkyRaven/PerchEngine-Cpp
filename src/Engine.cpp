@@ -12,15 +12,9 @@ using namespace Squawk;
 
 void Engine::Update(SDL_Event* e, bool* quit)
 {
-	// Check for input events
-	while (SDL_PollEvent(e))
-	{
-		if (e->type == SDL_QUIT)
-		{
-			*quit = true;
-		}
-	}
+	InputRef->UpdateInput(e, quit);
 
+	UpdateTime();
 	Root->_Update();
 	Root->_UpdateOut();
 
@@ -48,6 +42,17 @@ void Engine::StartUpdateLoop()
 	} while (!quit);
 
 	delete e;
+}
+
+void Engine::UpdateTime()
+{
+	Uint32 currentTicks = SDL_GetTicks();
+	Uint32 elapsedTicks = currentTicks - LastUpdateTicks;
+	
+	DeltaTime = elapsedTicks / 1000.0f;
+	TotalTime = currentTicks / 1000.0f;
+
+	LastUpdateTicks = currentTicks;
 }
 
 bool Engine::InitMainWindow()

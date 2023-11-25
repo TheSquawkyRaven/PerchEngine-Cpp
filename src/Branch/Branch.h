@@ -8,6 +8,7 @@
 
 
 #include "../Engine.h"
+#include "../Script.h"
 
 #include <SDL.h>
 
@@ -31,10 +32,12 @@ namespace Perch
 	private:
 
 		std::string Name = "Branch";
+		
 
 	protected:
 
 		Engine* EngineRef = NULL;
+		std::shared_ptr<Script> ScriptRef = NULL;
 
 	public:
 
@@ -83,6 +86,8 @@ namespace Perch
 	public:
 
 		PERCHENGINECPP_API void AttachChild(std::shared_ptr<Branch> branch);
+
+		PERCHENGINECPP_API inline void AttachScript(std::shared_ptr<Script> script) { ScriptRef = script; }
 
 		// Init - Called right after constructor is ran, from Engine::CreateBranch
 		// Will NOT call Init on children

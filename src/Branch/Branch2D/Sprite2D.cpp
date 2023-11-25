@@ -6,6 +6,62 @@
 
 using namespace std;
 using namespace Perch;
+using namespace Squawk;
+
+
+void Sprite2D::SetSpriteColumns(int spriteColumns)
+{
+	_SpriteColumns = spriteColumns;
+	UpdateCutRect();
+}
+void Sprite2D::SetSpriteRows(int spriteRows)
+{
+	_SpriteRows = spriteRows;
+	UpdateCutRect();
+}
+void Sprite2D::SetSpriteIndex(int spriteIndex)
+{
+	_SpriteIndex = spriteIndex;
+	UpdateCutRect();
+}
+
+void Sprite2D::UpdateCutRect()
+{
+	if (_SpriteColumns < 1)
+	{
+		Log::Errorf("_SpriteColumns must not be 0 or negative! Current Value: %d", _SpriteColumns);
+		return;
+	}
+	if (_SpriteRows < 1)
+	{
+		Log::Errorf("_SpriteRows must not be 0 or negative! Current Value: %d", _SpriteRows);
+		return;
+	}
+	if (_SpriteIndex < 0)
+	{
+		Log::Errorf("_SpriteIndex must not be negative! Current Value: %d", _SpriteIndex);
+		return;
+	}
+	if (_SpriteIndex >= _SpriteColumns * _SpriteRows)
+	{
+		Log::Warnf("_SpriteIndex is over the size of %d (%d*%d)! Current Value: %d", _SpriteColumns * _SpriteRows, _SpriteColumns, _SpriteRows, _SpriteIndex);
+	}
+
+	shared_ptr<Texture> texture = GetTexture();
+	Vector2 size = texture->GetSize();
+	size.X = size.X / _SpriteColumns;
+	size.Y = size.Y / _SpriteRows;
+
+	Vector2 position;
+	int iX = _SpriteIndex % _SpriteRows;
+	int iY = _SpriteIndex / _SpriteColumns;
+
+	position.X = size.X * iX;
+	position.Y = size.Y * iY;
+
+	_CutRect.SetPosition(position);
+	_CutRect.SetSize(size);
+}
 
 SDL_RendererFlip Sprite2D::GetSDLFlip() const
 {
@@ -36,28 +92,40 @@ shared_ptr<SDL_Point> Sprite2D::GetRotateOrigin()
 
 Vector2 Sprite2D::GetSize()
 {
-	if (_Texture == NULL)
+	return Vector2(Scale.X * _CutRect.GetSize().X, Scale.Y * _CutRect.GetSize().Y);
+
+	/*if (_Texture == NULL)
 	{
 		return Vector2();
 	}
 	Vector2i textureSize = _Texture->GetSize();
-	return Vector2(Scale.X * textureSize.X, Scale.Y * textureSize.Y);
+	return Vector2(Scale.X * textureSize.X, Scale.Y * textureSize.Y);*/
 }
 
 Vector2 Sprite2D::GetGlobalSize()
 {
-	if (_Texture == NULL)
+	Vector2 scale = GetGlobalScale();
+	return Vector2(scale.X * _CutRect.GetSize().X, scale.Y * _CutRect.GetSize().Y);
+
+	/*if (_Texture == NULL)
 	{
 		return Vector2();
 	}
 	Vector2i textureSize = _Texture->GetSize();
 	Vector2 scale = GetGlobalScale();
-	return Vector2(scale.X * textureSize.X, scale.Y * textureSize.Y);
+	return Vector2(scale.X * textureSize.X, scale.Y * textureSize.Y);*/
+}
+
+Rect2 Sprite2D::GetCutRect()
+{
+	UpdateCutRect();
+	return _CutRect;
 }
 
 void Sprite2D::SetTexture(shared_ptr<Texture> texture)
 {
 	_Texture = shared_ptr<Texture>(texture);
+	UpdateCutRect();
 }
 
 void Sprite2D::Update()
@@ -77,9 +145,11 @@ void Sprite2D::Draw(SDL_Renderer* renderer)
 	Vector2 size = GetGlobalSize();
 	shared_ptr<SDL_Rect> rect = Rect2::CreateSDLRect(position, size);
 
+	shared_ptr<SDL_Rect> cutRect = _CutRect.GetSDLRect();
+
 	SDL_SetTextureColorMod(_Texture->GetSDLTexture(), _Color.R, _Color.G, _Color.B);
 	SDL_SetTextureAlphaMod(_Texture->GetSDLTexture(), _Color.A);
-	SDL_RenderCopyEx(renderer, _Texture->GetSDLTexture(), NULL, rect.get(), Angle, GetRotateOrigin().get(), GetSDLFlip());
+	SDL_RenderCopyEx(renderer, _Texture->GetSDLTexture(), cutRect.get(), rect.get(), Angle, GetRotateOrigin().get(), GetSDLFlip());
 }
 
 void Sprite2D::OnDestroy()

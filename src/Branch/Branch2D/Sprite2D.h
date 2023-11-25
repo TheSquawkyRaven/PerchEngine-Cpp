@@ -33,6 +33,25 @@ namespace Perch
 		std::shared_ptr<Texture> _Texture = NULL;
 		Color _Color = Color();
 
+	private:
+
+		// Private because this may not be the latest value. Use GetCutRect instead.
+		Rect2 _CutRect = Rect2();
+
+		// Sprite Sheet
+		int _SpriteColumns = 1;
+		int _SpriteRows = 1;
+		int _SpriteIndex = 0;
+
+	public:
+
+		PERCHENGINECPP_API inline int GetSpriteColumns() const { return _SpriteColumns; }
+		PERCHENGINECPP_API void SetSpriteColumns(int spriteColumns);
+		PERCHENGINECPP_API inline int GetSpriteRows() const { return _SpriteRows; }
+		PERCHENGINECPP_API void SetSpriteRows(int spriteRows);
+		PERCHENGINECPP_API inline int GetSpriteIndex() const { return _SpriteIndex; }
+		PERCHENGINECPP_API void SetSpriteIndex(int spriteIndex);
+
 	public:
 
 		Vector2 RotatePivot = Vector2(0.5f, 0.5f);
@@ -51,6 +70,8 @@ namespace Perch
 		// # Functions
 
 	private:
+
+		void UpdateCutRect();
 		
 	protected:
 
@@ -61,6 +82,7 @@ namespace Perch
 
 		PERCHENGINECPP_API virtual Vector2 GetSize();
 		PERCHENGINECPP_API virtual Vector2 GetGlobalSize();
+		PERCHENGINECPP_API Rect2 GetCutRect();
 
 		PERCHENGINECPP_API virtual void SetTexture(std::shared_ptr<Texture> texture);
 

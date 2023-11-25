@@ -5,7 +5,6 @@
 #include "Log.h"
 #include "Branch/Branch2D/Sprite2D.h"
 #include "Branch/Branch2D/Text2D.h"
-#include "Branch/Branch2D/CutSprite2D.h"
 #include "Branch/Branch2D/Rectangle2D.h"
 #include "Branch/Branch2D/BorderedRectangle2D.h"
 #include "Branch/Branch2D/Line2D.h"
@@ -109,7 +108,7 @@ void OnRootCreate(Engine* Engine, Branch* Root)
 	viewport2D->AttachChild(line);
 	viewport2D->AttachChild(point);
 
-	shared_ptr<CutSprite2D> cutSprite = Engine->CreateBranch<CutSprite2D>();
+	shared_ptr<Sprite2D> cutSprite = Engine->CreateBranch<Sprite2D>();
 	cutSprite->SetTexture(png);
 	cutSprite->Position = Vector2(0, 0);
 	cutSprite->Scale = Vector2(1, 1.5f);

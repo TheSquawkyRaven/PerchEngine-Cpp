@@ -12,6 +12,8 @@
 #include <SDL_image.h>
 #include <SDL_ttf.h>
 
+#include "Input.h"
+
 #include "Structs/Vector2.h"
 #include "Structs/Vector2i.h"
 #include "Structs/Rect2.h"
@@ -26,6 +28,8 @@
 
 namespace Perch
 {
+
+	class Script;
 
 	// Config definition
 	class EngineConfig
@@ -70,10 +74,20 @@ namespace Perch
 		std::shared_ptr<Viewport> RootViewport = std::shared_ptr<Viewport>(new Viewport(MainWindowRect));
 		std::stack<std::shared_ptr<Viewport>> ViewportStack;
 
+		Uint32 LastUpdateTicks = 0;
+
+		std::unique_ptr<Input> InputRef = std::unique_ptr<Input>(new Input);
+
 	public:
 
 		PERCHENGINECPP_API inline Rect2 GetMainWindowRect() const { return MainWindowRect; }
 		PERCHENGINECPP_API inline SDL_Renderer* GetMainWindowRenderer() { return MainWindowRenderer; }
+		PERCHENGINECPP_API inline Input* GetInput() const { return InputRef.get(); }
+
+	public:
+
+		float DeltaTime = 0.0f;
+		float TotalTime = 0.0f;
 
 		// ###
 
@@ -92,6 +106,8 @@ namespace Perch
 		// Update - Runs every frame
 		void Update(SDL_Event* e, bool* quit);
 		void StartUpdateLoop();
+
+		void UpdateTime();
 
 		// Returns true if has error
 		bool CheckError() const;

@@ -158,7 +158,6 @@
     <ClInclude Include="src\Branch\Branch.h" />
     <ClInclude Include="src\Branch\Branch2D\BorderedRectangle2D.h" />
     <ClInclude Include="src\Branch\Branch2D\Branch2D.h" />
-    <ClInclude Include="src\Branch\Branch2D\CutSprite2D.h" />
     <ClInclude Include="src\Branch\Branch2D\Line2D.h" />
     <ClInclude Include="src\Branch\Branch2D\Point2D.h" />
     <ClInclude Include="src\Branch\Branch2D\Rectangle2D.h" />
@@ -166,8 +165,10 @@
     <ClInclude Include="src\Branch\Branch2D\Text2D.h" />
     <ClInclude Include="src\Branch\Branch2D\Viewport2D.h" />
     <ClInclude Include="src\Engine.h" />
+    <ClInclude Include="src\Input.h" />
     <ClInclude Include="src\Log.h" />
     <ClInclude Include="src\Resources\Resource.h" />
+    <ClInclude Include="src\Script.h" />
     <ClInclude Include="src\Structs\Color.h" />
     <ClInclude Include="src\Structs\Font.h" />
     <ClInclude Include="src\Structs\Rect2.h" />
@@ -187,7 +188,6 @@
     <ClCompile Include="src\Branch\Branch.cpp" />
     <ClCompile Include="src\Branch\Branch2D\BorderedRectangle2D.cpp" />
     <ClCompile Include="src\Branch\Branch2D\Branch2D.cpp" />
-    <ClCompile Include="src\Branch\Branch2D\CutSprite2D.cpp" />
     <ClCompile Include="src\Branch\Branch2D\Line2D.cpp" />
     <ClCompile Include="src\Branch\Branch2D\Point2D.cpp" />
     <ClCompile Include="src\Branch\Branch2D\Rectangle2D.cpp" />
@@ -195,9 +195,11 @@
     <ClCompile Include="src\Branch\Branch2D\Text2D.cpp" />
     <ClCompile Include="src\Branch\Branch2D\Viewport2D.cpp" />
     <ClCompile Include="src\Engine.cpp" />
+    <ClCompile Include="src\Input.cpp" />
     <ClCompile Include="src\Log.cpp" />
     <ClCompile Include="src\Main.cpp" />
     <ClCompile Include="src\Resources\Resource.cpp" />
+    <ClCompile Include="src\Script.cpp" />
     <ClCompile Include="src\Structs\Color.cpp" />
     <ClCompile Include="src\Structs\Font.cpp" />
     <ClCompile Include="src\Structs\Rect2.cpp" />
@@ -205,6 +207,9 @@
     <ClCompile Include="src\Structs\Vector2.cpp" />
     <ClCompile Include="src\Structs\Vector2i.cpp" />
     <ClCompile Include="src\Structs\Viewport.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="cpp.hint" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
