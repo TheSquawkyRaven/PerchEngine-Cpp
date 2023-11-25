@@ -46,7 +46,7 @@ namespace Perch
 
 	private:
 
-		std::shared_ptr<Branch> Parent = NULL;
+		Branch* Parent = NULL;
 		std::vector<std::shared_ptr<Branch>> Children;
 
 		bool ReadyCalled = false;
@@ -56,7 +56,7 @@ namespace Perch
 
 	protected:
 
-		PERCHENGINECPP_API inline std::shared_ptr<Branch> GetParent() { return Parent; }
+		PERCHENGINECPP_API inline Branch* GetParent() { return Parent; }
 
 	public:
 

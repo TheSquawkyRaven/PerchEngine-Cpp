@@ -1,9 +1,11 @@
 #include "pch.h"
 
+#include "../../Log.h"
 #include "Branch2D.h"
 
 using namespace std;
 using namespace Perch;
+using namespace Squawk;
 
 Branch2D::Branch2D()
 {
@@ -15,8 +17,8 @@ Branch2D::Branch2D()
 
 Vector2 Branch2D::_GetGlobalPosition()
 {
-	shared_ptr<Branch> parent = GetParent();
-	Branch2D* branch2D = dynamic_cast<Branch2D*>(parent.get());
+	Branch* parent = GetParent();
+	Branch2D* branch2D = dynamic_cast<Branch2D*>(parent);
 	if (branch2D == NULL)
 	{
 		return Position;
@@ -26,21 +28,21 @@ Vector2 Branch2D::_GetGlobalPosition()
 
 Vector2 Branch2D::_GetGlobalScale()
 {
-	shared_ptr<Branch> parent = GetParent();
-	Branch2D* branch2D = dynamic_cast<Branch2D*>(parent.get());
+	Branch* parent = GetParent();
+	Branch2D* branch2D = dynamic_cast<Branch2D*>(parent);
 	if (branch2D == NULL)
 	{
 		return Scale;
 	}
-	return branch2D->GetGlobalScale() + Scale;
+	return branch2D->GetGlobalScale() * Scale;
 }
 
-Vector2 Perch::Branch2D::GetGlobalPosition()
+Vector2 Branch2D::GetGlobalPosition()
 {
 	return _GetGlobalPosition();
 }
 
-Vector2 Perch::Branch2D::GetGlobalScale()
+Vector2 Branch2D::GetGlobalScale()
 {
 	return _GetGlobalScale();
 }

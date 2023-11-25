@@ -20,6 +20,8 @@ void Rigidbody2D::PhysicsUpdate()
 	Velocity = Velocity + velocity;
 	if (!ForceApplied)
 	{
-
+		Velocity = Velocity + ApplyingForce;
+		ForceApplied = true;
 	}
+	Position = Position + Velocity;
 }

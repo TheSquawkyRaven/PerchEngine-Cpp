@@ -100,16 +100,17 @@ void Branch::_UpdateOut()
 
 void Branch::_PhysicsUpdate()
 {
-    if (PhysicsUpdated)
+    /*if (PhysicsUpdated)
     {
         return;
-    }
+    }*/
     PhysicsUpdate();
     if (ScriptRef != NULL)
     {
         ScriptRef->PhysicsUpdate(EngineRef);
     }
     PhysicsUpdated = true;
+    PhysicsUpdated = false;
     if (!Children.empty())
     {
         // Update through recursion
@@ -198,6 +199,7 @@ void Branch::_Destroy(bool isChainedDestroy)
 void Branch::AttachChild(shared_ptr<Branch> branch)
 {
     Children.push_back(branch);
+    branch->Parent = this;
 }
 
 void Branch::Init()

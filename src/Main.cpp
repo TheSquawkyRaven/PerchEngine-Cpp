@@ -43,6 +43,12 @@ int main(int argc, char* args[])
 
 void OnRootCreate(Engine* Engine, Branch* Root)
 {
+	shared_ptr<Texture> png = Texture::Create(Engine, "./images/squawky_birb.png");
+	if (png == NULL)
+	{
+		return;
+	}
+
 	shared_ptr<Sprite2D> sprite = Engine->CreateBranch<Sprite2D>();
 	shared_ptr<Sprite2D> sprite2 = Engine->CreateBranch<Sprite2D>();
 	shared_ptr<Sprite2D> sprite3 = Engine->CreateBranch<Sprite2D>();
@@ -53,11 +59,6 @@ void OnRootCreate(Engine* Engine, Branch* Root)
 		return;
 	}
 
-	shared_ptr<Texture> png = Texture::Create(Engine, "./images/squawky_birb.png");
-	if (png == NULL)
-	{
-		return;
-	}
 	sprite->SetTexture(png);
 	sprite->Position = Vector2(100, 100);
 	sprite->Scale = Vector2(1, 1.5f);
@@ -136,8 +137,20 @@ void OnRootCreate(Engine* Engine, Branch* Root)
 
 	Root->AttachChild(text);
 
-
 	shared_ptr<Rigidbody2D> rigidbody2D = Engine->CreateBranch<Rigidbody2D>();
+	rigidbody2D->Gravity = 1.0f;
+
+	shared_ptr<Sprite2D> spriteR = Engine->CreateBranch<Sprite2D>();
+	spriteR->SetTexture(png);
+	spriteR->Position = Vector2(100, 100);
+	spriteR->Scale = Vector2(1, 1.5f);
+	spriteR->FlipY = true;
+	spriteR->SetName("Sprite");
+
+	rigidbody2D->AttachChild(spriteR);
+	rigidbody2D->SetName("Rigidbody");
+	
+
 	Root->AttachChild(rigidbody2D);
 
 

@@ -99,27 +99,12 @@ shared_ptr<SDL_Point> Sprite2D::GetRotateOrigin()
 Vector2 Sprite2D::GetSize()
 {
 	return Vector2(Scale.X * _CutRect.GetSize().X, Scale.Y * _CutRect.GetSize().Y);
-
-	/*if (_Texture == NULL)
-	{
-		return Vector2();
-	}
-	Vector2i textureSize = _Texture->GetSize();
-	return Vector2(Scale.X * textureSize.X, Scale.Y * textureSize.Y);*/
 }
 
 Vector2 Sprite2D::GetGlobalSize()
 {
 	Vector2 scale = GetGlobalScale();
 	return Vector2(scale.X * _CutRect.GetSize().X, scale.Y * _CutRect.GetSize().Y);
-
-	/*if (_Texture == NULL)
-	{
-		return Vector2();
-	}
-	Vector2i textureSize = _Texture->GetSize();
-	Vector2 scale = GetGlobalScale();
-	return Vector2(scale.X * textureSize.X, scale.Y * textureSize.Y);*/
 }
 
 Rect2 Sprite2D::GetCutRect()

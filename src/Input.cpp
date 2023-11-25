@@ -10,8 +10,22 @@ using namespace std;
 using namespace Perch;
 using namespace Squawk;
 
+void Input::UpdateKeyboardStates()
+{
+	if (KeyboardStates == NULL)
+	{
+		return;
+	}
+	for (int i = 0; i < SDL_NUM_SCANCODES; i++)
+	{
+		LastKeyboardStates[i] = KeyboardStates[i];
+	}
+}
+
 void Input::UpdateInput(SDL_Event* e, bool* quit)
 {
+	UpdateKeyboardStates();
+
 	while (SDL_PollEvent(e))
 	{
 		if (e->type == SDL_QUIT)
@@ -21,10 +35,19 @@ void Input::UpdateInput(SDL_Event* e, bool* quit)
 	}
 
 	KeyboardStates = (Uint8*)SDL_GetKeyboardState(NULL);
-
 }
 
 bool Input::GetKey(SDL_Scancode sdlScancode)
 {
 	return KeyboardStates[sdlScancode];
+}
+
+bool Input::GetKeyDown(SDL_Scancode sdlScancode)
+{
+	return !LastKeyboardStates[sdlScancode] && KeyboardStates[sdlScancode];
+}
+
+bool Input::GetKeyUp(SDL_Scancode sdlScancode)
+{
+	return LastKeyboardStates[sdlScancode] && !KeyboardStates[sdlScancode];
 }
