@@ -54,6 +54,9 @@ namespace Perch
 
 	public:
 
+		// Position transform applied relative to texture size. In percentage form (0.5f, 0.5f) is the center
+		Vector2 PositionPivot = Vector2();
+		// Rotation pivot relative to texture size. In percentage form (0.5f, 0.5f) is the center
 		Vector2 RotatePivot = Vector2(0.5f, 0.5f);
 		double Angle = 0;
 		// SDL do not support flipping at both axes at the same time
@@ -77,11 +80,15 @@ namespace Perch
 
 		PERCHENGINECPP_API SDL_RendererFlip GetSDLFlip() const;
 		PERCHENGINECPP_API std::shared_ptr<SDL_Point> GetRotateOrigin();
+		PERCHENGINECPP_API Vector2 GetPositionPivotOrigin();
 
 	public:
 
+		PERCHENGINECPP_API Sprite2D(Engine* engine) : Branch2D(engine) {};
+
 		PERCHENGINECPP_API virtual Vector2 GetSize();
 		PERCHENGINECPP_API virtual Vector2 GetGlobalSize();
+		PERCHENGINECPP_API Rect2 GetGlobalRect();
 		PERCHENGINECPP_API Rect2 GetCutRect();
 
 		PERCHENGINECPP_API virtual void SetTexture(std::shared_ptr<Texture> texture);

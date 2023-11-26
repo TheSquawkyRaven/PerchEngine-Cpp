@@ -59,7 +59,7 @@ void Sprite2D::UpdateCutRect()
 	size.Y = size.Y / _SpriteRows;
 
 	Vector2 position;
-	int iX = _SpriteIndex % _SpriteRows;
+	int iX = _SpriteIndex % _SpriteColumns;
 	int iY = _SpriteIndex / _SpriteColumns;
 
 	position.X = size.X * iX;
@@ -91,9 +91,19 @@ shared_ptr<SDL_Point> Sprite2D::GetRotateOrigin()
 	{
 		return NULL;
 	}
-	Vector2 rotateOrigin = RotatePivot * _Texture->GetSize();
+	Vector2 rotateOrigin = RotatePivot * GetSize();
 
 	return rotateOrigin.GetSDLPoint();
+}
+
+Vector2 Sprite2D::GetPositionPivotOrigin()
+{
+	if (_Texture == NULL)
+	{
+		return NULL;
+	}
+	Vector2 positionOrigin = PositionPivot * GetSize();
+	return positionOrigin;
 }
 
 Vector2 Sprite2D::GetSize()
@@ -105,6 +115,13 @@ Vector2 Sprite2D::GetGlobalSize()
 {
 	Vector2 scale = GetGlobalScale();
 	return Vector2(scale.X * _CutRect.GetSize().X, scale.Y * _CutRect.GetSize().Y);
+}
+
+Rect2 Sprite2D::GetGlobalRect()
+{
+	Vector2 position = GetGlobalPosition() - GetPositionPivotOrigin();
+	Vector2 size = GetGlobalSize();
+	return Rect2(position, size);
 }
 
 Rect2 Sprite2D::GetCutRect()
@@ -132,7 +149,7 @@ void Sprite2D::Draw(SDL_Renderer* renderer)
 		return;
 	}
 
-	Vector2 position = GetGlobalPosition();
+	Vector2 position = GetGlobalPosition() - GetPositionPivotOrigin();
 	Vector2 size = GetGlobalSize();
 	shared_ptr<SDL_Rect> rect = Rect2::CreateSDLRect(position, size);
 
@@ -145,5 +162,6 @@ void Sprite2D::Draw(SDL_Renderer* renderer)
 
 void Sprite2D::OnDestroy()
 {
+	Log::Printf("Sprite OnDestroy");
 	_Texture = NULL;
 }

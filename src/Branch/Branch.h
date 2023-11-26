@@ -70,30 +70,24 @@ namespace Perch
 	private:
 
 		int GetChildIndex(Branch* child);
-		
-		void _Init(Engine* engine);
+
 		void _Ready();
 
 		void _Update();
 		void _UpdateOut();
 		void _PhysicsUpdate();
+		void _CollisionUpdate();
 		void _Draw(SDL_Renderer* renderer);
 		void _DrawOut(SDL_Renderer* renderer);
 		void _Destroy(bool isChainedDestroy);
 
-	protected:
-
-		Branch();
-
 	public:
+
+		PERCHENGINECPP_API Branch(Engine* engine);
 
 		PERCHENGINECPP_API void AttachChild(std::shared_ptr<Branch> branch);
 
 		PERCHENGINECPP_API inline void AttachScript(std::shared_ptr<Script> script) { ScriptRef = script; }
-
-		// Init - Called right after constructor is ran, from Engine::CreateBranch
-		// Will NOT call Init on children
-		PERCHENGINECPP_API virtual void Init();
 
 		// Ready - Preorder, Called upon attaching to a branch of the main tree or when the tree is run. Only called once
 		PERCHENGINECPP_API virtual void Ready();
@@ -103,8 +97,10 @@ namespace Perch
 		// UpdateOut - Called every frame after Updating all children
 		PERCHENGINECPP_API virtual void UpdateOut();
 
-		// PhysicsUpdate - Preorder, Called every frame after update, before draw
+		// PhysicsUpdate - Preorder, Called every frame after update, before collision update
 		PERCHENGINECPP_API virtual void PhysicsUpdate();
+		// CollisionUpdate - Preorder, Called every frame after physics update, before draw
+		PERCHENGINECPP_API virtual void CollisionUpdate();
 
 		// Draw - Preorder, Called every frame. Update first, then draw
 		PERCHENGINECPP_API virtual void Draw(SDL_Renderer* renderer);

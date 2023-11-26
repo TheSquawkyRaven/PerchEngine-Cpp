@@ -20,6 +20,9 @@ void Engine::Update(SDL_Event* e, bool* quit)
 
 	Root->_PhysicsUpdate();
 
+	Root->_CollisionUpdate();
+	ColliderStack.clear();	// TODO move to Physics2D function
+
 	Color c = Config->ClearColor;
 	SDL_SetRenderDrawColor(MainWindowRenderer, c.R, c.G, c.B, c.A);
 	SDL_RenderClear(MainWindowRenderer);
@@ -68,7 +71,7 @@ bool Engine::InitMainWindow()
 
 	// Create a main window
 	// Title, X, & Y pos of window position on screen, width, height, hide window when created
-	Vector2i ScreenSize = MainWindowRect.GetSize();
+	Vector2i ScreenSize = GetMainWindowSize();
 	MainWindow = SDL_CreateWindow(Config->WindowName.c_str(), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, ScreenSize.X, ScreenSize.Y, SDL_WINDOW_HIDDEN);
 	if (MainWindow == NULL)
 	{
@@ -112,8 +115,7 @@ bool Engine::InitMainWindow()
 // Creates the root branch and calls the delegate for OnRootCreate for attachments of branches
 void Engine::CreateTree()
 {
-	Root = new Branch();
-	Root->_Init(this);
+	Root = new Branch(this);
 
 	if (OnRootCreate == NULL)
 	{

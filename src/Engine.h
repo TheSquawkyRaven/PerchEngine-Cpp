@@ -13,6 +13,7 @@
 #include <SDL_ttf.h>
 
 #include "Input.h"
+#include "Random.h"
 
 #include "Structs/Vector2.h"
 #include "Structs/Vector2i.h"
@@ -24,12 +25,14 @@
 #include <functional>
 #include <memory>
 #include <stack>
+#include <unordered_set>
 
 
 namespace Perch
 {
 
 	class Script;
+	class Collider2D;
 
 	// Config definition
 	class EngineConfig
@@ -77,17 +80,23 @@ namespace Perch
 		Uint32 LastUpdateTicks = 0;
 
 		std::unique_ptr<Input> InputRef = std::unique_ptr<Input>(new Input);
+		std::unique_ptr<Random> RandomRef = std::unique_ptr<Random>(new Random);
 
 	public:
 
 		PERCHENGINECPP_API inline Rect2 GetMainWindowRect() const { return MainWindowRect; }
+		PERCHENGINECPP_API inline Vector2 GetMainWindowSize() { return MainWindowRect.GetSize(); }
 		PERCHENGINECPP_API inline SDL_Renderer* GetMainWindowRenderer() { return MainWindowRenderer; }
 		PERCHENGINECPP_API inline Input* GetInput() const { return InputRef.get(); }
+		PERCHENGINECPP_API inline Random* GetRandom() const { return RandomRef.get(); }
 
 	public:
 
 		float DeltaTime = 0.0f;
 		float TotalTime = 0.0f;
+
+		// TODO Move to 2D Physics class
+		std::unordered_set<Collider2D*> ColliderStack;
 
 		// ###
 
@@ -129,15 +138,6 @@ namespace Perch
 
 		PERCHENGINECPP_API std::shared_ptr<Viewport> GetCurrentViewport();
 		PERCHENGINECPP_API void ClearViewportStack();
-
-		template<typename BranchT>
-		PERCHENGINECPP_API inline std::shared_ptr<BranchT> CreateBranch()
-		{
-			static_assert(std::is_base_of<Branch, BranchT>::value, "CreateBranch template must be derived from Branch.");
-			BranchT* branch = new BranchT();
-			branch->_Init(this);
-			return std::shared_ptr<BranchT>(branch);
-		}
 
 		// "Start" here will wait for until the closure of the MainWindow
 		// Will call quit to free up SDL. May change in the future

@@ -52,7 +52,9 @@ namespace Perch
 
 	public:
 
-		PERCHENGINECPP_API virtual void Init() override;
+		PERCHENGINECPP_API Text2D(Engine* engine) : Sprite2D(engine) {};
+
+		PERCHENGINECPP_API virtual void Ready() override;
 		PERCHENGINECPP_API void SetFont(std::shared_ptr<Font> font);
 
 		// ###

@@ -46,6 +46,8 @@ namespace Perch
 
 	public:
 
+		PERCHENGINECPP_API Line2D(Engine* engine) : Branch2D(engine) {};
+
 		PERCHENGINECPP_API Vector2 GetGlobalStartPosition();
 		PERCHENGINECPP_API Vector2 GetGlobalEndPosition();
 

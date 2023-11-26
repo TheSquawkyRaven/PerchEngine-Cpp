@@ -7,14 +7,6 @@ using namespace std;
 using namespace Perch;
 using namespace Squawk;
 
-Branch2D::Branch2D()
-{
-	Position.X = 0;
-	Position.Y = 0;
-	Scale.X = 1;
-	Scale.Y = 1;
-}
-
 Vector2 Branch2D::_GetGlobalPosition()
 {
 	Branch* parent = GetParent();

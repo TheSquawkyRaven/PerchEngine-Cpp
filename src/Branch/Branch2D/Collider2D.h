@@ -22,17 +22,15 @@ namespace Perch
 	/// 
 	/// </summary>
 	// Children are drawn on this viewport
-	class Viewport2D : public Branch2D
+	class Collider2D : public Branch2D
 	{
 
 		// # Variables + Getters/Setters
 	private:
-		std::shared_ptr<Viewport> _Viewport;
 
 	public:
 
-		PERCHENGINECPP_API inline std::shared_ptr<Viewport> GetViewport() const { return _Viewport; }
-		PERCHENGINECPP_API inline void SetViewport(std::shared_ptr<Viewport> viewport) { _Viewport = viewport; }
+		Rect2 Rect = Rect2();
 
 		// ###
 
@@ -40,15 +38,22 @@ namespace Perch
 
 	private:
 
+		void _OnCollision(Collider2D* collider);
+
 	public:
 
-		PERCHENGINECPP_API Viewport2D(Engine* engine) : Branch2D(engine) {};
+		PERCHENGINECPP_API Collider2D(Engine* engine);
 
-		PERCHENGINECPP_API virtual void Update() override;
-		PERCHENGINECPP_API virtual void UpdateOut() override;
+		PERCHENGINECPP_API bool DoesCollideWith(Collider2D* collider);
+		PERCHENGINECPP_API void GetAABB(float& left, float& top, float& right, float& bottom);
+
+		PERCHENGINECPP_API virtual void OnCollision(Collider2D* collider);
+
+		PERCHENGINECPP_API virtual void CollisionUpdate() override;
+
+		PERCHENGINECPP_API virtual void PhysicsUpdate() override;
 
 		PERCHENGINECPP_API virtual void Draw(SDL_Renderer* renderer) override;
-		PERCHENGINECPP_API virtual void DrawOut(SDL_Renderer* renderer) override;
 
 		// ###
 

@@ -44,6 +44,8 @@ namespace Perch
 		
 	public:
 
+		PERCHENGINECPP_API Rectangle2D(Engine* engine) : Branch2D(engine) {};
+
 		PERCHENGINECPP_API Vector2 GetRectSize();
 		PERCHENGINECPP_API Vector2 GetRectGlobalSize();
 

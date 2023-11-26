@@ -49,6 +49,8 @@ namespace Perch
 
 	public:
 
+		PERCHENGINECPP_API Rigidbody2D(Engine* engine) : Branch2D(engine) {};
+
 		PERCHENGINECPP_API void AddForce(Vector2 force);
 
 		PERCHENGINECPP_API virtual void PhysicsUpdate() override;

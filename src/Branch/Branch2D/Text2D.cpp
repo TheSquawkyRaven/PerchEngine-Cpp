@@ -19,7 +19,7 @@ void Text2D::UpdateTexture()
 	SetTexture(texture);
 }
 
-void Text2D::Init()
+void Text2D::Ready()
 {
 	SetColor(Color::Black());
 }

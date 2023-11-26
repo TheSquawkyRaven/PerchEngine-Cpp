@@ -60,6 +60,9 @@ namespace Perch
 		// OnDestroy - POSTorder, Called while destroying. Uninitialize pointers here.
 		PERCHENGINECPP_API virtual void OnDestroy(Engine* engine);
 
+		// OnCollision2D - Called when it receives a collision2D event
+		PERCHENGINECPP_API virtual void OnCollision2D(Engine* engine, Collider2D* collider);
+		
 		// ###
 	};
 }

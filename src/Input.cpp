@@ -3,8 +3,6 @@
 #include "Input.h"
 
 #include "Log.h"
-#include "Branch/Branch.h"
-#include <cassert>
 
 using namespace std;
 using namespace Perch;

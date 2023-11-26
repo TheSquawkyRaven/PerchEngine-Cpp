@@ -99,6 +99,12 @@
     <ClInclude Include="src\Branch\Branch2D\Rigidbody2D.h">
       <Filter>Header Files\Branch2D</Filter>
     </ClInclude>
+    <ClInclude Include="src\Random.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Branch\Branch2D\Collider2D.h">
+      <Filter>Header Files\Branch2D</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -174,6 +180,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Branch\Branch2D\Rigidbody2D.cpp">
+      <Filter>Source Files\Branch2D</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Random.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Branch\Branch2D\Collider2D.cpp">
       <Filter>Source Files\Branch2D</Filter>
     </ClCompile>
   </ItemGroup>

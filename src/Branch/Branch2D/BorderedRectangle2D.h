@@ -45,6 +45,8 @@ namespace Perch
 		
 	public:
 
+		PERCHENGINECPP_API BorderedRectangle2D(Engine* engine) : Rectangle2D(engine) {};
+
 		PERCHENGINECPP_API virtual void Draw(SDL_Renderer* renderer) override;
 
 		// ###

@@ -43,6 +43,8 @@ namespace Perch
 		
 	public:
 
+		PERCHENGINECPP_API Point2D(Engine* engine) : Branch2D(engine) {};
+
 		PERCHENGINECPP_API Vector2 GetGlobalPointPosition();
 
 		PERCHENGINECPP_API virtual void Draw(SDL_Renderer* renderer) override;

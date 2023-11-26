@@ -14,7 +14,6 @@
 namespace Perch
 {
 
-	// For bool return functions, true represents success
 	class Input
 	{
 

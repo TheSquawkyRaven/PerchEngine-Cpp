@@ -8,15 +8,9 @@ using namespace std;
 using namespace Perch;
 using namespace Squawk;
 
-
 void Branch::SetName(string name)
 {
     Name = name;
-}
-
-Branch::Branch()
-{
-
 }
 
 int Branch::GetChildIndex(Branch* child)
@@ -31,12 +25,6 @@ int Branch::GetChildIndex(Branch* child)
     // Not found!
     Log::Warnf("%s not found as a child in %s!", child->Name, Name);
     return -1;
-}
-
-void Branch::_Init(Engine* engine)
-{
-    EngineRef = engine;
-    Init();
 }
 
 void Branch::_Ready()
@@ -122,6 +110,24 @@ void Branch::_PhysicsUpdate()
     }
 }
 
+void Branch::_CollisionUpdate()
+{
+    /*if (PhysicsUpdated)
+    {
+        return;
+    }*/
+    CollisionUpdate();
+    if (!Children.empty())
+    {
+        // Update through recursion
+        for (size_t i = 0; i < Children.size(); ++i)
+        {
+            shared_ptr<Branch> child = Children[i];
+            child->_CollisionUpdate();
+        }
+    }
+}
+
 void Branch::_Draw(SDL_Renderer* renderer)
 {
     // Preorder draw order (Parent draw first)
@@ -191,9 +197,12 @@ void Branch::_Destroy(bool isChainedDestroy)
             }
             Parent->Children.erase(Parent->Children.begin() + childIndex);
         }
-
-        delete this;
     }
+}
+
+Branch::Branch(Engine* engine)
+{
+    EngineRef = engine;
 }
 
 void Branch::AttachChild(shared_ptr<Branch> branch)
@@ -201,9 +210,6 @@ void Branch::AttachChild(shared_ptr<Branch> branch)
     Children.push_back(branch);
     branch->Parent = this;
 }
-
-void Branch::Init()
-{}
 
 void Branch::Ready()
 {}
@@ -215,6 +221,9 @@ void Branch::UpdateOut()
 {}
 
 void Branch::PhysicsUpdate()
+{}
+
+void Branch::CollisionUpdate()
 {}
 
 void Branch::Draw(SDL_Renderer* renderer)

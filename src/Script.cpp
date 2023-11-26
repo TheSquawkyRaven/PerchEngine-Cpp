@@ -37,3 +37,6 @@ void Script::Draw(Engine* engine, SDL_Renderer * renderer)
 
 void Script::OnDestroy(Engine* engine)
 {}
+
+void Script::OnCollision2D(Engine* engine, Collider2D* collider)
+{}
