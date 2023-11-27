@@ -1,9 +1,9 @@
 #pragma once
 
 #ifdef PERCHENGINECPP_EXPORTS
-#define PERCHENGINECPP_API __declspec(dllexport)
+#define PERCH_API __declspec(dllexport)
 #else
-#define PERCHENGINECPP_API __declspec(dllimport)
+#define PERCH_API __declspec(dllimport)
 #endif
 
 
@@ -42,7 +42,7 @@ namespace Perch
 
 	public:
 
-		PERCHENGINECPP_API inline TTF_Font* GetSDLFont() { return SDLFont.get(); }
+		PERCH_API inline TTF_Font* GetSDLFont() { return SDLFont.get(); }
 
 		// ###
 
@@ -57,7 +57,7 @@ namespace Perch
 
 	public:
 
-		PERCHENGINECPP_API static std::shared_ptr<Font> Create(Engine* engine, std::string path, int fontSize);
+		PERCH_API static std::shared_ptr<Font> Create(Engine* engine, std::string path, int fontSize);
 
 		// ###
 

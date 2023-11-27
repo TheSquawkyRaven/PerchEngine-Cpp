@@ -10,7 +10,7 @@ using namespace Squawk;
 
 Vector2 Point2D::GetGlobalPointPosition()
 {
-	return _GetGlobalPosition() + _PointPosition;
+	return GetGlobalPosition() + _PointPosition;
 }
 
 void Point2D::Draw(SDL_Renderer* renderer)

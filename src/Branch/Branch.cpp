@@ -44,8 +44,7 @@ void Branch::_Ready()
         // Ready through recursion
         for (size_t i = 0; i < Children.size(); ++i)
         {
-            shared_ptr<Branch> child = Children[i];
-            child->_Ready();
+            Children[i]->_Ready();
         }
     }
 }
@@ -69,9 +68,8 @@ void Branch::_Update()
         // Update through recursion
         for (size_t i = 0; i < Children.size(); ++i)
         {
-            shared_ptr<Branch> child = Children[i];
-            child->_Update();
-            child->_UpdateOut();
+            Children[i]->_Update();
+            Children[i]->_UpdateOut();
         }
     }
 }
@@ -104,8 +102,7 @@ void Branch::_PhysicsUpdate()
         // Update through recursion
         for (size_t i = 0; i < Children.size(); ++i)
         {
-            shared_ptr<Branch> child = Children[i];
-            child->_PhysicsUpdate();
+            Children[i]->_PhysicsUpdate();
         }
     }
 }
@@ -122,8 +119,7 @@ void Branch::_CollisionUpdate()
         // Update through recursion
         for (size_t i = 0; i < Children.size(); ++i)
         {
-            shared_ptr<Branch> child = Children[i];
-            child->_CollisionUpdate();
+            Children[i]->_CollisionUpdate();
         }
     }
 }
@@ -146,9 +142,8 @@ void Branch::_Draw(SDL_Renderer* renderer)
         // Draw through recursion
         for (size_t i = 0; i < Children.size(); ++i)
         {
-            shared_ptr<Branch> child = Children[i];
-            child->_Draw(renderer);
-            child->_DrawOut(renderer);
+            Children[i]->_Draw(renderer);
+            Children[i]->_DrawOut(renderer);
         }
     }
 }
@@ -170,8 +165,7 @@ void Branch::_Destroy(bool isChainedDestroy)
         // Destroys all children through recursion
         for (size_t i = 0; i < Children.size(); ++i)
         {
-            shared_ptr<Branch> child = Children[i];
-            child->_Destroy(true);
+            Children[i]->_Destroy(true);
 
             Children[i] = NULL;
         }
@@ -205,10 +199,10 @@ Branch::Branch(Engine* engine)
     EngineRef = engine;
 }
 
-void Branch::AttachChild(shared_ptr<Branch> branch)
+void Branch::AttachChild(unique_ptr<Branch> branch)
 {
-    Children.push_back(branch);
     branch->Parent = this;
+    Children.push_back(move(branch));
 }
 
 void Branch::Ready()

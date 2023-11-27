@@ -1,9 +1,9 @@
 #pragma once
 
 #ifdef PERCHENGINECPP_EXPORTS
-#define PERCHENGINECPP_API __declspec(dllexport)
+#define PERCH_API __declspec(dllexport)
 #else
-#define PERCHENGINECPP_API __declspec(dllimport)
+#define PERCH_API __declspec(dllimport)
 #endif
 
 
@@ -37,17 +37,12 @@ namespace Perch
 		// # Functions
 		// ###
 
-	protected:
-
-		PERCHENGINECPP_API Vector2 _GetGlobalPosition();
-		PERCHENGINECPP_API Vector2 _GetGlobalScale();
-
 	public:
 
-		PERCHENGINECPP_API Branch2D(Engine* engine) : Branch(engine) {};
+		PERCH_API Branch2D(Engine* engine) : Branch(engine) {};
 
-		PERCHENGINECPP_API virtual Vector2 GetGlobalPosition();
-		PERCHENGINECPP_API virtual Vector2 GetGlobalScale();
+		PERCH_API virtual Vector2 GetGlobalPosition();
+		PERCH_API virtual Vector2 GetGlobalScale();
 
 	};
 

@@ -23,7 +23,7 @@ Vector2 Rectangle2D::GetRectGlobalSize()
 
 Vector2 Rectangle2D::GetRectGlobalPosition()
 {
-	return _GetGlobalPosition() + _Rect2.GetPosition();
+	return GetGlobalPosition() + _Rect2.GetPosition();
 }
 
 void Rectangle2D::Draw(SDL_Renderer* renderer)

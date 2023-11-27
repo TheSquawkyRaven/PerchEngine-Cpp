@@ -1,9 +1,9 @@
 #pragma once
 
 #ifdef PERCHENGINECPP_EXPORTS
-#define PERCHENGINECPP_API __declspec(dllexport)
+#define PERCH_API __declspec(dllexport)
 #else
-#define PERCHENGINECPP_API __declspec(dllimport)
+#define PERCH_API __declspec(dllimport)
 #endif
 
 
@@ -29,9 +29,9 @@ namespace Perch
 
 	public:
 
-		PERCHENGINECPP_API Viewport();
-		PERCHENGINECPP_API Viewport(Rect2 rect);
-		PERCHENGINECPP_API std::shared_ptr<SDL_Rect> GetSDLRect();
+		PERCH_API Viewport();
+		PERCH_API Viewport(Rect2 rect);
+		PERCH_API std::shared_ptr<SDL_Rect> GetSDLRect();
 
 	};
 

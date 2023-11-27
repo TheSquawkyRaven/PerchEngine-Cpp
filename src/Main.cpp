@@ -51,9 +51,9 @@ void OnRootCreate(Engine* Engine, Branch* Root)
 		return;
 	}
 
-	shared_ptr<Sprite2D> sprite(new Sprite2D(Engine));
-	shared_ptr<Sprite2D> sprite2(new Sprite2D(Engine));
-	shared_ptr<Sprite2D> sprite3(new Sprite2D(Engine));
+	unique_ptr<Sprite2D> sprite(new Sprite2D(Engine));
+	unique_ptr<Sprite2D> sprite2(new Sprite2D(Engine));
+	unique_ptr<Sprite2D> sprite3(new Sprite2D(Engine));
 
 	shared_ptr<Texture> bmp = Texture::Create(Engine, "./images/squawky_birb.bmp");
 	if (bmp == NULL)
@@ -77,42 +77,36 @@ void OnRootCreate(Engine* Engine, Branch* Root)
 	sprite3->RotatePivot = Vector2(0, 0);
 	sprite3->Angle = 45;
 
-	shared_ptr<BorderedRectangle2D> rectangle(new BorderedRectangle2D(Engine));
+	unique_ptr<BorderedRectangle2D> rectangle(new BorderedRectangle2D(Engine));
 	rectangle->SetRect2(Rect2(100, 120, 50, 50));
 	rectangle->SetBorderSize(5.0f);
 
-	shared_ptr<Line2D> line(new Line2D(Engine));
+	unique_ptr<Line2D> line(new Line2D(Engine));
 	line->SetStartPosition(Vector2(0, 100));
 	line->SetEndPosition(Vector2(300, 300));
 	line->SetColor(Color::Purple());
 
-	shared_ptr<Point2D> point(new Point2D(Engine));
+	unique_ptr<Point2D> point(new Point2D(Engine));
 	point->SetPointPosition(Vector2(5, 5));
 
-	Root->AttachChild(sprite);
-	Root->AttachChild(sprite2);
-	Root->AttachChild(sprite3);
+	Root->AttachChild(move(sprite));
+	Root->AttachChild(move(sprite2));
 
-	Root->AttachChild(rectangle);
+	Root->AttachChild(move(rectangle));
 
-	Root->AttachChild(line);
+	Root->AttachChild(move(line));
 
-	Root->AttachChild(point);
+	Root->AttachChild(move(point));
 
 	Viewport viewport = Viewport(Rect2(640, 360, 640, 360));
 	
-	shared_ptr<Viewport2D> viewport2D(new Viewport2D(Engine));
+	unique_ptr<Viewport2D> viewport2D(new Viewport2D(Engine));
 	viewport2D->SetViewport(std::shared_ptr<Viewport>(new Viewport(viewport)));
+	viewport2D->AttachChild(move(sprite3));
 
-	Root->AttachChild(viewport2D);
-	viewport2D->AttachChild(sprite);
-	viewport2D->AttachChild(sprite2);
-	viewport2D->AttachChild(sprite3);
-	viewport2D->AttachChild(rectangle);
-	viewport2D->AttachChild(line);
-	viewport2D->AttachChild(point);
+	Root->AttachChild(move(viewport2D));
 
-	shared_ptr<Sprite2D> cutSprite(new Sprite2D(Engine));
+	unique_ptr<Sprite2D> cutSprite(new Sprite2D(Engine));
 	cutSprite->SetTexture(png);
 	cutSprite->Position = Vector2(0, 0);
 	cutSprite->Scale = Vector2(1, 1.5f);
@@ -123,7 +117,7 @@ void OnRootCreate(Engine* Engine, Branch* Root)
 	cutSprite->SetSpriteRows(3);
 	cutSprite->SetSpriteIndex(7);
 
-	Root->AttachChild(cutSprite);
+	Root->AttachChild(move(cutSprite));
 
 	shared_ptr<Font> lameFont = Font::Create(Engine, "./fonts/LameFont.ttf", 24);
 	if (lameFont == NULL) 
@@ -131,32 +125,32 @@ void OnRootCreate(Engine* Engine, Branch* Root)
 		return;
 	}
 
-	shared_ptr<Text2D> text(new Text2D(Engine));
+	unique_ptr<Text2D> text(new Text2D(Engine));
 	text->Position = Vector2(50, 50);
 	text->SetFont(lameFont);
 	text->SetText("This is a text.");
 	text->SetText("Hello World");
 
-	Root->AttachChild(text);
+	Root->AttachChild(move(text));
 
-	shared_ptr<Rigidbody2D> rigidbody2D(new Rigidbody2D(Engine));
+	unique_ptr<Rigidbody2D> rigidbody2D(new Rigidbody2D(Engine));
 	rigidbody2D->Gravity = 1.0f;
 
-	shared_ptr<Sprite2D> spriteR(new Sprite2D(Engine));
+	unique_ptr<Sprite2D> spriteR(new Sprite2D(Engine));
 	spriteR->SetTexture(png);
 	spriteR->Position = Vector2(100, 100);
 	spriteR->Scale = Vector2(1, 1.5f);
 	spriteR->FlipY = true;
 	spriteR->SetName("Sprite");
 
-	rigidbody2D->AttachChild(spriteR);
+	rigidbody2D->AttachChild(move(spriteR));
 	rigidbody2D->SetName("Rigidbody");
 	
 
-	Root->AttachChild(rigidbody2D);
+	Root->AttachChild(move(rigidbody2D));
 
-	shared_ptr<Collider2D> b(new Collider2D(Engine));
+	unique_ptr<Collider2D> b(new Collider2D(Engine));
 	b->Rect = Rect2(10, 10, 100, 100);
-	Root->AttachChild(b);
+	Root->AttachChild(move(b));
 
 }

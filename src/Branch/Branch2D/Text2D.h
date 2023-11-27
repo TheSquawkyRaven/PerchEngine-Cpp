@@ -1,9 +1,9 @@
 #pragma once
 
 #ifdef PERCHENGINECPP_EXPORTS
-#define PERCHENGINECPP_API __declspec(dllexport)
+#define PERCH_API __declspec(dllexport)
 #else
-#define PERCHENGINECPP_API __declspec(dllimport)
+#define PERCH_API __declspec(dllimport)
 #endif
 
 
@@ -38,8 +38,8 @@ namespace Perch
 
 	public:
 
-		PERCHENGINECPP_API inline std::string GetText() const { return _Text; }
-		PERCHENGINECPP_API void SetText(std::string text);
+		PERCH_API inline std::string GetText() const { return _Text; }
+		PERCH_API void SetText(std::string text);
 
 		// ###
 
@@ -48,14 +48,14 @@ namespace Perch
 
 	protected:
 
-		PERCHENGINECPP_API void UpdateTexture();
+		PERCH_API void UpdateTexture();
 
 	public:
 
-		PERCHENGINECPP_API Text2D(Engine* engine) : Sprite2D(engine) {};
+		PERCH_API Text2D(Engine* engine) : Sprite2D(engine) {};
 
-		PERCHENGINECPP_API virtual void Ready() override;
-		PERCHENGINECPP_API void SetFont(std::shared_ptr<Font> font);
+		PERCH_API virtual void Ready() override;
+		PERCH_API void SetFont(std::shared_ptr<Font> font);
 
 		// ###
 

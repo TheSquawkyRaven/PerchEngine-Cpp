@@ -20,11 +20,11 @@ void Input::UpdateKeyboardStates()
 	}
 }
 
-void Input::UpdateInput(SDL_Event* e, bool* quit)
+void Input::UpdateInput(shared_ptr<SDL_Event> e, bool* quit)
 {
 	UpdateKeyboardStates();
 
-	while (SDL_PollEvent(e))
+	while (SDL_PollEvent(e.get()))
 	{
 		if (e->type == SDL_QUIT)
 		{

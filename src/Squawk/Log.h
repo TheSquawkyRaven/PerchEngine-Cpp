@@ -1,9 +1,9 @@
 #pragma once
 
 #ifdef PERCHENGINECPP_EXPORTS
-#define PERCHENGINECPP_API __declspec(dllexport)
+#define PERCH_API __declspec(dllexport)
 #else
-#define PERCHENGINECPP_API __declspec(dllimport)
+#define PERCH_API __declspec(dllimport)
 #endif
 
 
@@ -31,12 +31,12 @@ namespace Squawk
 
 	public:
 
-		PERCHENGINECPP_API static void Print(const char* str);
-		PERCHENGINECPP_API static void Printf(const char* format, ...);
-		PERCHENGINECPP_API static void Error(const char* err);
-		PERCHENGINECPP_API static void Errorf(const char* format, ...);
-		PERCHENGINECPP_API static void Warn(const char* warn);
-		PERCHENGINECPP_API static void Warnf(const char* format, ...);
+		PERCH_API static void Print(const char* str);
+		PERCH_API static void Printf(const char* format, ...);
+		PERCH_API static void Error(const char* err);
+		PERCH_API static void Errorf(const char* format, ...);
+		PERCH_API static void Warn(const char* warn);
+		PERCH_API static void Warnf(const char* format, ...);
 
 	};
 

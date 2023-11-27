@@ -10,12 +10,12 @@ using namespace Squawk;
 
 Vector2 Line2D::GetGlobalStartPosition()
 {
-	return _GetGlobalPosition() + _StartPosition;
+	return GetGlobalPosition() + _StartPosition;
 }
 
 Vector2 Line2D::GetGlobalEndPosition()
 {
-	return _GetGlobalPosition() + _EndPosition;
+	return GetGlobalPosition() + _EndPosition;
 }
 
 void Line2D::Draw(SDL_Renderer* renderer)

@@ -7,7 +7,7 @@ using namespace std;
 using namespace Perch;
 using namespace Squawk;
 
-Vector2 Branch2D::_GetGlobalPosition()
+Vector2 Branch2D::GetGlobalPosition()
 {
 	Branch* parent = GetParent();
 	Branch2D* branch2D = dynamic_cast<Branch2D*>(parent);
@@ -18,7 +18,7 @@ Vector2 Branch2D::_GetGlobalPosition()
 	return branch2D->GetGlobalPosition() + Position;
 }
 
-Vector2 Branch2D::_GetGlobalScale()
+Vector2 Branch2D::GetGlobalScale()
 {
 	Branch* parent = GetParent();
 	Branch2D* branch2D = dynamic_cast<Branch2D*>(parent);
@@ -27,14 +27,4 @@ Vector2 Branch2D::_GetGlobalScale()
 		return Scale;
 	}
 	return branch2D->GetGlobalScale() * Scale;
-}
-
-Vector2 Branch2D::GetGlobalPosition()
-{
-	return _GetGlobalPosition();
-}
-
-Vector2 Branch2D::GetGlobalScale()
-{
-	return _GetGlobalScale();
 }

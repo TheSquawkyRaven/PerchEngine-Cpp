@@ -1,15 +1,16 @@
 #pragma once
 
 #ifdef PERCHENGINECPP_EXPORTS
-#define PERCHENGINECPP_API __declspec(dllexport)
+#define PERCH_API __declspec(dllexport)
 #else
-#define PERCHENGINECPP_API __declspec(dllimport)
+#define PERCH_API __declspec(dllimport)
 #endif
 
 
 // Main SDL Window
 #include <SDL.h>
 
+#include <memory>
 
 namespace Perch
 {
@@ -37,11 +38,11 @@ namespace Perch
 
 	public:
 
-		void UpdateInput(SDL_Event* e, bool* quit);
+		void UpdateInput(std::shared_ptr<SDL_Event> e, bool* quit);
 
-		PERCHENGINECPP_API bool GetKey(SDL_Scancode sdlScancode);
-		PERCHENGINECPP_API bool GetKeyDown(SDL_Scancode sdlScancode);
-		PERCHENGINECPP_API bool GetKeyUp(SDL_Scancode sdlScancode);
+		PERCH_API bool GetKey(SDL_Scancode sdlScancode);
+		PERCH_API bool GetKeyDown(SDL_Scancode sdlScancode);
+		PERCH_API bool GetKeyUp(SDL_Scancode sdlScancode);
 
 		// ###
 	};

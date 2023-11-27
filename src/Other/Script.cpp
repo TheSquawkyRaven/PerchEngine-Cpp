@@ -15,6 +15,16 @@ Script::Script(Engine* engine)
 	EngineRef = engine;
 }
 
+shared_ptr<Script> Script::GetScript(Script* script)
+{
+	return std::shared_ptr<Script>(script);
+}
+
+shared_ptr<Script> Script::GetScript()
+{
+	return GetScript(this);
+}
+
 void Script::Init(Engine* engine)
 {}
 

@@ -1,9 +1,9 @@
 #pragma once
 
 #ifdef PERCHENGINECPP_EXPORTS
-#define PERCH_API __declspec(dllexport)
+#define PERCHENGINECPP_API __declspec(dllexport)
 #else
-#define PERCH_API __declspec(dllimport)
+#define PERCHENGINECPP_API __declspec(dllimport)
 #endif
 
 
@@ -12,7 +12,6 @@
 
 #include "../Engine.h"
 
-#include <memory>
 
 namespace Perch
 {
@@ -28,7 +27,7 @@ namespace Perch
 
 	protected:
 
-		Engine* EngineRef;
+		Engine* EngineRef = NULL;
 
 	public:
 
@@ -44,28 +43,31 @@ namespace Perch
 
 	public:
 
-		PERCH_API Script(Engine* engine);
+		Script(Engine* engine);
+
+		PERCHENGINECPP_API static std::shared_ptr<Script> GetScript(Script* script);
+		PERCHENGINECPP_API std::shared_ptr<Script> GetScript();
 
 		// Init - Called right after constructor is ran, from Engine::CreateScript
-		PERCH_API virtual void Init(Engine* engine);
+		PERCHENGINECPP_API virtual void Init(Engine* engine);
 
 		// Ready - Preorder, Called upon attaching to a branch of the main tree or when the tree is run. Only called once
-		PERCH_API virtual void Ready(Engine* engine);
+		PERCHENGINECPP_API virtual void Ready(Engine* engine);
 
 		// Update - Preorder, Called every frame
-		PERCH_API virtual void Update(Engine* engine);
+		PERCHENGINECPP_API virtual void Update(Engine* engine);
 
 		// Update - Preorder, Called every frame after update, before draw
-		PERCH_API virtual void PhysicsUpdate(Engine* engine);
+		PERCHENGINECPP_API virtual void PhysicsUpdate(Engine* engine);
 
 		// Draw - Preorder, Called every frame. Update first, then draw
-		PERCH_API virtual void Draw(Engine* engine, SDL_Renderer* renderer);
+		PERCHENGINECPP_API virtual void Draw(Engine* engine, SDL_Renderer* renderer);
 
 		// OnDestroy - POSTorder, Called while destroying. Uninitialize pointers here.
-		PERCH_API virtual void OnDestroy(Engine* engine);
+		PERCHENGINECPP_API virtual void OnDestroy(Engine* engine);
 
 		// OnCollision2D - Called when it receives a collision2D event
-		PERCH_API virtual void OnCollision2D(Engine* engine, Collider2D* collider);
+		PERCHENGINECPP_API virtual void OnCollision2D(Engine* engine, Collider2D* collider);
 		
 		// ###
 	};

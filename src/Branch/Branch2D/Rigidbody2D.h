@@ -1,9 +1,9 @@
 #pragma once
 
 #ifdef PERCHENGINECPP_EXPORTS
-#define PERCHENGINECPP_API __declspec(dllexport)
+#define PERCH_API __declspec(dllexport)
 #else
-#define PERCHENGINECPP_API __declspec(dllimport)
+#define PERCH_API __declspec(dllimport)
 #endif
 
 
@@ -49,11 +49,11 @@ namespace Perch
 
 	public:
 
-		PERCHENGINECPP_API Rigidbody2D(Engine* engine) : Branch2D(engine) {};
+		PERCH_API Rigidbody2D(Engine* engine) : Branch2D(engine) {};
 
-		PERCHENGINECPP_API void AddForce(Vector2 force);
+		PERCH_API void AddForce(Vector2 force);
 
-		PERCHENGINECPP_API virtual void PhysicsUpdate() override;
+		PERCH_API virtual void PhysicsUpdate() override;
 
 		// ###
 

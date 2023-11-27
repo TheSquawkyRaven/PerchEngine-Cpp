@@ -1,9 +1,9 @@
 #pragma once
 
 #ifdef PERCHENGINECPP_EXPORTS
-#define PERCHENGINECPP_API __declspec(dllexport)
+#define PERCH_API __declspec(dllexport)
 #else
-#define PERCHENGINECPP_API __declspec(dllimport)
+#define PERCH_API __declspec(dllimport)
 #endif
 
 
@@ -25,11 +25,11 @@ namespace Perch
 
 	public:
 
-		PERCHENGINECPP_API operator Vector2() const;
+		PERCH_API operator Vector2() const;
 
-		PERCHENGINECPP_API Vector2i();
-		PERCHENGINECPP_API Vector2i(int x, int y);
-		PERCHENGINECPP_API Vector2i(int val);
+		PERCH_API Vector2i();
+		PERCH_API Vector2i(int x, int y);
+		PERCH_API Vector2i(int val);
 
 	};
 

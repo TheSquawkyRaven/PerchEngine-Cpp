@@ -10,7 +10,7 @@ using namespace std;
 using namespace Perch;
 using namespace Squawk;
 
-void Engine::Update(SDL_Event* e, bool* quit)
+void Engine::Update(shared_ptr<SDL_Event> e, bool* quit)
 {
 	InputRef->UpdateInput(e, quit);
 
@@ -27,10 +27,10 @@ void Engine::Update(SDL_Event* e, bool* quit)
 	SDL_SetRenderDrawColor(MainWindowRenderer, c.R, c.G, c.B, c.A);
 	SDL_RenderClear(MainWindowRenderer);
 
-	UseViewport(MainWindowRenderer, RootViewport);
+	UseViewport(MainWindowRenderer, RootViewport.get());
 	Root->_Draw(MainWindowRenderer);
 	Root->_DrawOut(MainWindowRenderer);
-	UnuseViewport(MainWindowRenderer, RootViewport);
+	UnuseViewport(MainWindowRenderer, RootViewport.get());
 	ClearViewportStack();
 
 	SDL_RenderPresent(MainWindowRenderer);
@@ -38,7 +38,7 @@ void Engine::Update(SDL_Event* e, bool* quit)
 
 void Engine::StartUpdateLoop()
 {
-	SDL_Event* e = new SDL_Event{};
+	shared_ptr<SDL_Event> e = shared_ptr<SDL_Event>(new SDL_Event);
 	bool quit = false;
 	do
 	{
@@ -46,7 +46,6 @@ void Engine::StartUpdateLoop()
 
 	} while (!quit);
 
-	delete e;
 }
 
 void Engine::UpdateTime()
@@ -115,14 +114,14 @@ bool Engine::InitMainWindow()
 // Creates the root branch and calls the delegate for OnRootCreate for attachments of branches
 void Engine::CreateTree()
 {
-	Root = new Branch(this);
+	Root = unique_ptr<Branch>(new Branch(this));
 
 	if (OnRootCreate == NULL)
 	{
 		Log::Warn("OnRootCreate is not set, no root will be attached!");
 		return;
 	}
-	OnRootCreate(this, Root);
+	OnRootCreate(this, Root.get());
 }
 
 // Calls ready from the root
@@ -165,14 +164,14 @@ void Engine::UpdateConfig()
 	RootViewport->Rect = MainWindowRect;
 }
 
-void Engine::SimulateUseViewport(shared_ptr<Viewport> viewport)
+void Engine::SimulateUseViewport(Viewport* viewport)
 {
 	ViewportStack.push(viewport);
 }
 
-void Engine::SimulateUnuseViewport(shared_ptr<Viewport> viewport)
+void Engine::SimulateUnuseViewport(Viewport* viewport)
 {
-	shared_ptr<Viewport> viewportCheck = ViewportStack.top();
+	Viewport* viewportCheck = ViewportStack.top();
 	if (viewportCheck != viewport)
 	{
 		Log::Error("Viewport Stack is not properly popped (SimulateUnuseViewport)!");
@@ -180,15 +179,15 @@ void Engine::SimulateUnuseViewport(shared_ptr<Viewport> viewport)
 	ViewportStack.pop();
 }
 
-void Engine::UseViewport(SDL_Renderer* renderer, shared_ptr<Viewport> viewport)
+void Engine::UseViewport(SDL_Renderer* renderer, Viewport* viewport)
 {
 	ViewportStack.push(viewport);
 	SDL_RenderSetViewport(renderer, viewport->GetSDLRect().get());
 }
 
-void Engine::UnuseViewport(SDL_Renderer* renderer, std::shared_ptr<Viewport> viewport)
+void Engine::UnuseViewport(SDL_Renderer* renderer, Viewport* viewport)
 {
-	shared_ptr<Viewport> viewportCheck = ViewportStack.top();
+	Viewport* viewportCheck = ViewportStack.top();
 	if (viewportCheck != viewport)
 	{
 		Log::Errorf("Viewport Stack is not properly popped (UnuseViewport)! (%p == %p)", viewportCheck, viewport);
@@ -198,11 +197,11 @@ void Engine::UnuseViewport(SDL_Renderer* renderer, std::shared_ptr<Viewport> vie
 	{
 		return;
 	}
-	shared_ptr<Viewport> currentViewport = ViewportStack.top();
+	Viewport* currentViewport = ViewportStack.top();
 	SDL_RenderSetViewport(renderer, currentViewport->GetSDLRect().get());
 }
 
-shared_ptr<Viewport> Engine::GetCurrentViewport()
+Viewport* Engine::GetCurrentViewport()
 {
 	return ViewportStack.top();
 }

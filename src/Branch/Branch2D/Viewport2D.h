@@ -1,9 +1,9 @@
 #pragma once
 
 #ifdef PERCHENGINECPP_EXPORTS
-#define PERCHENGINECPP_API __declspec(dllexport)
+#define PERCH_API __declspec(dllexport)
 #else
-#define PERCHENGINECPP_API __declspec(dllimport)
+#define PERCH_API __declspec(dllimport)
 #endif
 
 
@@ -31,8 +31,8 @@ namespace Perch
 
 	public:
 
-		PERCHENGINECPP_API inline std::shared_ptr<Viewport> GetViewport() const { return _Viewport; }
-		PERCHENGINECPP_API inline void SetViewport(std::shared_ptr<Viewport> viewport) { _Viewport = viewport; }
+		PERCH_API inline std::shared_ptr<Viewport> GetViewport() const { return _Viewport; }
+		PERCH_API inline void SetViewport(std::shared_ptr<Viewport> viewport) { _Viewport = viewport; }
 
 		// ###
 
@@ -42,13 +42,13 @@ namespace Perch
 
 	public:
 
-		PERCHENGINECPP_API Viewport2D(Engine* engine) : Branch2D(engine) {};
+		PERCH_API Viewport2D(Engine* engine) : Branch2D(engine) {};
 
-		PERCHENGINECPP_API virtual void Update() override;
-		PERCHENGINECPP_API virtual void UpdateOut() override;
+		PERCH_API virtual void Update() override;
+		PERCH_API virtual void UpdateOut() override;
 
-		PERCHENGINECPP_API virtual void Draw(SDL_Renderer* renderer) override;
-		PERCHENGINECPP_API virtual void DrawOut(SDL_Renderer* renderer) override;
+		PERCH_API virtual void Draw(SDL_Renderer* renderer) override;
+		PERCH_API virtual void DrawOut(SDL_Renderer* renderer) override;
 
 		// ###
 

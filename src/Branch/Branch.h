@@ -1,9 +1,9 @@
 #pragma once
 
 #ifdef PERCHENGINECPP_EXPORTS
-#define PERCHENGINECPP_API __declspec(dllexport)
+#define PERCH_API __declspec(dllexport)
 #else
-#define PERCHENGINECPP_API __declspec(dllimport)
+#define PERCH_API __declspec(dllimport)
 #endif
 
 
@@ -37,30 +37,28 @@ namespace Perch
 	protected:
 
 		Engine* EngineRef = NULL;
-		std::shared_ptr<Script> ScriptRef = NULL;
+		std::unique_ptr<Script> ScriptRef = NULL;
 
 	public:
 
-		PERCHENGINECPP_API void SetName(std::string name);
-		PERCHENGINECPP_API inline std::string GetName() const { return Name; }
+		PERCH_API void SetName(std::string name);
+		PERCH_API inline std::string GetName() const { return Name; }
 
 	private:
 
-		Branch* Parent = NULL;
-		std::vector<std::shared_ptr<Branch>> Children;
+		Branch* Parent = nullptr;
+		std::vector<std::unique_ptr<Branch>> Children;
 
 		bool ReadyCalled = false;
 		bool Updated = false;
 		bool PhysicsUpdated = false;
 		bool Drawn = false;
 
-	protected:
-
-		PERCHENGINECPP_API inline Branch* GetParent() { return Parent; }
-
 	public:
 
-		PERCHENGINECPP_API inline bool IsReady() const { return ReadyCalled; }
+		PERCH_API inline bool IsReady() const { return ReadyCalled; }
+
+		PERCH_API inline Branch* GetParent() { return Parent; }
 
 		// ###
 
@@ -83,34 +81,34 @@ namespace Perch
 
 	public:
 
-		PERCHENGINECPP_API Branch(Engine* engine);
+		PERCH_API Branch(Engine* engine);
 
-		PERCHENGINECPP_API void AttachChild(std::shared_ptr<Branch> branch);
+		PERCH_API void AttachChild(std::unique_ptr<Branch> branch);
 
-		PERCHENGINECPP_API inline void AttachScript(std::shared_ptr<Script> script) { ScriptRef = script; }
+		PERCH_API inline void AttachScript(std::unique_ptr<Script> script) { ScriptRef = std::move(script); }
 
 		// Ready - Preorder, Called upon attaching to a branch of the main tree or when the tree is run. Only called once
-		PERCHENGINECPP_API virtual void Ready();
+		PERCH_API virtual void Ready();
 
 		// Update - Preorder, Called every frame
-		PERCHENGINECPP_API virtual void Update();
+		PERCH_API virtual void Update();
 		// UpdateOut - Called every frame after Updating all children
-		PERCHENGINECPP_API virtual void UpdateOut();
+		PERCH_API virtual void UpdateOut();
 
 		// PhysicsUpdate - Preorder, Called every frame after update, before collision update
-		PERCHENGINECPP_API virtual void PhysicsUpdate();
+		PERCH_API virtual void PhysicsUpdate();
 		// CollisionUpdate - Preorder, Called every frame after physics update, before draw
-		PERCHENGINECPP_API virtual void CollisionUpdate();
+		PERCH_API virtual void CollisionUpdate();
 
 		// Draw - Preorder, Called every frame. Update first, then draw
-		PERCHENGINECPP_API virtual void Draw(SDL_Renderer* renderer);
+		PERCH_API virtual void Draw(SDL_Renderer* renderer);
 		// DrawOut - Called every frame right after Drawing all children
-		PERCHENGINECPP_API virtual void DrawOut(SDL_Renderer* renderer);
+		PERCH_API virtual void DrawOut(SDL_Renderer* renderer);
 
-		PERCHENGINECPP_API void Destroy();
+		PERCH_API void Destroy();
 
 		// OnDestroy - POSTorder, Called while destroying. Uninitialize pointers here.
-		PERCHENGINECPP_API virtual void OnDestroy();
+		PERCH_API virtual void OnDestroy();
 
 		// ###
 

@@ -1,9 +1,9 @@
 #pragma once
 
 #ifdef PERCHENGINECPP_EXPORTS
-#define PERCHENGINECPP_API __declspec(dllexport)
+#define PERCH_API __declspec(dllexport)
 #else
-#define PERCHENGINECPP_API __declspec(dllimport)
+#define PERCH_API __declspec(dllimport)
 #endif
 
 
@@ -45,12 +45,12 @@ namespace Perch
 
 	public:
 
-		PERCHENGINECPP_API inline int GetSpriteColumns() const { return _SpriteColumns; }
-		PERCHENGINECPP_API void SetSpriteColumns(int spriteColumns);
-		PERCHENGINECPP_API inline int GetSpriteRows() const { return _SpriteRows; }
-		PERCHENGINECPP_API void SetSpriteRows(int spriteRows);
-		PERCHENGINECPP_API inline int GetSpriteIndex() const { return _SpriteIndex; }
-		PERCHENGINECPP_API void SetSpriteIndex(int spriteIndex);
+		PERCH_API inline int GetSpriteColumns() const { return _SpriteColumns; }
+		PERCH_API void SetSpriteColumns(int spriteColumns);
+		PERCH_API inline int GetSpriteRows() const { return _SpriteRows; }
+		PERCH_API void SetSpriteRows(int spriteRows);
+		PERCH_API inline int GetSpriteIndex() const { return _SpriteIndex; }
+		PERCH_API void SetSpriteIndex(int spriteIndex);
 
 	public:
 
@@ -64,8 +64,8 @@ namespace Perch
 		bool FlipY = false;
 
 		std::shared_ptr<Texture> GetTexture() { return _Texture; }
-		PERCHENGINECPP_API inline Color GetColor() const { return _Color; }
-		PERCHENGINECPP_API inline void SetColor(Color color) { _Color = color; }
+		PERCH_API inline Color GetColor() const { return _Color; }
+		PERCH_API inline void SetColor(Color color) { _Color = color; }
 
 		// ###
 
@@ -78,25 +78,25 @@ namespace Perch
 		
 	protected:
 
-		PERCHENGINECPP_API SDL_RendererFlip GetSDLFlip() const;
-		PERCHENGINECPP_API std::shared_ptr<SDL_Point> GetRotateOrigin();
-		PERCHENGINECPP_API Vector2 GetPositionPivotOrigin();
+		PERCH_API SDL_RendererFlip GetSDLFlip() const;
+		PERCH_API std::shared_ptr<SDL_Point> GetRotateOrigin();
+		PERCH_API Vector2 GetPositionPivotOrigin();
 
 	public:
 
-		PERCHENGINECPP_API Sprite2D(Engine* engine) : Branch2D(engine) {};
+		PERCH_API Sprite2D(Engine* engine) : Branch2D(engine) {};
 
-		PERCHENGINECPP_API virtual Vector2 GetSize();
-		PERCHENGINECPP_API virtual Vector2 GetGlobalSize();
-		PERCHENGINECPP_API Rect2 GetGlobalRect();
-		PERCHENGINECPP_API Rect2 GetCutRect();
+		PERCH_API virtual Vector2 GetSize();
+		PERCH_API virtual Vector2 GetGlobalSize();
+		PERCH_API Rect2 GetGlobalRect();
+		PERCH_API Rect2 GetCutRect();
 
-		PERCHENGINECPP_API virtual void SetTexture(std::shared_ptr<Texture> texture);
+		PERCH_API virtual void SetTexture(std::shared_ptr<Texture> texture);
 
-		PERCHENGINECPP_API virtual void Update() override;
-		PERCHENGINECPP_API virtual void Draw(SDL_Renderer* renderer) override;
+		PERCH_API virtual void Update() override;
+		PERCH_API virtual void Draw(SDL_Renderer* renderer) override;
 
-		PERCHENGINECPP_API virtual void OnDestroy() override;
+		PERCH_API virtual void OnDestroy() override;
 
 		// ###
 

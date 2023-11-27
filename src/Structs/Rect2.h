@@ -1,9 +1,9 @@
 #pragma once
 
 #ifdef PERCHENGINECPP_EXPORTS
-#define PERCHENGINECPP_API __declspec(dllexport)
+#define PERCH_API __declspec(dllexport)
 #else
-#define PERCHENGINECPP_API __declspec(dllimport)
+#define PERCH_API __declspec(dllimport)
 #endif
 
 
@@ -38,22 +38,22 @@ namespace Perch
 
 	public:
 
-		PERCHENGINECPP_API Rect2();
-		PERCHENGINECPP_API Rect2(Vector2 position, Vector2 size);
-		PERCHENGINECPP_API Rect2(float x, float y, float w, float h);
+		PERCH_API Rect2();
+		PERCH_API Rect2(Vector2 position, Vector2 size);
+		PERCH_API Rect2(float x, float y, float w, float h);
 
-		PERCHENGINECPP_API Vector2 GetPosition();
-		PERCHENGINECPP_API Vector2 GetSize();
-		PERCHENGINECPP_API void SetPosition(Vector2 position);
-		PERCHENGINECPP_API void SetPosition(Vector2i position);
-		PERCHENGINECPP_API void SetPosition(float x, float y);
-		PERCHENGINECPP_API void SetSize(Vector2 size);
-		PERCHENGINECPP_API void SetSize(Vector2i size);
-		PERCHENGINECPP_API void SetSize(float w, float h);
+		PERCH_API Vector2 GetPosition();
+		PERCH_API Vector2 GetSize();
+		PERCH_API void SetPosition(Vector2 position);
+		PERCH_API void SetPosition(Vector2i position);
+		PERCH_API void SetPosition(float x, float y);
+		PERCH_API void SetSize(Vector2 size);
+		PERCH_API void SetSize(Vector2i size);
+		PERCH_API void SetSize(float w, float h);
 
-		PERCHENGINECPP_API std::shared_ptr<SDL_Rect> GetSDLRect();
+		PERCH_API std::shared_ptr<SDL_Rect> GetSDLRect();
 
-		PERCHENGINECPP_API static std::shared_ptr<SDL_Rect> CreateSDLRect(Vector2 position, Vector2 size);
+		PERCH_API static std::shared_ptr<SDL_Rect> CreateSDLRect(Vector2 position, Vector2 size);
 
 	};
 

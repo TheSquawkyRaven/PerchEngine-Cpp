@@ -1,9 +1,9 @@
 #pragma once
 
 #ifdef PERCHENGINECPP_EXPORTS
-#define PERCHENGINECPP_API __declspec(dllexport)
+#define PERCH_API __declspec(dllexport)
 #else
-#define PERCHENGINECPP_API __declspec(dllimport)
+#define PERCH_API __declspec(dllimport)
 #endif
 
 
@@ -66,18 +66,18 @@ namespace Perch
 		bool HasError = false;
 
 		// SDL Window for rendering into
-		SDL_Window* MainWindow = NULL;
+		SDL_Window* MainWindow = nullptr;
 
 		// SDL Renderer for hardware rendering
-		SDL_Renderer* MainWindowRenderer = NULL;
+		SDL_Renderer* MainWindowRenderer = nullptr;
 
-		// Root is not delete when deconstructing because the destroy function will delete itself!
-		Branch* Root = NULL;
+		// Root is not deleted when deconstructing because the destroy function will delete itself!
+		std::unique_ptr<Branch> Root = nullptr;
 
 		std::function<void(Engine* Engine, Branch* Root)> OnRootCreate = NULL;
 
-		std::shared_ptr<Viewport> RootViewport = std::shared_ptr<Viewport>(new Viewport(MainWindowRect));
-		std::stack<std::shared_ptr<Viewport>> ViewportStack;
+		std::unique_ptr<Viewport> RootViewport = std::unique_ptr<Viewport>(new Viewport(MainWindowRect));
+		std::stack<Viewport*> ViewportStack;
 
 		Uint32 LastUpdateTicks = 0;
 
@@ -86,12 +86,12 @@ namespace Perch
 
 	public:
 
-		PERCHENGINECPP_API inline Rect2 GetMainWindowRect() const { return MainWindowRect; }
-		PERCHENGINECPP_API inline Vector2 GetMainWindowSize() { return MainWindowRect.GetSize(); }
-		PERCHENGINECPP_API inline bool DoShowDebug() { return Config->ShowDebug; }
-		PERCHENGINECPP_API inline SDL_Renderer* GetMainWindowRenderer() { return MainWindowRenderer; }
-		PERCHENGINECPP_API inline Input* GetInput() const { return InputRef.get(); }
-		PERCHENGINECPP_API inline Random* GetRandom() const { return RandomRef.get(); }
+		PERCH_API inline Rect2 GetMainWindowRect() const { return MainWindowRect; }
+		PERCH_API inline Vector2 GetMainWindowSize() { return MainWindowRect.GetSize(); }
+		PERCH_API inline bool DoShowDebug() { return Config->ShowDebug; }
+		PERCH_API inline SDL_Renderer* GetMainWindowRenderer() { return MainWindowRenderer; }
+		PERCH_API inline Input* GetInput() const { return InputRef.get(); }
+		PERCH_API inline Random* GetRandom() const { return RandomRef.get(); }
 
 	public:
 
@@ -116,7 +116,7 @@ namespace Perch
 		void RunTree();
 
 		// Update - Runs every frame
-		void Update(SDL_Event* e, bool* quit);
+		void Update(std::shared_ptr<SDL_Event> e, bool* quit);
 		void StartUpdateLoop();
 
 		void UpdateTime();
@@ -126,26 +126,26 @@ namespace Perch
 
 	public:
 
-		PERCHENGINECPP_API Engine(std::shared_ptr<EngineConfig> config);
-		PERCHENGINECPP_API void UpdateConfig();
+		PERCH_API Engine(std::shared_ptr<EngineConfig> config);
+		PERCH_API void UpdateConfig();
 
-		PERCHENGINECPP_API inline void SetOnRootCreate(std::function<void(Engine* Engine, Branch* Root)> onRootCreate) { this->OnRootCreate = onRootCreate; };
+		PERCH_API inline void SetOnRootCreate(std::function<void(Engine* Engine, Branch* Root)> onRootCreate) { this->OnRootCreate = onRootCreate; };
 
 		// Simulate viewport use, called in update when it is not drawing for children to use viewport data
-		PERCHENGINECPP_API void SimulateUseViewport(std::shared_ptr<Viewport> viewport);
-		PERCHENGINECPP_API void SimulateUnuseViewport(std::shared_ptr<Viewport> viewport);
+		PERCH_API void SimulateUseViewport(Viewport* viewport);
+		PERCH_API void SimulateUnuseViewport(Viewport* viewport);
 
 		// Called in Draw and DrawOut to set the current viewport
-		PERCHENGINECPP_API void UseViewport(SDL_Renderer* renderer, std::shared_ptr<Viewport> viewport);
-		PERCHENGINECPP_API void UnuseViewport(SDL_Renderer* renderer, std::shared_ptr<Viewport> viewport);
+		PERCH_API void UseViewport(SDL_Renderer* renderer, Viewport* viewport);
+		PERCH_API void UnuseViewport(SDL_Renderer* renderer, Viewport* viewport);
 
-		PERCHENGINECPP_API std::shared_ptr<Viewport> GetCurrentViewport();
-		PERCHENGINECPP_API void ClearViewportStack();
+		PERCH_API Viewport* GetCurrentViewport();
+		PERCH_API void ClearViewportStack();
 
 		// "Start" here will wait for until the closure of the MainWindow
 		// Will call quit to free up SDL. May change in the future
-		PERCHENGINECPP_API void Start();
-		PERCHENGINECPP_API void Quit();
+		PERCH_API void Start();
+		PERCH_API void Quit();
 
 		// ###
 	};
