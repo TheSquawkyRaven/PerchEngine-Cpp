@@ -2,7 +2,7 @@
 
 #include "Input.h"
 
-#include "Log.h"
+#include "../Squawk/Log.h"
 
 using namespace std;
 using namespace Perch;

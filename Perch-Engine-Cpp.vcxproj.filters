@@ -13,17 +13,35 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Header Files\Branch2D">
-      <UniqueIdentifier>{ab505b31-d2fb-4f0e-a238-e1b2b30e1144}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Structs">
       <UniqueIdentifier>{d7d14696-bc69-4f85-9df2-3336ddfffcd9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Branch2D">
-      <UniqueIdentifier>{a5730795-2a19-4b3d-8b0f-28b6cfdfc5e3}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Structs">
       <UniqueIdentifier>{3ad76cb7-0eb3-43a0-9591-bb4b5063ca77}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Branch">
+      <UniqueIdentifier>{36c2c42c-bc36-4231-a63b-77d51f6f96b1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Branch\Branch2D">
+      <UniqueIdentifier>{ab505b31-d2fb-4f0e-a238-e1b2b30e1144}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Branch">
+      <UniqueIdentifier>{94492a43-7fd7-4c1d-a0ad-a08466c6a6f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Branch\Branch2D">
+      <UniqueIdentifier>{a5730795-2a19-4b3d-8b0f-28b6cfdfc5e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Engine Components">
+      <UniqueIdentifier>{ec3769ae-2b1d-46d6-a3db-7be67f974be4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Engine Components">
+      <UniqueIdentifier>{a1c68932-14fd-4b26-b82c-073852bc711e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Squawk">
+      <UniqueIdentifier>{c03603d3-a63e-4938-846c-1609a0a3a051}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Squawk">
+      <UniqueIdentifier>{79b3d560-7224-446f-8b5d-762745bc2bbb}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -33,41 +51,29 @@
     <ClInclude Include="pch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Branch\Branch.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Engine.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Log.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Resources\Resource.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\Branch\Branch2D\Branch2D.h">
-      <Filter>Header Files\Branch2D</Filter>
+      <Filter>Header Files\Branch\Branch2D</Filter>
     </ClInclude>
     <ClInclude Include="src\Branch\Branch2D\BorderedRectangle2D.h">
-      <Filter>Header Files\Branch2D</Filter>
+      <Filter>Header Files\Branch\Branch2D</Filter>
     </ClInclude>
     <ClInclude Include="src\Branch\Branch2D\Line2D.h">
-      <Filter>Header Files\Branch2D</Filter>
+      <Filter>Header Files\Branch\Branch2D</Filter>
     </ClInclude>
     <ClInclude Include="src\Branch\Branch2D\Point2D.h">
-      <Filter>Header Files\Branch2D</Filter>
+      <Filter>Header Files\Branch\Branch2D</Filter>
     </ClInclude>
     <ClInclude Include="src\Branch\Branch2D\Rectangle2D.h">
-      <Filter>Header Files\Branch2D</Filter>
+      <Filter>Header Files\Branch\Branch2D</Filter>
     </ClInclude>
     <ClInclude Include="src\Branch\Branch2D\Sprite2D.h">
-      <Filter>Header Files\Branch2D</Filter>
+      <Filter>Header Files\Branch\Branch2D</Filter>
     </ClInclude>
     <ClInclude Include="src\Branch\Branch2D\Text2D.h">
-      <Filter>Header Files\Branch2D</Filter>
+      <Filter>Header Files\Branch\Branch2D</Filter>
     </ClInclude>
     <ClInclude Include="src\Branch\Branch2D\Viewport2D.h">
-      <Filter>Header Files\Branch2D</Filter>
+      <Filter>Header Files\Branch\Branch2D</Filter>
     </ClInclude>
     <ClInclude Include="src\Structs\Color.h">
       <Filter>Header Files\Structs</Filter>
@@ -90,20 +96,29 @@
     <ClInclude Include="src\Structs\Viewport.h">
       <Filter>Header Files\Structs</Filter>
     </ClInclude>
-    <ClInclude Include="src\Input.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Script.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\Branch\Branch2D\Rigidbody2D.h">
-      <Filter>Header Files\Branch2D</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Random.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Branch\Branch2D</Filter>
     </ClInclude>
     <ClInclude Include="src\Branch\Branch2D\Collider2D.h">
-      <Filter>Header Files\Branch2D</Filter>
+      <Filter>Header Files\Branch\Branch2D</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Branch\Script.h">
+      <Filter>Header Files\Branch</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Branch\Branch.h">
+      <Filter>Header Files\Branch</Filter>
+    </ClInclude>
+    <ClInclude Include="src\EngineComponents\Input.h">
+      <Filter>Header Files\Engine Components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\EngineComponents\Random.h">
+      <Filter>Header Files\Engine Components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Squawk\Log.h">
+      <Filter>Header Files\Squawk</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -113,44 +128,32 @@
     <ClCompile Include="pch.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Branch\Branch.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Engine.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Log.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Resources\Resource.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\Branch\Branch2D\BorderedRectangle2D.cpp">
-      <Filter>Source Files\Branch2D</Filter>
+      <Filter>Source Files\Branch\Branch2D</Filter>
     </ClCompile>
     <ClCompile Include="src\Branch\Branch2D\Branch2D.cpp">
-      <Filter>Source Files\Branch2D</Filter>
+      <Filter>Source Files\Branch\Branch2D</Filter>
     </ClCompile>
     <ClCompile Include="src\Branch\Branch2D\Line2D.cpp">
-      <Filter>Source Files\Branch2D</Filter>
+      <Filter>Source Files\Branch\Branch2D</Filter>
     </ClCompile>
     <ClCompile Include="src\Branch\Branch2D\Point2D.cpp">
-      <Filter>Source Files\Branch2D</Filter>
+      <Filter>Source Files\Branch\Branch2D</Filter>
     </ClCompile>
     <ClCompile Include="src\Branch\Branch2D\Rectangle2D.cpp">
-      <Filter>Source Files\Branch2D</Filter>
+      <Filter>Source Files\Branch\Branch2D</Filter>
     </ClCompile>
     <ClCompile Include="src\Branch\Branch2D\Sprite2D.cpp">
-      <Filter>Source Files\Branch2D</Filter>
+      <Filter>Source Files\Branch\Branch2D</Filter>
     </ClCompile>
     <ClCompile Include="src\Branch\Branch2D\Text2D.cpp">
-      <Filter>Source Files\Branch2D</Filter>
+      <Filter>Source Files\Branch\Branch2D</Filter>
     </ClCompile>
     <ClCompile Include="src\Branch\Branch2D\Viewport2D.cpp">
-      <Filter>Source Files\Branch2D</Filter>
+      <Filter>Source Files\Branch\Branch2D</Filter>
     </ClCompile>
     <ClCompile Include="src\Structs\Color.cpp">
       <Filter>Source Files\Structs</Filter>
@@ -173,20 +176,29 @@
     <ClCompile Include="src\Structs\Viewport.cpp">
       <Filter>Source Files\Structs</Filter>
     </ClCompile>
-    <ClCompile Include="src\Input.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Script.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\Branch\Branch2D\Rigidbody2D.cpp">
-      <Filter>Source Files\Branch2D</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Random.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Branch\Branch2D</Filter>
     </ClCompile>
     <ClCompile Include="src\Branch\Branch2D\Collider2D.cpp">
-      <Filter>Source Files\Branch2D</Filter>
+      <Filter>Source Files\Branch\Branch2D</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Engine.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Branch\Branch.cpp">
+      <Filter>Source Files\Branch</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Branch\Script.cpp">
+      <Filter>Source Files\Branch</Filter>
+    </ClCompile>
+    <ClCompile Include="src\EngineComponents\Input.cpp">
+      <Filter>Source Files\Engine Components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\EngineComponents\Random.cpp">
+      <Filter>Source Files\Engine Components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Squawk\Log.cpp">
+      <Filter>Source Files\Squawk</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

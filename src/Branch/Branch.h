@@ -8,7 +8,7 @@
 
 
 #include "../Engine.h"
-#include "../Script.h"
+#include "Script.h"
 
 #include <SDL.h>
 

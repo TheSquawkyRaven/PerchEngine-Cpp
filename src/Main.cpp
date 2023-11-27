@@ -2,7 +2,7 @@
 #include "pch.h"
 
 #include "Engine.h"
-#include "Log.h"
+#include "Squawk/Log.h"
 #include "Branch/Branch2D/Sprite2D.h"
 #include "Branch/Branch2D/Rigidbody2D.h"
 #include "Branch/Branch2D/Text2D.h"
@@ -32,6 +32,7 @@ int main(int argc, char* args[])
 
 	engineConfig->WindowName = WINDOW_NAME;
 	engineConfig->WindowSize = Vector2i(SCREEN_WIDTH, SCREEN_HEIGHT);
+	engineConfig->ShowDebug = true;
 
 	Engine* engine = new Engine(engineConfig);
 	engine->SetOnRootCreate(&OnRootCreate);

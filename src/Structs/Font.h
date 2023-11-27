@@ -10,7 +10,7 @@
 #include <SDL.h>
 #include <SDL_ttf.h>
 
-#include "../Log.h"
+#include "../Squawk/Log.h"
 #include "../Structs/Vector2i.h"
 
 #include <memory>

@@ -2,8 +2,8 @@
 
 #include "Script.h"
 
-#include "Log.h"
-#include "Branch/Branch.h"
+#include "../Squawk/Log.h"
+#include "Branch.h"
 #include <cassert>
 
 using namespace std;

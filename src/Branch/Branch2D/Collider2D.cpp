@@ -2,7 +2,7 @@
 
 #include "Collider2D.h"
 
-#include "../../Log.h"
+#include "../../Squawk/Log.h"
 
 using namespace std;
 using namespace Perch;
@@ -98,7 +98,11 @@ void Collider2D::PhysicsUpdate()
 
 void Collider2D::Draw(SDL_Renderer* renderer)
 {
-	return;
+	if (!EngineRef->DoShowDebug())
+	{
+		return;
+	}
+
 	Color color = Color::Cyan();
 	SDL_SetRenderDrawColor(renderer, color.R, color.G, color.B, color.A);
 

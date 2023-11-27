@@ -9,7 +9,7 @@
 
 #include <SDL.h>
 
-#include "../Log.h"
+#include "../Squawk/Log.h"
 #include "../Structs/Vector2i.h"
 #include "../Structs/Color.h"
 #include "../Structs/Font.h"

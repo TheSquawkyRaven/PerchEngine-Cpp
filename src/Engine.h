@@ -12,8 +12,8 @@
 #include <SDL_image.h>
 #include <SDL_ttf.h>
 
-#include "Input.h"
-#include "Random.h"
+#include "EngineComponents/Input.h"
+#include "EngineComponents/Random.h"
 
 #include "Structs/Vector2.h"
 #include "Structs/Vector2i.h"
@@ -44,6 +44,8 @@ namespace Perch
 		Vector2i WindowSize = Vector2i(640, 480);
 
 		Color ClearColor = Color();
+
+		bool ShowDebug = false;
 
 	};
 
@@ -86,6 +88,7 @@ namespace Perch
 
 		PERCHENGINECPP_API inline Rect2 GetMainWindowRect() const { return MainWindowRect; }
 		PERCHENGINECPP_API inline Vector2 GetMainWindowSize() { return MainWindowRect.GetSize(); }
+		PERCHENGINECPP_API inline bool DoShowDebug() { return Config->ShowDebug; }
 		PERCHENGINECPP_API inline SDL_Renderer* GetMainWindowRenderer() { return MainWindowRenderer; }
 		PERCHENGINECPP_API inline Input* GetInput() const { return InputRef.get(); }
 		PERCHENGINECPP_API inline Random* GetRandom() const { return RandomRef.get(); }
