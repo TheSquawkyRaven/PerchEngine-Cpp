@@ -27,12 +27,12 @@ namespace Perch
 
 		// # Variables + Getters/Setters
 	private:
-		std::shared_ptr<Viewport> _Viewport;
+		std::shared_ptr<Viewport> viewport;
 
 	public:
 
-		PERCH_API inline std::shared_ptr<Viewport> GetViewport() const { return _Viewport; }
-		PERCH_API inline void SetViewport(std::shared_ptr<Viewport> viewport) { _Viewport = viewport; }
+		PERCH_API inline std::shared_ptr<Viewport> GetViewport() const { return viewport; }
+		PERCH_API inline void SetViewport(std::shared_ptr<Viewport> viewport) { this->viewport = viewport; }
 
 		// ###
 

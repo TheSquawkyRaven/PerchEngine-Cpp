@@ -9,13 +9,19 @@ using namespace Perch;
 
 void Text2D::SetText(std::string text)
 {
-	_Text = text;
+	this->text = text;
+	UpdateTexture();
+}
+
+void Text2D::SetFont(shared_ptr<Font> font)
+{
+	this->font = font;
 	UpdateTexture();
 }
 
 void Text2D::UpdateTexture()
 {
-	shared_ptr<Texture> texture = Texture::Create(EngineRef, _Font, _Text, GetColor());
+	shared_ptr<Texture> texture = Texture::Create(engine, font, text, GetColor());
 	SetTexture(texture);
 }
 
@@ -24,8 +30,7 @@ void Text2D::Ready()
 	SetColor(Color::Black());
 }
 
-void Text2D::SetFont(shared_ptr<Font> font)
+void Text2D::OnDestroy()
 {
-	_Font = shared_ptr<Font>(font);
-	UpdateTexture();
+	font = nullptr;
 }

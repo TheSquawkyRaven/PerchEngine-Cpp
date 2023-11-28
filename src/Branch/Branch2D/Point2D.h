@@ -25,15 +25,15 @@ namespace Perch
 		// # Variables + Getters/Setters
 	private:
 
-		Vector2 _PointPosition = Vector2();
-		Color _Color = Color();
+		Vector2 pointPosition = Vector2();
+		Color color = Color();
 
 	public:
 
-		PERCH_API inline Vector2 GetPointPosition() const { return _PointPosition; }
-		PERCH_API inline void SetPointPosition(Vector2 position) { _PointPosition = position; }
-		PERCH_API inline Color GetColor() const { return _Color; }
-		PERCH_API inline void SetColor(Color color) { _Color = color; }
+		PERCH_API inline Vector2 GetPointPosition() const { return pointPosition; }
+		PERCH_API inline void SetPointPosition(Vector2 position) { pointPosition = position; }
+		PERCH_API inline Color GetColor() const { return color; }
+		PERCH_API inline void SetColor(Color color) { this->color = color; }
 
 		// ###
 
@@ -45,9 +45,9 @@ namespace Perch
 
 		PERCH_API Point2D(Engine* engine) : Branch2D(engine) {};
 
-		PERCH_API Vector2 GetGlobalPointPosition();
-
 		PERCH_API virtual void Draw(SDL_Renderer* renderer) override;
+
+		PERCH_API Vector2 GetGlobalPointPosition();
 
 		// ###
 

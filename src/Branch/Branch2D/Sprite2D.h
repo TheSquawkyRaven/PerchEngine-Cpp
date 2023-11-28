@@ -30,42 +30,43 @@ namespace Perch
 		// # Variables + Getters/Setters
 	private:
 
-		std::shared_ptr<Texture> _Texture = NULL;
-		Color _Color = Color();
+		std::shared_ptr<Texture> texture = nullptr;
+		Color color = Color();
 
 	private:
 
 		// Private because this may not be the latest value. Use GetCutRect instead.
-		Rect2 _CutRect = Rect2();
+		Rect2 cutRect = Rect2();
 
 		// Sprite Sheet
-		int _SpriteColumns = 1;
-		int _SpriteRows = 1;
-		int _SpriteIndex = 0;
+		int spriteColumns = 1;
+		int spriteRows = 1;
+		int spriteIndex = 0;
 
 	public:
 
-		PERCH_API inline int GetSpriteColumns() const { return _SpriteColumns; }
+		PERCH_API inline int GetSpriteColumns() const { return spriteColumns; }
 		PERCH_API void SetSpriteColumns(int spriteColumns);
-		PERCH_API inline int GetSpriteRows() const { return _SpriteRows; }
+		PERCH_API inline int GetSpriteRows() const { return spriteRows; }
 		PERCH_API void SetSpriteRows(int spriteRows);
-		PERCH_API inline int GetSpriteIndex() const { return _SpriteIndex; }
+		PERCH_API inline int GetSpriteIndex() const { return spriteIndex; }
 		PERCH_API void SetSpriteIndex(int spriteIndex);
 
 	public:
 
 		// Position transform applied relative to texture size. In percentage form (0.5f, 0.5f) is the center
-		Vector2 PositionPivot = Vector2();
+		Vector2 positionPivot = Vector2();
 		// Rotation pivot relative to texture size. In percentage form (0.5f, 0.5f) is the center
-		Vector2 RotatePivot = Vector2(0.5f, 0.5f);
-		double Angle = 0;
+		Vector2 rotatePivot = Vector2(0.5f, 0.5f);
+		double angle = 0;
 		// SDL do not support flipping at both axes at the same time
-		bool FlipX = false;
-		bool FlipY = false;
+		bool flipX = false;
+		bool flipY = false;
 
-		std::shared_ptr<Texture> GetTexture() { return _Texture; }
-		PERCH_API inline Color GetColor() const { return _Color; }
-		PERCH_API inline void SetColor(Color color) { _Color = color; }
+		PERCH_API std::shared_ptr<Texture> GetTexture() { return texture; }
+		PERCH_API virtual void SetTexture(std::shared_ptr<Texture> texture);
+		PERCH_API inline Color GetColor() const { return color; }
+		PERCH_API inline void SetColor(Color color) { this->color = color; }
 
 		// ###
 
@@ -86,17 +87,14 @@ namespace Perch
 
 		PERCH_API Sprite2D(Engine* engine) : Branch2D(engine) {};
 
+		PERCH_API virtual void Update() override;
+		PERCH_API virtual void Draw(SDL_Renderer* renderer) override;
+		PERCH_API virtual void OnDestroy() override;
+
 		PERCH_API virtual Vector2 GetSize();
 		PERCH_API virtual Vector2 GetGlobalSize();
 		PERCH_API Rect2 GetGlobalRect();
 		PERCH_API Rect2 GetCutRect();
-
-		PERCH_API virtual void SetTexture(std::shared_ptr<Texture> texture);
-
-		PERCH_API virtual void Update() override;
-		PERCH_API virtual void Draw(SDL_Renderer* renderer) override;
-
-		PERCH_API virtual void OnDestroy() override;
 
 		// ###
 

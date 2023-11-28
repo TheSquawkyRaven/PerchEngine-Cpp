@@ -31,34 +31,34 @@ namespace Perch
 
 	private:
 
-		std::string Name = "Branch";
+		std::string name = "Branch";
 		
 
 	protected:
 
-		Engine* EngineRef = NULL;
-		std::unique_ptr<Script> ScriptRef = NULL;
+		Engine* engine = nullptr;
+		std::unique_ptr<Script> script = nullptr;
 
 	public:
 
-		PERCH_API void SetName(std::string name);
-		PERCH_API inline std::string GetName() const { return Name; }
+		PERCH_API inline void SetName(std::string name) { this->name = name; }
+		PERCH_API inline std::string GetName() const { return name; }
 
 	private:
 
-		Branch* Parent = nullptr;
-		std::vector<std::unique_ptr<Branch>> Children;
+		Branch* parent = nullptr;
+		std::vector<std::unique_ptr<Branch>> children;
 
-		bool ReadyCalled = false;
-		bool Updated = false;
-		bool PhysicsUpdated = false;
-		bool Drawn = false;
+		bool readyExecuted = false;
+		bool updated = false;
+		bool physicsUpdated = false;
+		bool drawn = false;
 
 	public:
 
-		PERCH_API inline bool IsReady() const { return ReadyCalled; }
+		PERCH_API inline bool IsReady() const { return readyExecuted; }
 
-		PERCH_API inline Branch* GetParent() { return Parent; }
+		PERCH_API inline Branch* GetParent() { return parent; }
 
 		// ###
 
@@ -85,7 +85,7 @@ namespace Perch
 
 		PERCH_API void AttachChild(std::unique_ptr<Branch> branch);
 
-		PERCH_API inline void AttachScript(std::unique_ptr<Script> script) { ScriptRef = std::move(script); }
+		PERCH_API void AttachScript(std::unique_ptr<Script> script);
 
 		// Ready - Preorder, Called upon attaching to a branch of the main tree or when the tree is run. Only called once
 		PERCH_API virtual void Ready();

@@ -30,7 +30,7 @@ namespace Perch
 
 	public:
 
-		Rect2 Rect = Rect2();
+		Rect2 rect = Rect2();
 
 		// ###
 
@@ -42,18 +42,16 @@ namespace Perch
 
 	public:
 
-		PERCH_API Collider2D(Engine* engine);
+		PERCH_API Collider2D(Engine* engine) : Branch2D(engine) {}
 
-		PERCH_API bool DoesCollideWith(Collider2D* collider);
-		PERCH_API void GetAABB(float& left, float& top, float& right, float& bottom);
+		PERCH_API virtual void CollisionUpdate() override;
+		PERCH_API virtual void PhysicsUpdate() override;
+		PERCH_API virtual void Draw(SDL_Renderer* renderer) override;
 
 		PERCH_API virtual void OnCollision(Collider2D* collider);
 
-		PERCH_API virtual void CollisionUpdate() override;
-
-		PERCH_API virtual void PhysicsUpdate() override;
-
-		PERCH_API virtual void Draw(SDL_Renderer* renderer) override;
+		PERCH_API bool DoesCollideWith(Collider2D* collider);
+		PERCH_API void GetAABB(float& left, float& top, float& right, float& bottom);
 
 		// ###
 

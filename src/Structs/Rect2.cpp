@@ -7,10 +7,10 @@ using namespace std;
 
 void Rect2::UpdateSDLRect()
 {
-	SDLRect->x = (int)(Position.X + 0.5f);
-	SDLRect->y = (int)(Position.Y + 0.5f);
-	SDLRect->w = (int)(Size.X + 0.5f);
-	SDLRect->h = (int)(Size.Y + 0.5f);
+	sdlRect->x = (int)(position.x + 0.5f);
+	sdlRect->y = (int)(position.y + 0.5f);
+	sdlRect->w = (int)(size.x + 0.5f);
+	sdlRect->h = (int)(size.y + 0.5f);
 }
 
 Rect2::Rect2()
@@ -32,58 +32,60 @@ Rect2::Rect2(float x, float y, float w, float h)
 
 Vector2 Rect2::GetPosition()
 {
-	return Vector2(SDLRect->x, SDLRect->y);
+	return Vector2(sdlRect->x, sdlRect->y);
 }
 
 Vector2 Rect2::GetSize()
 {
-	return Vector2(SDLRect->w, SDLRect->h);
+	return Vector2(sdlRect->w, sdlRect->h);
 }
 
 void Rect2::SetPosition(Vector2 position)
 {
-	SetPosition(position.X, position.Y);
+	SetPosition(position.x, position.y);
 }
 
 void Rect2::SetPosition(Vector2i position)
 {
-	SetPosition(position.X, position.Y);
+	SetPosition(position.x, position.y);
 }
 
 void Rect2::SetPosition(float x, float y)
 {
-	Position = Vector2(x, y);
+	position.x = x;
+	position.y = y;
 	UpdateSDLRect();
 }
 
 void Rect2::SetSize(Vector2 size)
 {
-	SetSize(size.X, size.Y);
+	SetSize(size.x, size.y);
 }
 
 void Rect2::SetSize(Vector2i size)
 {
-	SetSize(size.X, size.Y);
+	SetSize(size.x, size.y);
 }
 
 void Rect2::SetSize(float w, float h)
 {
-	Size = Vector2(w, h);
+	size.x = w;
+	size.y = h;
 	UpdateSDLRect();
 }
 
 shared_ptr<SDL_Rect> Rect2::GetSDLRect()
 {
-	return SDLRect;
+	return sdlRect;
 }
 
 shared_ptr<SDL_Rect> Rect2::CreateSDLRect(Vector2 position, Vector2 size)
 {
 	shared_ptr<SDL_Rect> rect = shared_ptr<SDL_Rect>(new SDL_Rect);
-	rect->x = position.X;
-	rect->y = position.Y;
-	rect->w = size.X;
-	rect->h = size.Y;
+	rect->x = position.x;
+	rect->y = position.y;
+	rect->w = size.x;
+	rect->h = size.y;
 
 	return rect;
 }

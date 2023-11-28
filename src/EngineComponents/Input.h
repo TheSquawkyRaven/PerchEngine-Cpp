@@ -22,8 +22,8 @@ namespace Perch
 
 	private:
 
-		Uint8* LastKeyboardStates = new Uint8[SDL_NUM_SCANCODES];
-		Uint8* KeyboardStates = NULL;
+		Uint8* lastKeyboardStates = new Uint8[SDL_NUM_SCANCODES];
+		Uint8* keyboardStates = nullptr;
 
 	public:
 

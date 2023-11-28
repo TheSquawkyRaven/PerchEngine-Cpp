@@ -11,10 +11,10 @@ Viewport::Viewport()
 
 Viewport::Viewport(Rect2 rect)
 {
-	Rect = rect;
+	this->rect = rect;
 }
 
 shared_ptr<SDL_Rect> Viewport::GetSDLRect()
 {
-	return Rect.GetSDLRect();
+	return rect.GetSDLRect();
 }

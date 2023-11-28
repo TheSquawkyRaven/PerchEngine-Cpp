@@ -11,73 +11,77 @@ using namespace Squawk;
 
 void Sprite2D::SetSpriteColumns(int spriteColumns)
 {
-	_SpriteColumns = spriteColumns;
+	this->spriteColumns = spriteColumns;
 	UpdateCutRect();
 }
 void Sprite2D::SetSpriteRows(int spriteRows)
 {
-	_SpriteRows = spriteRows;
+	this->spriteRows = spriteRows;
 	UpdateCutRect();
 }
 void Sprite2D::SetSpriteIndex(int spriteIndex)
 {
-	_SpriteIndex = spriteIndex;
+	this->spriteIndex = spriteIndex;
+	UpdateCutRect();
+}
+
+void Sprite2D::SetTexture(shared_ptr<Texture> texture)
+{
+	this->texture = texture;
 	UpdateCutRect();
 }
 
 void Sprite2D::UpdateCutRect()
 {
-	if (_SpriteColumns < 1)
+	if (spriteColumns < 1)
 	{
-		Log::Errorf("_SpriteColumns must not be 0 or negative! Current Value: %d", _SpriteColumns);
+		Log::Errorf("spriteColumns must not be 0 or negative! Current Value: %d", spriteColumns);
 		return;
 	}
-	if (_SpriteRows < 1)
+	if (spriteRows < 1)
 	{
-		Log::Errorf("_SpriteRows must not be 0 or negative! Current Value: %d", _SpriteRows);
+		Log::Errorf("spriteRows must not be 0 or negative! Current Value: %d", spriteRows);
 		return;
 	}
-	if (_SpriteIndex < 0)
+	if (spriteIndex < 0)
 	{
-		Log::Errorf("_SpriteIndex must not be negative! Current Value: %d", _SpriteIndex);
+		Log::Errorf("spriteIndex must not be negative! Current Value: %d", spriteIndex);
 		return;
 	}
-	if (_SpriteIndex >= _SpriteColumns * _SpriteRows)
+	if (spriteIndex >= spriteColumns * spriteRows)
 	{
-		Log::Warnf("_SpriteIndex is over the size of %d (%d*%d)! Current Value: %d", _SpriteColumns * _SpriteRows, _SpriteColumns, _SpriteRows, _SpriteIndex);
+		Log::Warnf("spriteIndex is over the size of %d (%d*%d)! Current Value: %d", spriteColumns * spriteRows, spriteColumns, spriteRows, spriteIndex);
 	}
 
-	shared_ptr<Texture> texture = GetTexture();
-
-	if (texture == NULL)
+	if (texture == nullptr)
 	{
 		return;
 	}
 
 	Vector2 size = texture->GetSize();
-	size.X = size.X / _SpriteColumns;
-	size.Y = size.Y / _SpriteRows;
+	size.x = size.x / spriteColumns;
+	size.y = size.y / spriteRows;
 
 	Vector2 position;
-	int iX = _SpriteIndex % _SpriteColumns;
-	int iY = _SpriteIndex / _SpriteColumns;
+	int iX = spriteIndex % spriteColumns;
+	int iY = spriteIndex / spriteColumns;
 
-	position.X = size.X * iX;
-	position.Y = size.Y * iY;
+	position.x = size.x * iX;
+	position.y = size.y * iY;
 
-	_CutRect.SetPosition(position);
-	_CutRect.SetSize(size);
+	cutRect.SetPosition(position);
+	cutRect.SetSize(size);
 }
 
 SDL_RendererFlip Sprite2D::GetSDLFlip() const
 {
 	SDL_RendererFlip flip = SDL_FLIP_NONE;
-	if (FlipX)
+	if (flipX)
 	{
 		flip = SDL_FLIP_HORIZONTAL;
 		return flip;
 	}
-	if (FlipY)
+	if (flipY)
 	{
 		flip = SDL_FLIP_VERTICAL;
 		return flip;
@@ -87,34 +91,63 @@ SDL_RendererFlip Sprite2D::GetSDLFlip() const
 
 shared_ptr<SDL_Point> Sprite2D::GetRotateOrigin()
 {
-	if (_Texture == NULL)
+	if (texture == nullptr)
 	{
-		return NULL;
+		return nullptr;
 	}
-	Vector2 rotateOrigin = RotatePivot * GetSize();
+	Vector2 rotateOrigin = rotatePivot * GetSize();
 
 	return rotateOrigin.GetSDLPoint();
 }
 
 Vector2 Sprite2D::GetPositionPivotOrigin()
 {
-	if (_Texture == NULL)
+	if (texture == nullptr)
 	{
-		return NULL;
+		return Vector2();
 	}
-	Vector2 positionOrigin = PositionPivot * GetSize();
+	Vector2 positionOrigin = positionPivot * GetSize();
 	return positionOrigin;
+}
+
+void Sprite2D::Update()
+{
+	// Test Update
+	//Position.X += 0.01f;
+}
+
+void Sprite2D::Draw(SDL_Renderer* renderer)
+{
+	if (texture == nullptr)
+	{
+		return;
+	}
+
+	Vector2 position = GetGlobalPosition() - GetPositionPivotOrigin();
+	Vector2 size = GetGlobalSize();
+	shared_ptr<SDL_Rect> rect = Rect2::CreateSDLRect(position, size);
+
+	shared_ptr<SDL_Rect> cutSDLRect = cutRect.GetSDLRect();
+
+	SDL_SetTextureColorMod(texture->GetSDLTexture(), color.r, color.g, color.b);
+	SDL_SetTextureAlphaMod(texture->GetSDLTexture(), color.a);
+	SDL_RenderCopyEx(renderer, texture->GetSDLTexture(), cutSDLRect.get(), rect.get(), angle, GetRotateOrigin().get(), GetSDLFlip());
+}
+
+void Sprite2D::OnDestroy()
+{
+	texture = nullptr;
 }
 
 Vector2 Sprite2D::GetSize()
 {
-	return Vector2(Scale.X * _CutRect.GetSize().X, Scale.Y * _CutRect.GetSize().Y);
+	return Vector2(scale.x * cutRect.GetSize().x, scale.y * cutRect.GetSize().y);
 }
 
 Vector2 Sprite2D::GetGlobalSize()
 {
 	Vector2 scale = GetGlobalScale();
-	return Vector2(scale.X * _CutRect.GetSize().X, scale.Y * _CutRect.GetSize().Y);
+	return Vector2(scale.x * cutRect.GetSize().x, scale.y * cutRect.GetSize().y);
 }
 
 Rect2 Sprite2D::GetGlobalRect()
@@ -127,41 +160,5 @@ Rect2 Sprite2D::GetGlobalRect()
 Rect2 Sprite2D::GetCutRect()
 {
 	UpdateCutRect();
-	return _CutRect;
-}
-
-void Sprite2D::SetTexture(shared_ptr<Texture> texture)
-{
-	_Texture = shared_ptr<Texture>(texture);
-	UpdateCutRect();
-}
-
-void Sprite2D::Update()
-{
-	// Test Update
-	//Position.X += 0.01f;
-}
-
-void Sprite2D::Draw(SDL_Renderer* renderer)
-{
-	if (_Texture == NULL)
-	{
-		return;
-	}
-
-	Vector2 position = GetGlobalPosition() - GetPositionPivotOrigin();
-	Vector2 size = GetGlobalSize();
-	shared_ptr<SDL_Rect> rect = Rect2::CreateSDLRect(position, size);
-
-	shared_ptr<SDL_Rect> cutRect = _CutRect.GetSDLRect();
-
-	SDL_SetTextureColorMod(_Texture->GetSDLTexture(), _Color.R, _Color.G, _Color.B);
-	SDL_SetTextureAlphaMod(_Texture->GetSDLTexture(), _Color.A);
-	SDL_RenderCopyEx(renderer, _Texture->GetSDLTexture(), cutRect.get(), rect.get(), Angle, GetRotateOrigin().get(), GetSDLFlip());
-}
-
-void Sprite2D::OnDestroy()
-{
-	Log::Printf("Sprite OnDestroy");
-	_Texture = NULL;
+	return cutRect;
 }

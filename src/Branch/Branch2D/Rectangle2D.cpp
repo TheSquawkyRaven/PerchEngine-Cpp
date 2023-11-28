@@ -8,23 +8,6 @@ using namespace std;
 using namespace Perch;
 using namespace Squawk;
 
-Vector2 Rectangle2D::GetRectSize()
-{
-	Vector2 size = _Rect2.GetSize();
-	return Vector2(Scale.X * size.X, Scale.Y * size.Y);
-}
-
-Vector2 Rectangle2D::GetRectGlobalSize()
-{
-	Vector2 size = _Rect2.GetSize();
-	Vector2 scale = GetGlobalScale();
-	return Vector2(scale.X * size.X, scale.Y * size.Y);
-}
-
-Vector2 Rectangle2D::GetRectGlobalPosition()
-{
-	return GetGlobalPosition() + _Rect2.GetPosition();
-}
 
 void Rectangle2D::Draw(SDL_Renderer* renderer)
 {
@@ -33,6 +16,24 @@ void Rectangle2D::Draw(SDL_Renderer* renderer)
 
 	shared_ptr<SDL_Rect> rect = Rect2::CreateSDLRect(position, size);
 
-	SDL_SetRenderDrawColor(renderer, _Color.R, _Color.G, _Color.B, _Color.A);
+	SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, color.a);
 	SDL_RenderFillRect(renderer, rect.get());
+}
+
+Vector2 Rectangle2D::GetRectSize()
+{
+	Vector2 size = rect.GetSize();
+	return Vector2(scale.x * size.x, scale.y * size.y);
+}
+
+Vector2 Rectangle2D::GetRectGlobalSize()
+{
+	Vector2 size = rect.GetSize();
+	Vector2 scale = GetGlobalScale();
+	return Vector2(scale.x * size.x, scale.y * size.y);
+}
+
+Vector2 Rectangle2D::GetRectGlobalPosition()
+{
+	return GetGlobalPosition() + rect.GetPosition();
 }

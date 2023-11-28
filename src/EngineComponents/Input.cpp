@@ -10,13 +10,13 @@ using namespace Squawk;
 
 void Input::UpdateKeyboardStates()
 {
-	if (KeyboardStates == NULL)
+	if (keyboardStates == nullptr)
 	{
 		return;
 	}
 	for (int i = 0; i < SDL_NUM_SCANCODES; i++)
 	{
-		LastKeyboardStates[i] = KeyboardStates[i];
+		lastKeyboardStates[i] = keyboardStates[i];
 	}
 }
 
@@ -32,20 +32,20 @@ void Input::UpdateInput(shared_ptr<SDL_Event> e, bool* quit)
 		}
 	}
 
-	KeyboardStates = (Uint8*)SDL_GetKeyboardState(NULL);
+	keyboardStates = (Uint8*)SDL_GetKeyboardState(nullptr);
 }
 
 bool Input::GetKey(SDL_Scancode sdlScancode)
 {
-	return KeyboardStates[sdlScancode];
+	return keyboardStates[sdlScancode];
 }
 
 bool Input::GetKeyDown(SDL_Scancode sdlScancode)
 {
-	return !LastKeyboardStates[sdlScancode] && KeyboardStates[sdlScancode];
+	return !lastKeyboardStates[sdlScancode] && keyboardStates[sdlScancode];
 }
 
 bool Input::GetKeyUp(SDL_Scancode sdlScancode)
 {
-	return LastKeyboardStates[sdlScancode] && !KeyboardStates[sdlScancode];
+	return lastKeyboardStates[sdlScancode] && !keyboardStates[sdlScancode];
 }

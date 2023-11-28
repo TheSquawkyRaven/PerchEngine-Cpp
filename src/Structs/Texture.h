@@ -39,11 +39,11 @@ namespace Perch
 		// # Variables + Getters/Setters
 	private:
 
-		std::unique_ptr<SDL_Texture, SDLTextureDeleter> SDLTexture = NULL;
-		Vector2i Size = Vector2i();
+		std::unique_ptr<SDL_Texture, SDLTextureDeleter> sdlTexture = nullptr;
+		Vector2i size = Vector2i();
 
 	public:
-		PERCH_API inline SDL_Texture* GetSDLTexture() { return SDLTexture.get(); }
+		PERCH_API inline SDL_Texture* GetSDLTexture() { return sdlTexture.get(); }
 
 		PERCH_API Vector2i GetSize() const;
 

@@ -8,20 +8,21 @@ using namespace std;
 using namespace Perch;
 using namespace Squawk;
 
-void Rigidbody2D::AddForce(Vector2 force)
-{
-	ApplyingForce = force;
-	ForceApplied = false;
-}
 
 void Rigidbody2D::PhysicsUpdate()
 {
-	Vector2 velocity = Vector2(0, Gravity) * EngineRef->DeltaTime;
-	Velocity = Velocity + velocity;
-	if (!ForceApplied)
+	Vector2 vel = Vector2(0, gravity) * engine->deltaTime;
+	velocity = velocity + vel;
+	if (!forceApplied)
 	{
-		Velocity = Velocity + ApplyingForce;
-		ForceApplied = true;
+		velocity = velocity + applyingForce;
+		forceApplied = true;
 	}
-	Position = Position + Velocity;
+	position = position + velocity;
+}
+
+void Rigidbody2D::AddForce(Vector2 force)
+{
+	applyingForce = force;
+	forceApplied = false;
 }

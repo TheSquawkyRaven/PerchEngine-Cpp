@@ -8,43 +8,38 @@ using namespace std;
 using namespace Perch;
 using namespace Squawk;
 
-void Branch::SetName(string name)
-{
-    Name = name;
-}
-
 int Branch::GetChildIndex(Branch* child)
 {
-    for (int i = 0; i < Children.size(); i++)
+    for (int i = 0; i < children.size(); i++)
     {
-        if (Children[i].get() == child)
+        if (children[i].get() == child)
         {
             return i;
         }
     }
     // Not found!
-    Log::Warnf("%s not found as a child in %s!", child->Name, Name);
+    Log::Warnf("%s not found as a child in %s!", child->name, name);
     return -1;
 }
 
 void Branch::_Ready()
 {
     // Preorder ready order (Parent ready first)
-    if (!ReadyCalled)
+    if (!readyExecuted)
     {
         Ready();
-        if (ScriptRef != NULL)
+        if (script != nullptr)
         {
-            ScriptRef->Ready(EngineRef);
+            script->Ready();
         }
-        ReadyCalled = true;
+        readyExecuted = true;
     }
-    if (!Children.empty())
+    if (!children.empty())
     {
         // Ready through recursion
-        for (size_t i = 0; i < Children.size(); ++i)
+        for (size_t i = 0; i < children.size(); ++i)
         {
-            Children[i]->_Ready();
+            children[i]->_Ready();
         }
     }
 }
@@ -52,74 +47,54 @@ void Branch::_Ready()
 void Branch::_Update()
 {
     // Preorder update order (Parent update first)
-    if (Updated)
-    {
-        return;
-    }
-    // Updated problem! Update Out is not tracked properly as intended!
+    // TODO Updated problem! Update Out is not tracked properly as intended!
     Update();
-    if (ScriptRef != NULL)
+    if (script != nullptr)
     {
-        ScriptRef->Update(EngineRef);
+        script->Update();
     }
-    Updated = true;
-    if (!Children.empty())
+    if (!children.empty())
     {
         // Update through recursion
-        for (size_t i = 0; i < Children.size(); ++i)
+        for (size_t i = 0; i < children.size(); ++i)
         {
-            Children[i]->_Update();
-            Children[i]->_UpdateOut();
+            children[i]->_Update();
+            children[i]->_UpdateOut();
         }
     }
 }
 
 void Branch::_UpdateOut()
 {
-    if (!Updated)
-    {
-        return;
-    }
     UpdateOut();
-    Updated = false;
 }
 
 void Branch::_PhysicsUpdate()
 {
-    /*if (PhysicsUpdated)
-    {
-        return;
-    }*/
     PhysicsUpdate();
-    if (ScriptRef != NULL)
+    if (script != nullptr)
     {
-        ScriptRef->PhysicsUpdate(EngineRef);
+        script->PhysicsUpdate();
     }
-    PhysicsUpdated = true;
-    PhysicsUpdated = false;
-    if (!Children.empty())
+    if (!children.empty())
     {
         // Update through recursion
-        for (size_t i = 0; i < Children.size(); ++i)
+        for (size_t i = 0; i < children.size(); ++i)
         {
-            Children[i]->_PhysicsUpdate();
+            children[i]->_PhysicsUpdate();
         }
     }
 }
 
 void Branch::_CollisionUpdate()
 {
-    /*if (PhysicsUpdated)
-    {
-        return;
-    }*/
     CollisionUpdate();
-    if (!Children.empty())
+    if (!children.empty())
     {
         // Update through recursion
-        for (size_t i = 0; i < Children.size(); ++i)
+        for (size_t i = 0; i < children.size(); ++i)
         {
-            Children[i]->_CollisionUpdate();
+            children[i]->_CollisionUpdate();
         }
     }
 }
@@ -127,82 +102,77 @@ void Branch::_CollisionUpdate()
 void Branch::_Draw(SDL_Renderer* renderer)
 {
     // Preorder draw order (Parent draw first)
-    if (Drawn)
-    {
-        return;
-    }
     Draw(renderer);
-    if (ScriptRef != NULL)
+    if (script != nullptr)
     {
-        ScriptRef->Draw(EngineRef, renderer);
+        script->Draw(renderer);
     }
-    Drawn = true;
-    if (!Children.empty())
+    if (!children.empty())
     {
         // Draw through recursion
-        for (size_t i = 0; i < Children.size(); ++i)
+        for (size_t i = 0; i < children.size(); ++i)
         {
-            Children[i]->_Draw(renderer);
-            Children[i]->_DrawOut(renderer);
+            children[i]->_Draw(renderer);
+            children[i]->_DrawOut(renderer);
         }
     }
 }
 
 void Branch::_DrawOut(SDL_Renderer* renderer)
 {
-    if (!Drawn)
-    {
-        return;
-    }
     DrawOut(renderer);
-    Drawn = false;
 }
 
 void Branch::_Destroy(bool isChainedDestroy)
 {
-    if (!Children.empty())
+    if (!children.empty())
     {
         // Destroys all children through recursion
-        for (size_t i = 0; i < Children.size(); ++i)
+        for (size_t i = 0; i < children.size(); ++i)
         {
-            Children[i]->_Destroy(true);
-
-            Children[i] = NULL;
+            children[i]->_Destroy(true);
+            children[i] = nullptr;
         }
-        Children.clear();
+        children.clear();
     }
     // Postorder destruction order (Innermost child destroy first)
-    if (ScriptRef != NULL)
+    if (script != nullptr)
     {
-        ScriptRef->OnDestroy(EngineRef); // Script destroys first
+        script->OnDestroy(); // Script destroys first
     }
     OnDestroy();
 
     // If this is chained, no need to remove this(child) from parent
     if (!isChainedDestroy)
     {
-        if (Parent != NULL)
+        if (parent != nullptr)
         {
-            int childIndex = Parent->GetChildIndex(this);
+            int childIndex = parent->GetChildIndex(this);
             if (childIndex == -1)
             {
-                Log::Errorf("Cannot destroy %s as it is not a child of the assigned parent - %s!", Name, Parent->Name);
+                Log::Errorf("Cannot destroy %s as it is not a child of the assigned parent - %s!", name, parent->name);
                 return;
             }
-            Parent->Children.erase(Parent->Children.begin() + childIndex);
+            parent->children.erase(parent->children.begin() + childIndex);
         }
     }
 }
 
 Branch::Branch(Engine* engine)
 {
-    EngineRef = engine;
+    this->engine = engine;
 }
 
 void Branch::AttachChild(unique_ptr<Branch> branch)
 {
-    branch->Parent = this;
-    Children.push_back(move(branch));
+    branch->parent = this;
+    children.push_back(move(branch));
+}
+
+void Branch::AttachScript(unique_ptr<Script> script)
+{
+    this->script = std::move(script);
+    this->script->SetAttachedToBranch(this);
 }
 
 void Branch::Ready()

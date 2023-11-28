@@ -9,14 +9,55 @@ using namespace Perch;
 using namespace Squawk;
 
 
-
 void Collider2D::_OnCollision(Collider2D* collider)
 {
 	OnCollision(collider);
-	if (ScriptRef != NULL)
+	if (script != nullptr)
 	{
-		ScriptRef->OnCollision2D(EngineRef, collider);
+		script->OnCollision2D(collider);
 	}
+}
+
+void Collider2D::CollisionUpdate()
+{
+	for (Collider2D* collider : engine->colliderStack)
+	{
+		if (DoesCollideWith(collider))
+		{
+			_OnCollision(collider);
+			collider->_OnCollision(this);
+		}
+	}
+	engine->colliderStack.insert(this);
+}
+
+void Collider2D::PhysicsUpdate()
+{
+
+}
+
+void Collider2D::Draw(SDL_Renderer* renderer)
+{
+	if (!engine->DoShowDebug())
+	{
+		return;
+	}
+
+	Color color = Color::Cyan();
+	SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, color.a);
+
+	float l, t, r, b;
+	GetAABB(l, t, r, b);
+
+	SDL_RenderDrawLine(renderer, l, b, l, t);
+	SDL_RenderDrawLine(renderer, l, t, r, t);
+	SDL_RenderDrawLine(renderer, r, t, r, b);
+	SDL_RenderDrawLine(renderer, r, b, l, b);
+}
+
+void Collider2D::OnCollision(Collider2D* collider)
+{
+
 }
 
 bool Collider2D::DoesCollideWith(Collider2D* collider)
@@ -55,62 +96,14 @@ void Collider2D::GetAABB(float& left, float& top, float& right, float& bottom)
 	Vector2 position = GetGlobalPosition();
 	Vector2 scale = GetGlobalScale();
 
-	Vector2 rectPos = Rect.GetPosition();
-	Vector2 rectSize = Rect.GetSize();
+	Vector2 rectPos = rect.GetPosition();
+	Vector2 rectSize = rect.GetSize();
 
 	Vector2 pos = position + rectPos;
 	Vector2 size = rectSize * scale;
 
-	left = pos.X;
-	top = pos.Y;
-	right = pos.X + size.X;
-	bottom = pos.Y + size.Y;
-	
-}
-
-Collider2D::Collider2D(Engine* engine) : Branch2D(engine)
-{
-	
-}
-
-void Collider2D::OnCollision(Collider2D* collider)
-{
-
-}
-
-void Collider2D::CollisionUpdate()
-{
-	for (Collider2D* collider : EngineRef->ColliderStack)
-	{
-		if (DoesCollideWith(collider))
-		{
-			_OnCollision(collider);
-			collider->_OnCollision(this);
-		}
-	}
-	EngineRef->ColliderStack.insert(this);
-}
-
-void Collider2D::PhysicsUpdate()
-{
-
-}
-
-void Collider2D::Draw(SDL_Renderer* renderer)
-{
-	if (!EngineRef->DoShowDebug())
-	{
-		return;
-	}
-
-	Color color = Color::Cyan();
-	SDL_SetRenderDrawColor(renderer, color.R, color.G, color.B, color.A);
-
-	float l, t, r, b;
-	GetAABB(l, t, r, b);
-
-	SDL_RenderDrawLine(renderer, l, b, l, t);
-	SDL_RenderDrawLine(renderer, l, t, r, t);
-	SDL_RenderDrawLine(renderer, r, t, r, b);
-	SDL_RenderDrawLine(renderer, r, b, l, b);
+	left = pos.x;
+	top = pos.y;
+	right = pos.x + size.x;
+	bottom = pos.y + size.y;
 }

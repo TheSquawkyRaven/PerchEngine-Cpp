@@ -36,11 +36,11 @@ char* Log::AddStrInfo(char* str)
     size_t size = std::strlen(str) + std::strlen(format);
 
     char* buffer = (char*)realloc(str, size);
-    if (buffer == NULL)
+    if (buffer == nullptr)
     {
         PrintWithColor("ERROR: Memory reallocation failed!", CONSOLE_COLOR_RED);
         free(str);
-        return NULL;
+        return nullptr;
     }
 
     sprintf_s(buffer, size, format, str);
@@ -53,7 +53,7 @@ void Log::PrintAddInfo(char* str, int color)
     char* strResult = AddStrInfo(str);
     // str is realloc-ed
 
-    if (strResult == NULL)
+    if (strResult == nullptr)
     {
         return;
     }
@@ -67,7 +67,7 @@ void Log::PrintFormatter(int color, const char* format, va_list args)
     // Create a buffer with initial size of 256
     size_t size = 256;
     char* buffer = (char*)malloc(size * sizeof(char));
-    if (buffer == NULL)
+    if (buffer == nullptr)
     {
         PrintWithColor("ERROR: Memory allocation failed!", CONSOLE_COLOR_RED);
         return;
@@ -79,7 +79,7 @@ void Log::PrintFormatter(int color, const char* format, va_list args)
     {
         size = neededSize + 1;
         char* newBuffer = (char*)realloc(buffer, size);
-        if (newBuffer == NULL)
+        if (newBuffer == nullptr)
         {
             PrintWithColor("ERROR: Memory reallocation failed!", CONSOLE_COLOR_RED);
             free(buffer);

@@ -24,7 +24,7 @@ namespace Perch
 
 	public:
 
-		Rect2 Rect = Rect2();
+		Rect2 rect = Rect2();
 
 
 	public:

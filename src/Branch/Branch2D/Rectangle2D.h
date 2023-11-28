@@ -26,15 +26,15 @@ namespace Perch
 		// # Variables + Getters/Setters
 	private:
 
-		Rect2 _Rect2 = Rect2();
-		Color _Color = Color();
+		Rect2 rect = Rect2();
+		Color color = Color();
 
 	public:
 
-		PERCH_API inline Rect2 GetRect2() const { return _Rect2; }
-		PERCH_API inline void SetRect2(Rect2 rect2) { _Rect2 = rect2; }
-		PERCH_API inline Color GetColor() const { return _Color; }
-		PERCH_API inline void SetColor(Color color) { _Color = color; }
+		PERCH_API inline Rect2 GetRect2() const { return rect; }
+		PERCH_API inline void SetRect2(Rect2 rect) { this->rect = rect; }
+		PERCH_API inline Color GetColor() const { return color; }
+		PERCH_API inline void SetColor(Color color) { this->color = color; }
 
 		// ###
 
@@ -46,12 +46,12 @@ namespace Perch
 
 		PERCH_API Rectangle2D(Engine* engine) : Branch2D(engine) {};
 
+		PERCH_API virtual void Draw(SDL_Renderer* renderer) override;
+
 		PERCH_API Vector2 GetRectSize();
 		PERCH_API Vector2 GetRectGlobalSize();
 
 		PERCH_API Vector2 GetRectGlobalPosition();
-
-		PERCH_API virtual void Draw(SDL_Renderer* renderer) override;
 
 		// ###
 

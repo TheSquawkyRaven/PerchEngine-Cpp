@@ -10,21 +10,21 @@ using namespace Squawk;
 
 void Viewport2D::Update()
 {
-	EngineRef->SimulateUseViewport(_Viewport.get());
+	engine->SimulateUseViewport(viewport.get());
 }
 
 void Viewport2D::UpdateOut()
 {
-	EngineRef->SimulateUnuseViewport(_Viewport.get());
+	engine->SimulateUnuseViewport(viewport.get());
 }
 
 void Viewport2D::Draw(SDL_Renderer* renderer)
 {
-	EngineRef->UseViewport(renderer, _Viewport.get());
+	engine->UseViewport(renderer, viewport.get());
 }
 
 void Viewport2D::DrawOut(SDL_Renderer* renderer)
 {
-	EngineRef->UnuseViewport(renderer, _Viewport.get());
+	engine->UnuseViewport(renderer, viewport.get());
 }
 

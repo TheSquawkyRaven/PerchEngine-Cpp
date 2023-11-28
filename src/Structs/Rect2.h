@@ -25,10 +25,10 @@ namespace Perch
 
 	private:
 
-		Vector2 Position = Vector2();
-		Vector2 Size = Vector2();
+		Vector2 position = Vector2();
+		Vector2 size = Vector2();
 		// SDLRect is cached here because it is almost always used
-		std::shared_ptr<SDL_Rect> SDLRect = std::shared_ptr<SDL_Rect>(new SDL_Rect);
+		std::shared_ptr<SDL_Rect> sdlRect = std::shared_ptr<SDL_Rect>(new SDL_Rect);
 
 	public:
 

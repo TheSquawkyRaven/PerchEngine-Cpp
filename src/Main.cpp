@@ -20,137 +20,134 @@ using namespace std;
 using namespace Perch;
 using namespace Squawk;
 
-const string WINDOW_NAME = "A???";
+const string WINDOW_NAME = "a???";
 const int SCREEN_WIDTH = 1280;
 const int SCREEN_HEIGHT = 720;
 
-void OnRootCreate(Engine* Engine, Branch* Root);
+void OnRootCreate(Engine* engine, Branch* root);
 
 int main(int argc, char* args[])
 {
 	shared_ptr<EngineConfig> engineConfig = shared_ptr<EngineConfig>(new EngineConfig());
 
-	engineConfig->WindowName = WINDOW_NAME;
-	engineConfig->WindowSize = Vector2i(SCREEN_WIDTH, SCREEN_HEIGHT);
-	engineConfig->ShowDebug = true;
+	engineConfig->windowName = WINDOW_NAME;
+	engineConfig->windowSize = Vector2i(SCREEN_WIDTH, SCREEN_HEIGHT);
+	engineConfig->showDebug = true;
 
-	Engine* engine = new Engine(engineConfig);
+	unique_ptr<Engine> engine(new Engine(engineConfig));
 	engine->SetOnRootCreate(&OnRootCreate);
 	engine->Start();
-
-	delete engine;
 
 	return 0;
 }
 
-void OnRootCreate(Engine* Engine, Branch* Root)
+void OnRootCreate(Engine* engine, Branch* root)
 {
-	shared_ptr<Texture> png = Texture::Create(Engine, "./images/squawky_birb.png");
-	if (png == NULL)
+	shared_ptr<Texture> png = Texture::Create(engine, "./images/squawky_birb.png");
+	if (png == nullptr)
 	{
 		return;
 	}
 
-	unique_ptr<Sprite2D> sprite(new Sprite2D(Engine));
-	unique_ptr<Sprite2D> sprite2(new Sprite2D(Engine));
-	unique_ptr<Sprite2D> sprite3(new Sprite2D(Engine));
+	unique_ptr<Sprite2D> sprite(new Sprite2D(engine));
+	unique_ptr<Sprite2D> sprite2(new Sprite2D(engine));
+	unique_ptr<Sprite2D> sprite3(new Sprite2D(engine));
 
-	shared_ptr<Texture> bmp = Texture::Create(Engine, "./images/squawky_birb.bmp");
-	if (bmp == NULL)
+	shared_ptr<Texture> bmp = Texture::Create(engine, "./images/squawky_birb.bmp");
+	if (bmp == nullptr)
 	{
 		return;
 	}
 
 	sprite->SetTexture(png);
-	sprite->Position = Vector2(100, 100);
-	sprite->Scale = Vector2(1, 1.5f);
-	sprite->FlipY = true;
+	sprite->position = Vector2(100, 100);
+	sprite->scale = Vector2(1, 1.5f);
+	sprite->flipY = true;
 
 	sprite2->SetTexture(bmp);
-	sprite2->Position = Vector2(300, 100);
-	sprite2->Scale = Vector2(1.5, 1);
-	sprite2->FlipX = true;
+	sprite2->position = Vector2(300, 100);
+	sprite2->scale = Vector2(1.5, 1);
+	sprite2->flipX = true;
 
 	sprite3->SetTexture(bmp);
-	sprite3->Position = Vector2(200, 300);
-	sprite3->Scale = Vector2(1.5, 1.5);
-	sprite3->RotatePivot = Vector2(0, 0);
-	sprite3->Angle = 45;
+	sprite3->position = Vector2(200, 300);
+	sprite3->scale = Vector2(1.5, 1.5);
+	sprite3->rotatePivot = Vector2(0, 0);
+	sprite3->angle = 45;
 
-	unique_ptr<BorderedRectangle2D> rectangle(new BorderedRectangle2D(Engine));
+	unique_ptr<BorderedRectangle2D> rectangle(new BorderedRectangle2D(engine));
 	rectangle->SetRect2(Rect2(100, 120, 50, 50));
 	rectangle->SetBorderSize(5.0f);
 
-	unique_ptr<Line2D> line(new Line2D(Engine));
+	unique_ptr<Line2D> line(new Line2D(engine));
 	line->SetStartPosition(Vector2(0, 100));
 	line->SetEndPosition(Vector2(300, 300));
 	line->SetColor(Color::Purple());
 
-	unique_ptr<Point2D> point(new Point2D(Engine));
+	unique_ptr<Point2D> point(new Point2D(engine));
 	point->SetPointPosition(Vector2(5, 5));
 
-	Root->AttachChild(move(sprite));
-	Root->AttachChild(move(sprite2));
+	root->AttachChild(move(sprite));
+	root->AttachChild(move(sprite2));
 
-	Root->AttachChild(move(rectangle));
+	root->AttachChild(move(rectangle));
 
-	Root->AttachChild(move(line));
+	root->AttachChild(move(line));
 
-	Root->AttachChild(move(point));
+	root->AttachChild(move(point));
 
 	Viewport viewport = Viewport(Rect2(640, 360, 640, 360));
 	
-	unique_ptr<Viewport2D> viewport2D(new Viewport2D(Engine));
+	unique_ptr<Viewport2D> viewport2D(new Viewport2D(engine));
 	viewport2D->SetViewport(std::shared_ptr<Viewport>(new Viewport(viewport)));
 	viewport2D->AttachChild(move(sprite3));
 
-	Root->AttachChild(move(viewport2D));
+	root->AttachChild(move(viewport2D));
 
-	unique_ptr<Sprite2D> cutSprite(new Sprite2D(Engine));
+	unique_ptr<Sprite2D> cutSprite(new Sprite2D(engine));
 	cutSprite->SetTexture(png);
-	cutSprite->Position = Vector2(0, 0);
-	cutSprite->Scale = Vector2(1, 1.5f);
+	cutSprite->position = Vector2(0, 0);
+	cutSprite->scale = Vector2(1, 1.5f);
 	Color color = Color::White();
-	color.A = 120;
+	color.a = 120;
 	cutSprite->SetColor(color);
 	cutSprite->SetSpriteColumns(3);
 	cutSprite->SetSpriteRows(3);
 	cutSprite->SetSpriteIndex(7);
 
-	Root->AttachChild(move(cutSprite));
+	root->AttachChild(move(cutSprite));
 
-	shared_ptr<Font> lameFont = Font::Create(Engine, "./fonts/LameFont.ttf", 24);
-	if (lameFont == NULL) 
+	shared_ptr<Font> lameFont = Font::Create(engine, "./fonts/LameFont.ttf", 24);
+	if (lameFont == nullptr) 
 	{
 		return;
 	}
 
-	unique_ptr<Text2D> text(new Text2D(Engine));
-	text->Position = Vector2(50, 50);
+	unique_ptr<Text2D> text(new Text2D(engine));
+	text->position = Vector2(50, 50);
 	text->SetFont(lameFont);
 	text->SetText("This is a text.");
-	text->SetText("Hello World");
 
-	Root->AttachChild(move(text));
+	root->AttachChild(move(text));
 
-	unique_ptr<Rigidbody2D> rigidbody2D(new Rigidbody2D(Engine));
-	rigidbody2D->Gravity = 1.0f;
+	unique_ptr<Rigidbody2D> rigidbody2D(new Rigidbody2D(engine));
+	rigidbody2D->gravity = 1.0f;
 
-	unique_ptr<Sprite2D> spriteR(new Sprite2D(Engine));
+	unique_ptr<Sprite2D> spriteR(new Sprite2D(engine));
 	spriteR->SetTexture(png);
-	spriteR->Position = Vector2(100, 100);
-	spriteR->Scale = Vector2(1, 1.5f);
-	spriteR->FlipY = true;
+	spriteR->position = Vector2(100, 100);
+	spriteR->scale = Vector2(1, 1.5f);
+	spriteR->flipY = true;
 	spriteR->SetName("Sprite");
 
 	rigidbody2D->AttachChild(move(spriteR));
 	rigidbody2D->SetName("Rigidbody");
 	
 
-	Root->AttachChild(move(rigidbody2D));
+	root->AttachChild(move(rigidbody2D));
 
-	unique_ptr<Collider2D> b(new Collider2D(Engine));
-	b->Rect = Rect2(10, 10, 100, 100);
-	Root->AttachChild(move(b));
+	unique_ptr<Collider2D> b(new Collider2D(engine));
+	b->rect = Rect2(10, 10, 100, 100);
+	root->AttachChild(move(b));
 
 }

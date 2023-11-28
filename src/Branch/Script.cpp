@@ -12,26 +12,26 @@ using namespace Squawk;
 
 Script::Script(Engine* engine)
 {
-	EngineRef = engine;
+	this->engine = engine;
 }
 
-void Script::Init(Engine* engine)
+void Script::Init()
 {}
 
-void Script::Ready(Engine* engine)
+void Script::Ready()
 {}
 
-void Script::Update(Engine* engine)
+void Script::Update()
 {}
 
-void Script::PhysicsUpdate(Engine* engine)
+void Script::PhysicsUpdate()
 {}
 
-void Script::Draw(Engine* engine, SDL_Renderer* renderer)
+void Script::Draw(SDL_Renderer* renderer)
 {}
 
-void Script::OnDestroy(Engine* engine)
+void Script::OnDestroy()
 {}
 
-void Script::OnCollision2D(Engine* engine, Collider2D* collider)
+void Script::OnCollision2D(Collider2D* collider)
 {}

@@ -26,10 +26,10 @@ namespace Perch
 	public:
 
 		// Position - Local Position
-		Vector2 Position = Vector2();
+		Vector2 position = Vector2();
 		// TODO + Rotation
 		// Scale - Local Scale (1, 1) is full size
-		Vector2 Scale = Vector2(1, 1);
+		Vector2 scale = Vector2(1, 1);
 
 		// ###
 

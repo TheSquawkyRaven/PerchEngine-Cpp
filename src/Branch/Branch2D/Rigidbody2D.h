@@ -28,18 +28,18 @@ namespace Perch
 		// # Variables + Getters/Setters
 	private:
 
-		Vector2 ApplyingForce;
-		bool ForceApplied = true;
+		Vector2 applyingForce;
+		bool forceApplied = true;
 
 	public:
 
 		// TODO move to global gravity and change this to local gravity scale
-		float Gravity = 0.0f;
+		float gravity = 0.0f;
 
 		// TODO implement Drag
-		float Drag = 0.0f;
+		float drag = 0.0f;
 
-		Vector2 Velocity = 0.0f;
+		Vector2 velocity = 0.0f;
 
 		// ###
 
@@ -51,9 +51,9 @@ namespace Perch
 
 		PERCH_API Rigidbody2D(Engine* engine) : Branch2D(engine) {};
 
-		PERCH_API void AddForce(Vector2 force);
-
 		PERCH_API virtual void PhysicsUpdate() override;
+
+		PERCH_API void AddForce(Vector2 force);
 
 		// ###
 

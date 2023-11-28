@@ -25,18 +25,18 @@ namespace Perch
 		// # Variables + Getters/Setters
 	private:
 
-		Vector2 _StartPosition = Vector2();
-		Vector2 _EndPosition = Vector2();
-		Color _Color = Color();
+		Vector2 startPosition = Vector2();
+		Vector2 endPosition = Vector2();
+		Color color = Color();
 
 	public:
 
-		PERCH_API inline Vector2 GetStartPosition() const { return _StartPosition; }
-		PERCH_API inline Vector2 GetEndPosition() const { return _EndPosition; }
-		PERCH_API inline void SetStartPosition(Vector2 position) { _StartPosition = position; }
-		PERCH_API inline void SetEndPosition(Vector2 position) { _EndPosition = position; }
-		PERCH_API inline Color GetColor() const { return _Color; }
-		PERCH_API inline void SetColor(Color color) { _Color = color; }
+		PERCH_API inline Vector2 GetStartPosition() const { return startPosition; }
+		PERCH_API inline Vector2 GetEndPosition() const { return endPosition; }
+		PERCH_API inline void SetStartPosition(Vector2 position) { startPosition = position; }
+		PERCH_API inline void SetEndPosition(Vector2 position) { endPosition = position; }
+		PERCH_API inline Color GetColor() const { return color; }
+		PERCH_API inline void SetColor(Color color) { this->color = color; }
 
 		// ###
 
@@ -48,10 +48,10 @@ namespace Perch
 
 		PERCH_API Line2D(Engine* engine) : Branch2D(engine) {};
 
+		PERCH_API virtual void Draw(SDL_Renderer* renderer) override;
+
 		PERCH_API Vector2 GetGlobalStartPosition();
 		PERCH_API Vector2 GetGlobalEndPosition();
-
-		PERCH_API virtual void Draw(SDL_Renderer* renderer) override;
 
 		// ###
 

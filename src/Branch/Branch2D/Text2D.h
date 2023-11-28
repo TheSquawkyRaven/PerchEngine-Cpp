@@ -33,13 +33,16 @@ namespace Perch
 		// # Variables + Getters/Setters
 	private:
 
-		std::string _Text = "";
-		std::shared_ptr<Font> _Font = NULL;
+		std::string text = "";
+		std::shared_ptr<Font> font = nullptr;
 
 	public:
 
-		PERCH_API inline std::string GetText() const { return _Text; }
+		PERCH_API inline std::string GetText() const { return text; }
 		PERCH_API void SetText(std::string text);
+
+		PERCH_API inline std::shared_ptr<Font> GetFont() const { return font; }
+		PERCH_API void SetFont(std::shared_ptr<Font> font);
 
 		// ###
 
@@ -55,7 +58,7 @@ namespace Perch
 		PERCH_API Text2D(Engine* engine) : Sprite2D(engine) {};
 
 		PERCH_API virtual void Ready() override;
-		PERCH_API void SetFont(std::shared_ptr<Font> font);
+		PERCH_API virtual void OnDestroy() override;
 
 		// ###
 

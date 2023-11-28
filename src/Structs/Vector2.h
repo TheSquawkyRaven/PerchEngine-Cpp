@@ -23,8 +23,8 @@ namespace Perch
 	{
 
 	public:
-		float X = 0;
-		float Y = 0;
+		float x = 0;
+		float y = 0;
 
 
 	public:
@@ -48,6 +48,7 @@ namespace Perch
 
 		PERCH_API operator Vector2i() const;
 
+		// TODO +=, -=, *=, /=
 		PERCH_API Vector2 operator+(Vector2 const& other);
 		PERCH_API Vector2 operator-(Vector2 const& other);
 		PERCH_API Vector2 operator*(Vector2 const& other);

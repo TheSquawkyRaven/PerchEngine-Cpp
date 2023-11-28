@@ -38,11 +38,11 @@ namespace Perch
 		// # Variables + Getters/Setters
 	private:
 
-		std::unique_ptr<TTF_Font, SDLFontDeleter> SDLFont = NULL;
+		std::unique_ptr<TTF_Font, SDLFontDeleter> sdlFont = nullptr;
 
 	public:
 
-		PERCH_API inline TTF_Font* GetSDLFont() { return SDLFont.get(); }
+		PERCH_API inline TTF_Font* GetSDLFont() { return sdlFont.get(); }
 
 		// ###
 

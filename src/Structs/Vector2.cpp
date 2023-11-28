@@ -12,23 +12,23 @@ Vector2::Vector2()
 
 Vector2::Vector2(float x, float y)
 {
-	X = x;
-	Y = y;
+	this->x = x;
+	this->y = y;
 }
 
 Vector2::Vector2(float val)
 {
-	X = Y = val;
+	x = y = val;
 }
 
 float Vector2::Magnitude() const
 {
-	return sqrtf(X * X + Y * Y);
+	return sqrtf(x * x + y * y);
 }
 
 float Vector2::Dot(Vector2 const& other) const
 {
-	return X * other.X + Y * other.Y;
+	return x * other.x + y * other.y;
 }
 
 float Vector2::Distance(Vector2 const& other) const
@@ -40,8 +40,8 @@ float Vector2::Distance(Vector2 const& other) const
 void Vector2::Normalize()
 {
 	float magnitude = Magnitude();
-	X /= magnitude;
-	Y /= magnitude;
+	x /= magnitude;
+	y /= magnitude;
 }
 
 Vector2 Vector2::NormalizedVector() const
@@ -58,14 +58,14 @@ Vector2 Vector2::Midpoint(Vector2 const& other) const
 
 Vector2 Vector2::ProportionalPoint(Vector2 const& other, float proportion) const
 {
-	return Vector2((X + other.X) * proportion, (Y + other.Y) * proportion);
+	return Vector2((x + other.x) * proportion, (y + other.y) * proportion);
 }
 
 shared_ptr<SDL_Point> Vector2::GetSDLPoint() const
 {
 	SDL_Point* sdlPoint = new SDL_Point();
-	sdlPoint->x = X + 0.5f;
-	sdlPoint->y = Y + 0.5f;
+	sdlPoint->x = x + 0.5f;
+	sdlPoint->y = y + 0.5f;
 	return shared_ptr<SDL_Point>(sdlPoint);
 }
 
@@ -76,55 +76,55 @@ shared_ptr<SDL_Point> Vector2::GetSDLPoint() const
 
 Vector2::operator Vector2i() const
 {
-	return Vector2i(X, Y);
+	return Vector2i(x, y);
 }
 
 Vector2 Vector2::operator+(Vector2 const& other)
 {
-	return Vector2(X + other.X, Y + other.Y);
+	return Vector2(x + other.x, y + other.y);
 }
 
 Vector2 Vector2::operator-(Vector2 const& other)
 {
-	return Vector2(X - other.X, Y - other.Y);
+	return Vector2(x - other.x, y - other.y);
 }
 
 Vector2 Vector2::operator*(Vector2 const& other)
 {
-	return Vector2(X * other.X, Y * other.Y);
+	return Vector2(x * other.x, y * other.y);
 }
 
 Vector2 Vector2::operator/(Vector2 const& other)
 {
-	return Vector2(X / other.X, Y / other.Y);
+	return Vector2(x / other.x, y / other.y);
 }
 
 Vector2 Vector2::operator+(float const& other)
 {
-	return Vector2(X + other, Y + other);
+	return Vector2(x + other, y + other);
 }
 
 Vector2 Vector2::operator-(float const& other)
 {
-	return Vector2(X - other, Y - other);
+	return Vector2(x - other, y - other);
 }
 
 Vector2 Vector2::operator*(float const& other)
 {
-	return Vector2(X * other, Y * other);
+	return Vector2(x * other, y * other);
 }
 
 Vector2 Vector2::operator/(float const& other)
 {
-	return Vector2(X / other, Y / other);
+	return Vector2(x / other, y / other);
 }
 
 bool Vector2::operator==(Vector2 const& other)
 {
-	return X == other.X && Y == other.Y;
+	return x == other.x && y == other.y;
 }
 
 bool Vector2::operator!=(Vector2 const& other)
 {
-	return X != other.X && Y != other.Y;
+	return x != other.x && y != other.y;
 }

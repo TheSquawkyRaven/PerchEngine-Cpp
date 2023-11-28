@@ -12,28 +12,28 @@ using namespace Squawk;
 
 void Engine::Update(shared_ptr<SDL_Event> e, bool* quit)
 {
-	InputRef->UpdateInput(e, quit);
+	input->UpdateInput(e, quit);
 
 	UpdateTime();
-	Root->_Update();
-	Root->_UpdateOut();
+	root->_Update();
+	root->_UpdateOut();
 
-	Root->_PhysicsUpdate();
+	root->_PhysicsUpdate();
 
-	Root->_CollisionUpdate();
-	ColliderStack.clear();	// TODO move to Physics2D function
+	root->_CollisionUpdate();
+	colliderStack.clear();	// TODO move to Physics2D function
 
-	Color c = Config->ClearColor;
-	SDL_SetRenderDrawColor(MainWindowRenderer, c.R, c.G, c.B, c.A);
-	SDL_RenderClear(MainWindowRenderer);
+	Color c = config->clearColor;
+	SDL_SetRenderDrawColor(mainWindowRenderer, c.r, c.g, c.b, c.a);
+	SDL_RenderClear(mainWindowRenderer);
 
-	UseViewport(MainWindowRenderer, RootViewport.get());
-	Root->_Draw(MainWindowRenderer);
-	Root->_DrawOut(MainWindowRenderer);
-	UnuseViewport(MainWindowRenderer, RootViewport.get());
+	UseViewport(mainWindowRenderer, rootViewport.get());
+	root->_Draw(mainWindowRenderer);
+	root->_DrawOut(mainWindowRenderer);
+	UnuseViewport(mainWindowRenderer, rootViewport.get());
 	ClearViewportStack();
 
-	SDL_RenderPresent(MainWindowRenderer);
+	SDL_RenderPresent(mainWindowRenderer);
 }
 
 void Engine::StartUpdateLoop()
@@ -51,12 +51,12 @@ void Engine::StartUpdateLoop()
 void Engine::UpdateTime()
 {
 	Uint32 currentTicks = SDL_GetTicks();
-	Uint32 elapsedTicks = currentTicks - LastUpdateTicks;
+	Uint32 elapsedTicks = currentTicks - lastUpdateTicks;
 	
-	DeltaTime = elapsedTicks / 1000.0f;
-	TotalTime = currentTicks / 1000.0f;
+	deltaTime = elapsedTicks / 1000.0f;
+	totalTime = currentTicks / 1000.0f;
 
-	LastUpdateTicks = currentTicks;
+	lastUpdateTicks = currentTicks;
 }
 
 bool Engine::InitMainWindow()
@@ -71,16 +71,16 @@ bool Engine::InitMainWindow()
 	// Create a main window
 	// Title, X, & Y pos of window position on screen, width, height, hide window when created
 	Vector2i ScreenSize = GetMainWindowSize();
-	MainWindow = SDL_CreateWindow(Config->WindowName.c_str(), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, ScreenSize.X, ScreenSize.Y, SDL_WINDOW_HIDDEN);
-	if (MainWindow == NULL)
+	mainWindow = SDL_CreateWindow(config->windowName.c_str(), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, ScreenSize.x, ScreenSize.y, SDL_WINDOW_HIDDEN);
+	if (mainWindow == nullptr)
 	{
 		Log::Errorf("Window cannot be created! SDL_ERROR: %s", SDL_GetError());
 		return false;
 	}
 
 	// Hardware Accelerated renderer with VSync
-	MainWindowRenderer = SDL_CreateRenderer(MainWindow, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
-	if (MainWindowRenderer == NULL)
+	mainWindowRenderer = SDL_CreateRenderer(mainWindow, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+	if (mainWindowRenderer == nullptr)
 	{
 		Log::Errorf("Renderer cannot be created! SDL_ERROR: %s", SDL_GetError());
 		return false;
@@ -103,9 +103,9 @@ bool Engine::InitMainWindow()
 	}
 
 	// Renderer color
-	Color c = Config->ClearColor;
-	SDL_SetRenderDrawColor(MainWindowRenderer, c.R, c.G, c.B, c.A);
-	SDL_RenderClear(MainWindowRenderer);
+	Color c = config->clearColor;
+	SDL_SetRenderDrawColor(mainWindowRenderer, c.r, c.g, c.b, c.a);
+	SDL_RenderClear(mainWindowRenderer);
 
 
 	return true;
@@ -114,14 +114,14 @@ bool Engine::InitMainWindow()
 // Creates the root branch and calls the delegate for OnRootCreate for attachments of branches
 void Engine::CreateTree()
 {
-	Root = unique_ptr<Branch>(new Branch(this));
+	root = unique_ptr<Branch>(new Branch(this));
 
-	if (OnRootCreate == NULL)
+	if (onRootCreate == nullptr)
 	{
-		Log::Warn("OnRootCreate is not set, no root will be attached!");
+		Log::Warn("onRootCreate is not set, no root will be attached!");
 		return;
 	}
-	OnRootCreate(this, Root.get());
+	onRootCreate(this, root.get());
 }
 
 // Calls ready from the root
@@ -132,12 +132,12 @@ void Engine::RunTree()
 		return;
 	}
 
-	Root->_Ready();
+	root->_Ready();
 }
 
 bool Engine::CheckError() const
 {
-	if (HasError)
+	if (hasError)
 	{
 		Log::Error("Engine has error, please refer to log");
 		return true;
@@ -147,70 +147,70 @@ bool Engine::CheckError() const
 
 Engine::Engine(shared_ptr<EngineConfig> config)
 {
-	Config = config;
+	this->config = config;
 	UpdateConfig();
 
 	bool success = InitMainWindow();
 	if (!success)
 	{
-		HasError = true;
+		hasError = true;
 	}
 
 }
 
 void Engine::UpdateConfig()
 {
-	MainWindowRect.SetSize(Config->WindowSize);
-	RootViewport->Rect = MainWindowRect;
+	mainWindowRect.SetSize(config->windowSize);
+	rootViewport->rect = mainWindowRect;
 }
 
 void Engine::SimulateUseViewport(Viewport* viewport)
 {
-	ViewportStack.push(viewport);
+	viewportStack.push(viewport);
 }
 
 void Engine::SimulateUnuseViewport(Viewport* viewport)
 {
-	Viewport* viewportCheck = ViewportStack.top();
+	Viewport* viewportCheck = viewportStack.top();
 	if (viewportCheck != viewport)
 	{
 		Log::Error("Viewport Stack is not properly popped (SimulateUnuseViewport)!");
 	}
-	ViewportStack.pop();
+	viewportStack.pop();
 }
 
 void Engine::UseViewport(SDL_Renderer* renderer, Viewport* viewport)
 {
-	ViewportStack.push(viewport);
+	viewportStack.push(viewport);
 	SDL_RenderSetViewport(renderer, viewport->GetSDLRect().get());
 }
 
 void Engine::UnuseViewport(SDL_Renderer* renderer, Viewport* viewport)
 {
-	Viewport* viewportCheck = ViewportStack.top();
+	Viewport* viewportCheck = viewportStack.top();
 	if (viewportCheck != viewport)
 	{
 		Log::Errorf("Viewport Stack is not properly popped (UnuseViewport)! (%p == %p)", viewportCheck, viewport);
 	}
-	ViewportStack.pop();
-	if (ViewportStack.empty())
+	viewportStack.pop();
+	if (viewportStack.empty())
 	{
 		return;
 	}
-	Viewport* currentViewport = ViewportStack.top();
+	Viewport* currentViewport = viewportStack.top();
 	SDL_RenderSetViewport(renderer, currentViewport->GetSDLRect().get());
 }
 
 Viewport* Engine::GetCurrentViewport()
 {
-	return ViewportStack.top();
+	return viewportStack.top();
 }
 
 void Engine::ClearViewportStack()
 {
-	while (!ViewportStack.empty())
+	while (!viewportStack.empty())
 	{
-		ViewportStack.pop();
+		viewportStack.pop();
 	}
 }
 
@@ -225,7 +225,7 @@ void Engine::Start()
 
 	RunTree();
 
-	SDL_ShowWindow(MainWindow);
+	SDL_ShowWindow(mainWindow);
 	
 	StartUpdateLoop();
 
@@ -237,17 +237,17 @@ void Engine::Quit()
 	// Destroy Texture
 	// SDL_DestroyTexture(texture);
 
-	Root->Destroy();
+	root->Destroy();
 
-	SDL_DestroyRenderer(MainWindowRenderer);
-	SDL_DestroyWindow(MainWindow);
+	SDL_DestroyRenderer(mainWindowRenderer);
+	SDL_DestroyWindow(mainWindow);
 
-	MainWindow = NULL;
-	MainWindowRenderer = NULL;
+	mainWindow = nullptr;
+	mainWindowRenderer = nullptr;
 
 	TTF_Quit();
 	IMG_Quit();
 	SDL_Quit();
 
-	Log::Print("MainWindow is Closed");
+	Log::Print("mainWindow is Closed");
 }
