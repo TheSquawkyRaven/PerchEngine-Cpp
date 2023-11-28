@@ -34,6 +34,11 @@ void Engine::Update(shared_ptr<SDL_Event> e, bool* quit)
 	ClearViewportStack();
 
 	SDL_RenderPresent(mainWindowRenderer);
+
+	if (doQuit)
+	{
+		*quit = true;
+	}
 }
 
 void Engine::StartUpdateLoop()
@@ -145,6 +150,23 @@ bool Engine::CheckError() const
 	return false;
 }
 
+void Engine::QuitEngine()
+{
+	root->Destroy();
+
+	SDL_DestroyRenderer(mainWindowRenderer);
+	SDL_DestroyWindow(mainWindow);
+
+	mainWindow = nullptr;
+	mainWindowRenderer = nullptr;
+
+	TTF_Quit();
+	IMG_Quit();
+	SDL_Quit();
+
+	Log::Print("Main Window is Closed");
+}
+
 Engine::Engine(shared_ptr<EngineConfig> config)
 {
 	this->config = config;
@@ -229,25 +251,10 @@ void Engine::Start()
 	
 	StartUpdateLoop();
 
-	Quit();
+	QuitEngine();
 }
 
 void Engine::Quit()
 {
-	// Destroy Texture
-	// SDL_DestroyTexture(texture);
-
-	root->Destroy();
-
-	SDL_DestroyRenderer(mainWindowRenderer);
-	SDL_DestroyWindow(mainWindow);
-
-	mainWindow = nullptr;
-	mainWindowRenderer = nullptr;
-
-	TTF_Quit();
-	IMG_Quit();
-	SDL_Quit();
-
-	Log::Print("mainWindow is Closed");
+	doQuit = true;
 }

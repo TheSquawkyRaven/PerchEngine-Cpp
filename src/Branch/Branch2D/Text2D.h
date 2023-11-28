@@ -44,6 +44,10 @@ namespace Perch
 		PERCH_API inline std::shared_ptr<Font> GetFont() const { return font; }
 		PERCH_API void SetFont(std::shared_ptr<Font> font);
 
+	public:
+
+		int fontSize = 32;
+
 		// ###
 
 

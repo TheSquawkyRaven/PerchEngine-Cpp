@@ -6,6 +6,7 @@
 
 using namespace std;
 using namespace Perch;
+using namespace Squawk;
 
 void Text2D::SetText(std::string text)
 {
@@ -21,7 +22,7 @@ void Text2D::SetFont(shared_ptr<Font> font)
 
 void Text2D::UpdateTexture()
 {
-	shared_ptr<Texture> texture = Texture::Create(engine, font, text, GetColor());
+	shared_ptr<Texture> texture = Texture::Create(engine, font, text, fontSize, GetColor());
 	SetTexture(texture);
 }
 

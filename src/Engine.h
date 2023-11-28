@@ -14,6 +14,7 @@
 
 #include "EngineComponents/Input.h"
 #include "EngineComponents/Random.h"
+#include "EngineComponents/Resource.h"
 
 #include "Structs/Vector2.h"
 #include "Structs/Vector2i.h"
@@ -65,6 +66,8 @@ namespace Perch
 
 		bool hasError = false;
 
+		bool doQuit = false;
+
 		// SDL Window for rendering into
 		SDL_Window* mainWindow = nullptr;
 
@@ -83,6 +86,7 @@ namespace Perch
 
 		std::unique_ptr<Input> input = std::unique_ptr<Input>(new Input);
 		std::unique_ptr<Random> random = std::unique_ptr<Random>(new Random);
+		std::unique_ptr<Resource> resource = std::unique_ptr<Resource>(new Resource);
 
 	public:
 
@@ -90,8 +94,10 @@ namespace Perch
 		PERCH_API inline Vector2 GetMainWindowSize() { return mainWindowRect.GetSize(); }
 		PERCH_API inline bool DoShowDebug() { return config->showDebug; }
 		PERCH_API inline SDL_Renderer* GetMainWindowRenderer() { return mainWindowRenderer; }
+		
 		PERCH_API inline Input* GetInput() const { return input.get(); }
 		PERCH_API inline Random* GetRandom() const { return random.get(); }
+		PERCH_API inline Resource* GetResource() const { return resource.get(); }
 
 	public:
 
@@ -123,6 +129,8 @@ namespace Perch
 
 		// Returns true if has error
 		bool CheckError() const;
+
+		void QuitEngine();
 
 	public:
 

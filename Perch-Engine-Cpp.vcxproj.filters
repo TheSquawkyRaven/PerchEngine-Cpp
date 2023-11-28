@@ -120,6 +120,9 @@
     <ClInclude Include="src\Squawk\Log.h">
       <Filter>Header Files\Squawk</Filter>
     </ClInclude>
+    <ClInclude Include="src\EngineComponents\Resource.h">
+      <Filter>Header Files\Engine Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -199,6 +202,9 @@
     </ClCompile>
     <ClCompile Include="src\Squawk\Log.cpp">
       <Filter>Source Files\Squawk</Filter>
+    </ClCompile>
+    <ClCompile Include="src\EngineComponents\Resource.cpp">
+      <Filter>Source Files\Engine Components</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

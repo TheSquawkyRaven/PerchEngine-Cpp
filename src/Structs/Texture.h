@@ -61,7 +61,7 @@ namespace Perch
 	public:
 
 		PERCH_API static std::shared_ptr<Texture> Create(Engine* engine, std::string path);
-		PERCH_API static std::shared_ptr<Texture> Create(Engine* engine, std::shared_ptr<Font> font, std::string text, Color color);
+		PERCH_API static std::shared_ptr<Texture> Create(Engine* engine, std::shared_ptr<Font> font, std::string text, int fontSize, Color color);
 
 		// ###
 

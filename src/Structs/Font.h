@@ -51,13 +51,15 @@ namespace Perch
 
 	private:
 
-		static TTF_Font* LoadTTF(std::string path, int fontSize);
+		static TTF_Font* LoadTTF(std::string path);
 
 		Font(TTF_Font* sdlFont);
 
 	public:
 
-		PERCH_API static std::shared_ptr<Font> Create(Engine* engine, std::string path, int fontSize);
+		PERCH_API static std::shared_ptr<Font> Create(Engine* engine, std::string path);
+
+		void SetFontSize(int fontSize);
 
 		// ###
 

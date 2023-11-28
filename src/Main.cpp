@@ -117,18 +117,26 @@ void OnRootCreate(Engine* engine, Branch* root)
 
 	root->AttachChild(move(cutSprite));
 
-	shared_ptr<Font> lameFont = Font::Create(engine, "./fonts/LameFont.ttf", 24);
+	shared_ptr<Font> lameFont = Font::Create(engine, "./fonts/LameFont.ttf");
 	if (lameFont == nullptr) 
 	{
 		return;
 	}
 
 	unique_ptr<Text2D> text(new Text2D(engine));
+	text->fontSize = 128;
 	text->position = Vector2(50, 50);
 	text->SetFont(lameFont);
 	text->SetText("This is a text.");
 
+	unique_ptr<Text2D> text2(new Text2D(engine));
+	text2->fontSize = 64;
+	text2->position = Vector2(50, 200);
+	text2->SetFont(lameFont);
+	text2->SetText("This is another smaller text.");
+
 	root->AttachChild(move(text));
+	root->AttachChild(move(text2));
 
 	unique_ptr<Rigidbody2D> rigidbody2D(new Rigidbody2D(engine));
 	rigidbody2D->gravity = 1.0f;

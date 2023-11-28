@@ -38,24 +38,32 @@ Texture::Texture(SDL_Texture* sdlTexture)
 
 shared_ptr<Texture> Texture::Create(Engine* engine, string path)
 {
+	shared_ptr<Texture> texture = engine->GetResource()->TryGetLoadedTexture(path);
+	if (texture)
+	{
+		return texture;
+	}
+
 	SDL_Texture* sdlTexture = LoadTexture(engine->GetMainWindowRenderer(), path);
 	if (sdlTexture == nullptr)
 	{
 		return nullptr;
 	}
 
-	shared_ptr<Texture> texture = shared_ptr<Texture>(new Texture(sdlTexture));
+	texture = shared_ptr<Texture>(new Texture(sdlTexture));
+	engine->GetResource()->AddLoadedTexture(path, weak_ptr<Texture>(texture));
 
 	return texture;
 }
 
-shared_ptr<Texture> Texture::Create(Engine* engine, std::shared_ptr<Font> font, std::string text, Color color)
+shared_ptr<Texture> Texture::Create(Engine* engine, std::shared_ptr<Font> font, std::string text, int fontSize, Color color)
 {
 	if (text.length() == 0)
 	{
 		return nullptr;
 	}
 
+	font->SetFontSize(fontSize);
 	SDL_Surface* sdlSurface = TTF_RenderText_Solid(font->GetSDLFont(), text.c_str(), color);
 	if (sdlSurface == nullptr)
 	{
