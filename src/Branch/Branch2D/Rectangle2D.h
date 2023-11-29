@@ -24,17 +24,11 @@ namespace Perch
 	{
 
 		// # Variables + Getters/Setters
-	private:
-
-		Rect2 rect = Rect2();
-		Color color = Color();
 
 	public:
 
-		PERCH_API inline Rect2 GetRect2() const { return rect; }
-		PERCH_API inline void SetRect2(Rect2 rect) { this->rect = rect; }
-		PERCH_API inline Color GetColor() const { return color; }
-		PERCH_API inline void SetColor(Color color) { this->color = color; }
+		Rect2 rect = Rect2();
+		Color color = Color();
 
 		// ###
 

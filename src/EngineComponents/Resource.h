@@ -20,6 +20,7 @@ namespace Perch
 
 	class Texture;
 	class Font;
+	class Clip;
 
 	class Resource
 	{
@@ -28,10 +29,9 @@ namespace Perch
 
 	private:
 
-		// TODO Font, Texture cache
-
 		std::unordered_map<std::string, std::weak_ptr<Texture>> loadedTextureMap;
 		std::unordered_map<std::string, std::weak_ptr<Font>> loadedFontMap;
+		std::unordered_map<std::string, std::weak_ptr<Clip>> loadedClipMap;
 
 	public:
 
@@ -49,6 +49,9 @@ namespace Perch
 
 		std::shared_ptr<Font> TryGetLoadedFont(std::string path);
 		void AddLoadedFont(std::string path, std::weak_ptr<Font> fontW);
+
+		std::shared_ptr<Clip> TryGetLoadedClip(std::string path);
+		void AddLoadedClip(std::string path, std::weak_ptr<Clip> clipW);
 
 
 		// ###

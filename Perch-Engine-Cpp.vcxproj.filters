@@ -43,6 +43,12 @@
     <Filter Include="Source Files\Squawk">
       <UniqueIdentifier>{79b3d560-7224-446f-8b5d-762745bc2bbb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Branch\BranchUI">
+      <UniqueIdentifier>{863d8c1a-b6b1-4185-8150-196b2927f259}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Branch\BranchUI">
+      <UniqueIdentifier>{2de011f9-2a29-48a0-8bf0-9f6b68125c8d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -105,9 +111,6 @@
     <ClInclude Include="src\Engine.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Branch\Script.h">
-      <Filter>Header Files\Branch</Filter>
-    </ClInclude>
     <ClInclude Include="src\Branch\Branch.h">
       <Filter>Header Files\Branch</Filter>
     </ClInclude>
@@ -122,6 +125,24 @@
     </ClInclude>
     <ClInclude Include="src\EngineComponents\Resource.h">
       <Filter>Header Files\Engine Components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Branch\BranchUI\BranchUI.h">
+      <Filter>Header Files\Branch\BranchUI</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Branch\BranchUI\MouseOverUI.h">
+      <Filter>Header Files\Branch\BranchUI</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Branch\BranchUI\ButtonUI.h">
+      <Filter>Header Files\Branch\BranchUI</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Structs\Clip.h">
+      <Filter>Header Files\Structs</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Branch\Script.h">
+      <Filter>Header Files\Branch</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Branch\Audio.h">
+      <Filter>Header Files\Branch</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -205,6 +226,21 @@
     </ClCompile>
     <ClCompile Include="src\EngineComponents\Resource.cpp">
       <Filter>Source Files\Engine Components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Branch\BranchUI\BranchUI.cpp">
+      <Filter>Source Files\Branch\BranchUI</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Branch\BranchUI\MouseOverUI.cpp">
+      <Filter>Source Files\Branch\BranchUI</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Branch\BranchUI\ButtonUI.cpp">
+      <Filter>Source Files\Branch\BranchUI</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Structs\Clip.cpp">
+      <Filter>Source Files\Structs</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Branch\Audio.cpp">
+      <Filter>Source Files\Branch</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

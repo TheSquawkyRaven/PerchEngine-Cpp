@@ -24,6 +24,31 @@ const string WINDOW_NAME = "a???";
 const int SCREEN_WIDTH = 1280;
 const int SCREEN_HEIGHT = 720;
 
+class TScript : public Script
+{
+public:
+	TScript(Engine* engine) : Script(engine) {}
+	virtual void Update() override
+	{
+		if (engine->GetInput()->GetMouseDown(Input::LEFT))
+		{
+			Log::Printf("Left Button Down at %d, %d", engine->GetInput()->GetMousePosition().x, engine->GetInput()->GetMousePosition().y);
+		}
+		if (engine->GetInput()->GetMouse(Input::LEFT))
+		{
+			Log::Printf("Left Button at %d, %d", engine->GetInput()->GetMousePosition().x, engine->GetInput()->GetMousePosition().y);
+		}
+		if (engine->GetInput()->GetMouseUp(Input::LEFT))
+		{
+			Log::Printf("Left Button Up");
+		}
+		if (int sc = engine->GetInput()->GetMouseScrollY())
+		{
+			Log::Printf("Scrolled %d", sc);
+		}
+	}
+};
+
 void OnRootCreate(Engine* engine, Branch* root);
 
 int main(int argc, char* args[])
@@ -76,16 +101,16 @@ void OnRootCreate(Engine* engine, Branch* root)
 	sprite3->angle = 45;
 
 	unique_ptr<BorderedRectangle2D> rectangle(new BorderedRectangle2D(engine));
-	rectangle->SetRect2(Rect2(100, 120, 50, 50));
+	rectangle->rect = Rect2(100, 120, 50, 50);
 	rectangle->SetBorderSize(5.0f);
 
 	unique_ptr<Line2D> line(new Line2D(engine));
-	line->SetStartPosition(Vector2(0, 100));
-	line->SetEndPosition(Vector2(300, 300));
-	line->SetColor(Color::Purple());
+	line->startPosition = Vector2(0, 100);
+	line->endPosition = Vector2(300, 300);
+	line->color = Color::Purple();
 
 	unique_ptr<Point2D> point(new Point2D(engine));
-	point->SetPointPosition(Vector2(5, 5));
+	point->pointPosition = Vector2(5, 5);
 
 	root->AttachChild(move(sprite));
 	root->AttachChild(move(sprite2));
@@ -110,7 +135,7 @@ void OnRootCreate(Engine* engine, Branch* root)
 	cutSprite->scale = Vector2(1, 1.5f);
 	Color color = Color::White();
 	color.a = 120;
-	cutSprite->SetColor(color);
+	cutSprite->color = color;
 	cutSprite->SetSpriteColumns(3);
 	cutSprite->SetSpriteRows(3);
 	cutSprite->SetSpriteIndex(7);
@@ -157,5 +182,9 @@ void OnRootCreate(Engine* engine, Branch* root)
 	unique_ptr<Collider2D> b(new Collider2D(engine));
 	b->rect = Rect2(10, 10, 100, 100);
 	root->AttachChild(move(b));
+
+	TScript* tscript = new TScript(engine);
+	root->AttachScript(unique_ptr<TScript>(tscript));
+
 
 }

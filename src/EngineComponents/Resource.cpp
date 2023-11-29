@@ -47,3 +47,21 @@ void Resource::AddLoadedFont(string path, weak_ptr<Font> fontW)
 {
 	loadedFontMap[path] = fontW;
 }
+
+shared_ptr<Clip> Resource::TryGetLoadedClip(string path)
+{
+	weak_ptr<Clip> clipW = loadedClipMap[path];
+	shared_ptr<Clip> clip = clipW.lock();
+	if (clip)
+	{
+		return clip;
+	}
+
+	loadedClipMap.erase(path);
+	return nullptr;
+}
+
+void Resource::AddLoadedClip(string path, weak_ptr<Clip> fontW)
+{
+	loadedClipMap[path] = fontW;
+}

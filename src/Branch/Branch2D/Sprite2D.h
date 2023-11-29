@@ -31,9 +31,6 @@ namespace Perch
 	private:
 
 		std::shared_ptr<Texture> texture = nullptr;
-		Color color = Color();
-
-	private:
 
 		// Private because this may not be the latest value. Use GetCutRect instead.
 		Rect2 cutRect = Rect2();
@@ -45,6 +42,9 @@ namespace Perch
 
 	public:
 
+		PERCH_API std::shared_ptr<Texture> GetTexture() { return texture; }
+		PERCH_API virtual void SetTexture(std::shared_ptr<Texture> texture);
+
 		PERCH_API inline int GetSpriteColumns() const { return spriteColumns; }
 		PERCH_API void SetSpriteColumns(int spriteColumns);
 		PERCH_API inline int GetSpriteRows() const { return spriteRows; }
@@ -53,6 +53,8 @@ namespace Perch
 		PERCH_API void SetSpriteIndex(int spriteIndex);
 
 	public:
+		
+		Color color = Color();
 
 		// Position transform applied relative to texture size. In percentage form (0.5f, 0.5f) is the center
 		Vector2 positionPivot = Vector2();
@@ -62,11 +64,6 @@ namespace Perch
 		// SDL do not support flipping at both axes at the same time
 		bool flipX = false;
 		bool flipY = false;
-
-		PERCH_API std::shared_ptr<Texture> GetTexture() { return texture; }
-		PERCH_API virtual void SetTexture(std::shared_ptr<Texture> texture);
-		PERCH_API inline Color GetColor() const { return color; }
-		PERCH_API inline void SetColor(Color color) { this->color = color; }
 
 		// ###
 

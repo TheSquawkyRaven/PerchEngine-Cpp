@@ -11,6 +11,7 @@
 #include <SDL.h>
 #include <SDL_image.h>
 #include <SDL_ttf.h>
+#include <SDL_mixer.h>
 
 #include "EngineComponents/Input.h"
 #include "EngineComponents/Random.h"
@@ -122,7 +123,7 @@ namespace Perch
 		void RunTree();
 
 		// Update - Runs every frame
-		void Update(std::shared_ptr<SDL_Event> e, bool* quit);
+		void Update(SDL_Event* e, bool* quit);
 		void StartUpdateLoop();
 
 		void UpdateTime();

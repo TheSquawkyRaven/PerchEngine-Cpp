@@ -10,7 +10,7 @@ using namespace std;
 using namespace Perch;
 using namespace Squawk;
 
-void Engine::Update(shared_ptr<SDL_Event> e, bool* quit)
+void Engine::Update(SDL_Event* e, bool* quit)
 {
 	input->UpdateInput(e, quit);
 
@@ -47,7 +47,7 @@ void Engine::StartUpdateLoop()
 	bool quit = false;
 	do
 	{
-		Update(e, &quit);
+		Update(e.get(), &quit);
 
 	} while (!quit);
 
@@ -67,9 +67,9 @@ void Engine::UpdateTime()
 bool Engine::InitMainWindow()
 {
 	// Create SDL Video Graphics
-	if (SDL_Init(SDL_INIT_VIDEO) < 0)
+	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) < 0)
 	{
-		Log::Errorf("Could not initialize SDL_VIDEO! SDL_ERROR: %s", SDL_GetError());
+		Log::Errorf("Could not initialize SDL_VIDEO or SDL_AUDIO! SDL_ERROR: %s", SDL_GetError());
 		return false;
 	}
 
@@ -97,6 +97,13 @@ bool Engine::InitMainWindow()
 	if (!(IMG_Init(imageFlags) & imageFlags))
 	{
 		Log::Errorf("SDL_image cannot initialize! SDL_IMAGE_ERROR: %s", IMG_GetError());
+		return false;
+	}
+
+	// Mixer (Audio) Loading
+	if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0)
+	{
+		Log::Errorf("SDL_mixer cannot initialize! SDL_MIXER_ERROR: %s", Mix_GetError());
 		return false;
 	}
 

@@ -23,20 +23,13 @@ namespace Perch
 	{
 
 		// # Variables + Getters/Setters
-	private:
-
-		Vector2 startPosition = Vector2();
-		Vector2 endPosition = Vector2();
-		Color color = Color();
 
 	public:
 
-		PERCH_API inline Vector2 GetStartPosition() const { return startPosition; }
-		PERCH_API inline Vector2 GetEndPosition() const { return endPosition; }
-		PERCH_API inline void SetStartPosition(Vector2 position) { startPosition = position; }
-		PERCH_API inline void SetEndPosition(Vector2 position) { endPosition = position; }
-		PERCH_API inline Color GetColor() const { return color; }
-		PERCH_API inline void SetColor(Color color) { this->color = color; }
+		Vector2 startPosition = Vector2();
+		Vector2 endPosition = Vector2();
+
+		Color color = Color();
 
 		// ###
 

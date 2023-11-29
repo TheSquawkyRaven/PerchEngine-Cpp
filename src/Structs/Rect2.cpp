@@ -30,6 +30,17 @@ Rect2::Rect2(float x, float y, float w, float h)
 	SetSize(w, h);
 }
 
+shared_ptr<SDL_Rect> Rect2::CreateSDLRect(Vector2 position, Vector2 size)
+{
+	shared_ptr<SDL_Rect> rect = shared_ptr<SDL_Rect>(new SDL_Rect);
+	rect->x = position.x;
+	rect->y = position.y;
+	rect->w = size.x;
+	rect->h = size.y;
+
+	return rect;
+}
+
 Vector2 Rect2::GetPosition()
 {
 	return Vector2(sdlRect->x, sdlRect->y);
@@ -74,18 +85,32 @@ void Rect2::SetSize(float w, float h)
 	UpdateSDLRect();
 }
 
-shared_ptr<SDL_Rect> Rect2::GetSDLRect()
+bool Rect2::PointIsIn(Vector2 point) const
 {
-	return sdlRect;
+	return PointIsIn(point, position, size);
 }
 
-shared_ptr<SDL_Rect> Rect2::CreateSDLRect(Vector2 position, Vector2 size)
+bool Rect2::PointIsIn(Vector2 point, Vector2 position, Vector2 size)
 {
-	shared_ptr<SDL_Rect> rect = shared_ptr<SDL_Rect>(new SDL_Rect);
-	rect->x = position.x;
-	rect->y = position.y;
-	rect->w = size.x;
-	rect->h = size.y;
-
-	return rect;
+	if (point.x < position.x)
+	{
+		// Point is Left
+		return false;
+	}
+	if (point.x > position.x + size.x)
+	{
+		// Point is Right
+		return false;
+	}
+	if (point.y < position.y)
+	{
+		// Point is Above
+		return false;
+	}
+	if (point.y > position.y + size.y)
+	{
+		// Point is Below
+		return false;
+	}
+	return true;
 }

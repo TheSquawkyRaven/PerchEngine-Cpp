@@ -32,6 +32,8 @@ namespace Perch
 
 	public:
 
+		PERCH_API inline std::shared_ptr<SDL_Rect> GetSDLRect() { return sdlRect; }
+
 	private:
 
 		void UpdateSDLRect();
@@ -41,6 +43,7 @@ namespace Perch
 		PERCH_API Rect2();
 		PERCH_API Rect2(Vector2 position, Vector2 size);
 		PERCH_API Rect2(float x, float y, float w, float h);
+		PERCH_API static std::shared_ptr<SDL_Rect> CreateSDLRect(Vector2 position, Vector2 size);
 
 		PERCH_API Vector2 GetPosition();
 		PERCH_API Vector2 GetSize();
@@ -51,9 +54,8 @@ namespace Perch
 		PERCH_API void SetSize(Vector2i size);
 		PERCH_API void SetSize(float w, float h);
 
-		PERCH_API std::shared_ptr<SDL_Rect> GetSDLRect();
-
-		PERCH_API static std::shared_ptr<SDL_Rect> CreateSDLRect(Vector2 position, Vector2 size);
+		PERCH_API bool PointIsIn(Vector2 point) const;
+		PERCH_API static bool PointIsIn(Vector2 point, Vector2 position, Vector2 size);
 
 	};
 

@@ -40,13 +40,13 @@
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -71,12 +71,12 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>C:\PATH\SDL2_ttf-2.20.2\include;C:\PATH\SDL2_image-2.6.3\include;C:\PATH\SDL2-2.28.4\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\PATH\SDL2_ttf-2.20.2\lib\x64;C:\PATH\SDL2_image-2.6.3\lib\x64;C:\PATH\SDL2-2.28.4\lib\x64;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\PATH\SDL2_ttf-2.20.2\include;C:\PATH\SDL2_image-2.6.3\include;C:\PATH\SDL2-2.28.4\include;C:\PATH\SDL2_mixer-2.6.3\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\PATH\SDL2_ttf-2.20.2\lib\x64;C:\PATH\SDL2_image-2.6.3\lib\x64;C:\PATH\SDL2-2.28.4\lib\x64;C:\PATH\SDL2_mixer-2.6.3\lib\x64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>C:\PATH\SDL2_ttf-2.20.2\include;C:\PATH\SDL2_image-2.6.3\include;C:\PATH\SDL2-2.28.4\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\PATH\SDL2_ttf-2.20.2\lib\x64;C:\PATH\SDL2_image-2.6.3\lib\x64;C:\PATH\SDL2-2.28.4\lib\x64;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\PATH\SDL2_ttf-2.20.2\include;C:\PATH\SDL2_image-2.6.3\include;C:\PATH\SDL2-2.28.4\include;C:\PATH\SDL2_mixer-2.6.3\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\PATH\SDL2_ttf-2.20.2\lib\x64;C:\PATH\SDL2_image-2.6.3\lib\x64;C:\PATH\SDL2-2.28.4\lib\x64;C:\PATH\SDL2_mixer-2.6.3\lib\x64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -127,7 +127,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableUAC>false</EnableUAC>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;SDL2_mixer.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -149,12 +149,13 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableUAC>false</EnableUAC>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;SDL2_mixer.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="src\Branch\Audio.h" />
     <ClInclude Include="src\Branch\Branch.h" />
     <ClInclude Include="src\Branch\Branch2D\BorderedRectangle2D.h" />
     <ClInclude Include="src\Branch\Branch2D\Branch2D.h" />
@@ -166,12 +167,16 @@
     <ClInclude Include="src\Branch\Branch2D\Sprite2D.h" />
     <ClInclude Include="src\Branch\Branch2D\Text2D.h" />
     <ClInclude Include="src\Branch\Branch2D\Viewport2D.h" />
+    <ClInclude Include="src\Branch\BranchUI\BranchUI.h" />
+    <ClInclude Include="src\Branch\BranchUI\ButtonUI.h" />
+    <ClInclude Include="src\Branch\BranchUI\MouseOverUI.h" />
     <ClInclude Include="src\Branch\Script.h" />
     <ClInclude Include="src\Engine.h" />
     <ClInclude Include="src\EngineComponents\Input.h" />
     <ClInclude Include="src\EngineComponents\Random.h" />
     <ClInclude Include="src\EngineComponents\Resource.h" />
     <ClInclude Include="src\Squawk\Log.h" />
+    <ClInclude Include="src\Structs\Clip.h" />
     <ClInclude Include="src\Structs\Color.h" />
     <ClInclude Include="src\Structs\Font.h" />
     <ClInclude Include="src\Structs\Rect2.h" />
@@ -188,6 +193,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="src\Branch\Audio.cpp" />
     <ClCompile Include="src\Branch\Branch.cpp" />
     <ClCompile Include="src\Branch\Branch2D\BorderedRectangle2D.cpp" />
     <ClCompile Include="src\Branch\Branch2D\Branch2D.cpp" />
@@ -199,6 +205,9 @@
     <ClCompile Include="src\Branch\Branch2D\Sprite2D.cpp" />
     <ClCompile Include="src\Branch\Branch2D\Text2D.cpp" />
     <ClCompile Include="src\Branch\Branch2D\Viewport2D.cpp" />
+    <ClCompile Include="src\Branch\BranchUI\BranchUI.cpp" />
+    <ClCompile Include="src\Branch\BranchUI\ButtonUI.cpp" />
+    <ClCompile Include="src\Branch\BranchUI\MouseOverUI.cpp" />
     <ClCompile Include="src\Branch\Script.cpp" />
     <ClCompile Include="src\Engine.cpp" />
     <ClCompile Include="src\EngineComponents\Input.cpp" />
@@ -206,6 +215,7 @@
     <ClCompile Include="src\EngineComponents\Resource.cpp" />
     <ClCompile Include="src\Main.cpp" />
     <ClCompile Include="src\Squawk\Log.cpp" />
+    <ClCompile Include="src\Structs\Clip.cpp" />
     <ClCompile Include="src\Structs\Color.cpp" />
     <ClCompile Include="src\Structs\Font.cpp" />
     <ClCompile Include="src\Structs\Rect2.cpp" />

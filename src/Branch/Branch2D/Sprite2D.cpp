@@ -9,6 +9,12 @@ using namespace Perch;
 using namespace Squawk;
 
 
+void Sprite2D::SetTexture(shared_ptr<Texture> texture)
+{
+	this->texture = texture;
+	UpdateCutRect();
+}
+
 void Sprite2D::SetSpriteColumns(int spriteColumns)
 {
 	this->spriteColumns = spriteColumns;
@@ -22,12 +28,6 @@ void Sprite2D::SetSpriteRows(int spriteRows)
 void Sprite2D::SetSpriteIndex(int spriteIndex)
 {
 	this->spriteIndex = spriteIndex;
-	UpdateCutRect();
-}
-
-void Sprite2D::SetTexture(shared_ptr<Texture> texture)
-{
-	this->texture = texture;
 	UpdateCutRect();
 }
 
