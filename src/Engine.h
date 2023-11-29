@@ -83,7 +83,7 @@ namespace Perch
 		std::unique_ptr<Viewport> rootViewport = std::unique_ptr<Viewport>(new Viewport(mainWindowRect));
 		std::stack<Viewport*> viewportStack;
 
-		Uint32 lastUpdateTicks = 0;
+		Uint64 lastUpdateTicks = 0;
 
 		std::unique_ptr<Input> input = std::unique_ptr<Input>(new Input);
 		std::unique_ptr<Random> random = std::unique_ptr<Random>(new Random);
@@ -102,8 +102,13 @@ namespace Perch
 
 	public:
 
+		float timeScale = 1.0f;
+
 		float deltaTime = 0.0f;
 		float totalTime = 0.0f;
+
+		float realDeltaTime = 0.0f;
+		float realTotalTime = 0.0f;
 
 		// TODO Move to 2D Physics class
 		std::unordered_set<Collider2D*> colliderStack;

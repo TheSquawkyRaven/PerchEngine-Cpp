@@ -20,6 +20,12 @@ void Collider2D::_OnCollision(Collider2D* collider)
 
 void Collider2D::CollisionUpdate()
 {
+	// Prevent collision when engine is paused
+	// TODO move to Physics2D refer Engine's colliderStack
+	if (engine->timeScale == 0.0f)
+	{
+		return;
+	}
 	for (Collider2D* collider : engine->colliderStack)
 	{
 		if (DoesCollideWith(collider))

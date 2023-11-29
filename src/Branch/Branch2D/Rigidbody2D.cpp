@@ -18,7 +18,7 @@ void Rigidbody2D::PhysicsUpdate()
 		velocity = velocity + applyingForce;
 		forceApplied = true;
 	}
-	position = position + velocity;
+	position = position + velocity * engine->timeScale;
 }
 
 void Rigidbody2D::AddForce(Vector2 force)

@@ -55,11 +55,14 @@ void Engine::StartUpdateLoop()
 
 void Engine::UpdateTime()
 {
-	Uint32 currentTicks = SDL_GetTicks();
-	Uint32 elapsedTicks = currentTicks - lastUpdateTicks;
+	Uint64 currentTicks = SDL_GetTicks64();
+	Uint64 elapsedTicks = currentTicks - lastUpdateTicks;
 	
-	deltaTime = elapsedTicks / 1000.0f;
-	totalTime = currentTicks / 1000.0f;
+	realDeltaTime = elapsedTicks / 1000.0f;
+	realTotalTime = currentTicks / 1000.0f;
+
+	deltaTime = realDeltaTime * timeScale;
+	totalTime += deltaTime;
 
 	lastUpdateTicks = currentTicks;
 }
