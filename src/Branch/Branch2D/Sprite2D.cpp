@@ -136,6 +136,7 @@ void Sprite2D::Draw(SDL_Renderer* renderer)
 
 void Sprite2D::OnDestroy()
 {
+	Branch2D::OnDestroy();
 	texture = nullptr;
 }
 

@@ -8,6 +8,20 @@ using namespace std;
 using namespace Perch;
 using namespace Squawk;
 
+
+bool Branch::IsGloballyActive() const
+{
+    if (!active)
+    {
+        return false;
+    }
+    if (parent == nullptr)
+    {
+        return true;
+    }
+    return parent->IsGloballyActive();
+}
+
 int Branch::GetChildIndex(Branch* child)
 {
     for (int i = 0; i < children.size(); i++)
@@ -24,6 +38,12 @@ int Branch::GetChildIndex(Branch* child)
 
 void Branch::_Ready()
 {
+    if (markedForDestruction)
+    {
+        return;
+    }
+
+    // Active independent
     // Preorder ready order (Parent ready first)
     if (!readyExecuted)
     {
@@ -34,92 +54,106 @@ void Branch::_Ready()
         }
         readyExecuted = true;
     }
-    if (!children.empty())
+    // Ready through recursion
+    for (size_t i = 0; i < children.size(); ++i)
     {
-        // Ready through recursion
-        for (size_t i = 0; i < children.size(); ++i)
-        {
-            children[i]->_Ready();
-        }
+        children[i]->_Ready();
     }
 }
 
 void Branch::_Update()
 {
+    if (!active || markedForDestruction)
+    {
+        return;
+    }
+
     // Preorder update order (Parent update first)
-    // TODO Updated problem! Update Out is not tracked properly as intended!
     Update();
     if (script != nullptr)
     {
         script->Update();
     }
-    if (!children.empty())
+    // Update through recursion
+    for (size_t i = 0; i < children.size(); ++i)
     {
-        // Update through recursion
-        for (size_t i = 0; i < children.size(); ++i)
-        {
-            children[i]->_Update();
-            children[i]->_UpdateOut();
-        }
+        children[i]->_Update();
+        children[i]->_UpdateOut();
     }
 }
 
 void Branch::_UpdateOut()
 {
+    if (!active || markedForDestruction)
+    {
+        return;
+    }
+
     UpdateOut();
 }
 
 void Branch::_PhysicsUpdate()
 {
+    if (!active || markedForDestruction)
+    {
+        return;
+    }
+
     PhysicsUpdate();
     if (script != nullptr)
     {
         script->PhysicsUpdate();
     }
-    if (!children.empty())
+    // Update through recursion
+    for (size_t i = 0; i < children.size(); ++i)
     {
-        // Update through recursion
-        for (size_t i = 0; i < children.size(); ++i)
-        {
-            children[i]->_PhysicsUpdate();
-        }
+        children[i]->_PhysicsUpdate();
     }
 }
 
 void Branch::_CollisionUpdate()
 {
-    CollisionUpdate();
-    if (!children.empty())
+    if (!active || markedForDestruction)
     {
-        // Update through recursion
-        for (size_t i = 0; i < children.size(); ++i)
-        {
-            children[i]->_CollisionUpdate();
-        }
+        return;
+    }
+
+    CollisionUpdate();
+    // Update through recursion
+    for (size_t i = 0; i < children.size(); ++i)
+    {
+        children[i]->_CollisionUpdate();
     }
 }
 
 void Branch::_Draw(SDL_Renderer* renderer)
 {
+    if (!active || markedForDestruction)
+    {
+        return;
+    }
+
     // Preorder draw order (Parent draw first)
     Draw(renderer);
     if (script != nullptr)
     {
         script->Draw(renderer);
     }
-    if (!children.empty())
+    // Draw through recursion
+    for (size_t i = 0; i < children.size(); ++i)
     {
-        // Draw through recursion
-        for (size_t i = 0; i < children.size(); ++i)
-        {
-            children[i]->_Draw(renderer);
-            children[i]->_DrawOut(renderer);
-        }
+        children[i]->_Draw(renderer);
+        children[i]->_DrawOut(renderer);
     }
 }
 
 void Branch::_DrawOut(SDL_Renderer* renderer)
 {
+    if (!active || markedForDestruction)
+    {
+        return;
+    }
+
     DrawOut(renderer);
 }
 
@@ -141,6 +175,7 @@ void Branch::_Destroy(bool isChainedDestroy)
         script->OnDestroy(); // Script destroys first
     }
     OnDestroy();
+    script = nullptr;
 
     // If this is chained, no need to remove this(child) from parent
     if (!isChainedDestroy)
@@ -158,6 +193,17 @@ void Branch::_Destroy(bool isChainedDestroy)
     }
 }
 
+void Branch::MarkForDestruction()
+{
+    markedForDestruction = true;
+
+    // Mark for destruction through recursion
+    for (size_t i = 0; i < children.size(); ++i)
+    {
+        children[i]->MarkForDestruction();
+    }
+}
+
 Branch::Branch(Engine* engine)
 {
     this->engine = engine;
@@ -169,10 +215,20 @@ void Branch::AttachChild(unique_ptr<Branch> branch)
     children.push_back(move(branch));
 }
 
+void Branch::AttachChildu(Branch* branch)
+{
+    AttachChild(unique_ptr<Branch>(branch));
+}
+
 void Branch::AttachScript(unique_ptr<Script> script)
 {
     this->script = std::move(script);
     this->script->SetAttachedToBranch(this);
+}
+
+void Branch::AttachScriptu(Script* script)
+{
+    AttachScript(unique_ptr<Script>(script));
 }
 
 void Branch::Ready()
@@ -198,9 +254,9 @@ void Branch::DrawOut(SDL_Renderer* renderer)
 
 void Branch::Destroy()
 {
-    _Destroy(false);
+    MarkForDestruction();
+    engine->AddBranchToDestructionQueue(this);
 }
 
 void Branch::OnDestroy()
-{
-}
+{}

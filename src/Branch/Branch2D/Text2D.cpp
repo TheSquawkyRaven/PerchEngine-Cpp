@@ -26,12 +26,8 @@ void Text2D::UpdateTexture()
 	SetTexture(texture);
 }
 
-void Text2D::Ready()
-{
-	color = Color::Black();
-}
-
 void Text2D::OnDestroy()
 {
+	Sprite2D::OnDestroy();
 	font = nullptr;
 }

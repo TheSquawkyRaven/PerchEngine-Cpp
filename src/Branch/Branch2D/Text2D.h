@@ -61,7 +61,6 @@ namespace Perch
 
 		PERCH_API Text2D(Engine* engine) : Sprite2D(engine) {};
 
-		PERCH_API virtual void Ready() override;
 		PERCH_API virtual void OnDestroy() override;
 
 		// ###

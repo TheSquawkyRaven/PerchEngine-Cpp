@@ -11,7 +11,7 @@ using namespace Squawk;
 
 void Rigidbody2D::PhysicsUpdate()
 {
-	Vector2 vel = Vector2(0, gravity) * engine->deltaTime;
+	Vector2 vel = Vector2(0, gravity) * engine->GetDeltaTime();
 	velocity = velocity + vel;
 	if (!forceApplied)
 	{

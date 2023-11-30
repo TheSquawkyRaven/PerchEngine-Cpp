@@ -49,6 +49,12 @@
     <Filter Include="Source Files\Branch\BranchUI">
       <UniqueIdentifier>{2de011f9-2a29-48a0-8bf0-9f6b68125c8d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Renderer">
+      <UniqueIdentifier>{9e0cdeb8-c19b-4c76-8d87-bba076d20061}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Renderer">
+      <UniqueIdentifier>{c30ac4c8-e608-4b7f-aa7c-4a4747ef6b44}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -143,6 +149,12 @@
     </ClInclude>
     <ClInclude Include="src\Branch\Audio.h">
       <Filter>Header Files\Branch</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Renderer\Renderer.h">
+      <Filter>Header Files\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Renderer\SDLRenderer.h">
+      <Filter>Header Files\Renderer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -241,6 +253,9 @@
     </ClCompile>
     <ClCompile Include="src\Branch\Audio.cpp">
       <Filter>Source Files\Branch</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Renderer\SDLRenderer.cpp">
+      <Filter>Source Files\Renderer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

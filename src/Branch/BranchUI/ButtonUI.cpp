@@ -75,6 +75,7 @@ void ButtonUI::Draw(SDL_Renderer* renderer)
 
 void ButtonUI::OnDestroy()
 {
+	MouseOverUI::OnDestroy();
 	baseTexture = nullptr;
 	hoverTexture = nullptr;
 	holdTexture = nullptr;

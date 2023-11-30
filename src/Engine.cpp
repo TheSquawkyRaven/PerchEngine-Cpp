@@ -27,6 +27,8 @@ void Engine::Update(SDL_Event* e, bool* quit)
 	SDL_SetRenderDrawColor(mainWindowRenderer, c.r, c.g, c.b, c.a);
 	SDL_RenderClear(mainWindowRenderer);
 
+	// Update branch destruction before drawing
+	UpdateBranchDestruction();
 	UseViewport(mainWindowRenderer, rootViewport.get());
 	root->_Draw(mainWindowRenderer);
 	root->_DrawOut(mainWindowRenderer);
@@ -65,6 +67,21 @@ void Engine::UpdateTime()
 	totalTime += deltaTime;
 
 	lastUpdateTicks = currentTicks;
+}
+
+void Engine::AddBranchToDestructionQueue(Branch* branch)
+{
+	destructionQueue.push(branch);
+}
+
+void Engine::UpdateBranchDestruction()
+{
+	while (!destructionQueue.empty())
+	{
+		Branch* branch = destructionQueue.front();
+		destructionQueue.pop();
+		branch->_Destroy(false);
+	}
 }
 
 bool Engine::InitMainWindow()
@@ -117,11 +134,11 @@ bool Engine::InitMainWindow()
 		return false;
 	}
 
-	// Renderer color
+	// Renderer settings
 	Color c = config->clearColor;
+	SDL_SetRenderDrawBlendMode(mainWindowRenderer, SDL_BLENDMODE_BLEND);
 	SDL_SetRenderDrawColor(mainWindowRenderer, c.r, c.g, c.b, c.a);
 	SDL_RenderClear(mainWindowRenderer);
-
 
 	return true;
 }

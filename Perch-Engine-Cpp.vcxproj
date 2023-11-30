@@ -175,6 +175,8 @@
     <ClInclude Include="src\EngineComponents\Input.h" />
     <ClInclude Include="src\EngineComponents\Random.h" />
     <ClInclude Include="src\EngineComponents\Resource.h" />
+    <ClInclude Include="src\Renderer\Renderer.h" />
+    <ClInclude Include="src\Renderer\SDLRenderer.h" />
     <ClInclude Include="src\Squawk\Log.h" />
     <ClInclude Include="src\Structs\Clip.h" />
     <ClInclude Include="src\Structs\Color.h" />
@@ -214,6 +216,7 @@
     <ClCompile Include="src\EngineComponents\Random.cpp" />
     <ClCompile Include="src\EngineComponents\Resource.cpp" />
     <ClCompile Include="src\Main.cpp" />
+    <ClCompile Include="src\Renderer\SDLRenderer.cpp" />
     <ClCompile Include="src\Squawk\Log.cpp" />
     <ClCompile Include="src\Structs\Clip.cpp" />
     <ClCompile Include="src\Structs\Color.cpp" />

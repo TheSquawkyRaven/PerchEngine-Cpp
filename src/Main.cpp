@@ -151,12 +151,14 @@ void OnRootCreate(Engine* engine, Branch* root)
 	unique_ptr<Text2D> text(new Text2D(engine));
 	text->fontSize = 128;
 	text->position = Vector2(50, 50);
+	text->color = Color::Black();
 	text->SetFont(lameFont);
 	text->SetText("This is a text.");
 
 	unique_ptr<Text2D> text2(new Text2D(engine));
 	text2->fontSize = 64;
 	text2->position = Vector2(50, 200);
+	text->color = Color::Gray();
 	text2->SetFont(lameFont);
 	text2->SetText("This is another smaller text.");
 

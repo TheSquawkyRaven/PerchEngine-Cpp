@@ -28,6 +28,7 @@
 #include <memory>
 #include <stack>
 #include <unordered_set>
+#include <queue>
 
 
 namespace Perch
@@ -85,6 +86,8 @@ namespace Perch
 
 		Uint64 lastUpdateTicks = 0;
 
+		std::queue<Branch*> destructionQueue;
+
 		std::unique_ptr<Input> input = std::unique_ptr<Input>(new Input);
 		std::unique_ptr<Random> random = std::unique_ptr<Random>(new Random);
 		std::unique_ptr<Resource> resource = std::unique_ptr<Resource>(new Resource);
@@ -100,15 +103,22 @@ namespace Perch
 		PERCH_API inline Random* GetRandom() const { return random.get(); }
 		PERCH_API inline Resource* GetResource() const { return resource.get(); }
 
-	public:
-
-		float timeScale = 1.0f;
+	private:
 
 		float deltaTime = 0.0f;
 		float totalTime = 0.0f;
 
 		float realDeltaTime = 0.0f;
 		float realTotalTime = 0.0f;
+
+	public:
+
+		float timeScale = 1.0f;
+
+		inline float GetDeltaTime() const { return deltaTime; }
+		inline float GetTotalTime() const { return totalTime; }
+		inline float GetRealDeltaTime() const { return realDeltaTime; }
+		inline float GetRealTotalTime() const { return realTotalTime; }
 
 		// TODO Move to 2D Physics class
 		std::unordered_set<Collider2D*> colliderStack;
@@ -117,6 +127,11 @@ namespace Perch
 
 
 		// # Functions
+
+	public:
+		void AddBranchToDestructionQueue(Branch* branch);
+	private:
+		void UpdateBranchDestruction();
 
 	private:
 

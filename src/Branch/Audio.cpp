@@ -15,6 +15,7 @@ void Audio::SetClip(shared_ptr<Clip> clip)
 
 void Audio::OnDestroy()
 {
+	Branch::OnDestroy();
 	clip = nullptr;
 }
 
