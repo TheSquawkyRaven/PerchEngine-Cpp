@@ -32,6 +32,7 @@ namespace Perch
 
 		std::shared_ptr<Texture> texture = nullptr;
 
+		Rect2 rect = Rect2();
 		// Private because this may not be the latest value. Use GetCutRect instead.
 		Rect2 cutRect = Rect2();
 
@@ -77,15 +78,14 @@ namespace Perch
 	protected:
 
 		PERCH_API SDL_RendererFlip GetSDLFlip() const;
-		PERCH_API std::shared_ptr<SDL_Point> GetRotateOrigin();
+		PERCH_API Vector2 GetRotateOrigin();
 		PERCH_API Vector2 GetPositionPivotOrigin();
 
 	public:
 
 		PERCH_API Sprite2D(Engine* engine) : Branch2D(engine) {};
 
-		PERCH_API virtual void Update() override;
-		PERCH_API virtual void Draw(SDL_Renderer* renderer) override;
+		PERCH_API virtual void Draw(Renderer* renderer) override;
 		PERCH_API virtual void OnDestroy() override;
 
 		PERCH_API virtual Vector2 GetSize();

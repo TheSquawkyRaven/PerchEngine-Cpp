@@ -41,7 +41,7 @@ namespace Perch
 
 		PERCH_API Line2D(Engine* engine) : Branch2D(engine) {};
 
-		PERCH_API virtual void Draw(SDL_Renderer* renderer) override;
+		PERCH_API virtual void Draw(Renderer* renderer) override;
 
 		PERCH_API Vector2 GetGlobalStartPosition();
 		PERCH_API Vector2 GetGlobalEndPosition();

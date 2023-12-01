@@ -61,7 +61,7 @@ namespace Perch
 		PERCH_API virtual void PhysicsUpdate();
 
 		// Draw - Preorder, Called every frame. Update first, then draw
-		PERCH_API virtual void Draw(SDL_Renderer* renderer);
+		PERCH_API virtual void Draw(Renderer* renderer);
 
 		// OnDestroy - POSTorder, Called while destroying. Uninitialize pointers here.
 		PERCH_API virtual void OnDestroy();

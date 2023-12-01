@@ -10,14 +10,13 @@
 #include "../Engine.h"
 #include "Script.h"
 
-#include <SDL.h>
-
 #include <string>
 #include <vector>
 #include <memory>
 
 namespace Perch
 {
+
 	/// <summary>
 	/// A Branch is a container that can hold data and other branches as children.
 	/// This is similar to Godot's Node.
@@ -79,8 +78,8 @@ namespace Perch
 		void _UpdateOut();
 		void _PhysicsUpdate();
 		void _CollisionUpdate();
-		void _Draw(SDL_Renderer* renderer);
-		void _DrawOut(SDL_Renderer* renderer);
+		void _Draw(Renderer* renderer);
+		void _DrawOut(Renderer* renderer);
 		// Active independent
 		void _Destroy(bool isChainedDestroy);
 
@@ -112,9 +111,9 @@ namespace Perch
 		PERCH_API virtual void CollisionUpdate();
 
 		// Draw - Preorder, Called every frame. Update first, then draw. Active dependent
-		PERCH_API virtual void Draw(SDL_Renderer* renderer);
+		PERCH_API virtual void Draw(Renderer* renderer);
 		// DrawOut - Called every frame right after Drawing all children. Active dependent
-		PERCH_API virtual void DrawOut(SDL_Renderer* renderer);
+		PERCH_API virtual void DrawOut(Renderer* renderer);
 
 		// Destroy - Starts the destruction of children and this. Don't use or move any of the children of this after calling Destroy on this branch
 		PERCH_API void Destroy();

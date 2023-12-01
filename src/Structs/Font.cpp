@@ -2,6 +2,8 @@
 
 #include "Font.h"
 
+#include "../Engine.h"
+
 #include <iostream>
 #include <string>
 #include <memory>
@@ -9,6 +11,7 @@
 using namespace std;
 using namespace Perch;
 using namespace Squawk;
+
 
 TTF_Font* Font::LoadTTF(string path)
 {

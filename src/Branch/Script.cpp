@@ -27,7 +27,7 @@ void Script::Update()
 void Script::PhysicsUpdate()
 {}
 
-void Script::Draw(SDL_Renderer* renderer)
+void Script::Draw(Renderer* renderer)
 {}
 
 void Script::OnDestroy()

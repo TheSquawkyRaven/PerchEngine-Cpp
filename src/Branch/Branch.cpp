@@ -126,7 +126,7 @@ void Branch::_CollisionUpdate()
     }
 }
 
-void Branch::_Draw(SDL_Renderer* renderer)
+void Branch::_Draw(Renderer* renderer)
 {
     if (!active || markedForDestruction)
     {
@@ -147,7 +147,7 @@ void Branch::_Draw(SDL_Renderer* renderer)
     }
 }
 
-void Branch::_DrawOut(SDL_Renderer* renderer)
+void Branch::_DrawOut(Renderer* renderer)
 {
     if (!active || markedForDestruction)
     {
@@ -246,10 +246,10 @@ void Branch::PhysicsUpdate()
 void Branch::CollisionUpdate()
 {}
 
-void Branch::Draw(SDL_Renderer* renderer)
+void Branch::Draw(Renderer* renderer)
 {}
 
-void Branch::DrawOut(SDL_Renderer* renderer)
+void Branch::DrawOut(Renderer* renderer)
 {}
 
 void Branch::Destroy()

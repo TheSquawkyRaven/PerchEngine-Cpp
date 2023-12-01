@@ -56,7 +56,7 @@ void ButtonUI::OnMouseClick()
 	onClick();
 }
 
-void ButtonUI::Draw(SDL_Renderer* renderer)
+void ButtonUI::Draw(Renderer* renderer)
 {
 	if (texture == nullptr)
 	{
@@ -65,12 +65,10 @@ void ButtonUI::Draw(SDL_Renderer* renderer)
 
 	Vector2 position = GetGlobalPosition();
 	Vector2 size = GetGlobalSize(texture);
-	shared_ptr<SDL_Rect> rect = Rect2::CreateSDLRect(position, size);
+	rect.SetPosition(position);
+	rect.SetSize(size);
 
-	SDL_SetTextureColorMod(texture->GetSDLTexture(), color.r, color.g, color.b);
-	SDL_SetTextureAlphaMod(texture->GetSDLTexture(), color.a);
-	SDL_RenderCopy(renderer, texture->GetSDLTexture(), nullptr, rect.get());
-
+	renderer->DrawTexture(texture.get(), &color, nullptr, &rect);
 }
 
 void ButtonUI::OnDestroy()

@@ -9,13 +9,12 @@ using namespace Perch;
 using namespace Squawk;
 
 
-void Line2D::Draw(SDL_Renderer* renderer)
+void Line2D::Draw(Renderer* renderer)
 {
 	Vector2 start = GetGlobalStartPosition();
 	Vector2 end = GetGlobalEndPosition();
 
-	SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, color.a);
-	SDL_RenderDrawLine(renderer, start.x, start.y, end.x, end.y);
+	renderer->DrawLine(start.x, start.y, end.x, end.y, &color);
 }
 
 Vector2 Line2D::GetGlobalStartPosition()

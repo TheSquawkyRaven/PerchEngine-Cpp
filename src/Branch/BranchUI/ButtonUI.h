@@ -25,6 +25,8 @@ namespace Perch
 
 	private:
 
+		Rect2 rect = Rect2();
+
 		bool isHeld = false;
 
 		std::shared_ptr<Texture> texture = nullptr;
@@ -66,7 +68,7 @@ namespace Perch
 		// Click started and released in rect (both started and released in rect)
 		PERCH_API virtual void OnMouseClick() override;
 
-		PERCH_API virtual void Draw(SDL_Renderer* renderer) override;
+		PERCH_API virtual void Draw(Renderer* renderer) override;
 		PERCH_API virtual void OnDestroy() override;
 
 		PERCH_API virtual Vector2 GetGlobalSize(std::shared_ptr<Texture> texture);

@@ -17,6 +17,9 @@
 #include "EngineComponents/Random.h"
 #include "EngineComponents/Resource.h"
 
+#include "Renderer/Renderer.h"
+#include "Renderer/SDLRenderer.h"
+
 #include "Structs/Vector2.h"
 #include "Structs/Vector2i.h"
 #include "Structs/Rect2.h"
@@ -34,6 +37,8 @@
 namespace Perch
 {
 
+	class Renderer;
+	class SDLRenderer;
 	class Script;
 	class Collider2D;
 
@@ -43,9 +48,15 @@ namespace Perch
 
 	public:
 
+		enum RendererChoice
+		{
+			SDLRenderer = 1,
+		};
+
 		std::string windowName = "";
 		Vector2i windowSize = Vector2i(640, 480);
 
+		RendererChoice rendererChoice = SDLRenderer;
 		Color clearColor = Color();
 
 		bool showDebug = false;
@@ -73,8 +84,7 @@ namespace Perch
 		// SDL Window for rendering into
 		SDL_Window* mainWindow = nullptr;
 
-		// SDL Renderer for hardware rendering
-		SDL_Renderer* mainWindowRenderer = nullptr;
+		Renderer* mainWindowRenderer = nullptr;
 
 		// Root is not deleted when deconstructing because the destroy function will delete itself!
 		std::unique_ptr<Branch> root = nullptr;
@@ -97,7 +107,7 @@ namespace Perch
 		PERCH_API inline Rect2 GetMainWindowRect() const { return mainWindowRect; }
 		PERCH_API inline Vector2 GetMainWindowSize() { return mainWindowRect.GetSize(); }
 		PERCH_API inline bool DoShowDebug() { return config->showDebug; }
-		PERCH_API inline SDL_Renderer* GetMainWindowRenderer() { return mainWindowRenderer; }
+		PERCH_API inline Renderer* GetMainWindowRenderer() { return mainWindowRenderer; }
 		
 		PERCH_API inline Input* GetInput() const { return input.get(); }
 		PERCH_API inline Random* GetRandom() const { return random.get(); }
@@ -165,8 +175,8 @@ namespace Perch
 		PERCH_API void SimulateUnuseViewport(Viewport* viewport);
 
 		// Called in Draw and DrawOut to set the current viewport
-		PERCH_API void UseViewport(SDL_Renderer* renderer, Viewport* viewport);
-		PERCH_API void UnuseViewport(SDL_Renderer* renderer, Viewport* viewport);
+		PERCH_API void UseViewport(Renderer* renderer, Viewport* viewport);
+		PERCH_API void UnuseViewport(Renderer* renderer, Viewport* viewport);
 
 		PERCH_API Viewport* GetCurrentViewport();
 		PERCH_API void ClearViewportStack();

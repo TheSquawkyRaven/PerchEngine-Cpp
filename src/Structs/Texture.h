@@ -16,25 +16,34 @@
 
 #include <memory>
 #include <string>
-#include "../Engine.h"
 
 namespace Perch
 {
 
-	struct SDLTextureDeleter
-	{
-		void operator()(SDL_Texture* sdlTexture)
-		{
-			Squawk::Log::Print("Texture Destroyed");
-			SDL_DestroyTexture(sdlTexture);
-		}
-	};
+	class Engine;
+
+	class Renderer;
+	class SDLRenderer;
 
 	/// <summary>
 	/// 
 	/// </summary>
 	struct Texture
 	{
+
+		friend Renderer;
+		friend SDLRenderer;
+
+	private:
+
+		struct SDLTextureDeleter
+		{
+			void operator()(SDL_Texture* sdlTexture)
+			{
+				Squawk::Log::Print("Texture Destroyed");
+				SDL_DestroyTexture(sdlTexture);
+			}
+		};
 
 		// # Variables + Getters/Setters
 	private:
@@ -43,7 +52,6 @@ namespace Perch
 		Vector2i size = Vector2i();
 
 	public:
-		PERCH_API inline SDL_Texture* GetSDLTexture() { return sdlTexture.get(); }
 
 		PERCH_API Vector2i GetSize() const;
 
@@ -53,9 +61,7 @@ namespace Perch
 		// # Functions
 
 	private:
-
-		static SDL_Texture* LoadTexture(SDL_Renderer* renderer, std::string path);
-
+		
 		Texture(SDL_Texture* sdlTexture);
 
 	public:

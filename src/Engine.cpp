@@ -4,6 +4,7 @@
 
 #include "Squawk/Log.h"
 #include "Branch/Branch.h"
+
 #include <cassert>
 
 using namespace std;
@@ -23,9 +24,8 @@ void Engine::Update(SDL_Event* e, bool* quit)
 	root->_CollisionUpdate();
 	colliderStack.clear();	// TODO move to Physics2D function
 
-	Color c = config->clearColor;
-	SDL_SetRenderDrawColor(mainWindowRenderer, c.r, c.g, c.b, c.a);
-	SDL_RenderClear(mainWindowRenderer);
+	mainWindowRenderer->SetClearColor(&config->clearColor);
+	mainWindowRenderer->Clear();
 
 	// Update branch destruction before drawing
 	UpdateBranchDestruction();
@@ -35,7 +35,7 @@ void Engine::Update(SDL_Event* e, bool* quit)
 	UnuseViewport(mainWindowRenderer, rootViewport.get());
 	ClearViewportStack();
 
-	SDL_RenderPresent(mainWindowRenderer);
+	mainWindowRenderer->Flush();
 
 	if (doQuit)
 	{
@@ -103,13 +103,31 @@ bool Engine::InitMainWindow()
 		return false;
 	}
 
-	// Hardware Accelerated renderer with VSync
-	mainWindowRenderer = SDL_CreateRenderer(mainWindow, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
-	if (mainWindowRenderer == nullptr)
+	// Renderer choice
+	switch (config->rendererChoice)
 	{
-		Log::Errorf("Renderer cannot be created! SDL_ERROR: %s", SDL_GetError());
+	case EngineConfig::SDLRenderer:
+	{
+		SDLRenderer* sdlRenderer = new SDLRenderer();
+		bool success = sdlRenderer->InitializeRenderer(mainWindow, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+		if (!success)
+		{
+			return false;
+		}
+		mainWindowRenderer = sdlRenderer;
+		break;
+	}
+	default:
+	{
+		Log::Errorf("Unkown renderer choice! Renderer: %d", (int)config->rendererChoice);
 		return false;
 	}
+	}
+
+	// Renderer settings
+	mainWindowRenderer->SetClearColor(&config->clearColor);
+	mainWindowRenderer->Clear();
+
 
 	// PNG Loading
 	// Attempt to initialize the PNG Loader
@@ -133,12 +151,6 @@ bool Engine::InitMainWindow()
 		Log::Errorf("SDL_TTF cannot initialize! SDL_TTF_ERROR: %s", TTF_GetError());
 		return false;
 	}
-
-	// Renderer settings
-	Color c = config->clearColor;
-	SDL_SetRenderDrawBlendMode(mainWindowRenderer, SDL_BLENDMODE_BLEND);
-	SDL_SetRenderDrawColor(mainWindowRenderer, c.r, c.g, c.b, c.a);
-	SDL_RenderClear(mainWindowRenderer);
 
 	return true;
 }
@@ -181,7 +193,7 @@ void Engine::QuitEngine()
 {
 	root->Destroy();
 
-	SDL_DestroyRenderer(mainWindowRenderer);
+	mainWindowRenderer->Destroy();
 	SDL_DestroyWindow(mainWindow);
 
 	mainWindow = nullptr;
@@ -228,13 +240,13 @@ void Engine::SimulateUnuseViewport(Viewport* viewport)
 	viewportStack.pop();
 }
 
-void Engine::UseViewport(SDL_Renderer* renderer, Viewport* viewport)
+void Engine::UseViewport(Renderer* renderer, Viewport* viewport)
 {
 	viewportStack.push(viewport);
-	SDL_RenderSetViewport(renderer, viewport->GetSDLRect().get());
+	renderer->UseViewport(viewport);
 }
 
-void Engine::UnuseViewport(SDL_Renderer* renderer, Viewport* viewport)
+void Engine::UnuseViewport(Renderer* renderer, Viewport* viewport)
 {
 	Viewport* viewportCheck = viewportStack.top();
 	if (viewportCheck != viewport)
@@ -247,7 +259,7 @@ void Engine::UnuseViewport(SDL_Renderer* renderer, Viewport* viewport)
 		return;
 	}
 	Viewport* currentViewport = viewportStack.top();
-	SDL_RenderSetViewport(renderer, currentViewport->GetSDLRect().get());
+	renderer->UseViewport(currentViewport);
 }
 
 Viewport* Engine::GetCurrentViewport()

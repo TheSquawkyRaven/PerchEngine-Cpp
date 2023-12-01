@@ -39,7 +39,7 @@ namespace Perch
 
 		PERCH_API Point2D(Engine* engine) : Branch2D(engine) {};
 
-		PERCH_API virtual void Draw(SDL_Renderer* renderer) override;
+		PERCH_API virtual void Draw(Renderer* renderer) override;
 
 		PERCH_API Vector2 GetGlobalPointPosition();
 

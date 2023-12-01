@@ -26,6 +26,8 @@ namespace Perch
 		// # Variables + Getters/Setters
 	private:
 
+		Rect2 borderedGlobalRect = Rect2();
+
 		float borderSize = 1.0f;
 		Color borderColor = Color(0);
 
@@ -47,7 +49,7 @@ namespace Perch
 
 		PERCH_API BorderedRectangle2D(Engine* engine) : Rectangle2D(engine) {};
 
-		PERCH_API virtual void Draw(SDL_Renderer* renderer) override;
+		PERCH_API virtual void Draw(Renderer* renderer) override;
 
 		// ###
 

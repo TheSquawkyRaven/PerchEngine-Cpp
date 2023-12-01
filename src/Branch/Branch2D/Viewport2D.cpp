@@ -18,12 +18,12 @@ void Viewport2D::UpdateOut()
 	engine->SimulateUnuseViewport(viewport.get());
 }
 
-void Viewport2D::Draw(SDL_Renderer* renderer)
+void Viewport2D::Draw(Renderer* renderer)
 {
 	engine->UseViewport(renderer, viewport.get());
 }
 
-void Viewport2D::DrawOut(SDL_Renderer* renderer)
+void Viewport2D::DrawOut(Renderer* renderer)
 {
 	engine->UnuseViewport(renderer, viewport.get());
 }

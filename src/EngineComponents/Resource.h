@@ -18,9 +18,9 @@
 namespace Perch
 {
 
-	class Texture;
-	class Font;
-	class Clip;
+	struct Texture;
+	struct Font;
+	struct Clip;
 
 	class Resource
 	{

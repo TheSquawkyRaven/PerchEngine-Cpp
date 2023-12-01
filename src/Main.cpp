@@ -93,11 +93,12 @@ void OnRootCreate(Engine* engine, Branch* root)
 	sprite2->position = Vector2(300, 100);
 	sprite2->scale = Vector2(1.5, 1);
 	sprite2->flipX = true;
+	sprite2->angle = 0;
 
 	sprite3->SetTexture(bmp);
-	sprite3->position = Vector2(200, 300);
+	sprite3->position = Vector2(100, 100);
 	sprite3->scale = Vector2(1.5, 1.5);
-	sprite3->rotatePivot = Vector2(0, 0);
+	//sprite3->rotatePivot = Vector2(0, 0);
 	sprite3->angle = 45;
 
 	unique_ptr<BorderedRectangle2D> rectangle(new BorderedRectangle2D(engine));
@@ -121,10 +122,10 @@ void OnRootCreate(Engine* engine, Branch* root)
 
 	root->AttachChild(move(point));
 
-	Viewport viewport = Viewport(Rect2(640, 360, 640, 360));
+	Viewport* viewport = new Viewport(Rect2(640, 360, 640, 360));
 	
 	unique_ptr<Viewport2D> viewport2D(new Viewport2D(engine));
-	viewport2D->SetViewport(std::shared_ptr<Viewport>(new Viewport(viewport)));
+	viewport2D->SetViewport(std::shared_ptr<Viewport>(viewport));
 	viewport2D->AttachChild(move(sprite3));
 
 	root->AttachChild(move(viewport2D));

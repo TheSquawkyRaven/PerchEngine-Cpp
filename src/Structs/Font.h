@@ -15,10 +15,11 @@
 
 #include <memory>
 #include <string>
-#include "../Engine.h"
 
 namespace Perch
 {
+
+	class Engine;
 
 	struct SDLFontDeleter
 	{

@@ -2,6 +2,8 @@
 
 #include "Texture.h"
 
+#include "../Engine.h"
+
 #include <iostream>
 #include <string>
 #include <memory>
@@ -10,30 +12,15 @@ using namespace std;
 using namespace Perch;
 using namespace Squawk;
 
-Vector2i Texture::GetSize() const
-{
-	return size;
-}
-
-SDL_Texture* Texture::LoadTexture(SDL_Renderer* renderer, string path)
-{
-	SDL_Texture* texture = nullptr;
-
-	texture = IMG_LoadTexture(renderer, path.c_str());
-	if (texture == nullptr)
-	{
-		Log::Errorf("Failed to load texture, path: %s! SDL_IMAGE_ERROR: %s", path.c_str(), IMG_GetError());
-		return nullptr;
-	}
-
-	return texture;
-}
 
 Texture::Texture(SDL_Texture* sdlTexture)
 {
 	this->sdlTexture = unique_ptr<SDL_Texture, SDLTextureDeleter>(sdlTexture);
-	SDL_SetTextureBlendMode(sdlTexture, SDL_BLENDMODE_BLEND);
-	SDL_QueryTexture(sdlTexture, nullptr, nullptr, &size.x, &size.y);
+}
+
+Vector2i Texture::GetSize() const
+{
+	return size;
 }
 
 shared_ptr<Texture> Texture::Create(Engine* engine, string path)
@@ -44,13 +31,21 @@ shared_ptr<Texture> Texture::Create(Engine* engine, string path)
 		return texture;
 	}
 
-	SDL_Texture* sdlTexture = LoadTexture(engine->GetMainWindowRenderer(), path);
-	if (sdlTexture == nullptr)
+	SDLRenderer* sdlRenderer = dynamic_cast<SDLRenderer*>(engine->GetMainWindowRenderer());
+	if (sdlRenderer == nullptr)
+	{
+		Log::Error("Texture loading does not support non SDL_Renderer rendering yet!");
+		return nullptr;
+	}
+
+	Texture* text = sdlRenderer->LoadTexture(path.c_str());
+	if (text == nullptr)
 	{
 		return nullptr;
 	}
 
-	texture = shared_ptr<Texture>(new Texture(sdlTexture));
+	texture = shared_ptr<Texture>(text);
+
 	engine->GetResource()->AddLoadedTexture(path, weak_ptr<Texture>(texture));
 
 	return texture;
@@ -63,23 +58,21 @@ shared_ptr<Texture> Texture::Create(Engine* engine, std::shared_ptr<Font> font, 
 		return nullptr;
 	}
 
+	SDLRenderer* sdlRenderer = dynamic_cast<SDLRenderer*>(engine->GetMainWindowRenderer());
+	if (sdlRenderer == nullptr)
+	{
+		Log::Error("Texture loading for font does not support non SDL_Renderer rendering yet!");
+		return nullptr;
+	}
+
 	font->SetFontSize(fontSize);
-	SDL_Surface* sdlSurface = TTF_RenderText_Solid(font->GetSDLFont(), text.c_str(), color);
-	if (sdlSurface == nullptr)
+	Texture* texture = sdlRenderer->LoadFontTexture(font.get(), text.c_str(), &color);
+	if (texture == nullptr)
 	{
-		Log::Errorf("Failed to create surface from font! SDL_TTF_ERROR: %s", TTF_GetError());
 		return nullptr;
 	}
 
-	SDL_Texture* sdlTexture = SDL_CreateTextureFromSurface(engine->GetMainWindowRenderer(), sdlSurface);
-	SDL_FreeSurface(sdlSurface);
-	if (sdlTexture == nullptr)
-	{
-		Log::Errorf("Failed to convert surface to texture! SDL_IMAGE_ERROR: %s", IMG_GetError());
-		return nullptr;
-	}
+	shared_ptr<Texture> textureShared(texture);
 
-	shared_ptr<Texture> texture = shared_ptr<Texture>(new Texture(sdlTexture));
-
-	return texture;
+	return textureShared;
 }

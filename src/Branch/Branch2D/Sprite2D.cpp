@@ -89,15 +89,15 @@ SDL_RendererFlip Sprite2D::GetSDLFlip() const
 	return flip;
 }
 
-shared_ptr<SDL_Point> Sprite2D::GetRotateOrigin()
+Vector2 Sprite2D::GetRotateOrigin()
 {
 	if (texture == nullptr)
 	{
-		return nullptr;
+		return Vector2();
 	}
 	Vector2 rotateOrigin = rotatePivot * GetSize();
 
-	return rotateOrigin.GetSDLPoint();
+	return rotateOrigin;
 }
 
 Vector2 Sprite2D::GetPositionPivotOrigin()
@@ -110,13 +110,7 @@ Vector2 Sprite2D::GetPositionPivotOrigin()
 	return positionOrigin;
 }
 
-void Sprite2D::Update()
-{
-	// Test Update
-	//Position.X += 0.01f;
-}
-
-void Sprite2D::Draw(SDL_Renderer* renderer)
+void Sprite2D::Draw(Renderer* renderer)
 {
 	if (texture == nullptr)
 	{
@@ -125,13 +119,15 @@ void Sprite2D::Draw(SDL_Renderer* renderer)
 
 	Vector2 position = GetGlobalPosition() - GetPositionPivotOrigin();
 	Vector2 size = GetGlobalSize();
-	shared_ptr<SDL_Rect> rect = Rect2::CreateSDLRect(position, size);
+	rect.SetPosition(position);
+	rect.SetSize(size);
 
-	shared_ptr<SDL_Rect> cutSDLRect = cutRect.GetSDLRect();
+	Vector2 rotateOrigin = GetRotateOrigin();
 
-	SDL_SetTextureColorMod(texture->GetSDLTexture(), color.r, color.g, color.b);
-	SDL_SetTextureAlphaMod(texture->GetSDLTexture(), color.a);
-	SDL_RenderCopyEx(renderer, texture->GetSDLTexture(), cutSDLRect.get(), rect.get(), angle, GetRotateOrigin().get(), GetSDLFlip());
+	renderer->DrawTexture(texture.get(), &color,
+		&cutRect, &rect,
+		angle, &rotateOrigin,
+		flipX, flipY);
 }
 
 void Sprite2D::OnDestroy()

@@ -25,6 +25,10 @@ namespace Perch
 
 		// # Variables + Getters/Setters
 
+	private:
+
+		Rect2 globalRect = Rect2();
+
 	public:
 
 		Rect2 rect = Rect2();
@@ -40,7 +44,7 @@ namespace Perch
 
 		PERCH_API Rectangle2D(Engine* engine) : Branch2D(engine) {};
 
-		PERCH_API virtual void Draw(SDL_Renderer* renderer) override;
+		PERCH_API virtual void Draw(Renderer* renderer) override;
 
 		PERCH_API Vector2 GetRectSize();
 		PERCH_API Vector2 GetRectGlobalSize();

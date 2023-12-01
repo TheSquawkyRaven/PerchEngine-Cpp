@@ -9,15 +9,15 @@ using namespace Perch;
 using namespace Squawk;
 
 
-void Rectangle2D::Draw(SDL_Renderer* renderer)
+void Rectangle2D::Draw(Renderer* renderer)
 {
 	Vector2 position = GetRectGlobalPosition();
 	Vector2 size = GetRectSize();
 
-	shared_ptr<SDL_Rect> rect = Rect2::CreateSDLRect(position, size);
+	globalRect.SetPosition(position);
+	globalRect.SetSize(size);
 
-	SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, color.a);
-	SDL_RenderFillRect(renderer, rect.get());
+	renderer->DrawRect(&globalRect, &color);
 }
 
 Vector2 Rectangle2D::GetRectSize()

@@ -46,7 +46,7 @@ namespace Perch
 
 		PERCH_API virtual void CollisionUpdate() override;
 		PERCH_API virtual void PhysicsUpdate() override;
-		PERCH_API virtual void Draw(SDL_Renderer* renderer) override;
+		PERCH_API virtual void Draw(Renderer* renderer) override;
 
 		PERCH_API virtual void OnCollision(Collider2D* collider);
 

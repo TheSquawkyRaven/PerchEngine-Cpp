@@ -42,7 +42,7 @@ void Collider2D::PhysicsUpdate()
 
 }
 
-void Collider2D::Draw(SDL_Renderer* renderer)
+void Collider2D::Draw(Renderer* renderer)
 {
 	if (!engine->DoShowDebug())
 	{
@@ -50,15 +50,14 @@ void Collider2D::Draw(SDL_Renderer* renderer)
 	}
 
 	Color color = Color::Cyan();
-	SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, color.a);
 
 	float l, t, r, b;
 	GetAABB(l, t, r, b);
 
-	SDL_RenderDrawLine(renderer, l, b, l, t);
-	SDL_RenderDrawLine(renderer, l, t, r, t);
-	SDL_RenderDrawLine(renderer, r, t, r, b);
-	SDL_RenderDrawLine(renderer, r, b, l, b);
+	renderer->DrawLine(l, b, l, t, &color);
+	renderer->DrawLine(l, t, r, t, &color);
+	renderer->DrawLine(r, t, r, b, &color);
+	renderer->DrawLine(r, b, l, b, &color);
 }
 
 void Collider2D::OnCollision(Collider2D* collider)
