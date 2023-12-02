@@ -39,11 +39,13 @@ namespace Perch
 
 	class Renderer;
 	class SDLRenderer;
+	struct SDLRenderer::RendererLayerConfig;
+
 	class Script;
 	class Collider2D;
 
 	// Config definition
-	class EngineConfig
+	struct EngineConfig
 	{
 
 	public:
@@ -60,6 +62,8 @@ namespace Perch
 		Color clearColor = Color();
 
 		bool showDebug = false;
+
+		SDLRenderer::RendererLayerConfig rendererLayerConfig;
 
 	};
 

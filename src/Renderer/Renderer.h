@@ -11,6 +11,7 @@ namespace Perch
 {
 
 	class Engine;
+	class Branch;
 
 	struct Color;
 	struct Vector2;
@@ -51,6 +52,8 @@ namespace Perch
 		virtual void SetDrawColor(Color* color) = 0;
 		virtual void Clear() = 0;
 
+		virtual void SetDrawOrder(Branch* branch, int layer, int order) = 0;
+		virtual void Draw() = 0;
 		virtual void Flush() = 0;
 
 		virtual void DrawTexture(Texture* texture, Color* color,

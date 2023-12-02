@@ -9,6 +9,11 @@ using namespace Perch;
 using namespace Squawk;
 
 
+void Rectangle2D::SetupDraw(Renderer* renderer)
+{
+	SetupDefaultDrawOrder(renderer);
+}
+
 void Rectangle2D::Draw(Renderer* renderer)
 {
 	Vector2 position = GetRectGlobalPosition();

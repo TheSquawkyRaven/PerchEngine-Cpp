@@ -29,12 +29,14 @@ void Engine::Update(SDL_Event* e, bool* quit)
 
 	// Update branch destruction before drawing
 	UpdateBranchDestruction();
-	UseViewport(mainWindowRenderer, rootViewport.get());
-	root->_Draw(mainWindowRenderer);
-	root->_DrawOut(mainWindowRenderer);
-	UnuseViewport(mainWindowRenderer, rootViewport.get());
+	//UseViewport(mainWindowRenderer, rootViewport.get());
+	root->_SetupDraw(mainWindowRenderer);
+	/*root->_Draw(mainWindowRenderer);
+	root->_DrawOut(mainWindowRenderer);*/
+	//UnuseViewport(mainWindowRenderer, rootViewport.get());
 	ClearViewportStack();
 
+	mainWindowRenderer->Draw();
 	mainWindowRenderer->Flush();
 
 	if (doQuit)

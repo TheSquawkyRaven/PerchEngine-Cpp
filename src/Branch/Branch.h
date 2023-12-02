@@ -42,11 +42,6 @@ namespace Perch
 		PERCH_API inline bool IsActive() const { return active; }
 		PERCH_API bool IsGloballyActive() const;
 
-	protected:
-
-		Engine* engine = nullptr;
-		std::unique_ptr<Script> script = nullptr;
-
 	private:
 
 		Branch* parent = nullptr;
@@ -54,11 +49,26 @@ namespace Perch
 
 		bool readyExecuted = false;
 
+		int drawLayer = 0;
+		int drawOrder = 0;
+
 	public:
 
 		PERCH_API inline bool IsReady() const { return readyExecuted; }
 
 		PERCH_API inline Branch* GetParent() { return parent; }
+
+	protected:
+
+		Engine* engine = nullptr;
+		std::unique_ptr<Script> script = nullptr;
+
+	public:
+
+		// Ignores self's draw layer if true
+		bool inheritDrawLayer = true;
+		// Only works if inheritDrawLayer is true. This draw order will be added to parent's draw order.
+		bool relativeDrawOrder = true;
 
 		// ###
 
@@ -78,8 +88,7 @@ namespace Perch
 		void _UpdateOut();
 		void _PhysicsUpdate();
 		void _CollisionUpdate();
-		void _Draw(Renderer* renderer);
-		void _DrawOut(Renderer* renderer);
+		void _SetupDraw(Renderer* renderer);
 		// Active independent
 		void _Destroy(bool isChainedDestroy);
 
@@ -110,8 +119,21 @@ namespace Perch
 		// CollisionUpdate - Preorder, Called every frame after physics update, before draw. Active dependent
 		PERCH_API virtual void CollisionUpdate();
 
-		// Draw - Preorder, Called every frame. Update first, then draw. Active dependent
+		PERCH_API void SetupDefaultDrawOrder(Renderer* renderer);
+		// SetupDraw - Preorder, Called every frame. Update first, then SetupDraw. Active dependent
+		PERCH_API virtual void SetupDraw(Renderer* renderer);
+		// Returns the parent's draw layer if inheritDrawLayer is true
+		PERCH_API virtual int GetDrawLayer();
+		// Returns this draw order's + parent's draw order relativeDrawOrder is false, otherwise returns this draw order.
+		PERCH_API virtual int GetDrawOrder();
+		// Sets inheritDrawLayer to true or false if it equals the parent's draw layer
+		PERCH_API virtual void SetDrawLayer(int drawLayer);
+		PERCH_API virtual void SetDrawOrder(int drawOrder);
+
+		void _Draw(Renderer* renderer);
+		// Draw - Order dependent on SetupDraw. SetupDraw must be overriden to setup the draw layer and order.
 		PERCH_API virtual void Draw(Renderer* renderer);
+		void _DrawOut(Renderer* renderer);
 		// DrawOut - Called every frame right after Drawing all children. Active dependent
 		PERCH_API virtual void DrawOut(Renderer* renderer);
 

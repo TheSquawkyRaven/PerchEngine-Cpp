@@ -18,13 +18,14 @@ void Viewport2D::UpdateOut()
 	engine->SimulateUnuseViewport(viewport.get());
 }
 
+// TODO Set proper viewport drawing with new renderer system
 void Viewport2D::Draw(Renderer* renderer)
 {
-	engine->UseViewport(renderer, viewport.get());
+	//engine->UseViewport(renderer, viewport.get());
 }
 
 void Viewport2D::DrawOut(Renderer* renderer)
 {
-	engine->UnuseViewport(renderer, viewport.get());
+	//engine->UnuseViewport(renderer, viewport.get());
 }
 

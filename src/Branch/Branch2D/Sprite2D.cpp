@@ -110,6 +110,11 @@ Vector2 Sprite2D::GetPositionPivotOrigin()
 	return positionOrigin;
 }
 
+void Sprite2D::SetupDraw(Renderer* renderer)
+{
+	SetupDefaultDrawOrder(renderer);
+}
+
 void Sprite2D::Draw(Renderer* renderer)
 {
 	if (texture == nullptr)

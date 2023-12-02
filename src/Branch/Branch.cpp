@@ -126,35 +126,20 @@ void Branch::_CollisionUpdate()
     }
 }
 
-void Branch::_Draw(Renderer* renderer)
+void Branch::_SetupDraw(Renderer* renderer)
 {
     if (!active || markedForDestruction)
     {
         return;
     }
 
-    // Preorder draw order (Parent draw first)
-    Draw(renderer);
-    if (script != nullptr)
-    {
-        script->Draw(renderer);
-    }
-    // Draw through recursion
+    // Preorder SetupDraw order (Parent SetupDraw first)
+    SetupDraw(renderer);
+    // SetupDraw through recursion
     for (size_t i = 0; i < children.size(); ++i)
     {
-        children[i]->_Draw(renderer);
-        children[i]->_DrawOut(renderer);
+        children[i]->_SetupDraw(renderer);
     }
-}
-
-void Branch::_DrawOut(Renderer* renderer)
-{
-    if (!active || markedForDestruction)
-    {
-        return;
-    }
-
-    DrawOut(renderer);
 }
 
 void Branch::_Destroy(bool isChainedDestroy)
@@ -246,8 +231,98 @@ void Branch::PhysicsUpdate()
 void Branch::CollisionUpdate()
 {}
 
+void Branch::SetupDefaultDrawOrder(Renderer * renderer)
+{
+    renderer->SetDrawOrder(this, GetDrawLayer(), GetDrawOrder());
+}
+
+void Branch::SetupDraw(Renderer* renderer)
+{
+
+}
+
+int Branch::GetDrawLayer()
+{
+    if (parent == nullptr)
+    {
+        return drawLayer;
+    }
+    if (inheritDrawLayer)
+    {
+        return parent->GetDrawLayer();
+    }
+    return drawLayer;
+}
+
+int Branch::GetDrawOrder()
+{
+    if (!inheritDrawLayer)
+    {
+        return drawOrder;
+    }
+    if (!relativeDrawOrder)
+    {
+        return drawOrder;
+    }
+    if (parent == nullptr)
+    {
+        return drawOrder;
+    }
+    return drawOrder + parent->GetDrawOrder();
+}
+
+void Branch::SetDrawLayer(int drawLayer)
+{
+    this->drawLayer = drawLayer;
+    if (parent != nullptr)
+    {
+        if (parent->GetDrawLayer() == drawLayer)
+        {
+            inheritDrawLayer = true;
+            return;
+        }
+    }
+    inheritDrawLayer = false;
+}
+
+void Branch::SetDrawOrder(int drawOrder)
+{
+    this->drawOrder = drawOrder;
+}
+
+void Branch::_Draw(Renderer* renderer)
+{
+    if (!active || markedForDestruction)
+    {
+        return;
+    }
+
+    // Preorder draw order (Parent draw first)
+    Draw(renderer);
+    if (script != nullptr)
+    {
+        script->Draw(renderer);
+    }
+    //// Draw through recursion
+    //for (size_t i = 0; i < children.size(); ++i)
+    //{
+    //    children[i]->_Draw(renderer);
+    //    children[i]->_DrawOut(renderer);
+    //}
+}
+
 void Branch::Draw(Renderer* renderer)
 {}
+
+void Branch::_DrawOut(Renderer* renderer)
+{
+    if (!active || markedForDestruction)
+    {
+        return;
+    }
+
+    DrawOut(renderer);
+}
 
 void Branch::DrawOut(Renderer* renderer)
 {}

@@ -68,6 +68,7 @@ namespace Perch
 		// Click started and released in rect (both started and released in rect)
 		PERCH_API virtual void OnMouseClick() override;
 
+		PERCH_API virtual void SetupDraw(Renderer* renderer) override;
 		PERCH_API virtual void Draw(Renderer* renderer) override;
 		PERCH_API virtual void OnDestroy() override;
 

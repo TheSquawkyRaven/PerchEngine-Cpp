@@ -9,11 +9,142 @@
 #include "../Structs/Rect2.h"
 #include "../Structs/Viewport.h"
 
+#include "../Branch/Branch.h"
+
 
 using namespace std;
 using namespace Perch;
 using namespace Squawk;
 
+
+int SDLRenderer::RendererLayerConfig::GetIndexByLayerName(const char* name)
+{
+	/*for (int i = 0; i < layerNames.size(); i++)
+	{
+		if (layerNames[i] == name)
+		{
+			return i;
+		}
+	}*/
+	return -1;
+}
+
+bool SDLRenderer::DrawSorter::DrawLayer::DrawOrder::operator<(const DrawOrder& order) const
+{
+	return (index < order.index);
+}
+
+void SDLRenderer::DrawSorter::DrawLayer::DrawOrder::Add(Branch* branch)
+{
+	branches.push_back(branch);
+}
+
+void SDLRenderer::DrawSorter::DrawLayer::DrawOrder::Draw(Renderer* renderer)
+{
+	for (int i = 0; i < branches.size(); i++)
+	{
+		branches[i]->_Draw(renderer);
+	}
+}
+
+void SDLRenderer::DrawSorter::DrawLayer::DrawOrder::Clear()
+{
+	branches.clear();
+}
+
+bool SDLRenderer::DrawSorter::DrawLayer::operator<(const DrawLayer& layer) const
+{
+	return (order < layer.order);
+}
+
+void SDLRenderer::DrawSorter::DrawLayer::Add(Branch* branch, int order)
+{
+	DrawOrder* dOrder = nullptr;
+	for (int i = 0; i < drawOrder.size(); i++)
+	{
+		if (drawOrder[i].index == order)
+		{
+			dOrder = &drawOrder[i];
+			break;
+		}
+	}
+	if (dOrder == nullptr)
+	{
+		drawOrder.push_back(DrawLayer::DrawOrder{ order });
+		dOrder = &drawOrder[drawOrder.size() - 1];
+	}
+	dOrder->Add(branch);
+}
+
+void SDLRenderer::DrawSorter::DrawLayer::Sort()
+{
+	for (int i = 0; i < drawOrder.size(); i++)
+	{
+		sort(drawOrder.begin(), drawOrder.end());
+	}
+}
+
+void SDLRenderer::DrawSorter::DrawLayer::Draw(Renderer* renderer)
+{
+	for (int i = 0; i < drawOrder.size(); i++)
+	{
+		drawOrder[i].Draw(renderer);
+	}
+}
+
+void SDLRenderer::DrawSorter::DrawLayer::Clear()
+{
+	for (int i = 0; i < drawOrder.size(); i++)
+	{
+		drawOrder[i].Clear();
+	}
+	drawOrder.clear();
+}
+
+void SDLRenderer::DrawSorter::Add(Branch* branch, int layer, int order)
+{
+	DrawLayer* dLayer = nullptr;
+	for (int i = 0; i < drawLayers.size(); i++)
+	{
+		if (drawLayers[i].order == layer)
+		{
+			dLayer = &drawLayers[i];
+			break;
+		}
+	}
+	if (dLayer == nullptr)
+	{
+		drawLayers.push_back(DrawLayer{ layer });
+		dLayer = &drawLayers[drawLayers.size() - 1];
+	}
+	dLayer->Add(branch, order);
+}
+
+void SDLRenderer::DrawSorter::Sort()
+{
+	for (int i = 0; i < drawLayers.size(); i++)
+	{
+		drawLayers[i].Sort();
+	}
+	sort(drawLayers.begin(), drawLayers.end());
+}
+
+void SDLRenderer::DrawSorter::Draw(Renderer* renderer)
+{
+	for (int i = 0; i < drawLayers.size(); i++)
+	{
+		drawLayers[i].Draw(renderer);
+	}
+}
+
+void SDLRenderer::DrawSorter::Clear()
+{
+	for (int i = 0; i < drawLayers.size(); i++)
+	{
+		drawLayers[i].Clear();
+	}
+	drawLayers.clear();
+}
 
 bool SDLRenderer::InitializeRenderer()
 {
@@ -21,10 +152,10 @@ bool SDLRenderer::InitializeRenderer()
 	return false;
 }
 
-bool SDLRenderer::InitializeRenderer(SDL_Window* sdlWindow, int index, Uint32 flags)
+bool SDLRenderer::InitializeRenderer(SDL_Window* sdlWindow, int sdlIndex, Uint32 sdlFlags)
 {
 	// Hardware Accelerated renderer with VSync
-	sdlRenderer = SDL_CreateRenderer(sdlWindow, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+	sdlRenderer = SDL_CreateRenderer(sdlWindow, sdlIndex, sdlFlags);
 
 	if (sdlRenderer == nullptr)
 	{
@@ -37,6 +168,14 @@ bool SDLRenderer::InitializeRenderer(SDL_Window* sdlWindow, int index, Uint32 fl
 	return true;
 }
 
+void SDLRenderer::InitializeConfig(RendererLayerConfig* config)
+{
+	/*for (int i = 0; i < config->layerNames.size(); i++)
+	{
+		drawLayers.push_back(new vector<Branch*>[config->maxLayers]);
+	}*/
+}
+
 void SDLRenderer::SetDrawColor(Color* color)
 {
 	SDL_SetRenderDrawColor(sdlRenderer, color->r, color->g, color->b, color->a);
@@ -46,6 +185,18 @@ void SDLRenderer::Clear()
 {
 	SDL_SetRenderDrawColor(sdlRenderer, clearColor->r, clearColor->g, clearColor->b, clearColor->a);
 	SDL_RenderClear(sdlRenderer);
+}
+
+void SDLRenderer::SetDrawOrder(Branch* branch, int layer, int order)
+{
+	drawSorter.Add(branch, layer, order);
+}
+
+void SDLRenderer::Draw()
+{
+	drawSorter.Sort();
+	drawSorter.Draw(this);
+	drawSorter.Clear();
 }
 
 void SDLRenderer::Flush()
@@ -177,3 +328,12 @@ SDL_RendererFlip SDLRenderer::GetSDLFlip(bool flipX, bool flipY) const
 	}
 	return flip;
 }
+
+SDLRenderer::~SDLRenderer()
+{
+	/*for (vector<Branch*>* drawLayer : drawLayers)
+	{
+		delete[] drawLayer;
+	}*/
+}
+

@@ -56,6 +56,11 @@ void ButtonUI::OnMouseClick()
 	onClick();
 }
 
+void ButtonUI::SetupDraw(Renderer* renderer)
+{
+	SetupDefaultDrawOrder(renderer);
+}
+
 void ButtonUI::Draw(Renderer* renderer)
 {
 	if (texture == nullptr)

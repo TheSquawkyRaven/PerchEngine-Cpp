@@ -15,6 +15,8 @@
 #include "Renderer.h"
 
 #include <memory>
+#include <map>
+#include <vector>
 
 
 namespace Perch
@@ -25,29 +27,85 @@ namespace Perch
 
 		friend class Engine;
 
+	public:
+
+		struct RendererLayerConfig
+		{
+		public:
+
+			std::vector<const char*> layerNames;
+			int maxLayers = 256;
+
+			int GetIndexByLayerName(const char* name);
+
+		};
+
 		// # Variables + Getters/Setters
 
 	private:
+		
+		struct DrawSorter
+		{
+			struct DrawLayer
+			{
+				struct DrawOrder
+				{
+					int index;
+					std::vector<Branch*> branches;
+
+					bool operator <(const DrawOrder& order) const;
+					void Add(Branch* branch);
+					void Draw(Renderer* renderer);
+					void Clear();
+				};
+
+				int order;
+				std::vector<DrawOrder> drawOrder;
+
+				bool operator <(const DrawLayer& layer) const;
+				void Add(Branch* branch, int order);
+				void Sort();
+				void Draw(Renderer* renderer);
+				void Clear();
+			};
+
+			std::vector<DrawLayer> drawLayers;
+
+			void Add(Branch* branch, int layer, int order);
+			void Sort();
+			void Draw(Renderer* renderer);
+			void Clear();
+		};
 
 		SDL_Renderer* sdlRenderer;
 
+		DrawSorter drawSorter;
+
 	public:
+
+
 
 		// ###
 
 
 		// # Functions
 
+	private:
+
+
 	protected:
 
 		virtual bool InitializeRenderer() override;
-		virtual bool InitializeRenderer(SDL_Window* sdlWindow, int index, Uint32 flags);
+		virtual bool InitializeRenderer(SDL_Window* sdlWindow, int sdlIndex, Uint32 sdlFlags);
+		void InitializeConfig(RendererLayerConfig* rendererLayerConfig);
 
 	public:
 
 		virtual void SetDrawColor(Color* color) override;
 		virtual void Clear() override;
 
+		virtual void SetDrawOrder(Branch* branch, int layer, int order) override;
+		virtual void Draw() override;
 		virtual void Flush() override;
 
 		virtual void DrawTexture(Texture* texture, Color* color,
@@ -70,6 +128,8 @@ namespace Perch
 		Texture* LoadFontTexture(Font* font, const char* text, Color* color);
 
 		SDL_RendererFlip GetSDLFlip(bool flipX, bool flipY) const;
+
+		~SDLRenderer();
 
 		// ###
 	};

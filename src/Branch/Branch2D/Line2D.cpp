@@ -9,6 +9,11 @@ using namespace Perch;
 using namespace Squawk;
 
 
+void Line2D::SetupDraw(Renderer* renderer)
+{
+	SetupDefaultDrawOrder(renderer);
+}
+
 void Line2D::Draw(Renderer* renderer)
 {
 	Vector2 start = GetGlobalStartPosition();

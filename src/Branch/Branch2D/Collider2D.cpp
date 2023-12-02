@@ -42,13 +42,17 @@ void Collider2D::PhysicsUpdate()
 
 }
 
-void Collider2D::Draw(Renderer* renderer)
+void Collider2D::SetupDraw(Renderer* renderer)
 {
 	if (!engine->DoShowDebug())
 	{
 		return;
 	}
+	SetupDefaultDrawOrder(renderer);
+}
 
+void Collider2D::Draw(Renderer* renderer)
+{
 	Color color = Color::Cyan();
 
 	float l, t, r, b;

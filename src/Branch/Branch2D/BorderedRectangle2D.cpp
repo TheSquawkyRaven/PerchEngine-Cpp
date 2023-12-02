@@ -9,6 +9,11 @@ using namespace Perch;
 using namespace Squawk;
 
 
+void BorderedRectangle2D::SetupDraw(Renderer* renderer)
+{
+	SetupDefaultDrawOrder(renderer);
+}
+
 void BorderedRectangle2D::Draw(Renderer* renderer)
 {
 	Vector2 position = GetRectGlobalPosition() - Vector2(borderSize);

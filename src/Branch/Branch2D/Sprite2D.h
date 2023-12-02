@@ -85,6 +85,7 @@ namespace Perch
 
 		PERCH_API Sprite2D(Engine* engine) : Branch2D(engine) {};
 
+		PERCH_API virtual void SetupDraw(Renderer* renderer) override;
 		PERCH_API virtual void Draw(Renderer* renderer) override;
 		PERCH_API virtual void OnDestroy() override;
 

@@ -49,6 +49,7 @@ namespace Perch
 
 		PERCH_API BorderedRectangle2D(Engine* engine) : Rectangle2D(engine) {};
 
+		PERCH_API virtual void SetupDraw(Renderer* renderer) override;
 		PERCH_API virtual void Draw(Renderer* renderer) override;
 
 		// ###
