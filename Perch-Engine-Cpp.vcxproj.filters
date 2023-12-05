@@ -156,6 +156,9 @@
     <ClInclude Include="src\Renderer\SDLRenderer.h">
       <Filter>Header Files\Renderer</Filter>
     </ClInclude>
+    <ClInclude Include="src\Branch\Branch2D\ScrollingSprite2D.h">
+      <Filter>Header Files\Branch\Branch2D</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -256,6 +259,9 @@
     </ClCompile>
     <ClCompile Include="src\Renderer\SDLRenderer.cpp">
       <Filter>Source Files\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Branch\Branch2D\ScrollingSprite2D.cpp">
+      <Filter>Source Files\Branch\Branch2D</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -164,6 +164,7 @@
     <ClInclude Include="src\Branch\Branch2D\Point2D.h" />
     <ClInclude Include="src\Branch\Branch2D\Rectangle2D.h" />
     <ClInclude Include="src\Branch\Branch2D\Rigidbody2D.h" />
+    <ClInclude Include="src\Branch\Branch2D\ScrollingSprite2D.h" />
     <ClInclude Include="src\Branch\Branch2D\Sprite2D.h" />
     <ClInclude Include="src\Branch\Branch2D\Text2D.h" />
     <ClInclude Include="src\Branch\Branch2D\Viewport2D.h" />
@@ -204,6 +205,7 @@
     <ClCompile Include="src\Branch\Branch2D\Point2D.cpp" />
     <ClCompile Include="src\Branch\Branch2D\Rectangle2D.cpp" />
     <ClCompile Include="src\Branch\Branch2D\Rigidbody2D.cpp" />
+    <ClCompile Include="src\Branch\Branch2D\ScrollingSprite2D.cpp" />
     <ClCompile Include="src\Branch\Branch2D\Sprite2D.cpp" />
     <ClCompile Include="src\Branch\Branch2D\Text2D.cpp" />
     <ClCompile Include="src\Branch\Branch2D\Viewport2D.cpp" />

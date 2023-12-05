@@ -28,7 +28,7 @@ namespace Perch
 	{
 
 		// # Variables + Getters/Setters
-	private:
+	protected:
 
 		std::shared_ptr<Texture> texture = nullptr;
 
