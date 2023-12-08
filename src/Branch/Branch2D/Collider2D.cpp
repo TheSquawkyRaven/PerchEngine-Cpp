@@ -28,7 +28,7 @@ void Collider2D::CollisionUpdate()
 	}
 	for (Collider2D* collider : engine->colliderStack)
 	{
-		bool wasInContact = true;// collidersInContact.contains(collider);
+		bool wasInContact = collidersInContact.contains(collider);
 		bool isInContact = DoesCollideWith(collider);
 		if (!wasInContact && !isInContact)
 		{
