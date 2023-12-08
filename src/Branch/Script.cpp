@@ -1,6 +1,7 @@
 #include "pch.h"
 
 #include "Script.h"
+#include "Branch2D/Collider2D.h"
 
 #include "../Squawk/Log.h"
 #include "Branch.h"
@@ -33,5 +34,5 @@ void Script::Draw(Renderer* renderer)
 void Script::OnDestroy()
 {}
 
-void Script::OnCollision2D(Collider2D* collider)
+void Script::OnCollision2D(Collider2D* collider, CollisionState collisionState)
 {}

@@ -9,12 +9,12 @@ using namespace Perch;
 using namespace Squawk;
 
 
-void Collider2D::_OnCollision(Collider2D* collider)
+void Collider2D::_OnCollision(Collider2D* collider, CollisionState collisionState)
 {
-	OnCollision(collider);
+	OnCollision(collider, collisionState);
 	if (script != nullptr)
 	{
-		script->OnCollision2D(collider);
+		script->OnCollision2D(collider, collisionState);
 	}
 }
 
@@ -28,11 +28,34 @@ void Collider2D::CollisionUpdate()
 	}
 	for (Collider2D* collider : engine->colliderStack)
 	{
-		if (DoesCollideWith(collider))
+		bool wasInContact = true;// collidersInContact.contains(collider);
+		bool isInContact = DoesCollideWith(collider);
+		if (!wasInContact && !isInContact)
 		{
-			_OnCollision(collider);
-			collider->_OnCollision(this);
+			continue;
 		}
+		// Stay
+		if (wasInContact && isInContact)
+		{
+			_OnCollision(collider, CollisionState::Stay);
+			collider->_OnCollision(this, CollisionState::Stay);
+			continue;
+		}
+		// Enter
+		if (!wasInContact && isInContact)
+		{
+			collidersInContact.insert(collider);
+			collider->collidersInContact.insert(collider);
+			_OnCollision(collider, CollisionState::Enter);
+			collider->_OnCollision(this, CollisionState::Enter);
+			continue;
+		}
+		// Exit
+		collidersInContact.erase(collider);
+		collider->collidersInContact.erase(collider);
+		_OnCollision(collider, CollisionState::Exit);
+		collider->_OnCollision(this, CollisionState::Exit);
+		
 	}
 	engine->colliderStack.insert(this);
 }
@@ -64,7 +87,7 @@ void Collider2D::Draw(Renderer* renderer)
 	renderer->DrawLine(r, b, l, b, &color);
 }
 
-void Collider2D::OnCollision(Collider2D* collider)
+void Collider2D::OnCollision(Collider2D* collider, CollisionState collisionState)
 {
 
 }
@@ -108,7 +131,7 @@ void Collider2D::GetAABB(float& left, float& top, float& right, float& bottom)
 	Vector2 rectPos = rect.GetPosition();
 	Vector2 rectSize = rect.GetSize();
 
-	Vector2 pos = position + rectPos;
+	Vector2 pos = position + rectPos * scale;
 	Vector2 size = rectSize * scale;
 
 	left = pos.x;

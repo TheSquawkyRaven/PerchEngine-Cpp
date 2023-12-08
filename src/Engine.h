@@ -43,6 +43,7 @@ namespace Perch
 
 	class Script;
 	class Collider2D;
+	enum class CollisionState;
 
 	// Config definition
 	struct EngineConfig

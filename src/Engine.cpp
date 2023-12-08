@@ -24,11 +24,12 @@ void Engine::Update(SDL_Event* e, bool* quit)
 	root->_CollisionUpdate();
 	colliderStack.clear();	// TODO move to Physics2D function
 
+	// Update branch destruction before drawing
+	UpdateBranchDestruction();
+
 	mainWindowRenderer->SetClearColor(&config->clearColor);
 	mainWindowRenderer->Clear();
 
-	// Update branch destruction before drawing
-	UpdateBranchDestruction();
 	//UseViewport(mainWindowRenderer, rootViewport.get());
 	root->_SetupDraw(mainWindowRenderer);
 	/*root->_Draw(mainWindowRenderer);

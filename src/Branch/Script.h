@@ -67,7 +67,7 @@ namespace Perch
 		PERCH_API virtual void OnDestroy();
 
 		// OnCollision2D - Called when it receives a collision2D event
-		PERCH_API virtual void OnCollision2D(Collider2D* collider);
+		PERCH_API virtual void OnCollision2D(Collider2D* collider, CollisionState collisionState);
 		
 		// ###
 	};

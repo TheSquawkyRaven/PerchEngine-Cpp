@@ -14,19 +14,30 @@
 
 #include <SDL.h>
 #include <memory>
+#include <unordered_set>
 
 namespace Perch
 {
 
+	enum class CollisionState
+	{
+		Enter,
+		Stay,
+		Exit
+	};
+
 	/// <summary>
 	/// 
 	/// </summary>
-	// Children are drawn on this viewport
+	// 
 	class Collider2D : public Branch2D
 	{
+	public:
 
 		// # Variables + Getters/Setters
 	private:
+
+		std::unordered_set<Collider2D*> collidersInContact;
 
 	public:
 
@@ -38,7 +49,7 @@ namespace Perch
 
 	private:
 
-		void _OnCollision(Collider2D* collider);
+		void _OnCollision(Collider2D* collider, CollisionState collisionState);
 
 	public:
 
@@ -49,7 +60,9 @@ namespace Perch
 		PERCH_API virtual void SetupDraw(Renderer* renderer) override;
 		PERCH_API virtual void Draw(Renderer* renderer) override;
 
-		PERCH_API virtual void OnCollision(Collider2D* collider);
+		PERCH_API virtual void OnCollision(Collider2D* collider, CollisionState collisionState);
+
+		//PERCH_API virtual void AddToCollision(Collider2D* collider);
 
 		PERCH_API bool DoesCollideWith(Collider2D* collider);
 		PERCH_API void GetAABB(float& left, float& top, float& right, float& bottom);
