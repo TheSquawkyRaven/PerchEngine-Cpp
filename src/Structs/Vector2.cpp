@@ -84,9 +84,11 @@ Vector2 Vector2::operator+(Vector2 const& other)
 	return Vector2(x + other.x, y + other.y);
 }
 
-Vector2 Vector2::operator+=(Vector2 const& other)
+Vector2& Vector2::operator+=(Vector2 const& other)
 {
-	return Vector2(x + other.x, y + other.y);
+	x += other.x;
+	y += other.y;
+	return *this;
 }
 
 Vector2 Vector2::operator-(Vector2 const& other)
@@ -94,9 +96,11 @@ Vector2 Vector2::operator-(Vector2 const& other)
 	return Vector2(x - other.x, y - other.y);
 }
 
-Vector2 Vector2::operator-=(Vector2 const& other)
+Vector2& Vector2::operator-=(Vector2 const& other)
 {
-	return Vector2(x - other.x, y - other.y);
+	x -= other.x;
+	y -= other.y;
+	return *this;
 }
 
 Vector2 Vector2::operator*(Vector2 const& other)
@@ -104,9 +108,11 @@ Vector2 Vector2::operator*(Vector2 const& other)
 	return Vector2(x * other.x, y * other.y);
 }
 
-Vector2 Vector2::operator*=(Vector2 const& other)
+Vector2& Vector2::operator*=(Vector2 const& other)
 {
-	return Vector2(x * other.x, y * other.y);
+	x *= other.x;
+	y *= other.y;
+	return *this;
 }
 
 Vector2 Vector2::operator/(Vector2 const& other)
@@ -114,9 +120,11 @@ Vector2 Vector2::operator/(Vector2 const& other)
 	return Vector2(x / other.x, y / other.y);
 }
 
-Vector2 Vector2::operator/=(Vector2 const& other)
+Vector2& Vector2::operator/=(Vector2 const& other)
 {
-	return Vector2(x / other.x, y / other.y);
+	x /= other.x;
+	y /= other.y;
+	return *this;
 }
 
 Vector2 Vector2::operator+(float const& other)
@@ -124,9 +132,11 @@ Vector2 Vector2::operator+(float const& other)
 	return Vector2(x + other, y + other);
 }
 
-Vector2 Vector2::operator+=(float const& other)
+Vector2& Vector2::operator+=(float const& other)
 {
-	return Vector2(x + other, y + other);
+	x += other;
+	y += other;
+	return *this;
 }
 
 Vector2 Vector2::operator-(float const& other)
@@ -134,9 +144,11 @@ Vector2 Vector2::operator-(float const& other)
 	return Vector2(x - other, y - other);
 }
 
-Vector2 Vector2::operator-=(float const& other)
+Vector2& Vector2::operator-=(float const& other)
 {
-	return Vector2(x - other, y - other);
+	x -= other;
+	y -= other;
+	return *this;
 }
 
 Vector2 Vector2::operator*(float const& other)
@@ -144,9 +156,11 @@ Vector2 Vector2::operator*(float const& other)
 	return Vector2(x * other, y * other);
 }
 
-Vector2 Vector2::operator*=(float const& other)
+Vector2& Vector2::operator*=(float const& other)
 {
-	return Vector2(x * other, y * other);
+	x *= other;
+	y *= other;
+	return *this;
 }
 
 Vector2 Vector2::operator/(float const& other)
@@ -154,9 +168,11 @@ Vector2 Vector2::operator/(float const& other)
 	return Vector2(x / other, y / other);
 }
 
-Vector2 Vector2::operator/=(float const& other)
+Vector2& Vector2::operator/=(float const& other)
 {
-	return Vector2(x / other, y / other);
+	x /= other;
+	y /= other;
+	return *this;
 }
 
 bool Vector2::operator==(Vector2 const& other)

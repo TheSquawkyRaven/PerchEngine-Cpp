@@ -28,9 +28,6 @@ namespace Perch
 		// # Variables + Getters/Setters
 	private:
 
-		Vector2 applyingForce;
-		bool forceApplied = true;
-
 	public:
 
 		// TODO move to global gravity and change this to local gravity scale
