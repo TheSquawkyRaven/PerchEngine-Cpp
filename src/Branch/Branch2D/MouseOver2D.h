@@ -7,7 +7,7 @@
 #endif
 
 
-#include "BranchUI.h"
+#include "Branch2D.h"
 
 #include <SDL.h>
 
@@ -17,7 +17,7 @@ namespace Perch
 	/// <summary>
 	/// 
 	/// </summary>
-	class MouseOverUI : public BranchUI
+	class MouseOver2D : public Branch2D
 	{
 
 		// # Variables + Getters/Setters
@@ -28,7 +28,7 @@ namespace Perch
 		bool clickStartedInRect = false;
 
 	public:
-
+		// Note that if this is used as a child of Sprite2D, the pivot will be ignored! TODO Change in the future?
 		Rect2 rect = Rect2();
 
 		// ###
@@ -39,7 +39,7 @@ namespace Perch
 
 	public:
 
-		PERCH_API MouseOverUI(Engine* engine) : BranchUI(engine) {};
+		PERCH_API MouseOver2D(Engine* engine) : Branch2D(engine) {};
 
 		PERCH_API virtual void Update() override;
 		// Mouse position in rect

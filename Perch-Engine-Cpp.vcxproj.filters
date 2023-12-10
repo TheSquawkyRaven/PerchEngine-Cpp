@@ -43,12 +43,6 @@
     <Filter Include="Source Files\Squawk">
       <UniqueIdentifier>{79b3d560-7224-446f-8b5d-762745bc2bbb}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Branch\BranchUI">
-      <UniqueIdentifier>{863d8c1a-b6b1-4185-8150-196b2927f259}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Branch\BranchUI">
-      <UniqueIdentifier>{2de011f9-2a29-48a0-8bf0-9f6b68125c8d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Renderer">
       <UniqueIdentifier>{9e0cdeb8-c19b-4c76-8d87-bba076d20061}</UniqueIdentifier>
     </Filter>
@@ -132,15 +126,6 @@
     <ClInclude Include="src\EngineComponents\Resource.h">
       <Filter>Header Files\Engine Components</Filter>
     </ClInclude>
-    <ClInclude Include="src\Branch\BranchUI\BranchUI.h">
-      <Filter>Header Files\Branch\BranchUI</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Branch\BranchUI\MouseOverUI.h">
-      <Filter>Header Files\Branch\BranchUI</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Branch\BranchUI\ButtonUI.h">
-      <Filter>Header Files\Branch\BranchUI</Filter>
-    </ClInclude>
     <ClInclude Include="src\Structs\Clip.h">
       <Filter>Header Files\Structs</Filter>
     </ClInclude>
@@ -157,6 +142,12 @@
       <Filter>Header Files\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\Branch\Branch2D\ScrollingSprite2D.h">
+      <Filter>Header Files\Branch\Branch2D</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Branch\Branch2D\Button2D.h">
+      <Filter>Header Files\Branch\Branch2D</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Branch\Branch2D\MouseOver2D.h">
       <Filter>Header Files\Branch\Branch2D</Filter>
     </ClInclude>
   </ItemGroup>
@@ -242,15 +233,6 @@
     <ClCompile Include="src\EngineComponents\Resource.cpp">
       <Filter>Source Files\Engine Components</Filter>
     </ClCompile>
-    <ClCompile Include="src\Branch\BranchUI\BranchUI.cpp">
-      <Filter>Source Files\Branch\BranchUI</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Branch\BranchUI\MouseOverUI.cpp">
-      <Filter>Source Files\Branch\BranchUI</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Branch\BranchUI\ButtonUI.cpp">
-      <Filter>Source Files\Branch\BranchUI</Filter>
-    </ClCompile>
     <ClCompile Include="src\Structs\Clip.cpp">
       <Filter>Source Files\Structs</Filter>
     </ClCompile>
@@ -261,6 +243,12 @@
       <Filter>Source Files\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\Branch\Branch2D\ScrollingSprite2D.cpp">
+      <Filter>Source Files\Branch\Branch2D</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Branch\Branch2D\Button2D.cpp">
+      <Filter>Source Files\Branch\Branch2D</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Branch\Branch2D\MouseOverUI.cpp">
       <Filter>Source Files\Branch\Branch2D</Filter>
     </ClCompile>
   </ItemGroup>

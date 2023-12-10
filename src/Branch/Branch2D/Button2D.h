@@ -7,7 +7,7 @@
 #endif
 
 
-#include "MouseOverUI.h"
+#include "MouseOver2D.h"
 #include "../Branch2D/Sprite2D.h"
 
 #include <SDL.h>
@@ -18,7 +18,7 @@ namespace Perch
 	/// <summary>
 	/// 
 	/// </summary>
-	class ButtonUI : public MouseOverUI
+	class ButtonUI : public MouseOver2D
 	{
 
 		// # Variables + Getters/Setters
@@ -55,7 +55,7 @@ namespace Perch
 
 	public:
 
-		PERCH_API ButtonUI(Engine* engine) : MouseOverUI(engine) {};
+		PERCH_API ButtonUI(Engine* engine) : MouseOver2D(engine) {};
 
 		// Mouse position in rect
 		PERCH_API virtual void OnMouseHover() override;

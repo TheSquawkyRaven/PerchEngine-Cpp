@@ -161,8 +161,10 @@
     <ClInclude Include="src\Branch\Branch.h" />
     <ClInclude Include="src\Branch\Branch2D\BorderedRectangle2D.h" />
     <ClInclude Include="src\Branch\Branch2D\Branch2D.h" />
+    <ClInclude Include="src\Branch\Branch2D\Button2D.h" />
     <ClInclude Include="src\Branch\Branch2D\Collider2D.h" />
     <ClInclude Include="src\Branch\Branch2D\Line2D.h" />
+    <ClInclude Include="src\Branch\Branch2D\MouseOver2D.h" />
     <ClInclude Include="src\Branch\Branch2D\Point2D.h" />
     <ClInclude Include="src\Branch\Branch2D\Rectangle2D.h" />
     <ClInclude Include="src\Branch\Branch2D\Rigidbody2D.h" />
@@ -170,9 +172,6 @@
     <ClInclude Include="src\Branch\Branch2D\Sprite2D.h" />
     <ClInclude Include="src\Branch\Branch2D\Text2D.h" />
     <ClInclude Include="src\Branch\Branch2D\Viewport2D.h" />
-    <ClInclude Include="src\Branch\BranchUI\BranchUI.h" />
-    <ClInclude Include="src\Branch\BranchUI\ButtonUI.h" />
-    <ClInclude Include="src\Branch\BranchUI\MouseOverUI.h" />
     <ClInclude Include="src\Branch\Script.h" />
     <ClInclude Include="src\Engine.h" />
     <ClInclude Include="src\EngineComponents\Input.h" />
@@ -202,8 +201,10 @@
     <ClCompile Include="src\Branch\Branch.cpp" />
     <ClCompile Include="src\Branch\Branch2D\BorderedRectangle2D.cpp" />
     <ClCompile Include="src\Branch\Branch2D\Branch2D.cpp" />
+    <ClCompile Include="src\Branch\Branch2D\Button2D.cpp" />
     <ClCompile Include="src\Branch\Branch2D\Collider2D.cpp" />
     <ClCompile Include="src\Branch\Branch2D\Line2D.cpp" />
+    <ClCompile Include="src\Branch\Branch2D\MouseOverUI.cpp" />
     <ClCompile Include="src\Branch\Branch2D\Point2D.cpp" />
     <ClCompile Include="src\Branch\Branch2D\Rectangle2D.cpp" />
     <ClCompile Include="src\Branch\Branch2D\Rigidbody2D.cpp" />
@@ -211,9 +212,6 @@
     <ClCompile Include="src\Branch\Branch2D\Sprite2D.cpp" />
     <ClCompile Include="src\Branch\Branch2D\Text2D.cpp" />
     <ClCompile Include="src\Branch\Branch2D\Viewport2D.cpp" />
-    <ClCompile Include="src\Branch\BranchUI\BranchUI.cpp" />
-    <ClCompile Include="src\Branch\BranchUI\ButtonUI.cpp" />
-    <ClCompile Include="src\Branch\BranchUI\MouseOverUI.cpp" />
     <ClCompile Include="src\Branch\Script.cpp" />
     <ClCompile Include="src\Engine.cpp" />
     <ClCompile Include="src\EngineComponents\Input.cpp" />

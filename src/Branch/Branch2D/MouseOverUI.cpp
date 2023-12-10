@@ -1,13 +1,13 @@
 #include "pch.h"
 
 #include "../../Squawk/Log.h"
-#include "MouseOverUI.h"
+#include "MouseOver2D.h"
 
 using namespace std;
 using namespace Perch;
 using namespace Squawk;
 
-void MouseOverUI::Update()
+void MouseOver2D::Update()
 {
 	Vector2 mousePosition = engine->GetInput()->GetMousePosition();
 	// TODO change to using pivot, global scale, etc. Refer sprite draw function
@@ -45,17 +45,17 @@ void MouseOverUI::Update()
 	}
 }
 
-void MouseOverUI::OnMouseHover()
+void MouseOver2D::OnMouseHover()
 {}
 
-void MouseOverUI::OnMouseExit()
+void MouseOver2D::OnMouseExit()
 {}
 
-void MouseOverUI::OnMouseDown()
+void MouseOver2D::OnMouseDown()
 {}
 
-void MouseOverUI::OnMouseUp()
+void MouseOver2D::OnMouseUp()
 {}
 
-void MouseOverUI::OnMouseClick()
+void MouseOver2D::OnMouseClick()
 {}
