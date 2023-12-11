@@ -63,6 +63,8 @@ namespace Perch
 
 		PERCH_API virtual void OnDestroy() override;
 
+		PERCH_API virtual Vector2 GetGlobalSize() override;
+
 		// ###
 
 	};

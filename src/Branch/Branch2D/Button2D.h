@@ -50,17 +50,19 @@ namespace Perch
 		// # Functions
 		// ###
 
-	public:
+	protected:
 
-		PERCH_API Button2D(Engine* engine) : MouseOver2D(engine) {};
-
-		PERCH_API virtual void OnMouseOver(MouseOverState state) override;
-		
 		PERCH_API virtual void Hover();
 		PERCH_API virtual void Exit();
 		PERCH_API virtual void Down();
 		PERCH_API virtual void Up();
 		PERCH_API virtual void Click();
+
+	public:
+
+		PERCH_API Button2D(Engine* engine) : MouseOver2D(engine) {};
+
+		PERCH_API virtual void OnMouseOver(MouseOverState state) override;
 
 		// Make sure to set Sprite Rows or Sprite Order. 0 - base, 1 - hover, 2 - held
 		PERCH_API virtual void LinkSprite(Sprite2D* sprite);

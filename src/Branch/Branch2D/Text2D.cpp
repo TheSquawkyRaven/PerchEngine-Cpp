@@ -31,3 +31,8 @@ void Text2D::OnDestroy()
 	Sprite2D::OnDestroy();
 	font = nullptr;
 }
+
+Vector2 Text2D::GetGlobalSize()
+{
+	return GetSize();
+}
