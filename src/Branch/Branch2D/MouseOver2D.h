@@ -14,6 +14,20 @@
 namespace Perch
 {
 
+	enum class MouseOverState
+	{
+		// Mouse position in rect
+		Hover,
+		// Mouse position left rect (when stopped hovering)
+		Exit,
+		// Click starts in rect
+		Down,
+		// Click released (may or may not still be in rect, runs if click started in rect)
+		Up,
+		// Click started and released in rect (both started and released in rect)
+		Click,
+	};
+
 	/// <summary>
 	/// 
 	/// </summary>
@@ -23,6 +37,8 @@ namespace Perch
 		// # Variables + Getters/Setters
 
 	private:
+
+		Rect2 globalRect = Rect2();
 
 		bool mouseWasInRect = false;
 		bool clickStartedInRect = false;
@@ -37,21 +53,16 @@ namespace Perch
 		// # Functions
 		// ###
 
+	private:
+
+		void UpdateRect();
+
 	public:
 
 		PERCH_API MouseOver2D(Engine* engine) : Branch2D(engine) {};
 
 		PERCH_API virtual void Update() override;
-		// Mouse position in rect
-		PERCH_API virtual void OnMouseHover();
-		// Mouse position left rect (when stopped hovering)
-		PERCH_API virtual void OnMouseExit();
-		// Click starts in rect
-		PERCH_API virtual void OnMouseDown();
-		// Click released (may or may not still be in rect, runs if click started in rect)
-		PERCH_API virtual void OnMouseUp();
-		// Click started and released in rect (both started and released in rect)
-		PERCH_API virtual void OnMouseClick();
+		PERCH_API virtual void OnMouseOver(MouseOverState state);
 
 
 	};

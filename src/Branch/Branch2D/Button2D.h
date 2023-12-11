@@ -18,19 +18,17 @@ namespace Perch
 	/// <summary>
 	/// 
 	/// </summary>
-	class ButtonUI : public MouseOver2D
+	class Button2D : public MouseOver2D
 	{
 
 		// # Variables + Getters/Setters
 
 	private:
 
-		Rect2 rect = Rect2();
-
 		bool isHeld = false;
 
-		std::shared_ptr<Texture> texture = nullptr;
-
+		Perch::Sprite2D* linkedSprite = nullptr;
+		bool swapTexture = false;
 		std::shared_ptr<Texture> baseTexture = nullptr;
 		std::shared_ptr<Texture> hoverTexture = nullptr;
 		std::shared_ptr<Texture> holdTexture = nullptr;
@@ -39,7 +37,6 @@ namespace Perch
 
 	public:
 
-		PERCH_API void SetTextures(std::shared_ptr<Texture> base, std::shared_ptr<Texture> hover, std::shared_ptr<Texture> hold);
 		PERCH_API inline void SetOnClick(std::function<void()> onClick) { this->onClick = onClick; }
 
 	public:
@@ -55,25 +52,21 @@ namespace Perch
 
 	public:
 
-		PERCH_API ButtonUI(Engine* engine) : MouseOver2D(engine) {};
+		PERCH_API Button2D(Engine* engine) : MouseOver2D(engine) {};
 
-		// Mouse position in rect
-		PERCH_API virtual void OnMouseHover() override;
-		// Mouse position left rect (when stopped hovering)
-		PERCH_API virtual void OnMouseExit() override;
-		// Click starts in rect
-		PERCH_API virtual void OnMouseDown() override;
-		// Click released (may or may not still be in rect, runs if click started in rect)
-		PERCH_API virtual void OnMouseUp() override;
-		// Click started and released in rect (both started and released in rect)
-		PERCH_API virtual void OnMouseClick() override;
+		PERCH_API virtual void OnMouseOver(MouseOverState state) override;
+		
+		PERCH_API virtual void Hover();
+		PERCH_API virtual void Exit();
+		PERCH_API virtual void Down();
+		PERCH_API virtual void Up();
+		PERCH_API virtual void Click();
 
-		PERCH_API virtual void SetupDraw(Renderer* renderer) override;
-		PERCH_API virtual void Draw(Renderer* renderer) override;
+		// Make sure to set Sprite Rows or Sprite Order. 0 - base, 1 - hover, 2 - held
+		PERCH_API virtual void LinkSprite(Sprite2D* sprite);
+		PERCH_API virtual void LinkSprite(Sprite2D* sprite, std::shared_ptr<Texture> base, std::shared_ptr<Texture> hover, std::shared_ptr<Texture> hold);
+
 		PERCH_API virtual void OnDestroy() override;
-
-		PERCH_API virtual Vector2 GetGlobalSize(std::shared_ptr<Texture> texture);
-
 
 	};
 

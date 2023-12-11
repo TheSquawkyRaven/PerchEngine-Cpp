@@ -7,27 +7,36 @@ using namespace std;
 using namespace Perch;
 using namespace Squawk;
 
+void MouseOver2D::UpdateRect()
+{
+	Vector2 pos = GetGlobalPosition();
+	globalRect.SetPosition(pos);
+	Vector2 scale = GetGlobalScale();
+	globalRect.SetSize(rect.GetSize() * scale);
+}
+
 void MouseOver2D::Update()
 {
 	Vector2 mousePosition = engine->GetInput()->GetMousePosition();
 	// TODO change to using pivot, global scale, etc. Refer sprite draw function
-	bool mouseInRect = rect.PointIsIn(mousePosition);
+	UpdateRect();
+	bool mouseInRect = globalRect.PointIsIn(mousePosition);
 	if (!mouseWasInRect && mouseInRect)
 	{
 		mouseWasInRect = true;
-		OnMouseHover();
+		OnMouseOver(MouseOverState::Hover);
 	}
 	else if (mouseWasInRect && !mouseInRect)
 	{
 		mouseWasInRect = false;
-		OnMouseExit();
+		OnMouseOver(MouseOverState::Exit);
 	}
 	if (mouseInRect)
 	{
 		if (engine->GetInput()->GetMouseDown(Input::LEFT))
 		{
 			clickStartedInRect = true;
-			OnMouseDown();
+			OnMouseOver(MouseOverState::Down);
 		}
 	}
 	if (clickStartedInRect)
@@ -35,27 +44,15 @@ void MouseOver2D::Update()
 		if (engine->GetInput()->GetMouseUp(Input::LEFT))
 		{
 			clickStartedInRect = false;
-			OnMouseUp();
+			OnMouseOver(MouseOverState::Up);
 
 			if (mouseInRect)
 			{
-				OnMouseClick();
+				OnMouseOver(MouseOverState::Click);
 			}
 		}
 	}
 }
 
-void MouseOver2D::OnMouseHover()
-{}
-
-void MouseOver2D::OnMouseExit()
-{}
-
-void MouseOver2D::OnMouseDown()
-{}
-
-void MouseOver2D::OnMouseUp()
-{}
-
-void MouseOver2D::OnMouseClick()
+void MouseOver2D::OnMouseOver(MouseOverState state)
 {}

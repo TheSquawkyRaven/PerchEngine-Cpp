@@ -248,7 +248,7 @@
     <ClCompile Include="src\Branch\Branch2D\Button2D.cpp">
       <Filter>Source Files\Branch\Branch2D</Filter>
     </ClCompile>
-    <ClCompile Include="src\Branch\Branch2D\MouseOverUI.cpp">
+    <ClCompile Include="src\Branch\Branch2D\MouseOver2D.cpp">
       <Filter>Source Files\Branch\Branch2D</Filter>
     </ClCompile>
   </ItemGroup>
