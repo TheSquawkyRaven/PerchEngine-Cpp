@@ -13,204 +13,246 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\Branch">
+      <UniqueIdentifier>{7080b371-eb25-45d6-941f-a2db140b3cf3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Branch\Branch2D">
+      <UniqueIdentifier>{c97855de-d6ad-4600-9e88-0677111f21f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Renderer">
+      <UniqueIdentifier>{06840cff-490a-43e4-946d-acc35ea1e5b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Engine Components">
+      <UniqueIdentifier>{50941def-9bb0-41c5-b08d-2a988a1ddd74}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Misc">
+      <UniqueIdentifier>{ccaa000a-6c38-424a-acda-cc1e26747f78}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Structs">
+      <UniqueIdentifier>{6056d0de-254d-48fd-b043-e7f429f56f8a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Squawk">
+      <UniqueIdentifier>{10cba272-fe94-4e01-a117-7073cf994d3f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Branch">
+      <UniqueIdentifier>{d0f57662-ee6c-41d1-830d-3e4ac1852ffe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Renderer">
+      <UniqueIdentifier>{db03dad2-6e1c-44d3-a057-0e52d252d94c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Misc">
+      <UniqueIdentifier>{58abf00c-723e-4de5-a6a3-1271916c586a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Structs">
+      <UniqueIdentifier>{feaaa36f-c7a7-4657-bddd-a9b1b9f9202e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Squawk">
+      <UniqueIdentifier>{869ef2e9-b3bf-4de8-9fc9-f827a914643e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Branch\Branch2D">
+      <UniqueIdentifier>{f7c924de-50d2-46fc-a80c-f6fa3b354670}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Engine Components">
+      <UniqueIdentifier>{c293578f-cd73-4058-93e8-97b506b3fc93}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="framework.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="pch.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Branch\Audio.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Branch\Branch.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Branch\Branch2D\BorderedRectangle2D.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Branch\Branch2D\Branch2D.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Branch\Branch2D\Button2D.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Branch\Branch2D\Collider2D.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Branch\Branch2D\Line2D.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Branch\Branch2D\MouseOver2D.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Branch\Branch2D\Point2D.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Branch\Branch2D\Rectangle2D.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Branch\Branch2D\Rigidbody2D.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Branch\Branch2D\ScrollingSprite2D.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Branch\Branch2D\Sprite2D.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Branch\Branch2D\Text2D.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Branch\Branch2D\Viewport2D.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Branch\Script.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\Engine.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\EngineComponents\Input.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\Branch\Branch2D\BorderedRectangle2D.h">
+      <Filter>Header Files\Branch\Branch2D</Filter>
     </ClInclude>
-    <ClInclude Include="src\EngineComponents\Random.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\Branch\Branch2D\Branch2D.h">
+      <Filter>Header Files\Branch\Branch2D</Filter>
     </ClInclude>
-    <ClInclude Include="src\EngineComponents\Resource.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\Branch\Branch2D\Button2D.h">
+      <Filter>Header Files\Branch\Branch2D</Filter>
     </ClInclude>
-    <ClInclude Include="src\Renderer\Renderer.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\Branch\Branch2D\Collider2D.h">
+      <Filter>Header Files\Branch\Branch2D</Filter>
     </ClInclude>
-    <ClInclude Include="src\Renderer\SDLRenderer.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\Branch\Branch2D\MouseOver2D.h">
+      <Filter>Header Files\Branch\Branch2D</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Branch\Branch2D\Point2D.h">
+      <Filter>Header Files\Branch\Branch2D</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Branch\Branch2D\Line2D.h">
+      <Filter>Header Files\Branch\Branch2D</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Branch\Branch2D\Rectangle2D.h">
+      <Filter>Header Files\Branch\Branch2D</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Branch\Branch2D\Rigidbody2D.h">
+      <Filter>Header Files\Branch\Branch2D</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Branch\Branch2D\ScrollingSprite2D.h">
+      <Filter>Header Files\Branch\Branch2D</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Branch\Branch2D\Sprite2D.h">
+      <Filter>Header Files\Branch\Branch2D</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Branch\Branch2D\Text2D.h">
+      <Filter>Header Files\Branch\Branch2D</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Branch\Branch2D\Viewport2D.h">
+      <Filter>Header Files\Branch\Branch2D</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Branch\Audio.h">
+      <Filter>Header Files\Branch</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Branch\Branch.h">
+      <Filter>Header Files\Branch</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Branch\Script.h">
+      <Filter>Header Files\Branch</Filter>
+    </ClInclude>
+    <ClInclude Include="pch.h">
+      <Filter>Header Files\Misc</Filter>
     </ClInclude>
     <ClInclude Include="src\Squawk\Log.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Structs\Clip.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Structs\Color.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Structs\Font.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Squawk</Filter>
     </ClInclude>
     <ClInclude Include="src\Structs\Rect2.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Structs</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Structs\Clip.h">
+      <Filter>Header Files\Structs</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Structs\Color.h">
+      <Filter>Header Files\Structs</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Structs\Font.h">
+      <Filter>Header Files\Structs</Filter>
     </ClInclude>
     <ClInclude Include="src\Structs\Texture.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Structs</Filter>
     </ClInclude>
     <ClInclude Include="src\Structs\Vector2.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Structs</Filter>
     </ClInclude>
     <ClInclude Include="src\Structs\Vector2i.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Structs</Filter>
     </ClInclude>
     <ClInclude Include="src\Structs\Viewport.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Structs</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Renderer\SDLRenderer.h">
+      <Filter>Header Files\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Renderer\Renderer.h">
+      <Filter>Header Files\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\EngineComponents\Resource.h">
+      <Filter>Header Files\Engine Components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\EngineComponents\Random.h">
+      <Filter>Header Files\Engine Components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\EngineComponents\Input.h">
+      <Filter>Header Files\Engine Components</Filter>
+    </ClInclude>
+    <ClInclude Include="framework.h">
+      <Filter>Header Files\Misc</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="dllmain.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="pch.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Branch\Audio.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Branch\Branch.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Branch\Branch2D\BorderedRectangle2D.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Branch\Branch2D\Branch2D.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Branch\Branch2D\Button2D.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Branch\Branch2D\Collider2D.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Branch\Branch2D\Line2D.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Branch\Branch2D\MouseOver2D.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Branch\Branch2D\Point2D.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Branch\Branch2D\Rectangle2D.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Branch\Branch2D\Rigidbody2D.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Branch\Branch2D\ScrollingSprite2D.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Branch\Branch2D\Sprite2D.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Branch\Branch2D\Text2D.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Branch\Branch2D\Viewport2D.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Branch\Script.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\Engine.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\EngineComponents\Input.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="src\Branch\Branch2D\BorderedRectangle2D.cpp">
+      <Filter>Source Files\Branch\Branch2D</Filter>
     </ClCompile>
-    <ClCompile Include="src\EngineComponents\Random.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="src\Branch\Branch2D\Branch2D.cpp">
+      <Filter>Source Files\Branch\Branch2D</Filter>
     </ClCompile>
-    <ClCompile Include="src\EngineComponents\Resource.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="src\Branch\Branch2D\Button2D.cpp">
+      <Filter>Source Files\Branch\Branch2D</Filter>
     </ClCompile>
-    <ClCompile Include="src\Renderer\SDLRenderer.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="src\Branch\Branch2D\Collider2D.cpp">
+      <Filter>Source Files\Branch\Branch2D</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Branch\Branch2D\Line2D.cpp">
+      <Filter>Source Files\Branch\Branch2D</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Branch\Branch2D\MouseOver2D.cpp">
+      <Filter>Source Files\Branch\Branch2D</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Branch\Branch2D\Point2D.cpp">
+      <Filter>Source Files\Branch\Branch2D</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Branch\Branch2D\Rectangle2D.cpp">
+      <Filter>Source Files\Branch\Branch2D</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Branch\Branch2D\Rigidbody2D.cpp">
+      <Filter>Source Files\Branch\Branch2D</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Branch\Branch2D\ScrollingSprite2D.cpp">
+      <Filter>Source Files\Branch\Branch2D</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Branch\Branch2D\Sprite2D.cpp">
+      <Filter>Source Files\Branch\Branch2D</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Branch\Branch2D\Text2D.cpp">
+      <Filter>Source Files\Branch\Branch2D</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Branch\Branch2D\Viewport2D.cpp">
+      <Filter>Source Files\Branch\Branch2D</Filter>
+    </ClCompile>
+    <ClCompile Include="dllmain.cpp">
+      <Filter>Source Files\Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="pch.cpp">
+      <Filter>Source Files\Misc</Filter>
     </ClCompile>
     <ClCompile Include="src\Squawk\Log.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Structs\Clip.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Structs\Color.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Structs\Font.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Structs\Rect2.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Structs\Texture.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Structs\Vector2.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Structs\Vector2i.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Squawk</Filter>
     </ClCompile>
     <ClCompile Include="src\Structs\Viewport.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Structs</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Structs\Texture.cpp">
+      <Filter>Source Files\Structs</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Structs\Vector2.cpp">
+      <Filter>Source Files\Structs</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Structs\Vector2i.cpp">
+      <Filter>Source Files\Structs</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Structs\Rect2.cpp">
+      <Filter>Source Files\Structs</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Structs\Font.cpp">
+      <Filter>Source Files\Structs</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Structs\Color.cpp">
+      <Filter>Source Files\Structs</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Structs\Clip.cpp">
+      <Filter>Source Files\Structs</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Branch\Audio.cpp">
+      <Filter>Source Files\Branch</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Branch\Script.cpp">
+      <Filter>Source Files\Branch</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Branch\Branch.cpp">
+      <Filter>Source Files\Branch</Filter>
+    </ClCompile>
+    <ClCompile Include="src\EngineComponents\Random.cpp">
+      <Filter>Source Files\Engine Components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\EngineComponents\Resource.cpp">
+      <Filter>Source Files\Engine Components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\EngineComponents\Input.cpp">
+      <Filter>Source Files\Engine Components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Renderer\SDLRenderer.cpp">
+      <Filter>Source Files\Renderer</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
