@@ -158,9 +158,6 @@
     <ClCompile Include="pch.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\Branch\Branch2D\BorderedRectangle2D.cpp">
       <Filter>Source Files\Branch\Branch2D</Filter>
     </ClCompile>
