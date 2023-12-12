@@ -79,8 +79,8 @@ namespace Perch
 		PERCH_API Vector2 operator/(float const& other);
 		PERCH_API Vector2& operator/=(float const& other);
 
-		PERCH_API bool operator==(Vector2 const& other);
-		PERCH_API bool operator!=(Vector2 const& other);
+		PERCH_API bool operator==(const Vector2& other);
+		PERCH_API bool operator!=(const Vector2& other);
 
 	};
 
