@@ -15,6 +15,9 @@ Perch engine uses a hierarchical layout to represent "objects", in this case eac
 
 This system is inspired by Godot's node system, and represents the "objects" in game as branches to form a tree, with the root being a branch itself.
 
+## Documentation of Perch Engine
+* [Documentation](docs/README.md)
+
 ## Sample Projects
 * [Flappy Birb](https://github.com/TheSquawkyRaven/FlappyBirb-PerchEngine-Cpp)
 
