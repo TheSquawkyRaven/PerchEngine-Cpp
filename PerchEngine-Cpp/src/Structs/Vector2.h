@@ -60,7 +60,6 @@ namespace Perch
 
 		PERCH_API operator Vector2i() const;
 
-		// TODO +=, -=, *=, /=
 		PERCH_API Vector2 operator+(Vector2 const& other);
 		PERCH_API Vector2& operator+=(Vector2 const& other);
 		PERCH_API Vector2 operator-(Vector2 const& other);
