@@ -2,4 +2,4 @@
 
 ## Table of Contents
 
-(Branch){./Branch.md}
+[Branch](./Branch.md)
