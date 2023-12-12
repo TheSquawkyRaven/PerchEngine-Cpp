@@ -12,6 +12,7 @@
 #include "Vector2i.h"
 
 #include <memory>
+#include <string>
 
 namespace Perch
 {
@@ -80,6 +81,8 @@ namespace Perch
 
 		PERCH_API bool operator==(const Vector2& other);
 		PERCH_API bool operator!=(const Vector2& other);
+
+		PERCH_API std::string ToString();
 
 	};
 
