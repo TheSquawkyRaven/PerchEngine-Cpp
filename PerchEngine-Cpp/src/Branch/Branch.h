@@ -243,7 +243,7 @@ namespace Perch
 		/// <para>Don't use or move any of the children of this after calling Destroy on this branch.</para>
 		/// </summary>
 		PERCH_API void Destroy();
-				
+
 		/// <summary>
 		/// OnDestroy - Executes when the branch is being destroyed.
 		/// <para>Uninitialize manual pointers here</para>
