@@ -48,7 +48,7 @@ namespace Perch
 		PERCH_API virtual void UpdateOut() override;
 
 		PERCH_API virtual void Draw(Renderer* renderer) override;
-		PERCH_API virtual void DrawOut(Renderer* renderer) override;
+		//PERCH_API virtual void DrawOut(Renderer* renderer) override;
 
 		// ###
 

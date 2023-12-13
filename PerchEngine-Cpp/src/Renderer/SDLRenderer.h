@@ -27,19 +27,6 @@ namespace Perch
 
 		friend class Engine;
 
-	public:
-
-		struct RendererLayerConfig
-		{
-		public:
-
-			std::vector<const char*> layerNames;
-			int maxLayers = 256;
-
-			int GetIndexByLayerName(const char* name);
-
-		};
-
 		// # Variables + Getters/Setters
 
 	private:
@@ -97,7 +84,6 @@ namespace Perch
 
 		virtual bool InitializeRenderer() override;
 		virtual bool InitializeRenderer(SDL_Window* sdlWindow, int sdlIndex, Uint32 sdlFlags);
-		void InitializeConfig(RendererLayerConfig* rendererLayerConfig);
 
 	public:
 
