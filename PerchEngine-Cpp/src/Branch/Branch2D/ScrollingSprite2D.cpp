@@ -1,4 +1,4 @@
-#include "pch.h"
+
 
 #include "ScrollingSprite2D.h"
 #include "math.h"

@@ -1,4 +1,4 @@
-#include "pch.h"
+
 
 #include "Script.h"
 #include "Branch2D/Collider2D.h"

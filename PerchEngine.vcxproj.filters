@@ -1,0 +1,207 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Projects\Others\PerchEngine-Cpp\PerchEngine-Cpp\dllmain.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Projects\Others\PerchEngine-Cpp\PerchEngine-Cpp\src\Branch\Audio.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Projects\Others\PerchEngine-Cpp\PerchEngine-Cpp\src\Branch\Branch.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Projects\Others\PerchEngine-Cpp\PerchEngine-Cpp\src\Branch\Branch2D\BorderedRectangle2D.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Projects\Others\PerchEngine-Cpp\PerchEngine-Cpp\src\Branch\Branch2D\Branch2D.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Projects\Others\PerchEngine-Cpp\PerchEngine-Cpp\src\Branch\Branch2D\Button2D.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Projects\Others\PerchEngine-Cpp\PerchEngine-Cpp\src\Branch\Branch2D\Collider2D.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Projects\Others\PerchEngine-Cpp\PerchEngine-Cpp\src\Branch\Branch2D\Line2D.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Projects\Others\PerchEngine-Cpp\PerchEngine-Cpp\src\Branch\Branch2D\MouseOver2D.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Projects\Others\PerchEngine-Cpp\PerchEngine-Cpp\src\Branch\Branch2D\Point2D.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Projects\Others\PerchEngine-Cpp\PerchEngine-Cpp\src\Branch\Branch2D\Rectangle2D.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Projects\Others\PerchEngine-Cpp\PerchEngine-Cpp\src\Branch\Branch2D\Rigidbody2D.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Projects\Others\PerchEngine-Cpp\PerchEngine-Cpp\src\Branch\Branch2D\ScrollingSprite2D.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Projects\Others\PerchEngine-Cpp\PerchEngine-Cpp\src\Branch\Branch2D\Sprite2D.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Projects\Others\PerchEngine-Cpp\PerchEngine-Cpp\src\Branch\Branch2D\Text2D.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Projects\Others\PerchEngine-Cpp\PerchEngine-Cpp\src\Branch\Branch2D\Viewport2D.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Projects\Others\PerchEngine-Cpp\PerchEngine-Cpp\src\Branch\Script.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Projects\Others\PerchEngine-Cpp\PerchEngine-Cpp\src\Engine.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Projects\Others\PerchEngine-Cpp\PerchEngine-Cpp\src\EngineComponents\Input.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Projects\Others\PerchEngine-Cpp\PerchEngine-Cpp\src\EngineComponents\Random.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Projects\Others\PerchEngine-Cpp\PerchEngine-Cpp\src\EngineComponents\Resource.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Projects\Others\PerchEngine-Cpp\PerchEngine-Cpp\src\Renderer\SDLRenderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Projects\Others\PerchEngine-Cpp\PerchEngine-Cpp\src\Squawk\Log.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Projects\Others\PerchEngine-Cpp\PerchEngine-Cpp\src\Structs\Clip.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Projects\Others\PerchEngine-Cpp\PerchEngine-Cpp\src\Structs\Color.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Projects\Others\PerchEngine-Cpp\PerchEngine-Cpp\src\Structs\Font.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Projects\Others\PerchEngine-Cpp\PerchEngine-Cpp\src\Structs\Rect2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Projects\Others\PerchEngine-Cpp\PerchEngine-Cpp\src\Structs\Texture.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Projects\Others\PerchEngine-Cpp\PerchEngine-Cpp\src\Structs\Vector2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Projects\Others\PerchEngine-Cpp\PerchEngine-Cpp\src\Structs\Vector2i.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Projects\Others\PerchEngine-Cpp\PerchEngine-Cpp\src\Structs\Viewport.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="C:\Projects\Others\PerchEngine-Cpp\PerchEngine-Cpp\framework.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Projects\Others\PerchEngine-Cpp\PerchEngine-Cpp\src\Branch\Audio.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Projects\Others\PerchEngine-Cpp\PerchEngine-Cpp\src\Branch\Branch.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Projects\Others\PerchEngine-Cpp\PerchEngine-Cpp\src\Branch\Branch2D\BorderedRectangle2D.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Projects\Others\PerchEngine-Cpp\PerchEngine-Cpp\src\Branch\Branch2D\Branch2D.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Projects\Others\PerchEngine-Cpp\PerchEngine-Cpp\src\Branch\Branch2D\Button2D.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Projects\Others\PerchEngine-Cpp\PerchEngine-Cpp\src\Branch\Branch2D\Collider2D.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Projects\Others\PerchEngine-Cpp\PerchEngine-Cpp\src\Branch\Branch2D\Line2D.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Projects\Others\PerchEngine-Cpp\PerchEngine-Cpp\src\Branch\Branch2D\MouseOver2D.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Projects\Others\PerchEngine-Cpp\PerchEngine-Cpp\src\Branch\Branch2D\Point2D.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Projects\Others\PerchEngine-Cpp\PerchEngine-Cpp\src\Branch\Branch2D\Rectangle2D.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Projects\Others\PerchEngine-Cpp\PerchEngine-Cpp\src\Branch\Branch2D\Rigidbody2D.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Projects\Others\PerchEngine-Cpp\PerchEngine-Cpp\src\Branch\Branch2D\ScrollingSprite2D.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Projects\Others\PerchEngine-Cpp\PerchEngine-Cpp\src\Branch\Branch2D\Sprite2D.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Projects\Others\PerchEngine-Cpp\PerchEngine-Cpp\src\Branch\Branch2D\Text2D.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Projects\Others\PerchEngine-Cpp\PerchEngine-Cpp\src\Branch\Branch2D\Viewport2D.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Projects\Others\PerchEngine-Cpp\PerchEngine-Cpp\src\Branch\Script.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Projects\Others\PerchEngine-Cpp\PerchEngine-Cpp\src\Engine.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Projects\Others\PerchEngine-Cpp\PerchEngine-Cpp\src\EngineComponents\Input.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Projects\Others\PerchEngine-Cpp\PerchEngine-Cpp\src\EngineComponents\Random.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Projects\Others\PerchEngine-Cpp\PerchEngine-Cpp\src\EngineComponents\Resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Projects\Others\PerchEngine-Cpp\PerchEngine-Cpp\src\Renderer\Renderer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Projects\Others\PerchEngine-Cpp\PerchEngine-Cpp\src\Renderer\SDLRenderer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Projects\Others\PerchEngine-Cpp\PerchEngine-Cpp\src\Squawk\Log.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Projects\Others\PerchEngine-Cpp\PerchEngine-Cpp\src\Structs\Clip.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Projects\Others\PerchEngine-Cpp\PerchEngine-Cpp\src\Structs\Color.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Projects\Others\PerchEngine-Cpp\PerchEngine-Cpp\src\Structs\Font.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Projects\Others\PerchEngine-Cpp\PerchEngine-Cpp\src\Structs\Rect2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Projects\Others\PerchEngine-Cpp\PerchEngine-Cpp\src\Structs\Texture.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Projects\Others\PerchEngine-Cpp\PerchEngine-Cpp\src\Structs\Vector2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Projects\Others\PerchEngine-Cpp\PerchEngine-Cpp\src\Structs\Vector2i.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Projects\Others\PerchEngine-Cpp\PerchEngine-Cpp\src\Structs\Viewport.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Projects\Others\PerchEngine-Cpp\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{0719F847-C013-3909-9BE5-5D223A4AE658}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{16465CEC-765E-3F86-9DCB-5890B2C7CD7C}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

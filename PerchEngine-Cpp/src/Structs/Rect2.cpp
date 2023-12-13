@@ -1,4 +1,4 @@
-#include "pch.h"
+
 
 #include "Rect2.h"
 #include "../Squawk/Log.h"

@@ -1,4 +1,4 @@
-#include "pch.h"
+
 
 #include "Sprite2D.h"
 
