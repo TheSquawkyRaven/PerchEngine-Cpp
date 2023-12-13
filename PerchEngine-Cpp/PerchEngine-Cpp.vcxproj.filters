@@ -257,5 +257,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="cpp.hint" />
+    <None Include="..\.github\workflow\release.yml" />
   </ItemGroup>
 </Project>
