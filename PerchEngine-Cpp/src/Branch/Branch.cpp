@@ -314,18 +314,18 @@ void Branch::_Draw(Renderer* renderer)
 void Branch::Draw(Renderer* renderer)
 {}
 
-void Branch::_DrawOut(Renderer* renderer)
-{
-    if (!active || markedForDestruction)
-    {
-        return;
-    }
-
-    DrawOut(renderer);
-}
-
-void Branch::DrawOut(Renderer* renderer)
-{}
+//void Branch::_DrawOut(Renderer* renderer)
+//{
+//    if (!active || markedForDestruction)
+//    {
+//        return;
+//    }
+//
+//    DrawOut(renderer);
+//}
+//
+//void Branch::DrawOut(Renderer* renderer)
+//{}
 
 void Branch::Destroy()
 {

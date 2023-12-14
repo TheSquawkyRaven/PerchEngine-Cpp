@@ -17,18 +17,6 @@ using namespace Perch;
 using namespace Squawk;
 
 
-int SDLRenderer::RendererLayerConfig::GetIndexByLayerName(const char* name)
-{
-	/*for (int i = 0; i < layerNames.size(); i++)
-	{
-		if (layerNames[i] == name)
-		{
-			return i;
-		}
-	}*/
-	return -1;
-}
-
 bool SDLRenderer::DrawSorter::DrawLayer::DrawOrder::operator<(const DrawOrder& order) const
 {
 	return (index < order.index);
@@ -166,14 +154,6 @@ bool SDLRenderer::InitializeRenderer(SDL_Window* sdlWindow, int sdlIndex, Uint32
 	SDL_SetRenderDrawBlendMode(sdlRenderer, SDL_BLENDMODE_BLEND);
 
 	return true;
-}
-
-void SDLRenderer::InitializeConfig(RendererLayerConfig* config)
-{
-	/*for (int i = 0; i < config->layerNames.size(); i++)
-	{
-		drawLayers.push_back(new vector<Branch*>[config->maxLayers]);
-	}*/
 }
 
 void SDLRenderer::SetDrawColor(Color* color)
